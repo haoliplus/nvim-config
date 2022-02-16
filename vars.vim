@@ -37,9 +37,9 @@ language en_US.utf-8
 " faster. See https://neovim.io/doc/user/provider.html.
 if executable('python')
    if g:is_win
-    let g:python3_host_prog=substitute(exepath('python'), '.exe$', '', 'g')
+    let g:python3_host_prog=substitute(exepath('python3'), '.exe$', '', 'g')
   elseif g:is_linux || g:is_mac
-    let g:python3_host_prog=exepath('python')
+    let g:python3_host_prog=exepath('python3')
   endif
 else
   echoerr 'Python 3 executable not found! You must install Python 3 and set its PATH correctly!'

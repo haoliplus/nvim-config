@@ -67,6 +67,7 @@ export VIMRUNTIME="${VIM_RESOURCE_DIR}/runtime"
 export MYVIMRC=${MYVIMRC:-"${VIM_CONFIG_DIR}/init.vim"}
 export VIMINIT='source $MYVIMRC'
 alias vim='nvim'
+alias vi='nvim'
 alias ninstall='nvim +PlugInstall +qall'
 ZSH_THEME="ys"
 endmsg
