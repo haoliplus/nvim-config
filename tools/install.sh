@@ -23,6 +23,11 @@ smv() {
   mv "$2" "$2.old" >/dev/null 2>&1
   mv "$1" "$2"
 }
+create_link() {
+  rm -rf "$2.old"
+  mv "$2" "$2.old" >/dev/null
+  ln -s "$1" "$2" && return 0
+}
 
 curl -L https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim-linux64.tar.gz | tar -xz -C ${CACHE_DIR}
 smv ${CACHE_DIR}/nvim-linux64/bin/nvim ${HOME}/.local/bin/nvim
@@ -45,6 +50,11 @@ wget -c -o ${CACHE_DIR}/download_${USER}_log https://github.com/haoliplus/nvim-c
   && unzip ${CACHE_DIR}/master.zip -d ${CACHE_DIR} \
   && cp -r ${CACHE_DIR}/nvim-config-master ${HOME}/nvim
 
+create_link "${HOME}/nvim/resources/.tmux.conf" "${HOME}/.tmux.conf"
+create_link "${HOME}/nvim/resources/.tmux.conf.local" "${HOME}/.tmux.conf.local"
+create_link "${HOME}/nvim/resources/.flake8" "${HOME}/.flake8"
+create_link "${HOME}/nvim/resources/pycodestyle" "${HOME}/.config/pycodestyle"
+create_link "${HOME}/nvim/resources/yapf" "${HOME}/.config/yapf"
 
 cat >> ${HOME}/.zshrc << 'endmsg'
 export PATH="${HOME}/.local/bin:${PATH}"
