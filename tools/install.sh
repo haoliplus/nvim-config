@@ -20,12 +20,12 @@ NVIM_VERSION="v0.6.1"
 
 smv() {
   rm -rf "$2.old"
-  mv "$2" "$2.old" >/dev/null 2>&1
+  mv "$2" "$2.old" >/dev/null 2>&1 || true
   mv "$1" "$2"
 }
 create_link() {
   rm -rf "$2.old"
-  mv "$2" "$2.old" >/dev/null 2>&1
+  mv "$2" "$2.old" >/dev/null 2>&1 || true
   ln -s "$1" "$2" && return 0
 }
 
