@@ -20,7 +20,7 @@ NVIM_VERSION="v0.6.1"
 
 smv() {
   rm -rf "$2.old"
-  mv "$2" "$2.old" >/dev/null
+  mv "$2" "$2.old" >/dev/null 2>&1
   mv "$1" "$2"
 }
 
@@ -56,7 +56,20 @@ export VIMPLUGDIR="${VIM_RESOURCE_DIR}/plugged"
 export VIMRUNTIME="${VIM_RESOURCE_DIR}/runtime"
 export MYVIMRC=${MYVIMRC:-"${VIM_CONFIG_DIR}/init.vim"}
 export VIMINIT='source $MYVIMRC'
+alias vim='nvim'
 ZSH_THEME="ys"
 endmsg
 
+# For current env
+export PATH="${HOME}/.local/bin:${PATH}"
+export VIM_RESOURCE_DIR=${VIM_RESOURCE_DIR:-"${HOME}/.local/share/nvim"}
+export VIM_CONFIG_DIR=${VIM_CONFIG_DIR:-"${HOME}/nvim"}
+export WIKI_PATH="${HOME}/vimwiki"
+
+export VIMPLUGDIR="${VIM_RESOURCE_DIR}/plugged"
+export VIMRUNTIME="${VIM_RESOURCE_DIR}/runtime"
+export MYVIMRC=${MYVIMRC:-"${VIM_CONFIG_DIR}/init.vim"}
+export VIMINIT='source $MYVIMRC'
+alias vim='nvim'
+nvim +PluginInstall +qall
 
