@@ -25,7 +25,7 @@ smv() {
 }
 create_link() {
   rm -rf "$2.old"
-  mv "$2" "$2.old" >/dev/null
+  mv "$2" "$2.old" >/dev/null 2>&1
   ln -s "$1" "$2" && return 0
 }
 
