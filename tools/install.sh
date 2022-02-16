@@ -57,19 +57,9 @@ export VIMRUNTIME="${VIM_RESOURCE_DIR}/runtime"
 export MYVIMRC=${MYVIMRC:-"${VIM_CONFIG_DIR}/init.vim"}
 export VIMINIT='source $MYVIMRC'
 alias vim='nvim'
+alias ninstall='nvim +PlugInstall +qall'
 ZSH_THEME="ys"
 endmsg
 
-# For current env
-export PATH="${HOME}/.local/bin:${PATH}"
-export VIM_RESOURCE_DIR=${VIM_RESOURCE_DIR:-"${HOME}/.local/share/nvim"}
-export VIM_CONFIG_DIR=${VIM_CONFIG_DIR:-"${HOME}/nvim"}
-export WIKI_PATH="${HOME}/vimwiki"
-
-export VIMPLUGDIR="${VIM_RESOURCE_DIR}/plugged"
-export VIMRUNTIME="${VIM_RESOURCE_DIR}/runtime"
-export MYVIMRC=${MYVIMRC:-"${VIM_CONFIG_DIR}/init.vim"}
-export VIMINIT='source $MYVIMRC'
-alias vim='nvim'
-alias ninstall='nvim +PlugInstall +qall'
+echo "source ~/.zshrc"
 
