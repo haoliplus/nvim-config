@@ -4,6 +4,7 @@ let g:is_mac = has('macunix') ? v:true : v:false
 let g:logging_level = 'info'
 
 let g:LanguageClient_serverStderr = '/tmp/clangd.stderr'
+let g:NERDTreeGitStatusPorcelainVersion=1
 
 let g:mapleader = ";"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

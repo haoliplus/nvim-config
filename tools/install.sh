@@ -6,7 +6,7 @@
 # Distributed under terms of the MIT license.
 #
 
-set -x
+set -ex
 
 mkdir -p ${HOME}/.local/share
 mkdir -p ${HOME}/.local/bin
@@ -66,6 +66,7 @@ export VIMPLUGDIR="${VIM_RESOURCE_DIR}/plugged"
 export VIMRUNTIME="${VIM_RESOURCE_DIR}/runtime"
 export MYVIMRC=${MYVIMRC:-"${VIM_CONFIG_DIR}/init.vim"}
 export VIMINIT='source $MYVIMRC'
+export TERM="xterm-256color"
 alias vim='nvim'
 alias vi='nvim'
 alias ninstall='nvim +PlugInstall +qall'
