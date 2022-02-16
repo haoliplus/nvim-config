@@ -63,17 +63,8 @@ end
 
 -- Loop through the servers listed above.
 for _, server_name in pairs(servers) do
-    local server_available, server = lsp_installer_servers.get_server(server_name)
-    if server_available then
-        local opts = lsp_opts[server_name]
-        server:on_ready(function ()
-            server:setup(opts)
-        end)
-        if not server:is_installed() then
-            -- Queue the server to be installed.
-            server:install()
-        end
-    end
+    local opts = lsp_opts[server_name]                                                                                                                                                                 
+    require('lspconfig')[server_name].setup(opts)
 end
 
 require 'config.nvim-cmp'
