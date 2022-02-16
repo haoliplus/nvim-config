@@ -37,7 +37,17 @@ rm -rf ${HOME}/.local/bin/node && ln -s ${HOME}/.local/opt/node-${NODE_VERSION}-
 rm -rf ${HOME}/.local/bin/npm && ln -s ${HOME}/.local/opt/node-${NODE_VERSION}-linux-x64/bin/npm ${HOME}/.local/bin/npm
 python3 -m pip install -i https://pypi.douban.com/simple pynvim
 
-cat <<EOF
+
+
+CACHE_DIR=$(mktemp -d)
+
+wget -c -o ${CACHE_DIR}/download_${USER}_log https://github.com/haoliplus/nvim-config/archive/refs/heads/master.zip  -O ${CACHE_DIR}/master.zip \
+  && unzip ${CACHE_DIR}/master.zip -d ${CACHE_DIR} \
+  && cp -r ${CACHE_DIR}/nvim-config-master ${HOME}/nvim
+
+
+cat >> ${HOME}/.zshrc << 'endmsg'
+export PATH="${HOME}/.local/bin:${PATH}"
 export VIM_RESOURCE_DIR=${VIM_RESOURCE_DIR:-"${HOME}/.local/share/nvim"}
 export VIM_CONFIG_DIR=${VIM_CONFIG_DIR:-"${HOME}/nvim"}
 export WIKI_PATH="${HOME}/vimwiki"
@@ -47,6 +57,6 @@ export VIMRUNTIME="${VIM_RESOURCE_DIR}/runtime"
 export MYVIMRC=${MYVIMRC:-"${VIM_CONFIG_DIR}/init.vim"}
 export VIMINIT='source $MYVIMRC'
 ZSH_THEME="ys"
-EOF >> ${HOME}/.zshrc
+endmsg
 
 
