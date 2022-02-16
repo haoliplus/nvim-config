@@ -56,7 +56,11 @@ end
 
 local util = require("lspconfig/util")
 
-lsp_opts["clangd"]["cmd"] = { "clangd", "--clang-tidy", "--log=verbose"}
+lsp_opts["clangd"]["cmd"] = { "clangd", "--background-index", "--clang-tidy"}                                                                                                                          
+lsp_opts["clangd"]["root_dir"] = function(fname)                                                                                                                                                       
+    return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)                                                                                                                   
+end
+
 lsp_opts["pyright"]["root_dir"] = function(fname)
     return util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt")(fname) or util.path.dirname(fname)
 end
