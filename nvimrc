@@ -12,6 +12,7 @@ map <leader>9 9gt
 let g:username = $NICKNAME
 let g:email = $MAIL
 let g:licensee = $LICENSE
+let g:better_escape_shortcut = 'jj'
 
 set cursorcolumn
 set cursorline

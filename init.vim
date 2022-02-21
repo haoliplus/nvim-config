@@ -47,6 +47,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'neovim/nvim-lspconfig'
 " Plug 'scrooloose/nerdcommenter'
 Plug 'williamboman/nvim-lsp-installer'
+Plug 'Yggdroot/indentLine'
 
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
