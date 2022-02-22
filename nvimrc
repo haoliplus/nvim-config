@@ -14,14 +14,6 @@ let g:email = $MAIL
 let g:licensee = $LICENSE
 let g:better_escape_shortcut = 'jj'
 
-set cursorcolumn
-set cursorline
-set colorcolumn=80,120
-" hi CursorLine term=bold cterm=bold guibg=53
-hi CursorLine cterm=NONE ctermbg=8
-hi CursorColumn cterm=NONE ctermbg=8 ctermfg=white
-hi ColorColumn cterm=NONE ctermbg=8 ctermfg=white
-
 nmap <F1> <nop>
 
 nmap <A-j> :tabp <cr>
