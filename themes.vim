@@ -6,11 +6,13 @@ set t_Co=256
 set cursorcolumn
 set cursorline
 set background=dark
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 if (has("nvim"))
-  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
+" Italics for my themes
+let g:palenight_terminal_italics=1
+" simily with 'highlight Comment cterm=italic gui=italic'
 " Override cursorline and cursorcolumn
 let g:palenight_color_overrides = {
 \    'cursor_grey': { "gui": "#3E4452", "cterm": "White", "cterm16": "White" },
@@ -24,4 +26,3 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-highlight Comment cterm=italic gui=italic
