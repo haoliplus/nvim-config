@@ -1,7 +1,5 @@
 let s:plugin_conf_path="$VIM_CONFIG_DIR/plugins"
-
-if executable("CocActionAsync")
-  execute printf('source %s/coc.vim', s:plugin_conf_path)
-endif
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
-" execute printf('source %s/nvim-cmp.vim', s:plugin_conf_path)
+let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree.*', '*.wiki']
+let g:indentLine_fileTypeExclude = ['vimwiki']
+let g:indentLine_bufTypeExclude = ['help', 'terminal', 'vimwiki']
