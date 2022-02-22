@@ -31,13 +31,10 @@ Plug 'vim-scripts/DoxygenToolkit.vim', {'frozen': 1}
 Plug 'skywind3000/asyncrun.vim', {'frozen': 1}
 Plug 'tpope/vim-fugitive', {'frozen': 1}
 Plug 'drewtempelmeyer/palenight.vim', {'frozen': 1}
-" Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}, 'frozen': 1}
-" Plug 'liuchengxu/vista.vim', {'frozen': 1}
 Plug 'jlanzarotta/bufexplorer', {'frozen': 1}
 Plug 'tpope/vim-commentary', {'frozen': 1}
 Plug 'vim-scripts/mru.vim', {'frozen': 1}
 Plug 'kien/ctrlp.vim', {'frozen': 1}
-Plug 'honza/vim-snippets', {'frozen': 1}
 if isdirectory(g:wiki_path)
   Plug 'haoliplus/vimwiki', {'frozen': 1}
 endif
@@ -58,6 +55,8 @@ Plug 'hrsh7th/nvim-cmp'
 " For ultisnips users.
 Plug 'SirVer/ultisnips'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+" community-maintained snippets
+Plug 'honza/vim-snippets', {'frozen': 1}
 
 call plug#end()
 

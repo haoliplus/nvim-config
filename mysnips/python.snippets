@@ -1,0 +1,18 @@
+priority -50
+
+###########################################################################
+#                            TEXTMATE SNIPPETS                            #
+###########################################################################
+
+#! header
+snippet ifdebug "ifmain" b
+if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
+	${1:${VISUAL:main()}}
+endsnippet
+
+snippet ts2dt "timestamp to datetime object" b
+from datetime import datetime
+dt_object = datetime.fromtimestamp(timestamp)
+endsnippet
+
+# vim:ft=snippets:

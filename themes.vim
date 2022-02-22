@@ -24,3 +24,4 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
+highlight Comment cterm=italic gui=italic
