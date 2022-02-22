@@ -38,6 +38,7 @@ map <leader>f :MRU<CR>
 " => NERDTree
 """"""""""""""""""""""""""""""
 map <F5> :NERDTreeToggle<cr>
+map <F6> :NERDTreeTabsToggle<cr>
 nnoremap <silent> <expr><C-t> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<CR>"
 nnoremap <silent> <expr><C-s> ":Vista finder\<CR>"
 
