@@ -49,6 +49,7 @@ CACHE_DIR=$(mktemp -d)
 
 wget -c -o ${CACHE_DIR}/download_${USER}_log https://github.com/haoliplus/nvim-config/archive/refs/heads/master.zip  -O ${CACHE_DIR}/master.zip \
   && unzip ${CACHE_DIR}/master.zip -d ${CACHE_DIR} \
+  && rm -rf ${HOME}/nvim \
   && cp -r ${CACHE_DIR}/nvim-config-master ${HOME}/nvim
 
 create_link "${HOME}/nvim/resources/.tmux.conf" "${HOME}/.tmux.conf"
