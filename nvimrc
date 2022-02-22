@@ -41,35 +41,6 @@ map <F5> :NERDTreeToggle<cr>
 nnoremap <silent> <expr><C-t> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<CR>"
 nnoremap <silent> <expr><C-s> ":Vista finder\<CR>"
 
-""""""""""""""""""""""""""""""
-" => Coc
-""""""""""""""""""""""""""""""
-" function! s:check_back_space() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~# '\s'
-" endfunction
-" nnoremap <silent> <expr><A-s> ":CocList --interactive symbols\<CR>"
-" " nmap <silent> <expr><Esc> coc#util#has_float() ? "\<Plug>(coc-float-hide)" : "<Esc>"
-" nmap <silent> <expr><Esc> "\<Plug>(coc-float-hide)"
-" nmap <silent> <expr><A-CR> "\<Plug>(coc-fix-current)"
-" nmap <silent> <space> :call CocActionAsync('doHover')<cr>
-" 
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? "<C-n>" :
-"       \ coc#expandableOrJumpable() ? coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ coc#refresh()
-" 
-" let g:coc_snippet_next = '<tab>'
-" let g:coc_snippet_prev = '<S-tab>'
-" 
-" nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
-" nmap <silent> gr <Plug>(coc-references)
-" nmap <silent> gn <Plug>(coc-diagnostic-next)
-" nmap <silent> gp <Plug>(coc-diagnostic-prev)
-
 let s:hidden_all = 0
 function! ToggleHiddenAll()
     if s:hidden_all  == 0

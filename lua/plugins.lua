@@ -33,6 +33,8 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
 end
+require 'config.nvim-cmp'
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local lsp_installer_servers = require('nvim-lsp-installer.servers')
 
@@ -48,6 +50,7 @@ for _, server_name in pairs(servers) do
     -- this function will be invoked. Make sure not to use the "catch-all" lsp_installer.on_server_ready()
     -- function to set up servers, to avoid doing setting up a server twice.
     on_attach = on_attach,
+    capabilities = capabilities,
     flags = {
       debounce_text_changes = 150,
     }
@@ -71,4 +74,3 @@ for _, server_name in pairs(servers) do
     require('lspconfig')[server_name].setup(opts)
 end
 
-require 'config.nvim-cmp'

@@ -13,6 +13,7 @@ mkdir -p ${HOME}/.local/bin
 mkdir -p ${HOME}/.local/lib
 mkdir -p ${HOME}/.local/opt
 mkdir -p ${HOME}/.local/include
+mkdir -p ${HOME}/.cache/temp_dirs/undodir
 
 CACHE_DIR=$(mktemp -d)
 NODE_VERSION="v16.13.1"

@@ -17,17 +17,6 @@ autocmd FileType fzf call feedkeys("i\<Bs>")
 
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 
-
-" By default vista.vim never run if you don't call it explicitly.
-"
-" If you want to show the nearest function in your statusline automatically,
-" you can add the following line to your vimrc 
-" try
-"   autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
-" catch
-" endtry
-
-
 """"""""""""""""""""""""""""""
 " => Other
 """"""""""""""""""""""""""""""

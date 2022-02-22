@@ -27,4 +27,4 @@ set ignorecase
 
 " When searching try to be smart about cases 
 set smartcase
-set background=dark
+
