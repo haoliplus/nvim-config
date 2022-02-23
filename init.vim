@@ -34,6 +34,7 @@ Plug 'vim-scripts/DoxygenToolkit.vim', {'frozen': 1}
 Plug 'skywind3000/asyncrun.vim', {'frozen': 1}
 " git 
 Plug 'tpope/vim-fugitive', {'frozen': 1}
+Plug 'airblade/vim-gitgutter', {'frozen': 1}
 " Themes
 Plug 'drewtempelmeyer/palenight.vim', {'frozen': 1}
 " c-b show buffer
