@@ -8,7 +8,6 @@ execute printf('source %s/func.vim', s:config_path)
 execute printf('source %s/vars.vim', s:config_path)
 execute printf('source %s/options.vim', s:config_path)
 execute printf('source %s/mappings.vim', s:config_path)
-execute printf('source %s/autocommands.vim', s:config_path)
 
 call plug#begin(s:plug_dir)
 " Utility for other plugin
@@ -91,3 +90,4 @@ lua require('init')
 execute printf('source %s/plugin.vim', s:config_path)
 execute printf('source %s/nvimrc', s:config_path)
 execute printf('source %s/themes.vim', s:config_path)
+execute printf('source %s/autocommands.vim', s:config_path)
