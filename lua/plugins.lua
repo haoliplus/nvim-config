@@ -41,6 +41,7 @@ local lsp_installer_servers = require('nvim-lsp-installer.servers')
 local servers = {
     "clangd",
     "pyright",
+    -- "jedi_language_server",
 }
 local lsp_opts = {}
 
@@ -67,6 +68,10 @@ end
 lsp_opts["pyright"]["root_dir"] = function(fname)
     return util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt")(fname) or util.path.dirname(fname)
 end
+
+-- lsp_opts["jedi_language_server"]["root_dir"] = function(fname)
+--     return util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt")(fname) or util.path.dirname(fname)
+-- end
 
 -- Loop through the servers listed above.
 for _, server_name in pairs(servers) do

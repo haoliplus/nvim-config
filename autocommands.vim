@@ -1,4 +1,4 @@
-autocmd FileType python setl shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType python setl shiftwidth=4 tabstop=2 softtabstop=2
 
 
 " Return to last edit position when opening files (You want this!)
