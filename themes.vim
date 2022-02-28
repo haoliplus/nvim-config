@@ -10,6 +10,8 @@ if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
+" Change comment in C++ to ///
+autocmd FileType cpp setlocal commentstring=///\ %s
 " Italics for my themes
 let g:palenight_terminal_italics=1
 " simily with 'highlight Comment cterm=italic gui=italic'
