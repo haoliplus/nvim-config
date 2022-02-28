@@ -7,15 +7,6 @@ let g:LanguageClient_serverStderr = '/tmp/clangd.stderr'
 let g:NERDTreeGitStatusPorcelainVersion=1
 
 let g:mapleader = ";"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Turn persistent undo on 
-"    means that you can undo even when you close a buffer/VIM
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-try
-    set undodir=${HOME}/.cache/temp_dirs/undodir
-    set undofile
-catch
-endtry
 "{{ Builtin variables
 " Disable Python2 support
 let g:loaded_python_provider = 0
@@ -63,42 +54,9 @@ let g:vimwiki_list = [{'path': g:wiki_path.'/text/',
 let g:vimwiki_hl_headers = 1
 let g:vimwiki_global_ext = 0
 
-" NERDTree
-
-let NERDTreeShowLineNumber = 1
-let NERDTreeAutoCentor = 1
-let NERDTreeShowBookmarks = 1
-
-" only open NERDTree on console if dir was given
-" if set to 1, it always open NERDTree
-" if set to 0, it will not open NERDTree
-let g:nerdtree_tabs_open_on_console_startup=0
-
-" focus NREDTree if opening a dir, focus file if opening a file
-let g:nerdtree_tabs_smart_startup_focus=1
-
-let NERDTreeIgnore=['\.pyc','\~$','\.swp', '\.o']
-
-let g:NERDSpaceDelims = 0
-let g:NERDTreeGitStatusIncludeSubmodules=1
-
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-    \ "Modified"  : "*",
-    \ "Staged"    : "+",
-    \ "Untracked" : "~",
-    \ "Renamed"   : "»",
-    \ "Unmerged"  : "=",
-    \ "Deleted"   : "-",
-    \ "Dirty"     : "•",
-    \ "Clean"     : "✓",
-    \ 'Ignored'   : "~",
-    \ "Unknown"   : "?"
-    \ }
-
 """"""""""""""""""""""""""""""
 " => CTRL-P
 """"""""""""""""""""""""""""""
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_max_height = 20
 let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
-

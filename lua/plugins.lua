@@ -59,9 +59,9 @@ end
 
 local util = require("lspconfig/util")
 
-lsp_opts["clangd"]["cmd"] = { "clangd", "--background-index", "--clang-tidy"}                                                                                                                          
-lsp_opts["clangd"]["root_dir"] = function(fname)                                                                                                                                                       
-    return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)                                                                                                                   
+lsp_opts["clangd"]["cmd"] = { "clangd", "--background-index", "--clang-tidy"}
+lsp_opts["clangd"]["root_dir"] = function(fname)
+    return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
 end
 
 lsp_opts["pyright"]["root_dir"] = function(fname)
@@ -70,7 +70,27 @@ end
 
 -- Loop through the servers listed above.
 for _, server_name in pairs(servers) do
-    local opts = lsp_opts[server_name]                                                                                                                                                                 
+    local opts = lsp_opts[server_name]
     require('lspconfig')[server_name].setup(opts)
 end
 
+---
+
+require'nvim-web-devicons'.setup {
+ -- your personnal icons can go here (to override)
+ -- you can specify color or cterm_color instead of specifying both of them
+ -- DevIcon will be appended to `name`
+ override = {
+  zsh = {
+  icon = "#",
+  color = "#428850",
+  cterm_color = "65",
+  name = "Zsh"}
+};
+ -- globally enable default icons (default to false)
+ -- will get overriden by `get_icons` option
+ default = true;
+}
+require'nvim-tree'.setup {
+  open_on_tab        = true
+}

@@ -35,33 +35,6 @@ map <c-b> :CtrlPBuffer<cr>
 map <leader>f :MRU<CR>
 
 """"""""""""""""""""""""""""""
-" => NERDTree
+" => NvimTree
 """"""""""""""""""""""""""""""
-map <F5> :NERDTreeToggle<cr>
-map <F6> :NERDTreeTabsToggle<cr>
-nnoremap <silent> <expr><C-t> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<CR>"
-nnoremap <silent> <expr><C-s> ":Vista finder\<CR>"
-
-let s:hidden_all = 0
-function! ToggleHiddenAll()
-    if s:hidden_all  == 0
-        let s:hidden_all = 1
-        set noshowmode
-        set noruler
-        set laststatus=0
-        set noshowcmd
-    else
-        let s:hidden_all = 0
-        set showmode
-        set ruler
-        set laststatus=2
-        set showcmd
-    endif
-endfunction
-
-nnoremap <S-h> :call ToggleHiddenAll()<CR>
-
-" set laststatus=0
-set noshowmode
-let g:unite_force_overwrite_statusline = 0
-let g:vimfiler_force_overwrite_statusline = 0
+map <F5> :NvimTreeToggle<cr>

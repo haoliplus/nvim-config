@@ -13,7 +13,6 @@ set expandtab
 set mouse=
 
 set updatetime=300
-" set signcolumn=yes
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
@@ -28,3 +27,12 @@ set ignorecase
 " When searching try to be smart about cases 
 set smartcase
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Turn persistent undo on 
+"    means that you can undo even when you close a buffer/VIM
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+try
+    set undodir=${HOME}/.cache/temp_dirs/undodir
+    set undofile
+catch
+endtry

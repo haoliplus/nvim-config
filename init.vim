@@ -4,10 +4,10 @@ let s:config_path=$VIM_CONFIG_DIR
 let s:plug_dir=$VIMPLUGDIR
 let &runtimepath.=','.escape(expand('<sfile>:p:h'), '\,')
 
-execute printf('source %s/func.vim', s:config_path)
 execute printf('source %s/vars.vim', s:config_path)
 execute printf('source %s/options.vim', s:config_path)
 execute printf('source %s/mappings.vim', s:config_path)
+
 
 call plug#begin(s:plug_dir)
 " Utility for other plugin
@@ -15,18 +15,15 @@ Plug 'google/vim-glaive' , {'frozen': 1}
 Plug 'google/vim-maktaba', {'frozen': 1}
 
 " file tree explorer
-Plug 'scrooloose/nerdtree' , {'frozen': 1}
-" Git symbol for nerdtree
-Plug 'Xuyuanp/nerdtree-git-plugin', {'frozen': 1}
-" make nerdtree sync bwtween each tab
-Plug 'jistr/vim-nerdtree-tabs' , {'frozen': 1}
+Plug 'kyazdani42/nvim-web-devicons', {'frozen': 1}
+Plug 'kyazdani42/nvim-tree.lua', {'frozen': 1}
 
 " jump between .h/.cc
 Plug 'vim-scripts/a.vim', {'frozen': 1}"
 " Format code
 Plug 'google/vim-codefmt', {'frozen': 1}
 " syntax highlight
-Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'jackguo380/vim-lsp-cxx-highlight', {'frozen': 1}
 " Generate doc header and something
 Plug 'vim-scripts/DoxygenToolkit.vim', {'frozen': 1}
 " run command :AsyncRun[!]
@@ -82,12 +79,11 @@ endif
 call plug#end()
 
 call glaive#Install()
+execute printf('source %s/themes.vim', s:config_path)
 
-set completeopt=menu,menuone,noselect
 
 lua require('init')
 
 execute printf('source %s/plugin.vim', s:config_path)
 execute printf('source %s/nvimrc', s:config_path)
-execute printf('source %s/themes.vim', s:config_path)
 execute printf('source %s/autocommands.vim', s:config_path)

@@ -17,7 +17,10 @@ command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 """"""""""""""""""""""""""""""
 " => Other
 """"""""""""""""""""""""""""""
+" Format json
 com! FormatJSON %!json_pp -json_opt utf8,pretty
+" remove trailing space
+com! RMTS %s/\s\+$//e
 
 " Change comment in C++ to ///
 autocmd FileType cpp setlocal commentstring=///\ %s
