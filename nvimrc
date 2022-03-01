@@ -16,18 +16,19 @@ let g:better_escape_shortcut = 'jj'
 
 nmap <F1> <nop>
 
-nmap <A-j> :tabp <cr>
-nmap <A-k> :tabn <cr>
-nmap <c-j> :wincmd j<cr>
-nmap <c-k> :wincmd k<cr>
-nmap <c-h> :wincmd h<cr>
-nmap <c-l> :wincmd l<cr>
+nmap <A-j> :wincmd j<cr>
+nmap <A-k> :wincmd k<cr>
+nmap <A-h> :wincmd h<cr>
+nmap <A-l> :wincmd l<cr>
 
 """"""""""""""""""""""""""""""
 " => CTRL-P
 """"""""""""""""""""""""""""""
 let g:ctrlp_map = '<c-f>'
-map <leader>b :CtrlPBuffer<cr>
+
+" FZF
+nmap <F6> :Buffers<cr>
+nmap <F7> :Marks<cr>
 
 """"""""""""""""""""""""""""""
 " => MRU plugin
