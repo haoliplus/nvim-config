@@ -4,7 +4,8 @@ let s:config_path=$VIM_CONFIG_DIR
 let s:plug_dir=$VIMPLUGDIR
 let &runtimepath.=','.escape(expand('<sfile>:p:h'), '\,')
 
-execute printf('source %s/vars.vim', s:config_path)
+execute printf('source %s/env.vim', s:config_path)
+execute printf('source %s/plug_vars.vim', s:config_path)
 execute printf('source %s/options.vim', s:config_path)
 execute printf('source %s/mappings.vim', s:config_path)
 
@@ -84,6 +85,5 @@ execute printf('source %s/themes.vim', s:config_path)
 
 lua require('init')
 
-execute printf('source %s/plugin.vim', s:config_path)
 execute printf('source %s/nvimrc', s:config_path)
 execute printf('source %s/autocommands.vim', s:config_path)

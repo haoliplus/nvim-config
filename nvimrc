@@ -27,7 +27,7 @@ nmap <c-l> :wincmd l<cr>
 " => CTRL-P
 """"""""""""""""""""""""""""""
 let g:ctrlp_map = '<c-f>'
-map <c-b> :CtrlPBuffer<cr>
+map <leader>b :CtrlPBuffer<cr>
 
 """"""""""""""""""""""""""""""
 " => MRU plugin
