@@ -36,6 +36,7 @@ smv ${CACHE_DIR}/nvim-linux64/lib/nvim ${HOME}/.local/lib/nvim
 smv ${CACHE_DIR}/nvim-linux64/share/nvim ${HOME}/.local/share/nvim
 sh -c 'curl -fLo ${HOME}/.local/share/nvim/runtime/autoload/plug.vim --create-dirs \
      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+git clone --depth 1 https://github.com/wbthomason/packer.nvim ${HOME}/.local/share/nvim/site/pack/packer/start/packer.nvim-config
 
 curl -L https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-linux-x64.tar.xz | tar -xJ -C ${CACHE_DIR}
 smv ${CACHE_DIR}/node-${NODE_VERSION}-linux-x64 ${HOME}/.local/opt/node-${NODE_VERSION}-linux-x64

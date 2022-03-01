@@ -22,3 +22,8 @@ command! FormatJSON %!json_pp -json_opt utf8,pretty
 " remove trailing space
 command! RMTS %s/\s\+$//e
 
+
+augroup packer_user_config
+  autocmd!
+  autocmd BufWritePost packer_plugins.lua source <afile> | PackerCompile
+augroup end
