@@ -11,6 +11,8 @@ autocmd FileType c,cpp,proto,javascript  let b:codefmt_formatter = 'clang-format
 autocmd FileType bzl let b:codefmt_formatter = 'buildifier'
 autocmd FileType python let b:codefmt_formatter = 'yapf'
 autocmd FileType fzf call feedkeys("i\<Bs>")
+" Only for my specifical config file
+autocmd FileType yaml set nocursorcolumn
 
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 

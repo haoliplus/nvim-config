@@ -5,6 +5,7 @@ syntax on
 set t_Co=256
 set cursorcolumn
 set cursorline
+
 set background=dark
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -19,7 +20,9 @@ let g:palenight_terminal_italics=1
 let g:palenight_color_overrides = {
 \    'cursor_grey': { "gui": "#3E4452", "cterm": "White", "cterm16": "White" },
 \}
+
 colorscheme palenight
+
 set colorcolumn=80,120
 
 if exists('+termguicolors')
