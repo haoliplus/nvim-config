@@ -50,19 +50,19 @@ CACHE_DIR=$(mktemp -d)
 
 wget -c -o ${CACHE_DIR}/download_${USER}_log https://github.com/haoliplus/nvim-config/archive/refs/heads/master.zip  -O ${CACHE_DIR}/master.zip \
   && unzip ${CACHE_DIR}/master.zip -d ${CACHE_DIR} \
-  && rm -rf ${HOME}/nvim \
-  && cp -r ${CACHE_DIR}/nvim-config-master ${HOME}/nvim
+  && rm -rf ${HOME}/.nvim \
+  && cp -r ${CACHE_DIR}/nvim-config-master ${HOME}/.nvim
 
-create_link "${HOME}/nvim/resources/.tmux.conf" "${HOME}/.tmux.conf"
-create_link "${HOME}/nvim/resources/.tmux.conf.local" "${HOME}/.tmux.conf.local"
-create_link "${HOME}/nvim/resources/.flake8" "${HOME}/.flake8"
-create_link "${HOME}/nvim/resources/pycodestyle" "${HOME}/.config/pycodestyle"
-create_link "${HOME}/nvim/resources/yapf" "${HOME}/.config/yapf"
+create_link "${HOME}/.nvim/resources/.tmux.conf" "${HOME}/.tmux.conf"
+create_link "${HOME}/.nvim/resources/.tmux.conf.local" "${HOME}/.tmux.conf.local"
+create_link "${HOME}/.nvim/resources/.flake8" "${HOME}/.flake8"
+create_link "${HOME}/.nvim/resources/pycodestyle" "${HOME}/.config/pycodestyle"
+create_link "${HOME}/.nvim/resources/yapf" "${HOME}/.config/yapf"
 
 cat >> ${HOME}/.zshrc << 'endmsg'
 export PATH="${HOME}/.local/bin:${PATH}"
 export VIM_RESOURCE_DIR=${VIM_RESOURCE_DIR:-"${HOME}/.local/share/nvim"}
-export VIM_CONFIG_DIR=${VIM_CONFIG_DIR:-"${HOME}/nvim"}
+export VIM_CONFIG_DIR=${VIM_CONFIG_DIR:-"${HOME}/.nvim"}
 export WIKI_PATH="${HOME}/vimwiki"
 
 export VIMPLUGDIR="${VIM_RESOURCE_DIR}/plugged"

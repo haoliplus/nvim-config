@@ -79,9 +79,13 @@ endif
 
 call plug#end()
 
-call glaive#Install()
-execute printf('source %s/themes.vim', s:config_path)
+try
+  call glaive#Install()
+catch 
+  finish
+endtry
 
+execute printf('source %s/themes.vim', s:config_path)
 
 lua require('init')
 lua require('packer_plugins')
