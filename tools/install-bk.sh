@@ -31,7 +31,6 @@ create_link() {
 }
 
 curl -L https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim-linux64.tar.gz | tar -xz -C ${CACHE_DIR}
-
 smv ${CACHE_DIR}/nvim-linux64/bin/nvim ${HOME}/.local/bin/nvim
 smv ${CACHE_DIR}/nvim-linux64/lib/nvim ${HOME}/.local/lib/nvim
 smv ${CACHE_DIR}/nvim-linux64/share/nvim ${HOME}/.local/share/nvim
@@ -40,7 +39,6 @@ sh -c 'curl -fLo ${HOME}/.local/share/nvim/runtime/autoload/plug.vim --create-di
 git clone --depth 1 https://github.com/wbthomason/packer.nvim ${HOME}/.local/share/nvim/site/pack/packer/start/packer.nvim-config
 
 curl -L https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-linux-x64.tar.xz | tar -xJ -C ${CACHE_DIR}
-
 smv ${CACHE_DIR}/node-${NODE_VERSION}-linux-x64 ${HOME}/.local/opt/node-${NODE_VERSION}-linux-x64
 rm -rf ${HOME}/.local/bin/node && ln -s ${HOME}/.local/opt/node-${NODE_VERSION}-linux-x64/bin/node ${HOME}/.local/bin/node
 rm -rf ${HOME}/.local/bin/npm && ln -s ${HOME}/.local/opt/node-${NODE_VERSION}-linux-x64/bin/npm ${HOME}/.local/bin/npm

@@ -2,6 +2,9 @@ let g:home_path=$HOME
 let g:wiki_path=$WIKI_PATH
 let s:config_path=$VIM_CONFIG_DIR
 let s:plug_dir=$VIMPLUGDIR
+if !has('nvim-0.6')
+  finish
+endif
 let &runtimepath.=','.escape(expand('<sfile>:p:h'), '\,')
 
 execute printf('source %s/env.vim', s:config_path)
