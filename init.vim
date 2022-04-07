@@ -3,6 +3,9 @@ let g:wiki_path=$WIKI_PATH
 let s:config_path=$VIM_CONFIG_DIR
 let s:plug_dir=$VIMPLUGDIR
 if !has('nvim-0.6')
+  set runtimepath=$VIM/vimfiles
+  runtime! plugin/*.vim
+  set runtimepath=$VIM/vimfiles,$VIMRUNTIME
   finish
 endif
 let &runtimepath.=','.escape(expand('<sfile>:p:h'), '\,')
