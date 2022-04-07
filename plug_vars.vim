@@ -35,3 +35,9 @@ let g:indentLine_bufTypeExclude = ['help', 'terminal', 'vimwiki']
 " UltiSnips
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnips"]
 " execute printf('source %s/nvim-cmp.vim', s:plugin_conf_path)
+let g:nvim_tree_show_icons = {
+    \ 'git': 1,
+    \ 'folders': 0,
+    \ 'files': 0,
+    \ 'folder_arrows': 0,
+    \ }
