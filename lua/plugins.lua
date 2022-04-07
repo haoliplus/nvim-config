@@ -120,7 +120,7 @@ require'nvim-tree'.setup {
   filters = {
    dotfiles = false,
    custom = {},
-   exclude = {},
+   exclude = {"bazel-genfiles", "bazel-bin", ".vscode"},
   },
 }
 vim.opt.splitright = true
