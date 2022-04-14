@@ -42,3 +42,5 @@ let g:nvim_tree_show_icons = {
     \ 'files': 0,
     \ 'folder_arrows': 0,
     \ }
+
+let g:ultisnips_python_quoting_style = "double"

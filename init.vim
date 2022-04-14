@@ -74,7 +74,7 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'SirVer/ultisnips'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 " community-maintained snippets
-Plug 'honza/vim-snippets', {'frozen': 1}
+" Plug 'honza/vim-snippets', {'frozen': 1}
 
 " Optional
 if isdirectory(g:wiki_path)
