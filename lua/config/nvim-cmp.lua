@@ -29,7 +29,11 @@ cmp.setup({
   },
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    { name = 'path' },
+    { name = 'path',
+      option = {
+        trailing_slash = true
+      },
+    },
     { name = 'ultisnips' }, -- For ultisnips users.
   }, {
     { name = 'buffer' },
