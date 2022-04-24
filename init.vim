@@ -89,7 +89,6 @@ endtry
 execute printf('source %s/themes.vim', s:config_path)
 
 lua require('init')
-lua require('packer_plugins')
 
 execute printf('source %s/custom.vim', s:config_path)
 execute printf('source %s/autocommands.vim', s:config_path)
