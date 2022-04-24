@@ -20,7 +20,7 @@ command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 " Format json
 command! FormatJSON %!json_pp -json_opt utf8,pretty
 " remove trailing space
-command! RMTS %s/\s\+$//e
+command! RmTrailingSpace %s/\s\+$//e
 
 
 augroup packer_user_config
