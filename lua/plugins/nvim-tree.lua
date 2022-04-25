@@ -44,7 +44,7 @@ require'nvim-tree'.setup {
   },
   filters = {
    dotfiles = false,
-   custom = {},
+   custom = {"*.egg-info", ".git"},
    exclude = {"bazel-genfiles", "bazel-bin", ".vscode"},
   },
 }
