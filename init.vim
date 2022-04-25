@@ -13,41 +13,41 @@ execute printf('source %s/options.vim', s:config_path)
 
 call plug#begin(s:plug_dir)
 " Utility for other plugin
-Plug 'google/vim-glaive' , {'frozen': 1}
-Plug 'google/vim-maktaba', {'frozen': 1}
+Plug 'google/vim-glaive'
+Plug 'google/vim-maktaba'
 
 " file tree explorer
-Plug 'kyazdani42/nvim-web-devicons', {'frozen': 1}
-Plug 'kyazdani42/nvim-tree.lua', {'frozen': 1}
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
 
 " jump between .h/.cc
-Plug 'vim-scripts/a.vim', {'frozen': 1}"
+Plug 'vim-scripts/a.vim'
 " Format code
-Plug 'google/vim-codefmt', {'frozen': 1}
+Plug 'google/vim-codefmt'
 " syntax highlight
-Plug 'jackguo380/vim-lsp-cxx-highlight', {'frozen': 1}
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 " Generate doc header and something
-Plug 'vim-scripts/DoxygenToolkit.vim', {'frozen': 1}
+Plug 'vim-scripts/DoxygenToolkit.vim'
 " run command :AsyncRun[!]
-Plug 'skywind3000/asyncrun.vim', {'frozen': 1}
+Plug 'skywind3000/asyncrun.vim'
 " git 
-Plug 'tpope/vim-fugitive', {'frozen': 1}
-Plug 'airblade/vim-gitgutter', {'frozen': 1}
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 " Themes
-Plug 'drewtempelmeyer/palenight.vim', {'frozen': 1}
+Plug 'drewtempelmeyer/palenight.vim'
 " c-b show buffer
-Plug 'jlanzarotta/bufexplorer', {'frozen': 1}
+Plug 'jlanzarotta/bufexplorer'
 " quick commentary
-Plug 'tpope/vim-commentary', {'frozen': 1}
+Plug 'tpope/vim-commentary'
 " most recently used file
-Plug 'vim-scripts/mru.vim', {'frozen': 1}
+Plug 'vim-scripts/mru.vim'
 " fuzzy search using c-t
-Plug 'junegunn/fzf', { 'do': './install --all', 'frozen': 1}
-Plug 'junegunn/fzf.vim', {'frozen': 1}
+Plug 'junegunn/fzf', { 'do': './install --all'}
+Plug 'junegunn/fzf.vim'
 " fuzzy search using c-p
-Plug 'ctrlpvim/ctrlp.vim', {'frozen': 1}
+Plug 'ctrlpvim/ctrlp.vim'
 " file template
-Plug 'aperezdc/vim-template', {'frozen': 1}
+Plug 'aperezdc/vim-template'
 " Using jj to escape
 Plug 'jdhao/better-escape.vim'
 " status
