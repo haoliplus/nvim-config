@@ -79,9 +79,9 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnips"]
 " execute printf('source %s/nvim-cmp.vim', s:plugin_conf_path)
 let g:nvim_tree_show_icons = {
     \ 'git': 1,
-    \ 'folders': 0,
-    \ 'files': 0,
-    \ 'folder_arrows': 0,
+    \ 'folders': 1,
+    \ 'files': 1,
+    \ 'folder_arrows': 1,
     \ }
 
 let g:ultisnips_python_quoting_style = "double"
