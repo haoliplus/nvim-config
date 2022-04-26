@@ -6,7 +6,7 @@ autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 " FileType
 autocmd FileType c,cpp,proto,javascript  let b:codefmt_formatter = 'clang-format'
 autocmd FileType bzl let b:codefmt_formatter = 'buildifier'
-autocmd FileType python let b:codefmt_formatter = 'yapf'
+autocmd FileType python let b:codefmt_formatter = 'black'
 autocmd FileType python setl shiftwidth=4 tabstop=2 softtabstop=2
 autocmd FileType fzf call feedkeys("i\<Bs>")
 " Only for my specifical config file
