@@ -36,7 +36,8 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'path',
       option = {
-        trailing_slash = true
+        trailing_slash = true,
+        exclude = {"onboard_data"},
       },
     },
     { name = 'ultisnips' }, -- For ultisnips users.

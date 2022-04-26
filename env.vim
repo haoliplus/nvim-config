@@ -76,6 +76,10 @@ let g:indentLine_setConceal = 0
 
 " UltiSnips
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnips"]
+" vim-templates
+let g:tmpl_author_email = $MAIL
+let s:cur_dir=expand('<sfile>:p:h')..'/mytemplates'
+let g:tmpl_search_paths = [s:cur_dir]
 " execute printf('source %s/nvim-cmp.vim', s:plugin_conf_path)
 let g:nvim_tree_show_icons = {
     \ 'git': 1,

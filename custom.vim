@@ -34,6 +34,7 @@ nmap <F7> :Marks<cr>
 " => MRU plugin
 """"""""""""""""""""""""""""""
 map <leader>f :MRU<CR>
+nmap <F8> :MRU<CR>
 
 """"""""""""""""""""""""""""""
 " => NvimTree

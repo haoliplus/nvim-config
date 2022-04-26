@@ -47,7 +47,8 @@ Plug 'junegunn/fzf.vim'
 " fuzzy search using c-p
 Plug 'ctrlpvim/ctrlp.vim'
 " file template
-Plug 'aperezdc/vim-template'
+" Plug 'aperezdc/vim-template'
+Plug 'tibabit/vim-templates'
 " Using jj to escape
 Plug 'jdhao/better-escape.vim'
 " status
@@ -64,7 +65,7 @@ Plug 'hrsh7th/nvim-cmp'
 " complete sources for nvim-cmp
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
+Plug 'haoliplus/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 
 " For ultisnips users.

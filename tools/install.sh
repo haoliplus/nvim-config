@@ -31,30 +31,25 @@ create_link() {
 }
 
 curl -L https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim-linux64.tar.gz | tar -xz -C ${CACHE_DIR}
-
-smv ${CACHE_DIR}/nvim-linux64/bin/nvim ${HOME}/.local/bin/nvim
-smv ${CACHE_DIR}/nvim-linux64/lib/nvim ${HOME}/.local/lib/nvim
-smv ${CACHE_DIR}/nvim-linux64/share/nvim ${HOME}/.local/share/nvim
 sh -c 'curl -fLo ${HOME}/.local/share/nvim/runtime/autoload/plug.vim --create-dirs \
      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 git clone --depth 1 https://github.com/wbthomason/packer.nvim ${HOME}/.local/share/nvim/site/pack/packer/start/packer.nvim-config
 
 curl -L https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-linux-x64.tar.xz | tar -xJ -C ${CACHE_DIR}
 
-smv ${CACHE_DIR}/node-${NODE_VERSION}-linux-x64 ${HOME}/.local/opt/node-${NODE_VERSION}-linux-x64
-rm -rf ${HOME}/.local/bin/node && ln -s ${HOME}/.local/opt/node-${NODE_VERSION}-linux-x64/bin/node ${HOME}/.local/bin/node
-rm -rf ${HOME}/.local/bin/npm && ln -s ${HOME}/.local/opt/node-${NODE_VERSION}-linux-x64/bin/npm ${HOME}/.local/bin/npm
-python3 -m pip install -i https://pypi.douban.com/simple pynvim
-
-
-
-CACHE_DIR=$(mktemp -d)
-
 wget -c -o ${CACHE_DIR}/download_${USER}_log https://github.com/haoliplus/nvim-config/archive/refs/heads/master.zip  -O ${CACHE_DIR}/master.zip \
   && unzip ${CACHE_DIR}/master.zip -d ${CACHE_DIR} \
-  && rm -rf ${HOME}/.nvim \
-  && cp -r ${CACHE_DIR}/nvim-config-master ${HOME}/.nvim
+  && smv "${CACHE_DIR}/nvim-config-master" "${HOME}/.nvim"
 
+python3 -m pip install -i https://pypi.douban.com/simple pynvim pyright black yapf
+
+smv ${CACHE_DIR}/nvim-linux64/bin/nvim ${HOME}/.local/bin/nvim
+smv ${CACHE_DIR}/nvim-linux64/lib/nvim ${HOME}/.local/lib/nvim
+smv ${CACHE_DIR}/nvim-linux64/share/nvim ${HOME}/.local/share/nvim
+smv ${CACHE_DIR}/node-${NODE_VERSION}-linux-x64 ${HOME}/.local/opt/node-${NODE_VERSION}-linux-x64
+
+create_link "${HOME}/.local/opt/node-${NODE_VERSION}-linux-x64/bin/node" "${HOME}/.local/bin/node"
+create_link "${HOME}/.local/opt/node-${NODE_VERSION}-linux-x64/bin/npm" "${HOME}/.local/bin/npm"
 create_link "${HOME}/.nvim/resources/.tmux.conf" "${HOME}/.tmux.conf"
 create_link "${HOME}/.nvim/resources/.tmux.conf.local" "${HOME}/.tmux.conf.local"
 create_link "${HOME}/.nvim/resources/.flake8" "${HOME}/.flake8"
@@ -79,4 +74,3 @@ ZSH_THEME="ys"
 endmsg
 
 echo "source ~/.zshrc"
-
