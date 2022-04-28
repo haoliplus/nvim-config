@@ -8,16 +8,21 @@
 
 set -ex
 
-mkdir -p ${HOME}/.local/share
-mkdir -p ${HOME}/.local/bin
-mkdir -p ${HOME}/.local/lib
-mkdir -p ${HOME}/.local/opt
-mkdir -p ${HOME}/.local/include
-mkdir -p ${HOME}/.cache/temp_dirs/undodir
-
 CACHE_DIR=$(mktemp -d)
 NODE_VERSION="v16.13.1"
 NVIM_VERSION="v0.6.1"
+NVIM_ROOT=${HOME}/.nvim
+
+export CURRENT_OS=$(uname)
+export OS=$(uname)
+
+if [[ "$OS" == 'Linux' ]]; then
+  NVIM_NAME="linux-x64"
+  NODE_NAME="linux-x64"
+elif [[ "$OS" == 'Darwin' ]]; then
+  NVIM_NAME="nvim-macos"
+  NODE_NAME="darwin-arm64"
+fi
 
 smv() {
   rm -rf "$2.old"
@@ -30,31 +35,38 @@ create_link() {
   ln -s "$1" "$2" && return 0
 }
 
-curl -L https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim-linux64.tar.gz | tar -xz -C ${CACHE_DIR}
+mkdir -p ${HOME}/.local/share
+mkdir -p ${HOME}/.local/bin
+mkdir -p ${HOME}/.local/lib
+mkdir -p ${HOME}/.local/opt
+mkdir -p ${HOME}/.local/include
+mkdir -p ${HOME}/.cache/temp_dirs/undodir
+
+curl -L https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/${NVIM_NAME}.tar.gz | tar -xz -C ${CACHE_DIR}
 sh -c 'curl -fLo ${HOME}/.local/share/nvim/runtime/autoload/plug.vim --create-dirs \
      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-git clone --depth 1 https://github.com/wbthomason/packer.nvim ${HOME}/.local/share/nvim/site/pack/packer/start/packer.nvim-config
 
-curl -L https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-linux-x64.tar.xz | tar -xJ -C ${CACHE_DIR}
+curl -L https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-${NODE_NAME}.tar.xz | tar -xJ -C ${CACHE_DIR}
 
 wget -c -o ${CACHE_DIR}/download_${USER}_log https://github.com/haoliplus/nvim-config/archive/refs/heads/master.zip  -O ${CACHE_DIR}/master.zip \
   && unzip ${CACHE_DIR}/master.zip -d ${CACHE_DIR} \
-  && smv "${CACHE_DIR}/nvim-config-master" "${HOME}/.nvim"
+  && smv "${CACHE_DIR}/nvim-config-master" "${NVIM_ROOT}"
 
 python3 -m pip install -i https://pypi.douban.com/simple pynvim pyright black yapf
 
-smv ${CACHE_DIR}/nvim-linux64/bin/nvim ${HOME}/.local/bin/nvim
-smv ${CACHE_DIR}/nvim-linux64/lib/nvim ${HOME}/.local/lib/nvim
-smv ${CACHE_DIR}/nvim-linux64/share/nvim ${HOME}/.local/share/nvim
-smv ${CACHE_DIR}/node-${NODE_VERSION}-linux-x64 ${HOME}/.local/opt/node-${NODE_VERSION}-linux-x64
+smv ${CACHE_DIR}/${NVIM_NAME}/bin/nvim ${HOME}/.local/bin/nvim
+smv ${CACHE_DIR}/${NVIM_NAME}/lib/nvim ${HOME}/.local/lib/nvim
+smv ${CACHE_DIR}/${NVIM_NAME}/share/nvim ${HOME}/.local/share/nvim
+smv ${CACHE_DIR}/node-${NODE_VERSION}-${NODE_NAME} ${HOME}/.local/opt/node-${NODE_VERSION}-${NODE_NAME}
 
-create_link "${HOME}/.local/opt/node-${NODE_VERSION}-linux-x64/bin/node" "${HOME}/.local/bin/node"
-create_link "${HOME}/.local/opt/node-${NODE_VERSION}-linux-x64/bin/npm" "${HOME}/.local/bin/npm"
-create_link "${HOME}/.nvim/resources/.tmux.conf" "${HOME}/.tmux.conf"
-create_link "${HOME}/.nvim/resources/.tmux.conf.local" "${HOME}/.tmux.conf.local"
-create_link "${HOME}/.nvim/resources/.flake8" "${HOME}/.flake8"
-create_link "${HOME}/.nvim/resources/pycodestyle" "${HOME}/.config/pycodestyle"
-create_link "${HOME}/.nvim/resources/yapf" "${HOME}/.config/yapf"
+create_link "${HOME}/.local/opt/node-${NODE_VERSION}-${NODE_NAME}/bin/node" "${HOME}/.local/bin/node"
+create_link "${HOME}/.local/opt/node-${NODE_VERSION}-${NODE_NAME}/bin/npm" "${HOME}/.local/bin/npm"
+
+create_link "${NVIM_ROOT}/resources/.tmux.conf" "${HOME}/.tmux.conf"
+create_link "${NVIM_ROOT}/resources/.tmux.conf.local" "${HOME}/.tmux.conf.local"
+create_link "${NVIM_ROOT}/resources/.flake8" "${HOME}/.flake8"
+create_link "${NVIM_ROOT}/resources/pycodestyle" "${HOME}/.config/pycodestyle"
+create_link "${NVIM_ROOT}/resources/yapf" "${HOME}/.config/yapf"
 
 cat >> ${HOME}/.zshrc << 'endmsg'
 export PATH="${HOME}/.local/bin:${PATH}"
