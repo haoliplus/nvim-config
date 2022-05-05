@@ -11,6 +11,8 @@ let &runtimepath.=','.escape(expand('<sfile>:p:h'), '\,')
 execute printf('source %s/env.vim', s:config_path)
 execute printf('source %s/options.vim', s:config_path)
 
+" let g:plug_url_format='http://git::@hub.fastgit.org/%s.git'
+
 call plug#begin(s:plug_dir)
 " Utility for other plugin
 Plug 'google/vim-glaive'

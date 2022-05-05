@@ -8,6 +8,13 @@
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 
-require('lsp')
-require('plugins')
-require('packer_plugins')
+local call_requires = function()
+  require('lsp')
+  require('plugins')
+  require('packer_plugins')
+end;
+
+if pcall(call_requires) then
+else
+    print('Failed to run init.lua');
+end
