@@ -43,10 +43,13 @@ mkdir -p ${HOME}/.local/include
 mkdir -p ${HOME}/.cache/temp_dirs/undodir
 
 curl -L https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/${NVIM_NAME}.tar.gz | tar -xz -C ${CACHE_DIR}
-sh -c 'curl -fLo ${HOME}/.local/share/nvim/runtime/autoload/plug.vim --create-dirs \
-     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
 curl -L https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-${NODE_NAME}.tar.xz | tar -xJ -C ${CACHE_DIR}
+PLUG_FILE=${HOME}/.local/share/nvim/runtime/autoload/plug.vim
+
+while [ ! -f ${PLUG_FILE} ]
+do
+  curl -fLo  {PLUG_FILE} --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+done
 
 wget -c -o ${CACHE_DIR}/download_${USER}_log https://github.com/haoliplus/nvim-config/archive/refs/heads/master.zip  -O ${CACHE_DIR}/master.zip \
   && unzip ${CACHE_DIR}/master.zip -d ${CACHE_DIR} \
