@@ -17,7 +17,7 @@ export CURRENT_OS=$(uname)
 export OS=$(uname)
 
 if [[ "$OS" == 'Linux' ]]; then
-  NVIM_NAME="linux-x64"
+  NVIM_NAME="nvim-linux64"
   NODE_NAME="linux-x64"
 elif [[ "$OS" == 'Darwin' ]]; then
   NVIM_NAME="nvim-macos"
