@@ -10,7 +10,8 @@ set -ex
 
 CACHE_DIR=$(mktemp -d)
 NODE_VERSION="v16.13.1"
-NVIM_VERSION="v0.6.1"
+# NVIM_VERSION="v0.6.1"
+NVIM_VERSION="stable"
 NVIM_ROOT=${HOME}/.nvim
 
 export CURRENT_OS=$(uname)
@@ -48,7 +49,7 @@ PLUG_FILE=${HOME}/.local/share/nvim/runtime/autoload/plug.vim
 
 while [ ! -f ${PLUG_FILE} ]
 do
-  curl -fLo  {PLUG_FILE} --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  curl -fLo  ${PLUG_FILE} --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 done
 
 wget -c -o ${CACHE_DIR}/download_${USER}_log https://github.com/haoliplus/nvim-config/archive/refs/heads/master.zip  -O ${CACHE_DIR}/master.zip \

@@ -1,7 +1,7 @@
 """"""""""""""""""""""""
 "" Color
 """""""""""""""""""""""
-syntax on                                                                                      
+syntax on
 set t_Co=256
 set cursorcolumn
 set cursorline
