@@ -45,26 +45,27 @@ mkdir -p ${HOME}/.cache/temp_dirs/undodir
 
 curl -L https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/${NVIM_NAME}.tar.gz | tar -xz -C ${CACHE_DIR}
 curl -L https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-${NODE_NAME}.tar.xz | tar -xJ -C ${CACHE_DIR}
-PLUG_FILE=${HOME}/.local/share/nvim/runtime/autoload/plug.vim
 
+smv ${CACHE_DIR}/${NVIM_NAME}/bin/nvim ${HOME}/.local/bin/nvim
+smv ${CACHE_DIR}/${NVIM_NAME}/lib/nvim ${HOME}/.local/lib/nvim
+smv ${CACHE_DIR}/${NVIM_NAME}/share/nvim ${HOME}/.local/share/nvim
+
+PLUG_FILE=${HOME}/.local/share/nvim/runtime/autoload/plug.vim
 while [ ! -f ${PLUG_FILE} ]
 do
   curl -fLo  ${PLUG_FILE} --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 done
+
+smv ${CACHE_DIR}/node-${NODE_VERSION}-${NODE_NAME} ${HOME}/.local/opt/node-${NODE_VERSION}-${NODE_NAME}
+
+create_link "${HOME}/.local/opt/node-${NODE_VERSION}-${NODE_NAME}/bin/node" "${HOME}/.local/bin/node"
+create_link "${HOME}/.local/opt/node-${NODE_VERSION}-${NODE_NAME}/bin/npm" "${HOME}/.local/bin/npm"
 
 wget -c -o ${CACHE_DIR}/download_${USER}_log https://github.com/haoliplus/nvim-config/archive/refs/heads/master.zip  -O ${CACHE_DIR}/master.zip \
   && unzip ${CACHE_DIR}/master.zip -d ${CACHE_DIR} \
   && smv "${CACHE_DIR}/nvim-config-master" "${NVIM_ROOT}"
 
 python3 -m pip install -i https://pypi.douban.com/simple pynvim pyright black yapf
-
-smv ${CACHE_DIR}/${NVIM_NAME}/bin/nvim ${HOME}/.local/bin/nvim
-smv ${CACHE_DIR}/${NVIM_NAME}/lib/nvim ${HOME}/.local/lib/nvim
-smv ${CACHE_DIR}/${NVIM_NAME}/share/nvim ${HOME}/.local/share/nvim
-smv ${CACHE_DIR}/node-${NODE_VERSION}-${NODE_NAME} ${HOME}/.local/opt/node-${NODE_VERSION}-${NODE_NAME}
-
-create_link "${HOME}/.local/opt/node-${NODE_VERSION}-${NODE_NAME}/bin/node" "${HOME}/.local/bin/node"
-create_link "${HOME}/.local/opt/node-${NODE_VERSION}-${NODE_NAME}/bin/npm" "${HOME}/.local/bin/npm"
 
 create_link "${NVIM_ROOT}/resources/.tmux.conf" "${HOME}/.tmux.conf"
 create_link "${NVIM_ROOT}/resources/.tmux.conf.local" "${HOME}/.tmux.conf.local"
