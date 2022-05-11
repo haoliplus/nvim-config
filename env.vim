@@ -3,7 +3,6 @@ let g:is_win = (has('win32') || has('win64')) ? v:true : v:false
 let g:is_linux = (has('unix') && !has('macunix')) ? v:true : v:false
 let g:is_mac = has('macunix') ? v:true : v:false
 let g:logging_level = 'info'
-let g:vim_json_conceal=0
 
 "{{ Builtin variables
 " Disable Python2 support
@@ -73,6 +72,8 @@ let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree.*', '*.wiki']
 let g:indentLine_fileTypeExclude = ['vimwiki']
 let g:indentLine_bufTypeExclude = ['help', 'terminal', 'vimwiki']
 let g:indentLine_setConceal = 0
+let g:vim_json_conceal=0
+let g:markdown_syntax_conceal=0
 
 " UltiSnips
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnips"]
@@ -84,33 +85,58 @@ let g:tmpl_search_paths = [s:cur_dir]
 let g:nvim_tree_show_icons = {
     \ 'git': 1,
     \ 'folders': 1,
-    \ 'files': 0,
+    \ 'files': 1,
     \ 'folder_arrows': 1,
     \ }
 " default will show icon by default if no icon is provided
 " default shows no icon by default
-let g:nvim_tree_icons = {
-    \ 'default': "-",
-    \ 'symlink': "~",
-    \ 'git': {
-    \   'unstaged': "✗",
-    \   'staged': "✓",
-    \   'unmerged': "-",
-    \   'renamed': "➜",
-    \   'untracked': "★",
-    \   'deleted': "D",
-    \   'ignored': "◌"
-    \   },
-    \ 'folder': {
-    \   'arrow_open': "-",
-    \   'arrow_closed': "+",
-    \   'default': "@",
-    \   'open': "@",
-    \   'empty': "#",
-    \   'empty_open': "#",
-    \   'symlink': "~@",
-    \   'symlink_open': "~@",
-    \   }
-    \ }
+
+" If icon is not valid
+" let g:nvim_tree_icons = {
+"     \ 'default': "-",
+"     \ 'symlink': "~",
+"     \ 'git': {
+"     \   'unstaged': "✗",
+"     \   'staged': "✓",
+"     \   'unmerged': "-",
+"     \   'renamed': "➜",
+"     \   'untracked': "★",
+"     \   'deleted': "D",
+"     \   'ignored': "◌"
+"     \   },
+"     \ 'folder': {
+"     \   'arrow_open': "-",
+"     \   'arrow_closed': "+",
+"     \   'default': "@",
+"     \   'open': "@",
+"     \   'empty': "#",
+"     \   'empty_open': "#",
+"     \   'symlink': "~@",
+"     \   'symlink_open': "~@",
+"     \   }
+"     \ }
+
+" let g:nvim_tree_icons = {
+"     \ 'default': "-",
+"     \ 'symlink': "~",
+"     \ 'folder': {
+"     \   'arrow_open': "-",
+"     \   'arrow_closed': "+",
+"     \   'empty': "#",
+"     \   'empty_open': "#",
+"     \   }
+"     \ }
 
 let g:ultisnips_python_quoting_style = "double"
+
+
+let g:lightline = {
+      \ 'colorscheme': 'one',
+      \ 'active': {
+      \   'left': [ ['filename', 'readonly', 'gitbranch', 'paste', 'mode'],
+      \             ['modified']]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head',
+      \ },
+      \ }

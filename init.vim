@@ -53,7 +53,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tibabit/vim-templates'
 " Using jj to escape
 Plug 'jdhao/better-escape.vim'
-" status
+" status bar
 Plug 'itchyny/lightline.vim'
 " show indent line
 Plug 'Yggdroot/indentLine'
