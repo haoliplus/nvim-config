@@ -137,6 +137,6 @@ let g:lightline = {
       \             ['modified']]
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'fugitive#head',
+      \   'gitbranch': 'FugitiveHead',
       \ },
       \ }
