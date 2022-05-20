@@ -1,11 +1,9 @@
 # NVIM CONFIG
 
 ## FONT
-1. UbuntuMono Nerd Font Bold
+1. nvim-config/resources/JetBrainsMonoNLRegularNerdFontComplete.ttf
 
 ## INSTALL
 
 curl -s -L https://raw.githubusercontent.com/haoliplus/nvim-config/master/tools/install.sh | bash
 
-
-PS. Check varaible : e.g verbose set conceallevel?
