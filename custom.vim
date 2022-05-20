@@ -30,6 +30,8 @@ let g:ctrlp_map = '<c-f>'
 nmap <F6> :Buffers<cr>
 nmap <F7> :Marks<cr>
 
+nnoremap <Leader>a :Ack<Space>
+
 """"""""""""""""""""""""""""""
 " => MRU plugin
 """"""""""""""""""""""""""""""

@@ -140,3 +140,7 @@ let g:lightline = {
       \   'gitbranch': 'FugitiveHead',
       \ },
       \ }
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
