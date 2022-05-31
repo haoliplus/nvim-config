@@ -24,6 +24,16 @@ require('nvim-web-devicons').setup {
 
 require'nvim-tree'.setup {
   open_on_tab        = true,
+  renderer = {
+    icons = {
+      show = {
+       git = 1,
+       folder = 1,
+       file = 1,
+       folder_arrow = 1
+      }
+    }
+  },
   actions = {
    change_dir = {
     enable = true,
