@@ -9,8 +9,8 @@
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 
 local call_requires = function()
-  require('lsp')
   require('plugins')
+  require('lsp')
   require('packer_plugins')
 end;
 

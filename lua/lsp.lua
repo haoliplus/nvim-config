@@ -33,3 +33,41 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
 end
+local servers = {
+    "clangd",
+    "pyright",
+    -- "jedi_language_server",
+}
+local lsp_opts = {}
+
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+for _, server_name in pairs(servers) do
+  lsp_opts[server_name] = {
+    -- When this particular server is ready (i.e. when installation is finished or the server is already installed),
+    -- this function will be invoked. Make sure not to use the "catch-all" lsp_installer.on_server_ready()
+    -- function to set up servers, to avoid doing setting up a server twice.
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = {
+      debounce_text_changes = 150,
+    }
+  }
+end
+
+local util = require("lspconfig/util")
+
+lsp_opts["clangd"]["cmd"] = { "clangd", "--background-index", "--clang-tidy"}
+lsp_opts["clangd"]["root_dir"] = function(fname)
+    return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
+end
+
+lsp_opts["pyright"]["root_dir"] = function(fname)
+    return util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt")(fname) or util.path.dirname(fname)
+end
+
+-- Loop through the servers listed above.
+for _, server_name in pairs(servers) do
+    local opts = lsp_opts[server_name]
+    require('lspconfig')[server_name].setup(opts)
+end
