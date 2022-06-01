@@ -27,10 +27,10 @@ require'nvim-tree'.setup {
   renderer = {
     icons = {
       show = {
-       git = 1,
-       folder = 1,
-       file = 1,
-       folder_arrow = 1
+       git = true,
+       folder = true,
+       file = true,
+       folder_arrow = true
       }
     }
   },
