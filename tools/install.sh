@@ -76,6 +76,7 @@ create_link "${NVIM_ROOT}/resources/.tmux.conf.local" "${HOME}/.tmux.conf.local"
 create_link "${NVIM_ROOT}/resources/.flake8" "${HOME}/.flake8"
 create_link "${NVIM_ROOT}/resources/pycodestyle" "${HOME}/.config/pycodestyle"
 create_link "${NVIM_ROOT}/resources/yapf" "${HOME}/.config/yapf"
+create_link "${NVIM_ROOT}/resources/clang-format" "${HOME}/.clang-format"
 
 if [[ ! -f ${DOTROOT} ]]; then
 cat >> ${HOME}/.zshrc << 'endmsg'

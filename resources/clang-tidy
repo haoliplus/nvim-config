@@ -1,0 +1,106 @@
+---
+Checks:          'google-*,readability-identifier-naming,bugprone-*,-clang-analyzer-optin.performance.Padding,-clang-diagnostic-pragma-once-outside-header,-bugprone-branch-clone'
+WarningsAsErrors: 'google-*,clang-diagnostic-non-virtual-dtor,clang-diagnostic-inconsistent-missing-override'
+HeaderFilterRegex: ''
+AnalyzeTemporaryDtors: false
+FormatStyle:     google
+User:            roadstar
+CheckOptions:    
+  - key:             cert-dcl16-c.NewSuffixes
+    value:           'L;LL;LU;LLU'
+  - key:             cppcoreguidelines-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic
+    value:           '1'
+  - key:             google-build-namespaces.HeaderFileExtensions
+    value:           ',h,hh,hpp,hxx'
+  - key:             google-global-names-in-headers.HeaderFileExtensions
+    value:           ',h,hh,hpp,hxx'
+  - key:             google-readability-braces-around-statements.ShortStatementLines
+    value:           '1'
+  - key:             google-readability-function-size.BranchThreshold
+    value:           '4294967295'
+  - key:             google-readability-function-size.LineThreshold
+    value:           '4294967295'
+  - key:             google-readability-function-size.NestingThreshold
+    value:           '4294967295'
+  - key:             google-readability-function-size.ParameterThreshold
+    value:           '4294967295'
+  - key:             google-readability-function-size.StatementThreshold
+    value:           '800'
+  - key:             google-readability-function-size.VariableThreshold
+    value:           '4294967295'
+  - key:             google-readability-namespace-comments.ShortNamespaceLines
+    value:           '10'
+  - key:             google-readability-namespace-comments.SpacesBeforeComments
+    value:           '2'
+  - key:             google-runtime-int.SignedTypePrefix
+    value:           int
+  - key:             google-runtime-int.TypeSuffix
+    value:           ''
+  - key:             google-runtime-int.UnsignedTypePrefix
+    value:           uint
+  - key:             google-runtime-references.WhiteListTypes
+    value:           ''
+  - key:             modernize-loop-convert.MaxCopySize
+    value:           '16'
+  - key:             modernize-loop-convert.MinConfidence
+    value:           reasonable
+  - key:             modernize-loop-convert.NamingStyle
+    value:           CamelCase
+  - key:             modernize-pass-by-value.IncludeStyle
+    value:           llvm
+  - key:             modernize-replace-auto-ptr.IncludeStyle
+    value:           llvm
+  - key:             modernize-use-nullptr.NullMacros
+    value:           'NULL'
+  - key:             readability-identifier-naming.PublicMethodCase
+    value:           aNy_CasE
+  - key:             readability-identifier-naming.ClassCase
+    value:           CamelCase
+  - key:             readability-identifier-naming.StructCase
+    value:           CamelCase
+  - key:             readability-identifier-naming.EnumCase
+    value:           CamelCase
+  - key:             readability-identifier-naming.UnionCase
+    value:           CamelCase
+  - key:             readability-identifier-naming.TemplateParameterCase
+    value:           CamelCase
+  - key:             readability-identifier-naming.FunctionCase
+    value:           CamelCase
+  - key:             readability-identifier-naming.TypeAliasCase
+    value:           CamelCase
+  - key:             readability-identifier-naming.TypedefCase
+    value:           CamelCase
+  - key:             readability-identifier-naming.ConstexprVariableCase
+    value:           CamelCase
+  - key:             readability-identifier-naming.GlobalConstantCase
+    value:           CamelCase
+  - key:             readability-identifier-naming.StaticConstantCase
+    value:           CamelCase
+  - key:             readability-identifier-naming.NamespaceCase
+    value:           lower_case
+  - key:             readability-identifier-naming.VariableCase
+    value:           lower_case
+  - key:             readability-identifier-naming.MemberCase
+    value:           lower_case
+  - key:             readability-identifier-naming.ParameterCase
+    value:           lower_case
+  - key:             readability-identifier-naming.ClassMemberCase
+    value:           lower_case
+  - key:             readability-identifier-naming.ClassMemberSuffix
+    value:           '_'
+  - key:             readability-identifier-naming.PrivateMemberSuffix
+    value:           '_'
+  - key:             readability-identifier-naming.ProtectedMemberSuffix
+    value:           '_'
+  - key:             readability-identifier-naming.StaticConstantPrefix
+    value:           'k'
+  - key:             readability-identifier-naming.GlobalConstantPrefix
+    value:           'k'
+  - key:             readability-identifier-naming.ConstexprVariablePrefix
+    value:           'k'
+  - key:             readability-identifier-naming.EnumConstantCase
+    value:           UPPER_CASE
+  - key:             readability-identifier-naming.IgnoreFailedSplit
+    value:           '0'
+...
+
