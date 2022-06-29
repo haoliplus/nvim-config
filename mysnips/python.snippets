@@ -257,7 +257,56 @@ if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_q
 	${1:${VISUAL:main()}}
 endsnippet
 
-snippet ts2dt "timestamp to datetime object" b
+snippet ts2dt "float timestamp(second) to datetime" b
 from datetime import datetime
-dt_object = datetime.fromtimestamp(timestamp)
+dt_object = datetime.fromtimestamp(${1})
 endsnippet
+
+snippet initlogger "init logger" b
+import sys
+import logging
+from pathlib import Path
+
+def init_logger(
+		base_name="temp.log", log_dir=Path.home() / ".cache" / "log", reset=True
+):
+		if len(base_name) == 0:
+				base_name = "temp.log"
+		if Path(base_name).suffix != ".log":
+				base_name = f"{Path(base_name).stem}.log"
+
+		base_path = base_name
+		if base_name[0] != "/":
+				base_path = log_dir / base_name
+
+		Path(base_path).parent.mkdir(parents=True, exist_ok=True)
+		log_file_path = base_path
+		cnt = 0
+		while Path(log_file_path).exists():
+				cnt += 1
+				log_file_path = f"{base_path}.{cnt}"
+
+		stream_handler = logging.StreamHandler(sys.stdout)
+		stream_handler.setLevel(logging.INFO)
+		file_handler = logging.FileHandler(log_file_path)
+		file_handler.setLevel(logging.DEBUG)
+		logger = logging.getLogger()
+		if reset:
+				logger.handlers.clear()
+
+		logging.basicConfig(
+				level=logging.DEBUG,
+				datefmt="%m-%d %H:%M:%S",
+				format="[%(asctime)s.%(msecs)03d %(filename)s:%(lineno)d] [%(levelname)s] %(message)s",
+				handlers=[stream_handler, logging.FileHandler(log_file_path)],
+		)
+		logger.info(f"Logging into {log_file_path}")
+		logger.debug(f"Logging debug {log_file_path}")
+		return logging
+endsnippet
+
+snippet ldproto "load proto" b
+from google.protobuf import text_format
+text_format.Parse(open(path, "r").read(), obj)
+endsnippet
+
