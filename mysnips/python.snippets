@@ -310,3 +310,19 @@ from google.protobuf import text_format
 text_format.Parse(open(path, "r").read(), obj)
 endsnippet
 
+snippet dt2ts "datetime to float timestamp(second)" b
+from datetime import datetime
+dt = datetime(year=${1}, month=${2}, day=${3})
+ts = datetime.timestamp(dt)
+endsnippet
+
+snippet strptime "parse datetime" b
+from datetime import datetime
+datetime.strptime("2021-01-02 10:00:00.123", "%Y-%m-%d %H:%M:%S.%f")
+endsnippet
+
+snippet strftime "format datetime" b
+from datetime import datetime
+now = datetime.now()
+now.strftime("%Y-%m-%d %H:%M:%S.%f")
+endsnippet
