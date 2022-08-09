@@ -45,17 +45,19 @@ mkdir -p ${HOME}/.local/opt
 mkdir -p ${HOME}/.local/include
 mkdir -p ${HOME}/.cache/temp_dirs/undodir
 
-curl -L https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/${NVIM_NAME}.tar.gz | tar -xz -C ${CACHE_DIR}
-curl -L https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-${NODE_NAME}.tar.xz | tar -xJ -C ${CACHE_DIR}
+wget -qO- https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/${NVIM_NAME}.tar.gz | tar -xz -C ${CACHE_DIR}
+wget -qO- https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-${NODE_NAME}.tar.xz | tar -xJ -C ${CACHE_DIR}
 
 smv ${CACHE_DIR}/${NVIM_NAME}/bin/nvim ${HOME}/.local/bin/nvim
 smv ${CACHE_DIR}/${NVIM_NAME}/lib/nvim ${HOME}/.local/lib/nvim
 smv ${CACHE_DIR}/${NVIM_NAME}/share/nvim ${HOME}/.local/share/nvim
 
 PLUG_FILE=${HOME}/.local/share/nvim/runtime/autoload/plug.vim
+mkdir -p $(dirname "${PLUG_FILE}")
 while [ ! -f ${PLUG_FILE} ]
 do
-  curl -fLo  ${PLUG_FILE} --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  # curl -fLo  ${PLUG_FILE} https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  wget -c -q https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -O ${PLUG_FILE}
 done
 
 smv ${CACHE_DIR}/node-${NODE_VERSION}-${NODE_NAME} ${HOME}/.local/opt/node-${NODE_VERSION}-${NODE_NAME}
