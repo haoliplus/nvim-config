@@ -13,7 +13,7 @@ NODE_VERSION="v16.13.1"
 # NVIM_VERSION="v0.6.1"
 NVIM_VERSION="stable"
 NVIM_ROOT=${HOME}/.nvim
-DOTROOT="${DOTROOT:=${HOME}/.dotfiles}"
+DOTROOT="${DOTROOT:-'${HOME}/.dotfiles'}"
 mkdir -p ${HOME}/.cache/temp_dirs/undodir
 
 export CURRENT_OS=$(uname)
