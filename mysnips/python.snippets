@@ -327,19 +327,26 @@ now = datetime.now()
 now.strftime("%Y-%m-%d %H:%M:%S.%f")
 endsnippet
 
-snippet npjson "np to json" b
+snippet jsonencoder "some to json" b
 import json
 import numpy as np
-class NpEncoder(json.JSONEncoder):
-		def default(self, obj):
-				if isinstance(obj, np.integer):
-						return int(obj)
-				if isinstance(obj, np.floating):
-						# alternatively use str()
-						return float(obj)
-				if isinstance(obj, np.ndarray):
-						return obj.tolist()
-				return json.JSONEncoder.default(self, obj)
+from datetime import datetime
+from bson import ObjectId
+class CustomEncoder(json.JSONEncoder):
+	# json.dumps(data, cls=CustomEncoder)
+	def default(self, obj):
+		if isinstance(obj, np.integer):
+			return int(obj)
+		if isinstance(obj, np.floating):
+			# alternatively use str()
+			return float(obj)
+		if isinstance(obj, np.ndarray):
+			return obj.tolist()
+		if isinstance(obj, datetime):
+			return str(obj)
+		if isinstance(obj, ObjectId):
+			return str(obj)
+		return json.JSONEncoder.default(self, obj)
 
-json.dumps(obj, indent=2, cls=NpEncoder))
+json.dumps(obj, indent=2, cls=CustomEncoder))
 endsnippet
