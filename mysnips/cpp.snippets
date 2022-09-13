@@ -10,8 +10,22 @@ priority -49
 ###########################################################################
 snippet /*fabu
 /******************************************************************************
- * Copyright `!v strftime("%Y")` The FabuPilot Authors. All Rights Reserved.
- *****************************************************************************/
+	* Copyright `!v strftime("%Y")` The FabuPilot Authors. All Rights Reserved.
+	*****************************************************************************/
 
 endsnippet
+
+snippet fabumain
+int main(int argc, char *argv[]) {
+	google::SetCommandLineOption("v", "4");
+	google::SetCommandLineOption("flagfile", "/fabupilot/config/modules/common/data/global_flagfile.txt");
+	fabupilot::common::InitLogging("debug");
+	google::ParseCommandLineFlags(&argc, &argv, true);
+
+	std::cout << google::CommandlineFlagsIntoString();
+	fabupilot::common::SetStderrLoggingLevel(
+		static_cast<fabupilot::common::LogLevel>(FLAGS_v));
+	return 0;
+}
 # vim:ft=snippets:
+

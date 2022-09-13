@@ -14,6 +14,7 @@ NODE_VERSION="v16.13.1"
 NVIM_VERSION="stable"
 NVIM_ROOT=${HOME}/.nvim
 DOTROOT="${DOTROOT:-'${HOME}/.dotfiles'}"
+NVIM_CONFIG_DIR="${DOTROOT}/home/config/nvim"
 mkdir -p ${HOME}/.cache/temp_dirs/undodir
 
 export CURRENT_OS=$(uname)
@@ -64,10 +65,12 @@ smv ${CACHE_DIR}/node-${NODE_VERSION}-${NODE_NAME} ${HOME}/.local/opt/node-${NOD
 create_link "${HOME}/.local/opt/node-${NODE_VERSION}-${NODE_NAME}/bin/node" "${HOME}/.local/bin/node"
 create_link "${HOME}/.local/opt/node-${NODE_VERSION}-${NODE_NAME}/bin/npm" "${HOME}/.local/bin/npm"
 
-if [[ ! -f ${DOTROOT} ]] || [[ ! -f ${DOTROOT}/home/config/nvim ]]; then
+if [[ ! -f ${DOTROOT} ]] || [[ ! -f ${NVIM_CONFIG_DIR} ]]; then
   wget -c -o ${CACHE_DIR}/download_${USER}_log https://github.com/haoliplus/nvim-config/archive/refs/heads/master.zip  -O ${CACHE_DIR}/master.zip \
     && unzip ${CACHE_DIR}/master.zip -d ${CACHE_DIR} \
     && smv "${CACHE_DIR}/nvim-config-master" "${NVIM_ROOT}"
+else
+  create_link ${NVIM_CONFIG_DIR} ${NVIM_ROOT}
 fi
 
 python3 -m pip install -i https://pypi.douban.com/simple pynvim pyright black yapf

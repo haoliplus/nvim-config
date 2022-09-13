@@ -257,11 +257,6 @@ if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_q
 	${1:${VISUAL:main()}}
 endsnippet
 
-snippet ts2dt "float timestamp(second) to datetime" b
-from datetime import datetime
-dt_object = datetime.fromtimestamp(${1})
-endsnippet
-
 snippet initlogger "init logger" b
 import sys
 import logging
@@ -297,7 +292,7 @@ def init_logger(
 		logging.basicConfig(
 				level=logging.DEBUG,
 				datefmt="%m-%d %H:%M:%S",
-				format="[%(asctime)s.%(msecs)03d %(filename)s:%(lineno)d] [%(levelname)s] %(message)s",
+				format="[%(threadName) %(asctime)s.%(msecs)03d %(filename)s:%(lineno)d] [%(levelname)s] %(message)s",
 				handlers=[stream_handler, logging.FileHandler(log_file_path)],
 		)
 		logger.info(f"Logging into {log_file_path}")
@@ -308,6 +303,11 @@ endsnippet
 snippet ldproto "load proto" b
 from google.protobuf import text_format
 text_format.Parse(open(path, "r").read(), obj)
+endsnippet
+
+snippet ts2dt "float timestamp(second) to datetime" b
+from datetime import datetime
+dt_object = datetime.fromtimestamp(${1})
 endsnippet
 
 snippet dt2ts "datetime to float timestamp(second)" b
@@ -349,4 +349,37 @@ class CustomEncoder(json.JSONEncoder):
 		return json.JSONEncoder.default(self, obj)
 
 json.dumps(obj, indent=2, cls=CustomEncoder))
+endsnippet
+
+snippet asyncmp "async multi process" b
+import multiprocessing as mp
+
+def task(slice, shared_data):
+	pass
+
+n_worker = 8
+pool = mp.Pool(n_worker)
+result_list = []
+inp_list = [1, 2, 3, 4]
+num = len(inp_list)
+shared_data = None
+num_slice = num // n_worker
+for i in range(n_worker):
+		tmp = inp_list[num_slice * i : num_slice * (i + 1)]
+		result_list.append(pool.apply_async(task, args=(tmp[:], shared_data)))
+pool.close()
+pool.join()
+
+results = [result.get() for result in result_list]
+endsnippet
+snippet multithread "async multi thread" b
+import threading
+class MyThread(threading.Thread):
+	def run(self):
+		pass
+
+for f in range(4):
+	t = MyThread()
+	t.start()
+	t.join()
 endsnippet
