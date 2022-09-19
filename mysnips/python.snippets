@@ -257,6 +257,26 @@ if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_q
 	${1:${VISUAL:main()}}
 endsnippet
 
+snippet initstdlogger "init basic stdout logger" b
+import sys
+import logging
+
+def init_logger(
+):
+		stream_handler = logging.StreamHandler(sys.stdout)
+		stream_handler.setLevel(logging.INFO)
+		logger = logging.getLogger()
+		logger.handlers.clear()
+
+		logging.basicConfig(
+				level=logging.DEBUG,
+				datefmt="%m-%d %H:%M:%S",
+				format="[%(threadName)s %(asctime)s.%(msecs)03d %(filename)s:%(lineno)d] [%(levelname)s] %(message)s",
+				handlers=[stream_handler],
+		)
+		return logging
+endsnippet
+
 snippet initlogger "init logger" b
 import sys
 import logging
@@ -292,7 +312,7 @@ def init_logger(
 		logging.basicConfig(
 				level=logging.DEBUG,
 				datefmt="%m-%d %H:%M:%S",
-				format="[%(threadName) %(asctime)s.%(msecs)03d %(filename)s:%(lineno)d] [%(levelname)s] %(message)s",
+				format="[%(threadName)s %(asctime)s.%(msecs)03d %(filename)s:%(lineno)d] [%(levelname)s] %(message)s",
 				handlers=[stream_handler, logging.FileHandler(log_file_path)],
 		)
 		logger.info(f"Logging into {log_file_path}")
@@ -382,4 +402,15 @@ for f in range(4):
 	t = MyThread()
 	t.start()
 	t.join()
+endsnippet
+
+snippet argparse "arguments" b
+import argparse
+parser = argparse.ArgumentParser(description="config evaluate")
+parser.add_argument(
+		"--name",
+		default=None,
+		type=str,
+)
+args = parser.parse_args()
 endsnippet
