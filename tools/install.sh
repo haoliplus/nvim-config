@@ -81,8 +81,7 @@ create_link "${HOME}/.local/opt/${NODE_DIR}/bin/node" "${HOME}/.local/bin/node"
 create_link "${HOME}/.local/opt/${NODE_DIR}/bin/npm" "${HOME}/.local/bin/npm"
 
 if [[ ! -f ${DOTROOT} ]] || [[ ! -f ${NVIM_CONFIG_DIR} ]]; then
-  wget -c -o ${TMP_DIR}/download_${USER}_log \
-    ${NVIM_CONFIG_URL}  -O ${TMP_DIR}/master.zip \
+  wget -c ${NVIM_CONFIG_URL}  -O ${TMP_DIR}/master.zip \
     && unzip ${TMP_DIR}/master.zip -d ${TMP_DIR} \
     && smv "${TMP_DIR}/nvim-config-master" "${NVIM_ROOT}"
 else
@@ -100,7 +99,7 @@ create_link "${NVIM_ROOT}/resources/clang-format" "${HOME}/.clang-format"
 
 if [[ ! -f ${DOTROOT} ]]; then
 
-cat >> ${HOME}/.zshenv << 'endmsg'
+cat >> ${HOME}/.zshrc << 'endmsg'
 export HISTFILE="${HOME}/.cache/.docker_zsh_history"
 export PATH="${HOME}/.local/bin:${PATH}"
 export VIM_RESOURCE_DIR=${VIM_RESOURCE_DIR:-"${HOME}/.local/share/nvim"}
