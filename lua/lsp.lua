@@ -62,9 +62,21 @@ lsp_opts["clangd"]["root_dir"] = function(fname)
     return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
 end
 
+-- lsp_opts["pyright"]["cmd"] = { "pyright", "--dependencies", "--ignoreexternal", "--lib"}
+lsp_opts["pyright"]["cmd"] = { "pyright-langserver", "--stdio"}
 lsp_opts["pyright"]["root_dir"] = function(fname)
     return util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt")(fname) or util.path.dirname(fname)
 end
+lsp_opts["pyright"]["settings"] = {
+  python = {
+    analysis = {
+      autoSearchPaths = true,
+      diagnosticMode = "workspace",
+      useLibraryCodeForTypes = false -- this is for avoiding lib member access error like cv.imread 
+    }
+  }
+}
+lsp_opts["pyright"]["single_file_support"] = true
 
 -- Loop through the servers listed above.
 for _, server_name in pairs(servers) do
