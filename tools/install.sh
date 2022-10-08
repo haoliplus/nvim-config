@@ -32,7 +32,9 @@ fi
 TMP_DIR=$(mktemp -d)
 NODE_VERSION="v16.13.1"
 # NVIM_VERSION="v0.6.1"
-NVIM_VERSION="stable"
+# NVIM_VERSION>=v0.8.0 requires glibc
+# NVIM_VERSION="stable"
+NVIM_VERSION="v0.7.2"
 NVIM_ROOT=${HOME}/.nvim
 DOTROOT="${DOTROOT:-'${HOME}/.dotfiles'}"
 NVIM_CONFIG_DIR="${DOTROOT}/home/config/nvim"
