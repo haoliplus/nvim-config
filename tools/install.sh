@@ -72,11 +72,12 @@ mkdir -p ${INCLUDE_DIR}
 mkdir -p ${CACHE_DIR}/temp_dirs/undodir
 
 
-curl -L ${NVIM_DOWNLOAD_URL} | tar -xz -C ${TMP_DIR}
-
-smv ${TMP_DIR}/${NVIM_NAME}/bin/nvim ${LOCAL_DIR}/bin/nvim
-smv ${TMP_DIR}/${NVIM_NAME}/lib/nvim ${LOCAL_DIR}/lib/nvim
-smv ${TMP_DIR}/${NVIM_NAME}/share/nvim ${LOCAL_DIR}/share/nvim
+if [[ ! -f ${LOCAL_DIR}/bin/nvim ]]; then
+  curl -L ${NVIM_DOWNLOAD_URL} | tar -xz -C ${TMP_DIR}
+  smv ${TMP_DIR}/${NVIM_NAME}/bin/nvim ${LOCAL_DIR}/bin/nvim
+  smv ${TMP_DIR}/${NVIM_NAME}/lib/nvim ${LOCAL_DIR}/lib/nvim
+  smv ${TMP_DIR}/${NVIM_NAME}/share/nvim ${LOCAL_DIR}/share/nvim
+fi 
 
 PLUG_FILE=${LOCAL_DIR}/share/nvim/runtime/autoload/plug.vim
 while [ ! -f ${PLUG_FILE} ]
@@ -84,12 +85,12 @@ do
   curl -fLo  ${PLUG_FILE} --create-dirs ${PLUG_VIM_URL}
 done
 
-curl -L ${NODE_DOWNLOAD_URL} | tar -xJ -C ${TMP_DIR}
-
-smv ${TMP_DIR}/${NODE_DIR} ${LOCAL_DIR}/opt/${NODE_DIR}
-
-create_link "${LOCAL_DIR}/opt/${NODE_DIR}/bin/node" "${LOCAL_DIR}/bin/node"
-create_link "${LOCAL_DIR}/opt/${NODE_DIR}/bin/npm" "${LOCAL_DIR}/bin/npm"
+if [[ ! ${LOCAL_DIR}/bin/node ]]; then
+  curl -L ${NODE_DOWNLOAD_URL} | tar -xJ -C ${TMP_DIR}
+  smv ${TMP_DIR}/${NODE_DIR} ${LOCAL_DIR}/opt/${NODE_DIR}
+  create_link "${LOCAL_DIR}/opt/${NODE_DIR}/bin/node" "${LOCAL_DIR}/bin/node"
+  create_link "${LOCAL_DIR}/opt/${NODE_DIR}/bin/npm" "${LOCAL_DIR}/bin/npm"
+fi
 
 python3 -m pip install -i https://pypi.douban.com/simple pynvim pyright black yapf
 
