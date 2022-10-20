@@ -102,8 +102,9 @@ create_link "${NVIM_ROOT}/resources/clang-format" "${HOME}/.clang-format"
 
 if [[ ! -f ${DOTROOT} ]]; then
 
-cat >> ${HOME}/.zshrc << 'endmsg'
+cat >> ${HOME}/.zshrc << endmsg
 export HISTFILE="${HOME}/.cache/.docker_zsh_history"
+LOCAL_DIR="${NVIM_ROOT}/.local"
 export PATH="${LOCAL_DIR}/bin:${PATH}"
 export VIM_RESOURCE_DIR=${VIM_RESOURCE_DIR:-"${LOCAL_DIR}/share/nvim"}
 export VIM_CONFIG_DIR=${VIM_CONFIG_DIR:-"${NVIM_ROOT}"}
