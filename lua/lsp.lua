@@ -40,8 +40,17 @@ local servers = {
 }
 local lsp_opts = {}
 
--- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = nil
+
+local call_requires = function()
+  capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+end;
+
+if pcall(call_requires) then
+    print('Failed to set default_capabilities');
+else
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+end
 
 for _, server_name in pairs(servers) do
   lsp_opts[server_name] = {

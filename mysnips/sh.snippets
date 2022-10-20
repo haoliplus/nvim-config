@@ -1,0 +1,13 @@
+
+snippet heredoc1 "heredoc without parse" b
+read -r -d '' VAR <<'EOF'
+abc'asdf"
+$NAME
+EOF
+endsnippet
+
+snippet heredoc2 "heredoc with parse" b
+read -r -d '' VAR <<EOF
+abc'asdf"
+EOF
+endsnippet
