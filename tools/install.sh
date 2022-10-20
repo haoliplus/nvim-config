@@ -35,10 +35,11 @@ NODE_VERSION="v16.13.1"
 # NVIM_VERSION>=v0.8.0 requires glibc
 # NVIM_VERSION="stable"
 NVIM_VERSION="v0.7.2"
-NVIM_ROOT=${HOME}/.nvim
+PERSISTENT_DIR=${HOME}/.cache/.nvim
+NVIM_ROOT=${PERSISTENT_DIR:-"${HOME}/.nvim"}
 DOTROOT="${DOTROOT:-'${HOME}/.dotfiles'}"
 NVIM_CONFIG_DIR="${DOTROOT}/config/nvim"
-LOCAL_DIR="${HOME}/.local"
+LOCAL_DIR="${NVIM_ROOT}/.local"
 SHARE_DIR="${LOCAL_DIR}/share"
 BIN_DIR="${LOCAL_DIR}/bin"
 LIB_DIR="${LOCAL_DIR}/lib"
@@ -55,6 +56,14 @@ PLUG_VIM_URL="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vi
 NODE_DOWNLOAD_URL="https://registry.npmmirror.com/-/binary/node/${NODE_VERSION}/${NODE_DIR}.tar.xz"
 NVIM_CONFIG_URL="https://github.com/haoliplus/nvim-config/archive/refs/heads/master.zip"
 
+if [[ ! -f ${NVIM_CONFIG_DIR} ]] && [[ ! -f ${NVIM_ROOT} ]] ; then
+  wget -c ${NVIM_CONFIG_URL}  -O ${TMP_DIR}/master.zip \
+    && unzip ${TMP_DIR}/master.zip -d ${TMP_DIR} \
+    && smv "${TMP_DIR}/nvim-config-master" "${NVIM_ROOT}"
+else
+  create_link ${NVIM_CONFIG_DIR} ${NVIM_ROOT}
+fi
+
 mkdir -p ${SHARE_DIR}
 mkdir -p ${BIN_DIR}
 mkdir -p ${LIB_DIR}
@@ -69,7 +78,7 @@ smv ${TMP_DIR}/${NVIM_NAME}/bin/nvim ${LOCAL_DIR}/bin/nvim
 smv ${TMP_DIR}/${NVIM_NAME}/lib/nvim ${LOCAL_DIR}/lib/nvim
 smv ${TMP_DIR}/${NVIM_NAME}/share/nvim ${LOCAL_DIR}/share/nvim
 
-PLUG_FILE=${HOME}/.local/share/nvim/runtime/autoload/plug.vim
+PLUG_FILE=${LOCAL_DIR}/share/nvim/runtime/autoload/plug.vim
 while [ ! -f ${PLUG_FILE} ]
 do
   curl -fLo  ${PLUG_FILE} --create-dirs ${PLUG_VIM_URL}
@@ -77,18 +86,10 @@ done
 
 curl -L ${NODE_DOWNLOAD_URL} | tar -xJ -C ${TMP_DIR}
 
-smv ${TMP_DIR}/${NODE_DIR} ${HOME}/.local/opt/${NODE_DIR}
+smv ${TMP_DIR}/${NODE_DIR} ${LOCAL_DIR}/opt/${NODE_DIR}
 
-create_link "${HOME}/.local/opt/${NODE_DIR}/bin/node" "${HOME}/.local/bin/node"
-create_link "${HOME}/.local/opt/${NODE_DIR}/bin/npm" "${HOME}/.local/bin/npm"
-
-if [[ ! -f ${DOTROOT} ]] || [[ ! -f ${NVIM_CONFIG_DIR} ]]; then
-  wget -c ${NVIM_CONFIG_URL}  -O ${TMP_DIR}/master.zip \
-    && unzip ${TMP_DIR}/master.zip -d ${TMP_DIR} \
-    && smv "${TMP_DIR}/nvim-config-master" "${NVIM_ROOT}"
-else
-  create_link ${NVIM_CONFIG_DIR} ${NVIM_ROOT}
-fi
+create_link "${LOCAL_DIR}/opt/${NODE_DIR}/bin/node" "${LOCAL_DIR}/bin/node"
+create_link "${LOCAL_DIR}/opt/${NODE_DIR}/bin/npm" "${LOCAL_DIR}/bin/npm"
 
 python3 -m pip install -i https://pypi.douban.com/simple pynvim pyright black yapf
 
@@ -103,9 +104,9 @@ if [[ ! -f ${DOTROOT} ]]; then
 
 cat >> ${HOME}/.zshrc << 'endmsg'
 export HISTFILE="${HOME}/.cache/.docker_zsh_history"
-export PATH="${HOME}/.local/bin:${PATH}"
-export VIM_RESOURCE_DIR=${VIM_RESOURCE_DIR:-"${HOME}/.local/share/nvim"}
-export VIM_CONFIG_DIR=${VIM_CONFIG_DIR:-"${HOME}/.nvim"}
+export PATH="${LOCAL_DIR}/bin:${PATH}"
+export VIM_RESOURCE_DIR=${VIM_RESOURCE_DIR:-"${LOCAL_DIR}/share/nvim"}
+export VIM_CONFIG_DIR=${VIM_CONFIG_DIR:-"${NVIM_ROOT}"}
 export WIKI_PATH="${HOME}/vimwiki"
 
 export VIMPLUGDIR="${VIM_RESOURCE_DIR}/plugged"
