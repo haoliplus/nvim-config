@@ -90,7 +90,7 @@ done
 
 if [[ ! ${LOCAL_DIR}/bin/node ]]; then
   # curl -L ${NODE_DOWNLOAD_URL} | tar -xJ -C ${TMP_DIR}
-  wget -O - -o -c ${NODE_DOWNLOAD_URL} | tar -xJ -C ${TMP_DIR}
+  curl -L ${NODE_DOWNLOAD_URL} | tar -xJ -C ${TMP_DIR}
   smv ${TMP_DIR}/${NODE_DIR} ${LOCAL_DIR}/opt/${NODE_DIR}
   create_link "${LOCAL_DIR}/opt/${NODE_DIR}/bin/node" "${LOCAL_DIR}/bin/node"
   create_link "${LOCAL_DIR}/opt/${NODE_DIR}/bin/npm" "${LOCAL_DIR}/bin/npm"
@@ -107,12 +107,19 @@ create_link "${NVIM_ROOT}/resources/clang-format" "${HOME}/.clang-format"
 
 if [[ ! -f ${DOTROOT} ]]; then
 
-cat >> ${HOME}/.zshrc << endmsg
-export HISTFILE="${HOME}/.cache/.docker_zsh_history"
+read -r -d '' VAR <<EOF
 LOCAL_DIR="${NVIM_ROOT}/.local"
+export VIM_CONFIG_DIR=${VIM_CONFIG_DIR:-"${NVIM_ROOT}"}
+EOF
+
+echo "${VAR}" >> ${HOME}/.zshrc
+
+# The variable will not be replaced 
+cat >> ${HOME}/.zshrc << 'endmsg'
+
+export HISTFILE="${HOME}/.cache/.docker_zsh_history"
 export PATH="${LOCAL_DIR}/bin:${PATH}"
 export VIM_RESOURCE_DIR=${VIM_RESOURCE_DIR:-"${LOCAL_DIR}/share/nvim"}
-export VIM_CONFIG_DIR=${VIM_CONFIG_DIR:-"${NVIM_ROOT}"}
 export WIKI_PATH="${HOME}/vimwiki"
 
 export VIMPLUGDIR="${VIM_RESOURCE_DIR}/plugged"
