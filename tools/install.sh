@@ -6,8 +6,6 @@
 # Distributed under terms of the MIT license.
 #
 
-set -ex
-
 smv() {
   rm -rf "$2.old"
   mv "$2" "$2.old" >/dev/null 2>&1 || true
