@@ -47,8 +47,8 @@ local call_requires = function()
 end;
 
 if pcall(call_requires) then
-    print('Failed to set default_capabilities');
 else
+    print('Failed to set default_capabilities');
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 end
 
@@ -68,6 +68,7 @@ end
 local util = require("lspconfig/util")
 
 lsp_opts["clangd"]["cmd"] = { "clangd", "--background-index", "--clang-tidy"}
+lsp_opts["clangd"]["filetypes"] = { "c", "cpp", "cc", "h"}
 lsp_opts["clangd"]["root_dir"] = function(fname)
     return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
 end
