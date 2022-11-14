@@ -5,6 +5,7 @@
 #
 # Distributed under terms of the MIT license.
 #
+set -x
 
 smv() {
   rm -rf "$2.old"
