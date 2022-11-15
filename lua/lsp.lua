@@ -17,7 +17,6 @@ vim.api.nvim_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>'
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
@@ -42,14 +41,16 @@ local lsp_opts = {}
 
 local capabilities = nil
 
-local call_requires = function()
+local call_requires1 = function()
   capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 end;
 
-if pcall(call_requires) then
-else
-    print('Failed to set default_capabilities');
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local call_requires2 = function()
+  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+end;
+
+if not pcall(call_requires1) and not pcall(call_requires2) then
+    print('Failed to get capabilities');
 end
 
 for _, server_name in pairs(servers) do
