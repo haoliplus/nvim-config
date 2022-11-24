@@ -37,7 +37,10 @@ cmp.setup({
     { name = 'path',
       option = {
         trailing_slash = true,
-        exclude = {"onboard_data"},
+        exclude = {
+          "onboard_data",
+          "/onboard_data"
+        },
       },
     },
     { name = 'ultisnips' }, -- For ultisnips users.
