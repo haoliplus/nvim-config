@@ -14,7 +14,8 @@ local call_requires = function()
   require('packer_plugins')
 end;
 
-if pcall(call_requires) then
-else
-    print('Failed to run init.lua');
-end
+call_requires()
+-- if pcall(call_requires) then
+-- else
+--     print('Failed to run init.lua');
+-- end
