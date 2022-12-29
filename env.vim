@@ -3,6 +3,7 @@ let g:is_win = (has('win32') || has('win64')) ? v:true : v:false
 let g:is_linux = (has('unix') && !has('macunix')) ? v:true : v:false
 let g:is_mac = has('macunix') ? v:true : v:false
 let g:logging_level = 'info'
+let g:is_bash=1
 
 "{{ Builtin variables
 " Disable Python2 support
