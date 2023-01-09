@@ -34,11 +34,12 @@ NODE_VERSION="v16.13.1"
 # NVIM_VERSION>=v0.8.0 requires glibc
 # NVIM_VERSION="stable"
 NVIM_VERSION="v0.8.1"
-PERSISTENT_DIR=${HOME}/.cache/.nvim
-NVIM_ROOT=${PERSISTENT_DIR:-"${HOME}/.nvim"}
 DOTROOT=${DOTROOT:-"${HOME}/.dotfiles"}
-NVIM_CONFIG_DIR="${DOTROOT}/nvim"
-LOCAL_DIR="${NVIM_ROOT}/.local"
+PERSISTENT_DIR="${HOME}/.cache"
+
+VIM_CONFIG_DIR="${PERSISTENT_DIR}/.nvim"
+LOCAL_DIR="${PERSISTENT_DIR}/.local"
+
 SHARE_DIR="${LOCAL_DIR}/share"
 BIN_DIR="${LOCAL_DIR}/bin"
 LIB_DIR="${LOCAL_DIR}/lib"
@@ -55,12 +56,12 @@ PLUG_VIM_URL="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vi
 NODE_DOWNLOAD_URL="https://registry.npmmirror.com/-/binary/node/${NODE_VERSION}/${NODE_DIR}.tar.xz"
 NVIM_CONFIG_URL="https://github.com/haoliplus/nvim-config/archive/refs/heads/master.zip"
 
-if [[ ! -f ${NVIM_CONFIG_DIR} ]] && [[ ! -f ${NVIM_ROOT} ]] ; then
+if [[ ! -f "${DOTROOT}/nvim" ]] && [[ ! -f ${VIM_CONFIG_DIR} ]] ; then
   wget -c ${NVIM_CONFIG_URL}  -O ${TMP_DIR}/master.zip \
     && unzip ${TMP_DIR}/master.zip -d ${TMP_DIR} \
-    && smv "${TMP_DIR}/nvim-config-master" "${NVIM_ROOT}"
+    && smv "${TMP_DIR}/nvim-config-master" "${VIM_CONFIG_DIR}"
 else
-  create_link ${NVIM_CONFIG_DIR} ${NVIM_ROOT}
+  create_link "${DOTROOT}/nvim" ${VIM_CONFIG_DIR}
 fi
 
 mkdir -p ${SHARE_DIR}
@@ -97,18 +98,18 @@ fi
 
 python3 -m pip install -i https://pypi.douban.com/simple pynvim pyright black yapf
 
-create_link "${NVIM_ROOT}/resources/.tmux.conf" "${HOME}/.tmux.conf"
-create_link "${NVIM_ROOT}/resources/.tmux.conf.local" "${HOME}/.tmux.conf.local"
-create_link "${NVIM_ROOT}/resources/.flake8" "${HOME}/.flake8"
-create_link "${NVIM_ROOT}/resources/pycodestyle" "${HOME}/.config/pycodestyle"
-create_link "${NVIM_ROOT}/resources/yapf" "${HOME}/.config/yapf"
-create_link "${NVIM_ROOT}/resources/clang-format" "${HOME}/.clang-format"
+create_link "${VIM_CONFIG_DIR}/resources/.tmux.conf" "${HOME}/.tmux.conf"
+create_link "${VIM_CONFIG_DIR}/resources/.tmux.conf.local" "${HOME}/.tmux.conf.local"
+create_link "${VIM_CONFIG_DIR}/resources/.flake8" "${HOME}/.flake8"
+create_link "${VIM_CONFIG_DIR}/resources/pycodestyle" "${HOME}/.config/pycodestyle"
+create_link "${VIM_CONFIG_DIR}/resources/yapf" "${HOME}/.config/yapf"
+create_link "${VIM_CONFIG_DIR}/resources/clang-format" "${HOME}/.clang-format"
 
 if [[ ! -f ${DOTROOT} ]]; then
 
 read -r -d '' VAR <<EOF
-LOCAL_DIR="${NVIM_ROOT}/.local"
-export VIM_CONFIG_DIR=${VIM_CONFIG_DIR:-"${NVIM_ROOT}"}
+LOCAL_DIR="${LOCAL_DIR}"
+export VIM_CONFIG_DIR="${VIM_CONFIG_DIR}"
 EOF
 
 echo "${VAR}" >> ${HOME}/.zshrc
