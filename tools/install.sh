@@ -35,10 +35,15 @@ NODE_VERSION="v16.13.1"
 # NVIM_VERSION="stable"
 NVIM_VERSION="v0.8.1"
 DOTROOT=${DOTROOT:-"${HOME}/.dotfiles"}
-PERSISTENT_DIR="${HOME}/.cache"
 
-VIM_CONFIG_DIR="${PERSISTENT_DIR}/.nvim"
-LOCAL_DIR="${PERSISTENT_DIR}/.local"
+if [[ -f "${DOTROOT}/nvim" ]] ; then
+  VIM_CONFIG_DIR="${DOTROOT}/nvim"
+  LOCAL_DIR="${HOME}/.local"
+else
+  PERSISTENT_DIR="${HOME}/.cache"
+  VIM_CONFIG_DIR="${PERSISTENT_DIR}/.nvim"
+  LOCAL_DIR="${PERSISTENT_DIR}/.local"
+fi
 
 SHARE_DIR="${LOCAL_DIR}/share"
 BIN_DIR="${LOCAL_DIR}/bin"
@@ -98,8 +103,14 @@ fi
 
 python3 -m pip install -i https://pypi.douban.com/simple pynvim pyright black yapf
 
-create_link "${VIM_CONFIG_DIR}/resources/.tmux.conf" "${HOME}/.tmux.conf"
-create_link "${VIM_CONFIG_DIR}/resources/.tmux.conf.local" "${HOME}/.tmux.conf.local"
+if [[ ! -f "${DOTROOT}" ]]  ; then
+  create_link "${VIM_CONFIG_DIR}/resources/.tmux.conf" "${HOME}/.tmux.conf"
+  create_link "${VIM_CONFIG_DIR}/resources/.tmux.conf.local" "${HOME}/.tmux.conf.local"
+else
+  create_link "${DOTROOT}/config/.tmux.conf" "${HOME}/.tmux.conf"
+  create_link "${DOTROOT}/config/.tmux.conf.local" "${HOME}/.tmux.conf.local"
+fi
+
 create_link "${VIM_CONFIG_DIR}/resources/.flake8" "${HOME}/.flake8"
 create_link "${VIM_CONFIG_DIR}/resources/pycodestyle" "${HOME}/.config/pycodestyle"
 create_link "${VIM_CONFIG_DIR}/resources/yapf" "${HOME}/.config/yapf"
