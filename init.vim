@@ -20,10 +20,11 @@ Plug 'google/vim-maktaba'
 
 " file tree explorer
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'kyazdani42/nvim-tree.lua'
+" tree will be loaded on the first invocation of NvimTreeToggle command
+Plug 'kyazdani42/nvim-tree.lua', { 'commit': '9f7bed5536521eca912a7663b11655d218acf013', 'on': 'NvimTreeToggle' }
 
 " jump between .h/.cc
-Plug 'vim-scripts/a.vim'
+Plug 'vim-scripts/a.vim', { 'for': ['c', 'cpp'] }
 " Format code
 Plug 'google/vim-codefmt'
 " syntax highlight
