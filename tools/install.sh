@@ -33,7 +33,7 @@ NODE_VERSION="v16.13.1"
 # NVIM_VERSION="v0.6.1"
 # NVIM_VERSION>=v0.8.0 requires glibc
 # NVIM_VERSION="stable"
-NVIM_VERSION="v0.8.1"
+NVIM_VERSION="v0.8.0"
 DOTROOT=${DOTROOT:-"${HOME}/.dotfiles"}
 
 if [[ -f "${DOTROOT}/nvim" ]] ; then
