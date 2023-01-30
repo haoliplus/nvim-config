@@ -14,10 +14,20 @@
 # then uncomment the following line to make Meta + arrow keys mapping work
 #set -ga terminal-overrides "*:kUP3=\e[1;9A,*:kDN3=\e[1;9B,*:kRIT3=\e[1;9C,*:kLFT3=\e[1;9D"
 
-unbind C-h
-unbind C-l
-bind -r p previous-window # select previous window
-bind -r n next-window     # select next window
+# set-option -sa terminal-overrides ',xterm-256color:RGB'
+# set-option -ga terminal-overrides ',xterm-256color:Tc'
+# set -g default-terminal "xterm-256color"
+# set-option -sa terminal-overrides ',xterm-256color:RGB'
+set-option -sa terminal-overrides ',xterm-256color:RGB' 
+
+# uncomment the following lines to use non-login shell
+# set -g default-command "${SHELL}"
+# set-option -g default-shell /bin/bash
+
+# unbind C-h
+# unbind C-l
+# bind -r F9 previous-window # select previous window
+# bind -r F10 next-window     # select next window
 
 # -- windows & pane creation ---------------------------------------------------
 
@@ -250,7 +260,7 @@ tmux_conf_theme_pairing_bg="none"
 tmux_conf_theme_pairing_attr="none"
 
 # prefix indicator
-tmux_conf_theme_prefix="⌨"                  # U+2328
+tmux_conf_theme_prefix="*"                  # U+2328
 tmux_conf_theme_prefix_fg="none"
 tmux_conf_theme_prefix_bg="none"
 tmux_conf_theme_prefix_attr="none"
@@ -334,7 +344,7 @@ tmux_conf_copy_to_os_clipboard=false
 set -g history-limit 500000
 
 # start with mouse mode enabled
-#set -g mouse on
+set -g mouse off
 
 # force Vi mode
 #   really you should export VISUAL or EDITOR environment variable, see manual
