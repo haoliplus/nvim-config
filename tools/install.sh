@@ -36,7 +36,7 @@ NODE_VERSION="v16.13.1"
 NVIM_VERSION="v0.7.2"
 DOTROOT=${DOTROOT:-"${HOME}/.dotfiles"}
 
-if [[ -f "${DOTROOT}/nvim" ]] ; then
+if [[ -d "${DOTROOT}/nvim" ]] ; then
   VIM_CONFIG_DIR="${DOTROOT}/nvim"
   LOCAL_DIR="${HOME}/.local"
 else
@@ -61,7 +61,7 @@ PLUG_VIM_URL="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vi
 NODE_DOWNLOAD_URL="https://registry.npmmirror.com/-/binary/node/${NODE_VERSION}/${NODE_DIR}.tar.xz"
 NVIM_CONFIG_URL="https://github.com/haoliplus/nvim-config/archive/refs/heads/master.zip"
 
-if [[ ! -f "${DOTROOT}/nvim" ]] && [[ ! -f ${VIM_CONFIG_DIR} ]] ; then
+if [[ ! -d "${DOTROOT}/nvim" ]] && [[ ! -d ${VIM_CONFIG_DIR} ]] ; then
   wget -c ${NVIM_CONFIG_URL}  -O ${TMP_DIR}/master.zip \
     && unzip ${TMP_DIR}/master.zip -d ${TMP_DIR} \
     && smv "${TMP_DIR}/nvim-config-master" "${VIM_CONFIG_DIR}"
@@ -103,7 +103,7 @@ fi
 
 python3 -m pip install -i https://pypi.douban.com/simple pynvim pyright black yapf
 
-if [[ ! -f "${DOTROOT}" ]]  ; then
+if [[ ! -d "${DOTROOT}" ]]  ; then
   create_link "${VIM_CONFIG_DIR}/resources/.tmux.conf" "${HOME}/.tmux.conf"
   create_link "${VIM_CONFIG_DIR}/resources/.tmux.conf.local" "${HOME}/.tmux.conf.local"
 else
@@ -116,7 +116,7 @@ create_link "${VIM_CONFIG_DIR}/resources/pycodestyle" "${HOME}/.config/pycodesty
 create_link "${VIM_CONFIG_DIR}/resources/yapf" "${HOME}/.config/yapf"
 create_link "${VIM_CONFIG_DIR}/resources/clang-format" "${HOME}/.clang-format"
 
-if [[ ! -f ${DOTROOT} ]]; then
+if [[ ! -d ${DOTROOT} ]]; then
 
 read -r -d '' VAR <<EOF
 LOCAL_DIR="${LOCAL_DIR}"
