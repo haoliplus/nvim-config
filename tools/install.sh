@@ -65,8 +65,6 @@ if [[ ! -d "${DOTROOT}/nvim" ]] && [[ ! -d ${VIM_CONFIG_DIR} ]] ; then
   wget -c ${NVIM_CONFIG_URL}  -O ${TMP_DIR}/master.zip \
     && unzip ${TMP_DIR}/master.zip -d ${TMP_DIR} \
     && smv "${TMP_DIR}/nvim-config-master" "${VIM_CONFIG_DIR}"
-else
-  create_link "${DOTROOT}/nvim" ${VIM_CONFIG_DIR}
 fi
 
 mkdir -p ${SHARE_DIR}
