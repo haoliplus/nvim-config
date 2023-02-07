@@ -91,7 +91,7 @@ do
   wget -O ${PLUG_FILE} -c ${PLUG_VIM_URL}
 done
 
-if [[ ! ${LOCAL_DIR}/bin/node ]]; then
+if [[ ! -d ${LOCAL_DIR}/bin/node ]]; then
   # curl -L ${NODE_DOWNLOAD_URL} | tar -xJ -C ${TMP_DIR}
   curl -L ${NODE_DOWNLOAD_URL} | tar -xJ -C ${TMP_DIR}
   smv ${TMP_DIR}/${NODE_DIR} ${LOCAL_DIR}/opt/${NODE_DIR}
@@ -105,8 +105,8 @@ if [[ ! -d "${DOTROOT}" ]]  ; then
   create_link "${VIM_CONFIG_DIR}/resources/.tmux.conf" "${HOME}/.tmux.conf"
   create_link "${VIM_CONFIG_DIR}/resources/.tmux.conf.local" "${HOME}/.tmux.conf.local"
 else
-  create_link "${DOTROOT}/config/.tmux.conf" "${HOME}/.tmux.conf"
-  create_link "${DOTROOT}/config/.tmux.conf.local" "${HOME}/.tmux.conf.local"
+  create_link "${DOTROOT}/config/nvim/resources/.tmux.conf" "${HOME}/.tmux.conf"
+  create_link "${DOTROOT}/config/nvim/resources/.tmux.conf.local" "${HOME}/.tmux.conf.local"
 fi
 
 create_link "${VIM_CONFIG_DIR}/resources/.flake8" "${HOME}/.flake8"
