@@ -13,6 +13,41 @@ priority 50
 #                            TEXTMATE SNIPPETS                            #
 ###########################################################################
 
+snippet loggerinit "" b
+from loguru import logger
+
+
+def init_logger(base_name="temp.txt", log_dir=Path.home() / ".cache" / "log"):
+	if len(base_name) == 0:
+		base_name = "temp.txt"
+	if Path(base_name).suffix != ".txt":
+		base_name = f"{Path(base_name).stem}.txt"
+
+	base_path = base_name
+	if base_name[0] != "/":
+		base_path = log_dir / base_name
+
+	Path(base_path).parent.mkdir(parents=True, exist_ok=True)
+	log_file_path = base_path
+	cnt = 0
+	while Path(log_file_path).exists():
+		cnt += 1
+		log_file_path = f"{Path(base_path).parent / Path(base_path).stem}.{cnt:06}.txt"
+
+	logger.remove()
+	logger.add(
+		sys.stdout,
+		colorize=True,
+		format="<green>[{level:.1} {time:MM-DD HH:mm:ss.sss} {file}:{line}]</green> <level>{message}</level>",
+	)
+	logger.add(
+		log_file_path,
+		colorize=False,
+		format="[{level} {process.name}.{thread.name} {time:MM-DD HH:mm:ss.sss} {file}:{line}] <level>{message}</level>",
+	)
+endsnippet
+
+
 snippet loggerinit1 "init basic stdout logger" b
 import sys
 import logging
@@ -271,6 +306,7 @@ pool.join()
 
 results = [result.get() for result in result_list]
 endsnippet
+
 snippet multithread "async multi thread" b
 import threading
 class MyThread(threading.Thread):
