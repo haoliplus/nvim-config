@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+######################################################################
+# @author      : lihao (lihao@fabu.ai)
+# @file        : init_pyproj
+# @created     : Thursday Feb 23, 2023 11:54:23 CST
+#
+# @description : 
+######################################################################
+
+
+NVIM_ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+
+cp -r ${NVIM_ROOT_DIR}/myprojects-temp/py_proj/ ./
