@@ -29,3 +29,10 @@ augroup packer_user_config
   autocmd!
   autocmd BufWritePost packer_plugins.lua source <afile> | PackerCompile
 augroup end
+
+" autocmd BufNewFile,BufRead * setlocal 
+autocmd BufNewFile,BufRead py.template set ft=python
+autocmd BufNewFile,BufRead *.yaml.template set ft=yaml
+autocmd BufNewFile,BufRead sh.template set ft=sh
+" ??
+autocmd BufNewFile,BufRead python_my.snippets set ft=python
