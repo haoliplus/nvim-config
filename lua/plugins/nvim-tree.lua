@@ -1,7 +1,7 @@
 #! /usr/bin/env lua
 --
 -- nvim-tree.lua
--- Copyright (C) 2022 lihao <lihao@fabu.ai>
+-- Copyright (C) 2022 lihao <haoliplus@gmail.com>
 --
 -- Distributed under terms of the MIT license.
 --

@@ -22,7 +22,7 @@ install_requires =
     protobuf<4,>=3.17
     fire
     loguru
-    fabukit @ git+https://github.com/guest/demo2.git
+    demo2 @ git+https://github.com/guest/demo2.git
 
 [options.packages.find]
 where = src
