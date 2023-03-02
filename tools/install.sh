@@ -33,16 +33,17 @@ NODE_VERSION="v16.13.1"
 # NVIM_VERSION="v0.6.1"
 # NVIM_VERSION>=v0.8.0 requires glibc
 # NVIM_VERSION="stable"
-NVIM_VERSION="v0.7.2"
 DOTROOT=${DOTROOT:-"${HOME}/.dotfiles"}
 
 if [[ -d "${DOTROOT}/nvim" ]] ; then
   VIM_CONFIG_DIR="${DOTROOT}/nvim"
   LOCAL_DIR="${HOME}/.local"
+  NVIM_VERSION="v0.8.3"
 else
   PERSISTENT_DIR="${HOME}/.cache"
   VIM_CONFIG_DIR="${PERSISTENT_DIR}/.nvim"
   LOCAL_DIR="${PERSISTENT_DIR}/.local"
+  NVIM_VERSION="v0.7.2"
 fi
 
 SHARE_DIR="${LOCAL_DIR}/share"

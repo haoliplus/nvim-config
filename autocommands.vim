@@ -25,10 +25,10 @@ command! FormatJSON %!json_pp -json_opt utf8,pretty
 command! RmTrailingSpace %s/\s\+$//e
 
 
-augroup packer_user_config
-  autocmd!
-  autocmd BufWritePost packer_plugins.lua source <afile> | PackerCompile
-augroup end
+" augroup packer_user_config
+"   autocmd!
+"   autocmd BufWritePost packer_plugins.lua source <afile> | PackerCompile
+" augroup end
 
 " autocmd BufNewFile,BufRead * setlocal 
 autocmd BufNewFile,BufRead py.template set ft=python
