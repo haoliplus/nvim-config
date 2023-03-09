@@ -154,3 +154,8 @@ let g:lightline = {
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
+
+
+" -- disable netrw at the very start of your init.lua (strongly advised)
+" let g:loaded_netrw = 1
+" let g:loaded_netrwPlugin = 1
