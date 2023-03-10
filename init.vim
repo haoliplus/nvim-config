@@ -8,7 +8,7 @@ if !has('nvim-0.6')
 endif
 let &runtimepath.=','.escape(expand('<sfile>:p:h'), '\,')
 
-execute printf('source %s/env.vim', s:config_path)
+execute printf('source %s/var.vim', s:config_path)
 execute printf('source %s/options.vim', s:config_path)
 
 " let g:plug_url_format='http://git::@hub.fastgit.org/%s.git'

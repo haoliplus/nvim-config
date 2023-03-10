@@ -13,6 +13,7 @@ priority 50
 #                            TEXTMATE SNIPPETS                            #
 ###########################################################################
 
+# -----------------------------------------------------------------------------
 snippet loggerinit "" b
 from loguru import logger
 
@@ -48,12 +49,12 @@ def init_logger(base_name="temp.txt", log_dir=Path.home() / ".cache" / "log"):
 endsnippet
 
 
+# -----------------------------------------------------------------------------
 snippet loggerinit1 "init basic stdout logger" b
 import sys
 import logging
 
-def init_logger(
-):
+def init_logger():
 	stream_handler = logging.StreamHandler(sys.stdout)
 	stream_handler.setLevel(logging.INFO)
 	logger = logging.getLogger()
@@ -68,6 +69,7 @@ def init_logger(
 	return logging
 endsnippet
 
+# -----------------------------------------------------------------------------
 snippet loggerinit2 "init logger with color" b
 import sys
 import logging
@@ -135,6 +137,7 @@ def init_logger(
 	return logging
 endsnippet
 
+# -----------------------------------------------------------------------------
 snippet loggerinit3 "full logger with argument color" b
 import os
 import logging
@@ -228,33 +231,39 @@ def init_logger(
 	return logging
 endsnippet
 
+# -----------------------------------------------------------------------------
 snippet ldproto "load proto" b
 from google.protobuf import text_format
 text_format.Parse(open(path, "r").read(), obj)
 endsnippet
 
+# -----------------------------------------------------------------------------
 snippet ts2dt "float timestamp(second) to datetime" b
 from datetime import datetime
 dt_object = datetime.fromtimestamp(${1})
 endsnippet
 
+# -----------------------------------------------------------------------------
 snippet dt2ts "datetime to float timestamp(second)" b
 from datetime import datetime
 dt = datetime(year=${1}, month=${2}, day=${3})
 ts = datetime.timestamp(dt)
 endsnippet
 
+# -----------------------------------------------------------------------------
 snippet strptime "parse datetime" b
 from datetime import datetime
 datetime.strptime("2021-01-02 10:00:00.123", "%Y-%m-%d %H:%M:%S.%f")
 endsnippet
 
+# -----------------------------------------------------------------------------
 snippet strftime "format datetime" b
 from datetime import datetime
 now = datetime.now()
 now.strftime("%Y-%m-%d %H:%M:%S.%f")
 endsnippet
 
+# -----------------------------------------------------------------------------
 snippet jsonencoder "some to json" b
 import json
 import numpy as np
@@ -278,14 +287,15 @@ class CustomEncoder(json.JSONEncoder):
 
 json.dumps(obj, indent=2, cls=CustomEncoder)
 endsnippet
-
+# -----------------------------------------------------------------------------
 #! header
 snippet ifx "if __main__" b
 if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
 	${1:${VISUAL:main()}}
 endsnippet
 
-snippet mpasync "async multi process" b
+# -----------------------------------------------------------------------------
+snippet multiprocess "async multi process" b
 import multiprocessing as mp
 
 def task(slice, shared_data):
@@ -307,7 +317,8 @@ pool.join()
 results = [result.get() for result in result_list]
 endsnippet
 
-snippet multithread "async multi thread" b
+# -----------------------------------------------------------------------------
+snippet multithread "async multi thread(Only for io program)" b
 import threading
 class MyThread(threading.Thread):
 	def run(self):
@@ -319,6 +330,7 @@ for f in range(4):
 	t.join()
 endsnippet
 
+# -----------------------------------------------------------------------------
 snippet argparse "arguments" b
 import argparse
 parser = argparse.ArgumentParser(description="config evaluate")
@@ -328,4 +340,17 @@ parser.add_argument(
 	type=str,
 )
 args = parser.parse_args()
+endsnippet
+
+snippet singleton "Snigleton" b
+class Singleton(type):
+	__instance = {}
+
+	def __call__(cls, *args, **kwargs):
+		if cls not in cls.__instance:
+			cls.__instance[cls] = super().__call__(*args, **kwargs)
+		return cls.__instance[cls]
+
+class MyClass(metaclass=Singleton):
+	pass
 endsnippet
