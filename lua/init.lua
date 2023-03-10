@@ -8,6 +8,7 @@
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 
+
 local call_requires = function()
   require('plugins')
   require('lsp')

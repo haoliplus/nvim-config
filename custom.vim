@@ -41,4 +41,5 @@ nmap <F8> :MRU<CR>
 """"""""""""""""""""""""""""""
 " => NvimTree
 """"""""""""""""""""""""""""""
-map <F5> :NvimTreeToggle<cr>
+" map <F5> :NvimTreeToggle<cr>
+map <F5> :NvimTreeFindFileToggle<cr>
