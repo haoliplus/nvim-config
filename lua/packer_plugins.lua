@@ -116,7 +116,7 @@ packer.startup(function(use)
   -- Using jj to escape
   use 'jdhao/better-escape.vim'
   -- status bar
-  use {'itchyny/lightline.vim'
+  use {'itchyny/lightline.vim',
     setup = function() 
       vim.g.lightline = {
         colorscheme = 'one',
@@ -183,7 +183,7 @@ packer.startup(function(use)
   } 
   use 'quangnguyen30192/cmp-nvim-ultisnips'
   -- community-maintained snippets
-  use {'mileszs/ack.vim'
+  use {'mileszs/ack.vim',
     setup = function() 
       if vim.fn.executable('ag') == 1 then
         vim.g.ackprg = 'ag --vimgrep'
