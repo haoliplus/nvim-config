@@ -195,7 +195,7 @@ packer.startup(function(use)
     'nvim-tree/nvim-tree.lua',
     requires = {'kyazdani42/nvim-web-devicons'},
     config = function() 
-      keymap.set('n', '<F5>', ':NvimTreeFindFileToggle<CR>', { noremap = true, silent = true })
+      vim.keymap.set('n', '<F5>', ':NvimTreeFindFileToggle<CR>', { noremap = true, silent = true })
     end
   }
   use {
