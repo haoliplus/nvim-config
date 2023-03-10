@@ -8,15 +8,20 @@
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 
+vim.g.home_path=vim.fn.getenv("HOME")
+vim.g.wiki_path=vim.fn.getenv("WIKI_PATH")
+vim.g.config_path=vim.fn.getenv("VIM_CONFIG_DIR")
+vim.g.plug_dir=vim.fn.getenv("VIMPLUGDIR")
 
 local call_requires = function()
+  require('var')
+  require('options')
+  require("packer_plugins")
+  require('themes')
   require('plugins')
   require('lsp')
-  require('packer_plugins')
+  require('custom')
+  require('autocommands')
 end;
 
 call_requires()
--- if pcall(call_requires) then
--- else
---     print('Failed to run init.lua');
--- end
