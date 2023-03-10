@@ -11,11 +11,6 @@ keymap.set('n', '<Leader>7', '7gt', { noremap = true, silent = true })
 keymap.set('n', '<Leader>8', '8gt', { noremap = true, silent = true })
 keymap.set('n', '<Leader>9', '9gt', { noremap = true, silent = true })
 
-vim.g.username = vim.fn.getenv("NICKNAME")
-vim.g.email = vim.fn.getenv("MAIL")
-vim.g.licensee = vim.fn.getenv("LICENSE")
-vim.g.better_escape_shortcut = 'jj'
-
 keymap.set('n', '<F1>', '<nop>', { noremap = true, silent = true })
 
 keymap.set('n', '<A-j>', ':wincmd j<CR>', { noremap = true, silent = true })
@@ -38,3 +33,4 @@ keymap.set('n', '<Leader>a', ':Ack<Space>', { noremap = true, silent = true })
 -- """"""""""""""""""""""""""""""
 keymap.set('n', '<Leader>f', ':MRU<CR>', { noremap = true, silent = true })
 keymap.set('n', '<F8>', ':MRU<CR>', { noremap = true, silent = true })
+keymap.set('n', '<F5>', ':NvimTreeFindFileToggle<CR>', { noremap = true, silent = true })

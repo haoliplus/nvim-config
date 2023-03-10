@@ -19,7 +19,6 @@ local call_requires = function()
   require("packer_plugins")
   require('themes')
   require('plugins')
-  require('lsp')
   require('custom')
   require('autocommands')
 end;
