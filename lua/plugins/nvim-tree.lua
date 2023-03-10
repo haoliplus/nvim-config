@@ -86,7 +86,7 @@ require'nvim-tree'.setup {
    custom = {"*.egg-info", ".git", 
    "__pycache__", "arcanist-extensions",
    "bazel-genfiles", 
-   "bazel-bin", "bazel-fabupilot", "bazel-out", "bazel-testlogs",
+   "bazel-bin", "bazel-out", "bazel-testlogs",
    ".vscode"},
    exclude = {},
   },
