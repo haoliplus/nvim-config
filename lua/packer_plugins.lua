@@ -89,10 +89,22 @@ packer.startup(function(use)
   }
   use 'junegunn/fzf.vim'
   -- fuzzy search using c-p
-  use 'ctrlpvim/ctrlp.vim'
+  use {'ctrlpvim/ctrlp.vim',
+    setup = function() 
+      vim.g.ctrlp_working_path_mode = 0
+      vim.g.ctrlp_max_height = 20
+      vim.g.ctrlp_custom_ignore = 'node_modules|^.DS_Store|^.git|^.coffee'
+    end
+  }
   -- file template
   use {'tibabit/vim-templates',
-  config = function() 
+    setup = function()
+      -- vim-templates
+      vim.g.tmpl_author_email = vim.fn.getenv("MAIL")
+      local cur_dir=vim.fn.expand('<sfile>:p:h')..'/mytemplates'
+      vim.g.tmpl_search_paths = {cur_dir}
+    end,
+    config = function() 
       vim.cmd(
       [[
       autocmd BufNewFile,BufRead py.template set ft=python
@@ -104,9 +116,36 @@ packer.startup(function(use)
   -- Using jj to escape
   use 'jdhao/better-escape.vim'
   -- status bar
-  use 'itchyny/lightline.vim'
+  use {'itchyny/lightline.vim'
+    setup = function() 
+      vim.g.lightline = {
+        colorscheme = 'one',
+        active = {
+          left = {
+            {'filename', 'readonly', 'gitbranch', 'paste', 'mode'},
+            {'modified'}
+          }
+        },
+        component_function = {
+          gitbranch = 'FugitiveHead',
+        },
+      }
+    end
+  }
   -- show indent line
-  use 'Yggdroot/indentLine'
+  use {'Yggdroot/indentLine',
+    setup = function() 
+      -- Indent Line
+      vim.g.indentLine_bufNameExclude = {'_.*', 'NERD_tree.*', '*.wiki'}
+      vim.g.indentLine_fileTypeExclude = {'vimwiki'}
+      vim.g.indentLine_bufTypeExclude = {'help', 'terminal', 'vimwiki'}
+      vim.g.vim_json_conceal=0
+      vim.g.indentLine_color_term = 239
+
+      vim.g.markdown_syntax_conceal=0
+
+    end
+  }
 
   
     -- Better syntax highlighting
@@ -130,6 +169,11 @@ packer.startup(function(use)
 
   -- For ultisnips users.
   use {'SirVer/ultisnips',
+    setup = function() 
+      -- UltiSnips
+      vim.g.UltiSnipsSnippetDirectories={"UltiSnips", "mysnips"}
+      vim.g.ultisnips_python_quoting_style = "double"
+    end,
     config = function() 
       vim.cmd(
         [[
@@ -139,7 +183,13 @@ packer.startup(function(use)
   } 
   use 'quangnguyen30192/cmp-nvim-ultisnips'
   -- community-maintained snippets
-  use 'mileszs/ack.vim'
+  use {'mileszs/ack.vim'
+    setup = function() 
+      if vim.fn.executable('ag') == 1 then
+        vim.g.ackprg = 'ag --vimgrep'
+      end
+    end
+  }
 
   use {
     'nvim-tree/nvim-tree.lua',
@@ -174,6 +224,9 @@ packer.startup(function(use)
       }
       vim.g.vimwiki_hl_headers = 1
       vim.g.vimwiki_global_ext = 0
+      vim.cmd([[
+        autocmd BufNewFile,BufRead */vimwiki/**.md :autocmd TextChanged,TextChangedI <buffer> silent write
+      ]])
     end
   }
 end)
