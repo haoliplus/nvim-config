@@ -61,6 +61,10 @@ PLUG_VIM_URL="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vi
 # https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-${NODE_NAME}.tar.xz
 NODE_DOWNLOAD_URL="https://registry.npmmirror.com/-/binary/node/${NODE_VERSION}/${NODE_DIR}.tar.xz"
 NVIM_CONFIG_URL="https://github.com/haoliplus/nvim-config/archive/refs/heads/master.zip"
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+curl https://pyenv.run | bash
+
 
 if [[ ! -d "${DOTROOT}/nvim" ]] && [[ ! -d ${VIM_CONFIG_DIR} ]] ; then
   wget -c ${NVIM_CONFIG_URL}  -O ${TMP_DIR}/master.zip \
