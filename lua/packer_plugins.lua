@@ -23,8 +23,13 @@ vim.cmd [[packadd packer.nvim]]
 packer.startup(function(use)
   use 'wbthomason/packer.nvim'
   -- Utility for other plugin
-  use 'google/vim-glaive'
   use 'google/vim-maktaba'
+  use {
+    'google/vim-glaive',
+    requires = {
+      'google/vim-maktaba'
+    },
+  }
 
   -- language server protocol
   use {
