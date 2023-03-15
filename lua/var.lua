@@ -55,8 +55,6 @@ vim.g.better_escape_shortcut = 'jj'
 vim.g.vim_json_conceal=0
 vim.g.markdown_syntax_conceal=0
 -- vim.g.tmpl_author_email = vim.fn.getenv("MAIL")
-local cur_dir=vim.fn.expand('<sfile>:p:h')..'/mytemplates'
-vim.g.tmpl_search_paths = {cur_dir}
 
 vim.g.ctrlp_working_path_mode = 0
 vim.g.ctrlp_max_height = 20

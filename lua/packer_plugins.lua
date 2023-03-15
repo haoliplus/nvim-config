@@ -103,6 +103,8 @@ packer.startup(function(use)
     setup = function()
       -- vim-templates
         vim.g.tmpl_author_email = vim.fn.getenv("MAIL")
+        local cur_dir=vim.g.config_path.."/mytemplates"
+        vim.g.tmpl_search_paths = {cur_dir}
     end,
     config = function() 
       vim.cmd(
