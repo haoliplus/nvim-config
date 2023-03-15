@@ -170,7 +170,7 @@ packer.startup(function(use)
 
   use {
     'nvim-tree/nvim-tree.lua',
-    requires = {'kyazdani42/nvim-web-devicons'},
+    requires = {'nvim-tree/nvim-web-devicons'},
     config = function() 
       vim.keymap.set('n', '<F5>', ':NvimTreeFindFileToggle<CR>', { noremap = true, silent = true })
     end
@@ -204,6 +204,20 @@ packer.startup(function(use)
       vim.cmd([[
         autocmd BufNewFile,BufRead */vimwiki/**.md :autocmd TextChanged,TextChangedI <buffer> silent write
       ]])
+    end
+  }
+  use {
+    "folke/trouble.nvim",
+    requires = "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+        vim.keymap.set("n", "<F9>", ":TroubleToggle<cr>",
+            {silent = true, noremap = true}
+          )
+      }
     end
   }
 end)
