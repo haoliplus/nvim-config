@@ -95,8 +95,6 @@ do
   # curl -fLo  ${PLUG_FILE} --create-dirs ${PLUG_VIM_URL}
   wget -O ${PLUG_FILE} -c ${PLUG_VIM_URL}
 done
-git clone --depth 1 https://github.com/wbthomason/packer.nvim\
-  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 if [[ ! -d ${LOCAL_DIR}/bin/node ]]; then
   # curl -L ${NODE_DOWNLOAD_URL} | tar -xJ -C ${TMP_DIR}
@@ -108,13 +106,8 @@ fi
 
 python3 -m pip install -i https://pypi.douban.com/simple pynvim pyright black yapf
 
-if [[ ! -d "${DOTROOT}" ]]  ; then
-  create_link "${VIM_CONFIG_DIR}/resources/.tmux.conf" "${HOME}/.tmux.conf"
-  create_link "${VIM_CONFIG_DIR}/resources/.tmux.conf.local" "${HOME}/.tmux.conf.local"
-else
-  create_link "${DOTROOT}/config/nvim/resources/.tmux.conf" "${HOME}/.tmux.conf"
-  create_link "${DOTROOT}/config/nvim/resources/.tmux.conf.local" "${HOME}/.tmux.conf.local"
-fi
+create_link "${VIM_CONFIG_DIR}/resources/.tmux.conf" "${HOME}/.tmux.conf"
+create_link "${VIM_CONFIG_DIR}/resources/.tmux.conf.local" "${HOME}/.tmux.conf.local"
 
 create_link "${VIM_CONFIG_DIR}/resources/.flake8" "${HOME}/.flake8"
 create_link "${VIM_CONFIG_DIR}/resources/pycodestyle" "${HOME}/.config/pycodestyle"
