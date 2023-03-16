@@ -216,7 +216,6 @@ packer.startup(function(use)
   }
   use {'romgrk/barbar.nvim', requires = 'nvim-tree/nvim-web-devicons',
     config = function() 
-      vim.g.bufferline.animation = false
       local map = vim.api.nvim_set_keymap
       local opts = { noremap = true, silent = true }
       -- Move to previous/next

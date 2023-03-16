@@ -13,6 +13,12 @@ vim.g.wiki_path=vim.fn.getenv("WIKI_PATH")
 vim.g.config_path=vim.fn.getenv("VIM_CONFIG_DIR")
 vim.g.plug_dir=vim.fn.getenv("VIMPLUGDIR")
 
+local status, packer = pcall(require, "packer")
+if (not status) then
+  print("Packer is not installed")
+  return
+end
+
 local call_requires = function()
   require('var')
   require('options')
