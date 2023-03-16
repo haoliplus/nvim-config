@@ -4,10 +4,6 @@
 -- Copyright (C) 2022 lihao <haoliplus@gmail.com>
 --
 -- Distributed under terms of the MIT license.
---
--- return require('packer').startup(function()
---   use 'wbthomason/packer.nvim'
--- end)
 
 -- git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 --  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
@@ -127,18 +123,16 @@ packer.startup(function(use)
     setup = function() 
     end
   }
-
-  
     -- Better syntax highlighting
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
   }
-    -- automatically insert/delete parenthesis, brackets, quotes
-    use { 'windwp/nvim-autopairs', config = function() require('nvim-autopairs').setup() end }
+  -- automatically insert/delete parenthesis, brackets, quotes
+  use { 'windwp/nvim-autopairs', config = function() require('nvim-autopairs').setup() end }
 
-    -- motions to surround text with other text
-    use { 'kylechui/nvim-surround', config = function() require('nvim-surround').setup() end }
+  -- motions to surround text with other text
+  use { 'kylechui/nvim-surround', config = function() require('nvim-surround').setup() end }
 
   -- lsp complete
   use 'hrsh7th/nvim-cmp'
@@ -222,6 +216,7 @@ packer.startup(function(use)
   }
   use {'romgrk/barbar.nvim', requires = 'nvim-tree/nvim-web-devicons',
     config = function() 
+      vim.g.bufferline.animation = false
       local map = vim.api.nvim_set_keymap
       local opts = { noremap = true, silent = true }
       -- Move to previous/next
@@ -261,10 +256,13 @@ packer.startup(function(use)
       -- map('n', '<Space>bl', '<Cmd>BufferOrderByLanguage<CR>', opts)
       -- map('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
     end
-  }
-  use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons',
-  setup = function() 
-     animation = true
-  end
-}
+  } -- barbar.nvim
+  use {
+    'akinsho/bufferline.nvim',
+    tag = "v3.*",
+    requires = 'nvim-tree/nvim-web-devicons',
+    config = function()
+      require('bufferline').setup({animation=false})
+    end
+  } -- bufferline.nvim
 end)
