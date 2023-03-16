@@ -95,6 +95,8 @@ do
   # curl -fLo  ${PLUG_FILE} --create-dirs ${PLUG_VIM_URL}
   wget -O ${PLUG_FILE} -c ${PLUG_VIM_URL}
 done
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 if [[ ! -d ${LOCAL_DIR}/bin/node ]]; then
   # curl -L ${NODE_DOWNLOAD_URL} | tar -xJ -C ${TMP_DIR}
