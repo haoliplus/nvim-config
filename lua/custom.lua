@@ -10,6 +10,8 @@ keymap.set('n', '<Leader>6', '6gt', { noremap = true, silent = true })
 keymap.set('n', '<Leader>7', '7gt', { noremap = true, silent = true })
 keymap.set('n', '<Leader>8', '8gt', { noremap = true, silent = true })
 keymap.set('n', '<Leader>9', '9gt', { noremap = true, silent = true })
+keymap.set('n', '<Leader>y', '"+y', { noremap = true, silent = true })
+keymap.set('v', '<Leader>y', '"+y', { noremap = true, silent = true })
 
 keymap.set('n', '<F1>', '<nop>', { noremap = true, silent = true })
 
