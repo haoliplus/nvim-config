@@ -35,22 +35,6 @@
 -- `m`               toggle_mark         Toggle node in bookmarks
 -- `bmv`             bulk_move           Move all bookmarked nodes into specified location
 
-require('nvim-web-devicons').setup {
- -- your personnal icons can go here (to override)
- -- you can specify color or cterm_color instead of specifying both of them
- -- DevIcon will be appended to `name`
-  override = {
-    zsh = {
-    icon = "#",
-    color = "#428850",
-    cterm_color = "65",
-    name = "Zsh"}
-  };
- -- globally enable default icons (default to false)
- -- will get overriden by `get_icons` option
- default = true;
-}
-
 require'nvim-tree'.setup {
   open_on_tab        = true,
   renderer = {
@@ -110,7 +94,6 @@ require'nvim-tree'.setup {
   }
 }
 
-vim.opt.splitright = true
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = function(data) 
   -- buffer is a directory
@@ -119,12 +102,6 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = function(data)
   if not directory then
     return
   end
-  -- if new window
-  -- create a new, empty buffer
-  -- vim.cmd.enew()
-  -- wipe the directory buffer
-  -- vim.cmd.bw(data.buf)
-
   -- change to the directory
   vim.cmd.cd(data.file)
 
@@ -133,48 +110,3 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = function(data)
 end
 })
 
--- nvim-tree is also there in modified buffers so this function filter it out
-local modifiedBufs = function(bufs)
-    local t = 0
-    for k,v in pairs(bufs) do
-        if v.name:match("NvimTree_") == nil then
-            t = t + 1
-        end
-    end
-    return t
-end
-
--- vim.api.nvim_create_autocmd("BufEnter", {
---     nested = true,
---     callback = function()
---         if #vim.api.nvim_list_wins() == 1 and
---         vim.api.nvim_buf_get_name(0):match("NvimTree_") ~= nil and
---         modifiedBufs(vim.fn.getbufinfo({bufmodified = 1})) == 0 then
---             vim.cmd "quit"
---         end
---     end
--- })
--- vim.api.nvim_create_autocmd("BufEnter", {
---   group = vim.api.nvim_create_augroup("NvimTreeClose", {clear = true}),
---   pattern = "NvimTree_*",
---   callback = function()
---     -- winlayout: The result is a nested List containing the layout of windows in a tabpage.
---     -- For a leaf window, it returns:
---     --     ["leaf", {winid}]
---     local layout = vim.api.nvim_call_function("winlayout", {})
---     if layout[1] == "leaf" and 
---       vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(layout[2]), "filetype") == "NvimTree" 
---       and layout[3] == nil then 
---         vim.cmd("confirm quit")
---      end
---   end
--- })
-
--- change the tab title when leave the tab
--- vim.api.nvim_create_autocmd({ "TabLeave" }, 
---   { 
---     pattern = "NvimTree_*",
---     callback = function()
---         vim.cmd "wincmd p"
---     end
---   })

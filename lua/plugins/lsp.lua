@@ -36,27 +36,15 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
 end
+
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 local servers = {
     "clangd",
     "pyright",
     -- "jedi_language_server",
 }
 local lsp_opts = {}
-
-local capabilities = nil
-
-local call_requires1 = function()
-  capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-end;
-
-local call_requires2 = function()
-  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-end;
-
-if not pcall(call_requires1) and not pcall(call_requires2) then
-    print('Failed to get capabilities');
-end
-
 for _, server_name in pairs(servers) do
   lsp_opts[server_name] = {
     -- When this particular server is ready (i.e. when installation is finished or the server is already installed),
@@ -72,27 +60,31 @@ end
 
 local util = require("lspconfig/util")
 
-lsp_opts["clangd"]["cmd"] = { "clangd", "--background-index", "--clang-tidy"}
-lsp_opts["clangd"]["filetypes"] = { "c", "cpp", "cc", "h"}
-lsp_opts["clangd"]["root_dir"] = function(fname)
-    return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
-end
-
--- lsp_opts["pyright"]["cmd"] = { "pyright", "--dependencies", "--ignoreexternal", "--lib"}
-lsp_opts["pyright"]["cmd"] = { "pyright-langserver", "--stdio"}
-lsp_opts["pyright"]["root_dir"] = function(fname)
-    return util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt")(fname) or util.path.dirname(fname)
-end
-lsp_opts["pyright"]["settings"] = {
-  python = {
-    analysis = {
-      autoSearchPaths = true,
-      diagnosticMode = "workspace",
-      useLibraryCodeForTypes = false -- this is for avoiding lib member access error like cv.imread 
-    }
-  }
+lsp_opts["clangd"] = {
+  cmd = { "clangd", "--background-index", "--clang-tidy"},
+  filetypes = { "c", "cpp", "cc", "h"},
+  root_dir = function(fname)
+      return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
+  end,
 }
-lsp_opts["pyright"]["single_file_support"] = true
+
+lsp_opts["pyright"] = {
+  cmd = { "pyright-langserver", "--stdio"},
+  root_dir = function(fname)
+    return util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt")(fname) or util.path.dirname(fname)
+  end,
+  settings = {
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        diagnosticMode = "workspace",
+        useLibraryCodeForTypes = false -- this is for avoiding lib member access error like cv.imread 
+      }
+    }
+  },
+  single_file_support = true
+}
+
 
 -- Loop through the servers listed above.
 for _, server_name in pairs(servers) do

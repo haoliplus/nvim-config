@@ -1,4 +1,4 @@
-vim.cmd("autocmd!") -- what is this
+vim.cmd("autocmd!") -- Remove all auto cmd
 
 vim.scriptencoding = 'utf-8'
 vim.opt.encoding = 'utf-8'
@@ -41,3 +41,4 @@ vim.opt.smartcase = true
 -- """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 vim.opt.undodir=vim.fn.getenv("HOME").. "/.cache/temp_dirs/undodir"
 vim.opt.undofile=true
+vim.opt.splitright = true
