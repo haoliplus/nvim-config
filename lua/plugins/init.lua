@@ -14,6 +14,7 @@ if (not status) then
   return
 end
 
+local keymap = vim.keymap
 vim.cmd [[packadd packer.nvim]]
 
 packer.startup(function(use)
@@ -79,12 +80,24 @@ packer.startup(function(use)
   -- quick commentary
   use 'tpope/vim-commentary'
   -- most recently used file
-  use 'vim-scripts/mru.vim'
+  use {
+    'vim-scripts/mru.vim',
+    config = function ()
+      -- """"""""""""""""""""""""""""""
+      -- " => MRU plugin
+      -- """"""""""""""""""""""""""""""
+      vim.keymap.set('n', '<Leader>f', ':MRU<CR>', { noremap = true, silent = true })
+      vim.keymap.set('n', '<F8>', ':MRU<CR>', { noremap = true, silent = true })
+    end
+  }
   -- fuzzy search using c-t
   use {
     'junegunn/fzf',
 	  run = './install --all',
     config = function() 
+      -- Fzf
+      vim.keymap.set('n', '<F6>', ':Buffers<CR>', { noremap = true, silent = true })
+      vim.keymap.set('n', '<F7>', ':Marks<CR>', { noremap = true, silent = true })
       vim.cmd([[autocmd FileType fzf call feedkeys("i\<Bs>")]])
     end
   }
@@ -95,6 +108,10 @@ packer.startup(function(use)
       vim.g.ctrlp_working_path_mode = 0
       vim.g.ctrlp_max_height = 20
       vim.g.ctrlp_custom_ignore = 'node_modules|^.DS_Store|^.git|^.coffee'
+      --"""""""""""""""""""""""""""""
+      -- => CTRL-P
+      --"""""""""""""""""""""""""""""
+      vim.g.ctrlp_map = '<c-f>'
     end
   }
   -- file template
@@ -211,6 +228,7 @@ packer.startup(function(use)
     setup = function() 
       if vim.fn.executable('ag') == 1 then
         vim.g.ackprg = 'ag --vimgrep'
+        vim.keymap.set('n', '<Leader>a', ':Ack<Space>', { noremap = true, silent = true })
       end
     end
   }
