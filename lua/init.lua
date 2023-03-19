@@ -20,12 +20,16 @@ if (not status) then
 end
 
 local call_requires = function()
-  require('var')
-  require('options')
-  require("packer_plugins")
+  require('setup')
+  require("plugins")
   require('themes')
-  require('custom')
+  require('keymap')
   require('autocommands')
 end;
 
-call_requires()
+local status, ret = pcall(call_requires)
+
+if (not status) then
+  print("Failed to init")
+  return
+end
