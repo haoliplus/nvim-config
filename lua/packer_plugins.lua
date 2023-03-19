@@ -122,18 +122,33 @@ packer.startup(function(use)
   }
   -- status bar
   use {'itchyny/lightline.vim',
+    requires = {
+      'mengelbrecht/lightline-bufferline',
+      'akinsho/bufferline.nvim'
+    },
     setup = function() 
       vim.g.lightline = {
         colorscheme = 'one',
         active = {
           left = {
-            {'filename', 'readonly', 'gitbranch', 'paste', 'mode'},
-            {'modified'}
+            {'filename', 'gitbranch', 'mode'},
+            {'readonly', 'paste', 'modified'}
+          },
+          right= {
+            {'lineinfo', 'percent' },
+            -- 'fileformat', 'fileencoding',
+            {'filetype', 'charvaluehex' }
           }
         },
         component_function = {
           gitbranch = 'FugitiveHead',
         },
+        component_expand = {
+          buffers = 'lightline#bufferline#buffers'
+        },
+        component_type = {
+          buffers = 'tabsel'
+        }
       }
     end
   }
