@@ -323,4 +323,6 @@ packer.startup(function(use)
       require('bufferline').setup({animation=false})
     end
   } -- bufferline.nvim
-end)
+end) -- packer.setup
+
+require('plugins')

@@ -75,6 +75,6 @@ handlers['textDocument/typeDefinition'] = raw_location_handler
 handlers['textDocument/implementation'] = raw_location_handler
 
 -- close quickfix list after open
--- vim.cmd([[
--- autocmd FileType qf nmap <buffer> <cr> <cr>:cclose<cr>
--- ]])
+vim.cmd([[
+autocmd FileType qf nmap <buffer> <cr> <cr>:cclose<cr>
+]])
