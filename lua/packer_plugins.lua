@@ -33,7 +33,7 @@ packer.startup(function(use)
     requires = {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-    }
+    },
   }
 
   -- jump between .h/.cc
@@ -167,7 +167,9 @@ packer.startup(function(use)
     end 
   }
   -- lsp complete
-  use 'hrsh7th/nvim-cmp'
+  use {
+    'hrsh7th/nvim-cmp',
+  }
   -- complete sources for nvim-cmp
   use { 'hrsh7th/cmp-nvim-lsp', requires = 'hrsh7th/nvim-cmp'}
   use { 'hrsh7th/cmp-buffer', requires = 'hrsh7th/nvim-cmp'}
@@ -212,7 +214,13 @@ packer.startup(function(use)
             name = "Zsh"
           },
           dockerfile = {
-            icon = " ",
+            icon = "*",
+            color = "#428850",
+            cterm_color = "65",
+            name = "Dockerfile"
+          },
+          Dockerfile = {
+            icon = "*",
             color = "#428850",
             cterm_color = "65",
             name = "Dockerfile"
@@ -221,6 +229,13 @@ packer.startup(function(use)
        -- globally enable default icons (default to false)
        -- will get overriden by `get_icons` option
        default = true;
+       override_by_filename = {
+         ["Dockerfile"] = {
+           icon = "$",
+           color = "#f1502f",
+           name = "Gitignore"
+         }
+       };
       }
     end
   }
@@ -273,7 +288,7 @@ packer.startup(function(use)
         -- refer to the configuration section below
         vim.keymap.set("n", "<F9>", ":TroubleToggle<cr>",
             {silent = true, noremap = true}
-          )
+        )
       }
     end
   }
