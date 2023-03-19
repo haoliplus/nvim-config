@@ -19,13 +19,13 @@ local function raw_location_handler(_, result, ctx, config)
 
   config = config or {}
 
-  -- textDocument/definition can return Location or Location[]
-  -- https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_definition
+  -- -- textDocument/definition can return Location or Location[]
+  -- -- https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_definition
 
- -- create a new tab and save bufnr
-  -- api.nvim_command('tabnew')
-  -- local buf = api.nvim_get_current_buf()
-  api.nvim_command('tab split')
+ -- -- create a new tab and save bufnr
+  -- -- api.nvim_command('tabnew')
+  -- -- local buf = api.nvim_get_current_buf()
+  -- api.nvim_command('tab split')
 
   if vim.tbl_islist(result) then
     local title = 'LSP locations'
@@ -40,7 +40,8 @@ local function raw_location_handler(_, result, ctx, config)
         return
       end
       vim.fn.setqflist({}, ' ', { title = title, items = items })
-      api.nvim_command('botright copen')
+      api.nvim_command('botright cw')
+      -- api.nvim_command('cclose')
     end
   else
     util.jump_to_location(result, client.offset_encoding, config.reuse_win)
@@ -72,3 +73,8 @@ handlers['textDocument/declaration']    = raw_location_handler
 handlers['textDocument/definition']     = raw_location_handler
 handlers['textDocument/typeDefinition'] = raw_location_handler
 handlers['textDocument/implementation'] = raw_location_handler
+
+-- close quickfix list after open
+-- vim.cmd([[
+-- autocmd FileType qf nmap <buffer> <cr> <cr>:cclose<cr>
+-- ]])
