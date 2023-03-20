@@ -40,39 +40,39 @@ require'nvim-tree'.setup {
   renderer = {
     icons = {
       show = {
-       git = true,
-       folder = true,
-       file = true,
-       folder_arrow = true
+        git = true,
+        folder = true,
+        file = true,
+        folder_arrow = true
       }
     }
   },
   actions = {
-   change_dir = {
-    enable = true,
-    global = false,
-   },
-   open_file = {
-    quit_on_open = false,
-    resize_window = true,
-    window_picker = {
-     enable = true,
-     chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
-     exclude = {
-      filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
-      buftype = { "nofile", "terminal", "help" },
-     },
+    change_dir = {
+      enable = true,
+      global = false,
     },
-   },
+    open_file = {
+      quit_on_open = false,
+      resize_window = true,
+      window_picker = {
+        enable = true,
+        chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
+        exclude = {
+          filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
+          buftype = { "nofile", "terminal", "help" },
+        },
+      },
+    },
   },
   filters = {
-   dotfiles = false,
-   custom = {"*.egg-info", ".git", 
-   "__pycache__", "arcanist-extensions",
-   "bazel-genfiles", 
-   "bazel-bin", "bazel-out", "bazel-testlogs",
-   ".vscode"},
-   exclude = {},
+    dotfiles = false,
+    custom = {"*.egg-info", ".git",
+      "__pycache__", "arcanist-extensions",
+      "bazel-genfiles",
+      "bazel-bin", "bazel-out", "bazel-testlogs",
+      ".vscode"},
+    exclude = {},
   },
   git = {ignore = false},
   tab = {
@@ -86,16 +86,16 @@ require'nvim-tree'.setup {
       list = {
         -- remove a default mapping for cd
         { key = "<2-RightMouse>", action = "" },
-         -- add multiple normal mode mappings for edit
+        -- add multiple normal mode mappings for edit
         { key = { "<CR>", "o" }, action = "edit", mode = "n" },
-        -- { key = { "<C-t>" }, action = "", action_cb =  open_new_tab },
+      -- { key = { "<C-t>" }, action = "", action_cb =  open_new_tab },
       }
     }
   }
 }
 
 
-vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = function(data) 
+vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = function(data)
   -- buffer is a directory
   local directory = vim.fn.isdirectory(data.file) == 1
 

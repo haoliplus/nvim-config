@@ -39,7 +39,7 @@ packer.startup(function(use)
 
   -- jump between .h/.cc
   use {
-    'vim-scripts/a.vim', 
+    'vim-scripts/a.vim',
     ft = {"c", "cpp", "cc"}
   }-- { 'for': {'c', 'cpp'} }
   -- Format code
@@ -59,7 +59,7 @@ packer.startup(function(use)
       ]])
       -- Only format manually
       vim.cmd(
-      [[
+        [[
         autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
       ]])
     end
@@ -70,7 +70,7 @@ packer.startup(function(use)
   use 'vim-scripts/DoxygenToolkit.vim'
   -- run command :AsyncRun[!]
   use 'skywind3000/asyncrun.vim'
-  -- git 
+  -- git
   use 'tpope/vim-fugitive'
   use 'airblade/vim-gitgutter'
   -- Themes
@@ -93,8 +93,8 @@ packer.startup(function(use)
   -- fuzzy search using c-t
   use {
     'junegunn/fzf',
-	  run = './install --all',
-    config = function() 
+    run = './install --all',
+    config = function()
       -- Fzf
       vim.keymap.set('n', '<F6>', ':Buffers<CR>', { noremap = true, silent = true })
       vim.keymap.set('n', '<F7>', ':Marks<CR>', { noremap = true, silent = true })
@@ -104,7 +104,7 @@ packer.startup(function(use)
   use 'junegunn/fzf.vim'
   -- fuzzy search using c-p
   use {'ctrlpvim/ctrlp.vim',
-    setup = function() 
+    setup = function()
       vim.g.ctrlp_working_path_mode = 0
       vim.g.ctrlp_max_height = 20
       vim.g.ctrlp_custom_ignore = 'node_modules|^.DS_Store|^.git|^.coffee'
@@ -122,9 +122,9 @@ packer.startup(function(use)
       local cur_dir=vim.g.config_path.."/mytemplates"
       vim.g.tmpl_search_paths = {cur_dir}
     end,
-    config = function() 
+    config = function()
       vim.cmd(
-      [[
+        [[
       autocmd BufNewFile,BufRead py.template set ft=python
       autocmd BufNewFile,BufRead *.yaml.template set ft=yaml
       autocmd BufNewFile,BufRead sh.template set ft=sh
@@ -133,7 +133,7 @@ packer.startup(function(use)
   }
   -- Using jj to escape
   use {'jdhao/better-escape.vim',
-    setup = function() 
+    setup = function()
       vim.g.better_escape_shortcut = 'jj'
     end
   }
@@ -143,7 +143,7 @@ packer.startup(function(use)
       'mengelbrecht/lightline-bufferline',
       'akinsho/bufferline.nvim'
     },
-    setup = function() 
+    setup = function()
       vim.g.lightline = {
         colorscheme = 'one',
         active = {
@@ -171,7 +171,7 @@ packer.startup(function(use)
   }
   -- show indent line
   use {'Yggdroot/indentLine',
-    setup = function() 
+    setup = function()
       -- Indent Line
       vim.g.indentLine_bufNameExclude = {'_.*', 'NERD_tree.*', '*.wiki'}
       vim.g.indentLine_fileTypeExclude = {'vimwiki'}
@@ -179,24 +179,24 @@ packer.startup(function(use)
       vim.g.indentLine_color_term = 239
     end
   }
-    -- Better syntax highlighting
+  -- Better syntax highlighting
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
   }
   -- automatically insert/delete parenthesis, brackets, quotes
-  use { 
+  use {
     'windwp/nvim-autopairs',
-    config = function() 
-      require('nvim-autopairs').setup() 
-    end 
+    config = function()
+      require('nvim-autopairs').setup()
+    end
   }
   -- motions to surround text with other text
   use {
-    'kylechui/nvim-surround', 
-    config = function() 
-      require('nvim-surround').setup() 
-    end 
+    'kylechui/nvim-surround',
+    config = function()
+      require('nvim-surround').setup()
+    end
   }
   -- lsp complete
   use {
@@ -210,22 +210,22 @@ packer.startup(function(use)
 
   -- For ultisnips users.
   use {'SirVer/ultisnips',
-    setup = function() 
+    setup = function()
       -- UltiSnips
       vim.g.UltiSnipsSnippetDirectories={"UltiSnips", "mysnips"}
       vim.g.ultisnips_python_quoting_style = "double"
     end,
-    config = function() 
+    config = function()
       vim.cmd(
         [[
         autocmd BufNewFile,BufRead python_my.snippets set ft=python
         ]])
     end
-  } 
+  }
   use 'quangnguyen30192/cmp-nvim-ultisnips'
   -- community-maintained snippets
   use {'mileszs/ack.vim',
-    setup = function() 
+    setup = function()
       if vim.fn.executable('ag') == 1 then
         vim.g.ackprg = 'ag --vimgrep'
         vim.keymap.set('n', '<Leader>a', ':Ack<Space>', { noremap = true, silent = true })
@@ -234,11 +234,11 @@ packer.startup(function(use)
   }
   use {
     'nvim-tree/nvim-web-devicons',
-    config = function() 
+    config = function()
       require('nvim-web-devicons').setup {
-       -- your personnal icons can go here (to override)
-       -- you can specify color or cterm_color instead of specifying both of them
-       -- DevIcon will be appended to `name`
+        -- your personnal icons can go here (to override)
+        -- you can specify color or cterm_color instead of specifying both of them
+        -- DevIcon will be appended to `name`
         override = {
           zsh = {
             icon = "#",
@@ -259,16 +259,16 @@ packer.startup(function(use)
             name = "Dockerfile"
           }
         };
-       -- globally enable default icons (default to false)
-       -- will get overriden by `get_icons` option
-       default = true;
-       override_by_filename = {
-         ["Dockerfile"] = {
-           icon = "$",
-           color = "#f1502f",
-           name = "Gitignore"
-         }
-       };
+        -- globally enable default icons (default to false)
+        -- will get overriden by `get_icons` option
+        default = true;
+        override_by_filename = {
+          ["Dockerfile"] = {
+            icon = "$",
+            color = "#f1502f",
+            name = "Gitignore"
+          }
+        };
       }
     end
   }
@@ -276,7 +276,7 @@ packer.startup(function(use)
   use {
     'nvim-tree/nvim-tree.lua',
     requires = {'nvim-tree/nvim-web-devicons'},
-    config = function() 
+    config = function()
       vim.keymap.set('n', '<F5>', ':NvimTreeFindFileToggle<CR>', { noremap = true, silent = true })
     end
   }
@@ -297,8 +297,8 @@ packer.startup(function(use)
           template_path= vim.g.wiki_path .. '/templates/',
           template_default= 'def_template',
           template_ext= '.html'
-         }
-       }
+        }
+      }
       vim.g.vimwiki_ext2syntax = {
         ['.md'] = 'markdown',
         ['.markdown'] = 'markdown',
@@ -320,7 +320,7 @@ packer.startup(function(use)
         -- or leave it empty to use the default settings
         -- refer to the configuration section below
         vim.keymap.set("n", "<F9>", ":TroubleToggle<cr>",
-            {silent = true, noremap = true}
+          {silent = true, noremap = true}
         )
       }
     end
@@ -328,7 +328,7 @@ packer.startup(function(use)
   use {
     'romgrk/barbar.nvim',
     requires = 'nvim-tree/nvim-web-devicons',
-    config = function() 
+    config = function()
       local map = vim.api.nvim_set_keymap
       local opts = { noremap = true, silent = true }
       -- Move to previous/next
@@ -361,3 +361,4 @@ end) -- packer.setup
 require('plugins.nvim-cmp')
 require('plugins.nvim-tree')
 require('plugins.lsp')
+

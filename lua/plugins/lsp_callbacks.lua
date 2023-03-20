@@ -22,7 +22,7 @@ local function raw_location_handler(_, result, ctx, config)
   -- -- textDocument/definition can return Location or Location[]
   -- -- https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_definition
 
- -- -- create a new tab and save bufnr
+  -- -- create a new tab and save bufnr
   -- -- api.nvim_command('tabnew')
   -- -- local buf = api.nvim_get_current_buf()
   -- api.nvim_command('tab split')
@@ -48,15 +48,15 @@ local function raw_location_handler(_, result, ctx, config)
   end
 end
 
- 
+
 local location_callback = function(_, method, result)
   if result == nil or vim.tbl_isempty(result) then
     local _ = log.info() and log.info(method, 'No location found')
     return nil
   end
- 
+
   api.nvim_command('tab split')
- 
+
   if vim.tbl_islist(result) then
     util.jump_to_location(result[1])
     if #result > 1 then
@@ -68,7 +68,7 @@ local location_callback = function(_, method, result)
     util.jump_to_location(result)
   end
 end
- 
+
 handlers['textDocument/declaration']    = raw_location_handler
 handlers['textDocument/definition']     = raw_location_handler
 handlers['textDocument/typeDefinition'] = raw_location_handler
@@ -78,3 +78,4 @@ handlers['textDocument/implementation'] = raw_location_handler
 vim.cmd([[
 autocmd FileType qf nmap <buffer> <cr> <cr>:cclose<cr>
 ]])
+

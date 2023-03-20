@@ -1,4 +1,3 @@
-
 -- """"""""""""""""""""""""
 -- "" Color
 -- """""""""""""""""""""""
@@ -17,7 +16,7 @@ vim.g.palenight_terminal_italics=1
 -- simily with 'highlight Comment cterm=italic gui=italic'
 -- Override cursorline and cursorcolumn
 vim.g.palenight_color_overrides = {
-    cursor_grey= { gui= "#3E4452", cterm= "White", cterm16= "White" },
+  cursor_grey= { gui= "#3E4452", cterm= "White", cterm16= "White" },
 }
 
 vim.cmd('colorscheme palenight')
@@ -29,3 +28,4 @@ if vim.fn.exists('+termguicolors') == 1 then
   vim.cmd([[let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"]])
   vim.opt.termguicolors = true
 end
+

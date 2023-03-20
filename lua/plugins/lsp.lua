@@ -50,9 +50,9 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(
   vim.lsp.protocol.make_client_capabilities())
 
 local servers = {
-    "clangd",
-    "pyright",
-    -- "jedi_language_server",
+  "clangd",
+  "pyright",
+-- "jedi_language_server",
 }
 local lsp_opts = {}
 for _, server_name in pairs(servers) do
@@ -70,22 +70,22 @@ lsp_opts["clangd"] = {
   cmd = { "clangd", "--background-index", "--clang-tidy"},
   filetypes = { "c", "cpp", "cc", "h"},
   root_dir = function(fname)
-      return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
+    return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
   end,
 }
 
 lsp_opts["pyright"] = {
   cmd = { "pyright-langserver", "--stdio"},
   root_dir = function(fname)
-    return util.root_pattern(".git", "setup.py",  "setup.cfg", 
-        "pyproject.toml", "requirements.txt")(fname) or util.path.dirname(fname)
+    return util.root_pattern(".git", "setup.py",  "setup.cfg",
+      "pyproject.toml", "requirements.txt")(fname) or util.path.dirname(fname)
   end,
   settings = {
     python = {
       analysis = {
         autoSearchPaths = true,
         diagnosticMode = "workspace",
-        useLibraryCodeForTypes = false -- this is for avoiding lib member access error like cv.imread 
+        useLibraryCodeForTypes = false -- this is for avoiding lib member access error like cv.imread
       }
     }
   },
@@ -95,6 +95,7 @@ lsp_opts["pyright"] = {
 
 -- Loop through the servers listed above.
 for _, server_name in pairs(servers) do
-    local opts = lsp_opts[server_name]
-    require('lspconfig')[server_name].setup(opts)
+  local opts = lsp_opts[server_name]
+  require('lspconfig')[server_name].setup(opts)
 end
+
