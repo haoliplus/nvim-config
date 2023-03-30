@@ -21,7 +21,8 @@ export CURRENT_OS=$(uname)
 export OS=$(uname)
 
 if [[ "$OS" == 'Linux' ]]; then
-  NVIM_NAME="nvim-linux64"
+  # NVIM_NAME="nvim-linux64"
+  NVIM_NAME="nvim.appimage"
   NODE_NAME="linux-x64"
 elif [[ "$OS" == 'Darwin' ]]; then
   NVIM_NAME="nvim-macos"
@@ -63,7 +64,8 @@ NODE_DOWNLOAD_URL="https://registry.npmmirror.com/-/binary/node/${NODE_VERSION}/
 NVIM_CONFIG_URL="https://github.com/haoliplus/nvim-config/archive/refs/heads/master.zip"
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-curl https://pyenv.run | bash
+
+# curl https://pyenv.run | bash
 
 
 if [[ ! -d "${DOTROOT}/nvim" ]] && [[ ! -d ${VIM_CONFIG_DIR} ]] ; then
@@ -81,11 +83,14 @@ mkdir -p ${CACHE_DIR}/temp_dirs/undodir
 
 
 if [[ ! -f ${LOCAL_DIR}/bin/nvim ]]; then
-  # curl -L ${NVIM_DOWNLOAD_URL} | tar -xz -C ${TMP_DIR}
-  wget -O - -c ${NVIM_DOWNLOAD_URL} | tar -xz -C ${TMP_DIR}
-  smv ${TMP_DIR}/${NVIM_NAME}/bin/nvim ${LOCAL_DIR}/bin/nvim
-  smv ${TMP_DIR}/${NVIM_NAME}/lib/nvim ${LOCAL_DIR}/lib/nvim
-  smv ${TMP_DIR}/${NVIM_NAME}/share/nvim ${LOCAL_DIR}/share/nvim
+  # curl -L ${NVIM_DOWNLOAD_URL} | tar -xz -C ${TMP_DIR} 
+  wget -O ${LOCAL_DIR}/bin/nvim -c ${NVIM_DOWNLOAD_URL}
+  chmod +x ${LOCAL_DIR}/bin/nvim
+
+  # wget -O - -c ${NVIM_DOWNLOAD_URL} | tar -xz -C ${TMP_DIR}
+  # smv ${TMP_DIR}/${NVIM_NAME}/bin/nvim ${LOCAL_DIR}/bin/nvim
+  # smv ${TMP_DIR}/${NVIM_NAME}/lib/nvim ${LOCAL_DIR}/lib/nvim
+  # smv ${TMP_DIR}/${NVIM_NAME}/share/nvim ${LOCAL_DIR}/share/nvim
 fi 
 
 PLUG_FILE=${LOCAL_DIR}/share/nvim/runtime/autoload/plug.vim
