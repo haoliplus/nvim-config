@@ -2,10 +2,9 @@
 # -*- coding: utf-8 -*-
 # vim:fenc=utf-8
 #
-# Copyright © {{YEAR}} {{NAME}} <{{EMAIL}}>
+# Copyright © {{_lua:os.date("%Y")_}} {{_author_}} <{{_email_}}>
 #
-# Distributed under terms of the {{LICENSE}} license.
-
+# Distributed under terms of the MIT license.
 """
 
 """

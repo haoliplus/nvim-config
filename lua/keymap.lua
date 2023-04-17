@@ -22,6 +22,5 @@ keymap.set('n', '<A-k>', ':wincmd k<CR>', { noremap = true, silent = true })
 keymap.set('n', '<A-h>', ':wincmd h<CR>', { noremap = true, silent = true })
 keymap.set('n', '<A-l>', ':wincmd l<CR>', { noremap = true, silent = true })
 
--- keymap.set('n', '<Leader>t', function()
---     return ':Template '
--- end, { remap = true})
+-- keymap.set('n', '<Leader>t', ':Template ',  { remap = true})
+-- keymap.set('n', '<F10>', ':MRU', { noremap = true, silent = true })

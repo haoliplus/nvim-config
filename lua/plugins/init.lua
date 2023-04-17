@@ -123,23 +123,19 @@ packer.startup(function(use)
     end
   }
   use {'nvimdev/template.nvim', 
-    requires = { {'nvim-telescope/telescope.nvim'} },
     cmd = {'Template','TemProject'},
     config = function()
       -- vim.filetype.add ( filename = { ['main.sh'] = 'sh' })
       -- vim.filetype.add ( filename = { ['a.html'] = 'html' })
-      vim.filetype.add({
-       filename = {
-         ['main.sh'] = 'sh',
-       },
-      })
       require('template').setup({
             temp_dir = vim.g.config_path.."/templates",
     --     local cur_dir=
             author   = vim.fn.getenv("NICKNAME"), -- your name
-            email    = vim.fn.getenv("MAIL")-- email address
+            email    = vim.fn.getenv("MAIL"),-- email address
+            license = "MIT"
           -- config in there
       })
+      -- vim.keymap.set('n', '<F10>', ':Template ',  { remap = true})
   end}
   -- file template
   -- use {'tibabit/vim-templates',
