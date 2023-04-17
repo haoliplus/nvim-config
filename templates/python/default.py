@@ -4,7 +4,7 @@
 #
 # Copyright © {{_lua:os.date("%Y")_}} {{_author_}} <{{_email_}}>
 #
-# Distributed under terms of the MIT license.
+# Distributed under terms of the {{_lua:os.getenv("LICENSE")_}} license. 
 """
 
 """

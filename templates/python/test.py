@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 # vim:fenc=utf-8
 #
-# Copyright © 2023 lihao <lihao@fabu.ai>
+# Copyright © {{_lua:os.date("%Y")_}} {{_author_}} <{{_email_}}>
 #
-# Distributed under terms of the MIT license.
+# Distributed under terms of the {{_lua:os.getenv("LICENSE")_}} license. 
 
 """
 

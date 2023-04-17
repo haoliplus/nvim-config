@@ -1,13 +1,13 @@
 /**
- * @author      : {{NAME}} ({{EMAIL}})
- * @file        : {{FILE}}
- * @created     : {{TIMESTAMP}}
+ * @author      : {{_author_}} ({{_email_}})
+ * @file        : {{_file_name_}}
+ * @created     : {{_date_}}
  */
 
 #include <iostream>
 
 int main()
 {
-    {{CURSOR}}
+    {{_cursor_}}
     return 0;
 }
