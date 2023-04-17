@@ -354,3 +354,13 @@ class Singleton(type):
 class MyClass(metaclass=Singleton):
 	pass
 endsnippet
+
+snippet loggerbasic "logger basic" b
+import sys
+import tempfile
+from loguru import logger
+logger.remove()
+tmp_file = tempfile.NamedTemporaryFile(dir="/tmp")
+logger.add(sys.stdout, colorize=True, format="<level>[{level:.1} {time:MM-DD HH:mm:ss} {file}:{line}]</level> {message}", level="INFO")
+logger.add(tmp_file.name, level="DEBUG")
+endsnippet
