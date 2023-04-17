@@ -106,3 +106,20 @@ vim.opt.undodir=vim.fn.getenv("HOME").. "/.cache/temp_dirs/undodir"
 vim.opt.undofile=true
 vim.opt.splitright = true
 
+
+vim.filetype.add({
+ filename = {
+   ['this_is_a_speci'] = 'yaml',
+   -- ['a.sh'] = 'yaml',
+ },
+  pattern = {
+    ['.*.sh'] = 'sh',
+    ['.*.html'] = 'html',
+    ['.*.mock'] = 'text',
+    ['.*.h'] = 'cpp',
+    ['.*.cfg'] = 'cfg',
+  }
+})
+
+-- print(vim.filetype.match({ filename = "main.sh" }))
+-- print(vim.filetype.match({ filename = "a.sh" }))

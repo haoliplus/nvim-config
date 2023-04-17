@@ -114,23 +114,50 @@ packer.startup(function(use)
       vim.g.ctrlp_map = '<c-f>'
     end
   }
-  -- file template
-  use {'tibabit/vim-templates',
-    setup = function()
-      -- vim-templates
-      vim.g.tmpl_author_email = vim.fn.getenv("MAIL")
-      local cur_dir=vim.g.config_path.."/mytemplates"
-      vim.g.tmpl_search_paths = {cur_dir}
-    end,
-    config = function()
-      vim.cmd(
-        [[
-      autocmd BufNewFile,BufRead py.template set ft=python
-      autocmd BufNewFile,BufRead *.yaml.template set ft=yaml
-      autocmd BufNewFile,BufRead sh.template set ft=sh
-      ]])
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.1',
+  -- or                            , branch = '0.1.x',
+    requires = { {'nvim-lua/plenary.nvim'} },
+    config = function() 
+      -- require("telescope").load_extension('find_template')
     end
   }
+  use {'nvimdev/template.nvim', 
+    requires = { {'nvim-telescope/telescope.nvim'} },
+    cmd = {'Template','TemProject'},
+    config = function()
+      -- vim.filetype.add ( filename = { ['main.sh'] = 'sh' })
+      -- vim.filetype.add ( filename = { ['a.html'] = 'html' })
+      vim.filetype.add({
+       filename = {
+         ['main.sh'] = 'sh',
+       },
+      })
+      require('template').setup({
+            temp_dir = vim.g.config_path.."/templates",
+    --     local cur_dir=
+            author   = vim.fn.getenv("NICKNAME"), -- your name
+            email    = vim.fn.getenv("MAIL")-- email address
+          -- config in there
+      })
+  end}
+  -- file template
+  -- use {'tibabit/vim-templates',
+  --   setup = function()
+  --     -- vim-templates
+  --     vim.g.tmpl_author_email = vim.fn.getenv("MAIL")
+  --     local cur_dir=vim.g.config_path.."/mytemplates"
+  --     vim.g.tmpl_search_paths = {cur_dir}
+  --   end,
+  --   config = function()
+  --     vim.cmd(
+  --       [[
+  --     autocmd BufNewFile,BufRead py.template set ft=python
+  --     autocmd BufNewFile,BufRead *.yaml.template set ft=yaml
+  --     autocmd BufNewFile,BufRead sh.template set ft=sh
+  --     ]])
+  --   end
+  -- }
   -- Using jj to escape
   use {'jdhao/better-escape.vim',
     setup = function()
@@ -182,6 +209,7 @@ packer.startup(function(use)
   -- Better syntax highlighting
   use {
     'nvim-treesitter/nvim-treesitter',
+    cond = false,
     run = ':TSUpdate',
     config = function()
       require'nvim-treesitter.configs'.setup {

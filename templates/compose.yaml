@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  prod:
+    # image: docker.xx/guest/demo:latest
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: prod
+    hostname: prod
+    restart: yes
+    container_name: prod
+
+  dev:
+    # image: docker.xx/guest/demo:dev
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: dev
+    hostname: dev
+    restart: no
+    container_name: dev
+    tty: true

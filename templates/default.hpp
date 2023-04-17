@@ -1,0 +1,18 @@
+/**
+ * @author      : {{NAME}} ({{EMAIL}})
+ * @file        : {{FILE}}
+ * @created     : {{TIMESTAMP}}
+ */
+
+#pragma once
+
+
+class {{CLASS}}
+{
+    public:
+        {{CLASS}} ({{CURSOR}});
+        virtual ~{{CLASS}} ();
+    private:
+        /* private data */
+};
+
