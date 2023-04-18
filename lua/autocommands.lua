@@ -1,17 +1,15 @@
-vim.cmd(
-  [[
-autocmd FileType python setl shiftwidth=4 tabstop=2 softtabstop=2
-]])
 -- Only for my specifical config file
-vim.cmd(
-  [[
-autocmd FileType yaml set nocursorcolumn
-]]
-)
+vim.api.nvim_create_autocmd('FileType', {
+  desc = 'yaml config',
+  pattern = 'yaml',
+  -- group = vim.api.nvim_create_augroup('black_on_save', { clear = true }),
+  callback = function (opts)
+    vim.opt.cursorcolumn = false
+  end,
+})
 
 vim.api.nvim_create_autocmd('FileType', {
   desc = 'Format python',
-
   pattern = 'python',
   -- group = vim.api.nvim_create_augroup('black_on_save', { clear = true }),
   callback = function (opts)
@@ -20,17 +18,10 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt.softtabstop=2
   end,
 })
-
--- Return to last edit position when opening files (You want this!)
-vim.cmd(
-  [[
-autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-]])
 -- """"""""""""""""""""""""""""""
 -- " => Other
 -- """"""""""""""""""""""""""""""
 -- " Format json
-
 vim.api.nvim_create_user_command(
   'FormatJson',
   function(input)
@@ -77,3 +68,18 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = 'NvimTree', -- or any other filetree's `ft`
 })
 
+-- Return to last edit position when opening files (You want this!)
+-- vim.cmd(
+--   [[
+-- autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+-- ]])
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufReadPost' }, {
+  callback = function()
+    local row, column = unpack(vim.api.nvim_buf_get_mark(0, '"'))
+    local buf_line_count = vim.api.nvim_buf_line_count(0)
+
+    if row >= 1 and row <= buf_line_count then
+      vim.api.nvim_win_set_cursor(0, { row, column })
+    end
+  end,
+})

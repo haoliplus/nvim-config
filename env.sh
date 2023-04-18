@@ -21,3 +21,4 @@ export VIMRUNTIME="${VIM_RESOURCE_DIR}/runtime"
 export MYVIMRC=${MYVIMRC:-"${VIM_CONFIG_DIR}/init.vim"}
 export VIMINIT='source $MYVIMRC'
 
+# this_is_a_word

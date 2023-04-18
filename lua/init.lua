@@ -21,6 +21,7 @@ end
 
 local call_requires = function()
   require('setup')
+  require('custom_filetype')
   require("plugins")
   require('themes')
   require('keymap')
