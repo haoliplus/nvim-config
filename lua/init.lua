@@ -32,6 +32,7 @@ local status, ret = pcall(call_requires)
 
 if (not status) then
   print("Failed to init")
+  print(ret)
   return
 end
 

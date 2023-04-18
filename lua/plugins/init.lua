@@ -182,17 +182,18 @@ packer.startup(function(use)
           -- extension_name = {
           --   extension_config_key = value,
           -- }
-            find_template = {
-            },
+            -- find_template = {
+            -- },
           -- please take a look at the readme of the extension you want to configure
         }
       }
-      -- require("telescope").load_extension('find_template')
     end
   }
   use {'nvimdev/template.nvim', 
-    requires = {'nvim-telescope/telescope.nvim'},
-    cmd = {'Template','TemProject'},
+    requires = {{'nvim-telescope/telescope.nvim'}},
+    -- this allow us to load this plugin only when we type this command.
+    -- But this makes the config ineffect sometimes
+    -- cmd = {'Template','TemProject'},
     config = function()
       -- vim.filetype.add ( filename = { ['main.sh'] = 'sh' })
       -- vim.filetype.add ( filename = { ['a.html'] = 'html' })
