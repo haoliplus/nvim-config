@@ -155,10 +155,43 @@ packer.startup(function(use)
   -- or                            , branch = '0.1.x',
     requires = { {'nvim-lua/plenary.nvim'} },
     config = function() 
+      require('telescope').setup{
+        defaults = {
+          -- Default configuration for telescope goes here:
+          -- config_key = value,
+          mappings = {
+            i = {
+              -- map actions.which_key to <C-h> (default: <C-/>)
+              -- actions.which_key shows the mappings for your picker,
+              -- e.g. git_{create, delete, ...}_branch for the git_branches picker
+              ["<C-h>"] = "which_key"
+            }
+          }
+        },
+        pickers = {
+          -- Default configuration for builtin pickers goes here:
+          -- picker_name = {
+          --   picker_config_key = value,
+          --   ...
+          -- }
+          -- Now the picker_config_key will be applied every time you call this
+          -- builtin picker
+        },
+        extensions = {
+          -- Your extension configuration goes here:
+          -- extension_name = {
+          --   extension_config_key = value,
+          -- }
+            find_template = {
+            },
+          -- please take a look at the readme of the extension you want to configure
+        }
+      }
       -- require("telescope").load_extension('find_template')
     end
   }
   use {'nvimdev/template.nvim', 
+    requires = {'nvim-telescope/telescope.nvim'},
     cmd = {'Template','TemProject'},
     config = function()
       -- vim.filetype.add ( filename = { ['main.sh'] = 'sh' })
@@ -169,6 +202,7 @@ packer.startup(function(use)
             email    = vim.fn.getenv("MAIL"),-- email address
       })
       -- vim.keymap.set('n', '<F10>', ':Template ',  { remap = true})
+      require("telescope").load_extension('find_template')
   end}
   -- Using jj to escape
   use {'jdhao/better-escape.vim',
