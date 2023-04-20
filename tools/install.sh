@@ -21,8 +21,8 @@ export CURRENT_OS=$(uname)
 export OS=$(uname)
 
 if [[ "$OS" == 'Linux' ]]; then
-  # NVIM_NAME="nvim-linux64"
-  NVIM_NAME="nvim.appimage"
+  NVIM_NAME="nvim-linux64"
+  # NVIM_NAME="nvim.appimage"
   NODE_NAME="linux-x64"
 elif [[ "$OS" == 'Darwin' ]]; then
   NVIM_NAME="nvim-macos"
@@ -57,6 +57,7 @@ CACHE_DIR="${LOCAL_DIR}/.cache"
 NODE_DIR="node-${NODE_VERSION}-${NODE_NAME}"
 
 NVIM_DOWNLOAD_URL="https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/${NVIM_NAME}.tar.gz"
+# NVIM_DOWNLOAD_URL="https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/${NVIM_NAME}"
 PLUG_VIM_URL="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 # https://registry.npmmirror.com/-/binary/node/${NODE_VERSION}/node-${NODE_VERSION}-${NODE_NAME}.tar.xz
 # https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-${NODE_NAME}.tar.xz
@@ -84,13 +85,13 @@ mkdir -p ${CACHE_DIR}/temp_dirs/undodir
 
 if [[ ! -f ${LOCAL_DIR}/bin/nvim ]]; then
   # curl -L ${NVIM_DOWNLOAD_URL} | tar -xz -C ${TMP_DIR} 
-  wget -O ${LOCAL_DIR}/bin/nvim -c ${NVIM_DOWNLOAD_URL}
-  chmod +x ${LOCAL_DIR}/bin/nvim
+  # wget -O ${LOCAL_DIR}/bin/nvim -c ${NVIM_DOWNLOAD_URL}
+  # chmod +x ${LOCAL_DIR}/bin/nvim
 
-  # wget -O - -c ${NVIM_DOWNLOAD_URL} | tar -xz -C ${TMP_DIR}
-  # smv ${TMP_DIR}/${NVIM_NAME}/bin/nvim ${LOCAL_DIR}/bin/nvim
-  # smv ${TMP_DIR}/${NVIM_NAME}/lib/nvim ${LOCAL_DIR}/lib/nvim
-  # smv ${TMP_DIR}/${NVIM_NAME}/share/nvim ${LOCAL_DIR}/share/nvim
+  wget -O - -c ${NVIM_DOWNLOAD_URL} | tar -xz -C ${TMP_DIR}
+  smv ${TMP_DIR}/${NVIM_NAME}/bin/nvim ${LOCAL_DIR}/bin/nvim
+  smv ${TMP_DIR}/${NVIM_NAME}/lib/nvim ${LOCAL_DIR}/lib/nvim
+  smv ${TMP_DIR}/${NVIM_NAME}/share/nvim ${LOCAL_DIR}/share/nvim
 fi 
 
 PLUG_FILE=${LOCAL_DIR}/share/nvim/runtime/autoload/plug.vim
