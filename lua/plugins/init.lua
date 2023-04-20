@@ -473,6 +473,9 @@ packer.startup(function(use)
       require('bufferline').setup({animation=false})
     end
   } -- bufferline.nvim
+  use {
+    'lambdalisue/suda.vim'
+  }
 end) -- packer.setup
 
 require('plugins.nvim-cmp')
