@@ -110,8 +110,6 @@ if [[ ! -d ${LOCAL_DIR}/bin/node ]]; then
   create_link "${LOCAL_DIR}/opt/${NODE_DIR}/bin/npm" "${LOCAL_DIR}/bin/npm"
 fi
 
-python3 -m pip install -i https://pypi.douban.com/simple pynvim pyright black yapf
-
 create_link "${VIM_CONFIG_DIR}/resources/.tmux.conf" "${HOME}/.tmux.conf"
 create_link "${VIM_CONFIG_DIR}/resources/.tmux.conf.local" "${HOME}/.tmux.conf.local"
 
