@@ -86,10 +86,10 @@ mkdir -p ${CACHE_DIR}/temp_dirs/undodir
 if [[ ! -f ${LOCAL_DIR}/bin/nvim ]]; then
   # curl -L ${NVIM_DOWNLOAD_URL} | tar -xz -C ${TMP_DIR} 
   wget -O ${LOCAL_DIR}/bin/nvim.appimage -c ${NVIM_APPIMAGE_DOWNLOAD_URL}
-  chmod +x ${LOCAL_DIR}/bin/nvim
+  chmod +x ${LOCAL_DIR}/bin/nvim.appimage
 
   wget -O - -c ${NVIM_DOWNLOAD_URL} | tar -xz -C ${TMP_DIR}
-  smv ${TMP_DIR}/${NVIM_NAME}/bin/nvim ${LOCAL_DIR}/bin/nvim
+  smv ${TMP_DIR}/${NVIM_NAME}/bin/nvim ${LOCAL_DIR}/bin/nvim.bin
   smv ${TMP_DIR}/${NVIM_NAME}/lib/nvim ${LOCAL_DIR}/lib/nvim
   smv ${TMP_DIR}/${NVIM_NAME}/share/nvim ${LOCAL_DIR}/share/nvim
 fi 

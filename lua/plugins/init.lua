@@ -63,6 +63,13 @@ packer.startup(function(use)
       'google/vim-maktaba'
     },
   }
+  use {
+      'williamboman/mason.nvim',
+      run = ":MasonUpdate",
+      config = function() 
+        require("mason").setup()
+      end
+  }
 
   -- language server protocol
   use {

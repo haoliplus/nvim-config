@@ -52,6 +52,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(
 local servers = {
   "clangd",
   "pyright",
+  -- "beautysh"
 -- "jedi_language_server",
 }
 local lsp_opts = {}

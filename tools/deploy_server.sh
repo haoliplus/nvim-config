@@ -8,15 +8,21 @@
 set -ex
 
 SSH_ALIAS=${SSH_ALIAS:-"guest"}
+PORT=${PORT:-"22"}
 
 sync_file() {
-  rsync --copy-links -aP $1 ${SSH_ALIAS}:~/$(dirname $1)
+  rsync -e "ssh -p ${PORT}" --copy-links -aP $1 ${SSH_ALIAS}:~/$(dirname $1)
 }
 
 
 cd ${HOME}
-sync_file .local/bin/nvim
+ssh ${SSH_ALIAS} -p ${PORT} "mkdir -p ~/.local/bin; mkdir -p ~/.local/lib; mkdir -p ~/.local/share;mkdir -p ~/.dotfiles"
+sync_file .local/bin/nvim.bin
 sync_file .local/bin/nvim.appimage
+sync_file .dotfiles/nvim
 sync_file .local/bin/node
 sync_file .local/lib/nvim
 sync_file .local/share/nvim
+
+ssh ${SSH_ALIAS} -p ${PORT} 'cat ${HOME}/.dotfiles/nvim/tools/.custom_env.sh >> ${HOME}/.zshrc'
+ssh ${SSH_ALIAS} -p ${PORT} 'cat ${HOME}/.dotfiles/nvim/tools/.custom_env.sh >> ${HOME}/.bashrc'
