@@ -371,30 +371,34 @@ packer.startup(function(use)
             cterm_color = "65",
             name = "Zsh"
           },
-          dockerfile = {
-            icon = "*",
-            color = "#428850",
-            cterm_color = "65",
-            name = "Dockerfile"
-          },
-          Dockerfile = {
-            icon = "*",
-            color = "#428850",
-            cterm_color = "65",
-            name = "Dockerfile"
-          }
         };
         -- globally enable default icons (default to false)
         -- will get overriden by `get_icons` option
         default = true;
         override_by_filename = {
-          ["Dockerfile"] = {
-            icon = "$",
-            color = "#f1502f",
-            name = "Gitignore"
-          }
+          ["containerfile"] = {
+            icon = "*",
+            color = "#458ee5",
+            cterm_color = "68",
+            name = "containerfile",
+          },
         };
       }
+      require("nvim-web-devicons").set_icon {
+        containerfile = {
+          icon = "",
+          color = "#428850",
+          cterm_color = "65",
+          name = "containerfile"
+        },
+        dockerfile = {
+          icon = "",
+          color = "#428850",
+          cterm_color = "65",
+          name = "dockerfile"
+        }
+      }
+
     end
   }
   use {

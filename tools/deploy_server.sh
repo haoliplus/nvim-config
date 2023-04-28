@@ -24,5 +24,5 @@ sync_file .local/bin/node
 sync_file .local/lib/nvim
 sync_file .local/share/nvim
 
-ssh ${SSH_ALIAS} -p ${PORT} 'cat ${HOME}/.dotfiles/nvim/tools/.custom_env.sh >> ${HOME}/.zshrc'
-ssh ${SSH_ALIAS} -p ${PORT} 'cat ${HOME}/.dotfiles/nvim/tools/.custom_env.sh >> ${HOME}/.bashrc'
+ssh ${SSH_ALIAS} -p ${PORT} "echo 'source ${HOME}/.dotfiles/nvim/tools/.custom_env.sh'  >> ${HOME}/.zshrc"
+ssh ${SSH_ALIAS} -p ${PORT} "echo 'source ${HOME}/.dotfiles/nvim/tools/.custom_env.sh'  >> ${HOME}/.bashrc"
