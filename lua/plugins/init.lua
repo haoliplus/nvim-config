@@ -403,10 +403,20 @@ packer.startup(function(use)
   }
   use {
     'nvim-tree/nvim-tree.lua',
+    disable = true,
     requires = {'nvim-tree/nvim-web-devicons'},
     config = function()
       vim.keymap.set('n', '<F5>', ':NvimTreeFindFileToggle<CR>', { noremap = true, silent = true })
     end
+  }
+  use {
+  "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    requires = { 
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+    }
   }
   use {
     'haoliplus/vimwiki',
@@ -527,6 +537,7 @@ packer.startup(function(use)
 end) -- packer.setup
 
 require('plugins.nvim-cmp')
-require('plugins.nvim-tree')
+-- require('plugins.nvim-tree')
+require('plugins.neo-tree')
 require('plugins.lsp')
 
