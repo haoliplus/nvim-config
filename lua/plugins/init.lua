@@ -67,12 +67,15 @@ packer.startup(function(use)
       'williamboman/mason.nvim',
       run = ":MasonUpdate",
       config = function() 
-        require("mason").setup()
       end
   }
   use {
       'williamboman/mason-lspconfig.nvim',
+      requires = {
+        'williamboman/mason.nvim',
+      },
       config = function() 
+        require("mason").setup()
         require("mason-lspconfig").setup{
           ensure_installed = { "lua_ls", "rust_analyzer" }
         }
@@ -496,10 +499,11 @@ packer.startup(function(use)
   } -- barbar.nvim
   use {
     'akinsho/bufferline.nvim',
-    tag = "v3.*",
+     tag = "v4.1.0",
     requires = 'nvim-tree/nvim-web-devicons',
     config = function()
-      require('bufferline').setup({animation=false})
+      -- require('bufferline').setup({animation=false})
+       require('plugins.bufferline')
     end
   } -- bufferline.nvim
   use {
