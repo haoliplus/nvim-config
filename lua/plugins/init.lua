@@ -70,7 +70,14 @@ packer.startup(function(use)
         require("mason").setup()
       end
   }
-
+  use {
+      'williamboman/mason-lspconfig.nvim',
+      config = function() 
+        require("mason-lspconfig").setup{
+          ensure_installed = { "lua_ls", "rust_analyzer" }
+        }
+      end
+  }
   -- language server protocol
   use {
     'neovim/nvim-lspconfig',
@@ -466,6 +473,7 @@ packer.startup(function(use)
   use {
     'romgrk/barbar.nvim',
     requires = 'nvim-tree/nvim-web-devicons',
+    disable=True,
     config = function()
       local map = vim.api.nvim_set_keymap
       local opts = { noremap = true, silent = true }
@@ -535,6 +543,7 @@ packer.startup(function(use)
   }
   use 'rcarriga/nvim-notify'
 end) -- packer.setup
+
 
 require('plugins.nvim-cmp')
 -- require('plugins.nvim-tree')
