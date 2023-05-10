@@ -14,7 +14,6 @@ return  {
     config = function()
       -- require('plugins.utils.lsp_callbacks')
       -- print(vim.inspect(vim.api.nvim_list_runtime_paths()))
-      vim.opt.rtp:prepend(vim.g.config_path)
       require('plugins.utils.lsp_callbacks')
 
       -- See `:help vim.diagnostic.*` for documentation on any of the below functions

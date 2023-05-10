@@ -20,24 +20,12 @@ vim.g.wiki_path=vim.fn.getenv("WIKI_PATH")
 vim.g.config_path=vim.fn.getenv("VIM_CONFIG_DIR")
 vim.g.plug_dir=vim.fn.getenv("VIMPLUGDIR")
 vim.opt.rtp:prepend(vim.g.config_path)
-if not contains(vim.api.nvim_list_runtime_paths(), vim.g.config_path) then
-  print(vim.inspect(vim.api.nvim_list_runtime_paths()))
-end
 
 require('setup')
 require('custom_filetype')
 
--- print(vim.inspect(vim.api.nvim_list_runtime_paths()))
 require("lazy").setup("plugins")
 
-if not contains(vim.api.nvim_list_runtime_paths(), vim.g.config_path) then
-  -- print(vim.inspect(vim.api.nvim_list_runtime_paths()))
-  print(contains(vim.api.nvim_list_runtime_paths(), vim.g.config_path))
-  vim.opt.rtp:prepend(vim.g.config_path)
-else
-end
-
--- vim.opt.rtp:prepend(vim.g.config_path)
 require('themes')
 require('keymap')
 require('autocommands')
