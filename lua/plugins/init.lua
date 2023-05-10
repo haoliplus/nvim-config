@@ -6,8 +6,11 @@
 -- Distributed under terms of the MIT license.
 --
 
-require("lazy").setup({
-  {'wbthomason/packer.nvim'},
+return {
+  -- Themes
+  {'drewtempelmeyer/palenight.vim'},
+  -- quick commentary
+  {'tpope/vim-commentary'},
   -- Utility for other plugin
   {'google/vim-maktaba'},
   -- lsp complete
@@ -17,7 +20,7 @@ require("lazy").setup({
   { 'hrsh7th/cmp-buffer', dependencies = 'hrsh7th/nvim-cmp'},
   { 'haoliplus/cmp-path', dependencies = 'hrsh7th/nvim-cmp'},
   { 'hrsh7th/cmp-cmdline', dependencies = 'hrsh7th/nvim-cmp'},
-  {'quangnguyen30192/cmp-nvim-ultisnips'},
+  -- {'quangnguyen30192/cmp-nvim-ultisnips'},
   { 'lambdalisue/suda.vim' },
   { 'sindrets/diffview.nvim', dependencies = 'nvim-lua/plenary.nvim' },
   {'rcarriga/nvim-notify'},
@@ -34,14 +37,10 @@ require("lazy").setup({
   -- git
   {'tpope/vim-fugitive'},
   {'airblade/vim-gitgutter'},
-  -- Themes
-  {'drewtempelmeyer/palenight.vim'},
   {'junegunn/fzf.vim'},
   -- fuzzy search using c-p
   -- c-b show buffer
   {'jlanzarotta/bufexplorer'},
-  -- quick commentary
-  {'tpope/vim-commentary'},
   {
       'williamboman/mason-lspconfig.nvim',
       dependencies = {
@@ -54,7 +53,7 @@ require("lazy").setup({
         }
       end
   },
-  -- language server protocol
+  ---- language server protocol
   {
     'neovim/nvim-lspconfig',
     dependencies = {
@@ -63,7 +62,7 @@ require("lazy").setup({
     },
   },
 
-  -- most recently used file
+  ---- most recently used file
   {
     'vim-scripts/mru.vim',
     config = function ()
@@ -74,7 +73,7 @@ require("lazy").setup({
       vim.keymap.set('n', '<F8>', ':MRU<CR>', { noremap = true, silent = true })
     end
   },
-  -- fuzzy search using c-t
+  ---- fuzzy search using c-t
   {
     'junegunn/fzf',
     build = './install --all',
@@ -94,45 +93,6 @@ require("lazy").setup({
       -- => CTRL-P
       --"""""""""""""""""""""""""""""
       vim.g.ctrlp_map = '<c-f>'
-    end
-  },
-  {
-    'nvim-telescope/telescope.nvim', version = '0.1.1',
-  -- or                            , branch = '0.1.x',
-    dependencies = { {'nvim-lua/plenary.nvim'} },
-    config = function()
-      require('telescope').setup{
-        defaults = {
-          -- Default configuration for telescope goes here:
-          -- config_key = value,
-          mappings = {
-            i = {
-              -- map actions.which_key to <C-h> (default: <C-/>)
-              -- actions.which_key shows the mappings for your picker,
-              -- e.g. git_{create, delete, ...}_branch for the git_branches picker
-              ["<C-h>"] = "which_key"
-            }
-          }
-        },
-        pickers = {
-          -- Default configuration for builtin pickers goes here:
-          -- picker_name = {
-          --   picker_config_key = value,
-          --   ...
-          -- }
-          -- Now the picker_config_key will be applied every time you call this
-          -- builtin picker
-        },
-        extensions = {
-          -- Your extension configuration goes here:
-          -- extension_name = {
-          --   extension_config_key = value,
-          -- }
-            -- find_template = {
-            -- },
-          -- please take a look at the readme of the extension you want to configure
-        }
-      }
     end
   },
   {'nvimdev/template.nvim', 
@@ -157,98 +117,6 @@ require("lazy").setup({
       vim.g.better_escape_shortcut = 'jj'
     end
   },
-  -- status bar
-  {'itchyny/lightline.vim',
-    dependencies = {
-      'mengelbrecht/lightline-bufferline',
-      'akinsho/bufferline.nvim'
-    },
-    setup = function()
-      vim.g.lightline = {
-        colorscheme = 'one',
-        active = {
-          left = {
-            {'filename', 'gitbranch', 'mode'},
-            {'readonly', 'paste', 'modified'}
-          },
-          right= {
-            {'lineinfo', 'percent' },
-            -- 'fileformat', 'fileencoding',
-            {'filetype', 'charvaluehex' }
-          }
-        },
-        component_function = {
-          gitbranch = 'FugitiveHead',
-        },
-        component_expand = {
-          buffers = 'lightline#bufferline#buffers'
-        },
-        component_type = {
-          buffers = 'tabsel'
-        }
-      }
-    end
-  },
-  -- show indent line
-  {'Yggdroot/indentLine',
-    setup = function()
-      -- Indent Line
-      vim.g.indentLine_bufNameExclude = {'_.*', 'NERD_tree.*', '*.wiki'}
-      vim.g.indentLine_fileTypeExclude = {'vimwiki'}
-      vim.g.indentLine_bufTypeExclude = {'help', 'terminal', 'vimwiki'}
-      vim.g.indentLine_color_term = 239
-    end
-  },
-  -- Better syntax highlighting
-  {
-    'nvim-treesitter/nvim-treesitter',
-    enabled = true,
-    build = ':TSUpdate',
-    config = function()
-      require'nvim-treesitter.configs'.setup {
-        -- A list of parser names, or "all" (the five listed parsers should always be installed)
-        ensure_installed = { "c", "lua", "vim", "query" },
-        ignore_install = { "help" },
-
-        -- Install parsers synchronously (only applied to `ensure_installed`)
-        sync_install = false,
-
-        -- Automatically install missing parsers when entering buffer
-        -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-        auto_install = true,
-
-        -- List of parsers to ignore installing (for "all")
-        ignore_install = { "javascript" },
-
-        ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-        -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-
-        highlight = {
-          enable = false,
-
-          -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-          -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-          -- the name of the parser)
-          -- list of language that will be disabled
-          disable = { "c", "rust" },
-          -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
-          -- disable = function(lang, buf)
-          --   local max_filesize = 100 * 1024 -- 100 KB
-          --   local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-          --   if ok and stats and stats.size > max_filesize then
-          --     return true
-          --   end
-          -- end,
-
-          -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-          -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-          -- Using this option may slow down your editor, and you may see some duplicate highlights.
-          -- Instead of true it can also be a list of languages
-          additional_vim_regex_highlighting = false,
-        },
-      }
-    end
-  },
   -- automatically insert/delete parenthesis, brackets, quotes
   {
     'windwp/nvim-autopairs',
@@ -256,7 +124,7 @@ require("lazy").setup({
       require('nvim-autopairs').setup()
     end
   },
-  -- motions to surround text with other text
+  ---- motions to surround text with other text
   {
     'kylechui/nvim-surround',
     config = function()
@@ -264,7 +132,7 @@ require("lazy").setup({
     end
   },
 
-  -- For ultisnips users.
+  ---- For ultisnips users.
   {'SirVer/ultisnips',
     setup = function()
       -- UltiSnips
@@ -278,111 +146,13 @@ require("lazy").setup({
         ]])
     end
   },
-  -- community-maintained snippets
+  ---- community-maintained snippets
   {'mileszs/ack.vim',
     setup = function()
       if vim.fn.executable('ag') == 1 then
         vim.g.ackprg = 'ag --vimgrep'
         vim.keymap.set('n', '<Leader>a', ':Ack<Space>', { noremap = true, silent = true })
       end
-    end
-  },
-  {
-    'nvim-tree/nvim-web-devicons',
-    config = function()
-      require('nvim-web-devicons').setup {
-        -- your personnal icons can go here (to override)
-        -- you can specify color or cterm_color instead of specifying both of them
-        -- DevIcon will be appended to `name`
-        override = {
-          zsh = {
-            icon = "#",
-            color = "#428850",
-            cterm_color = "65",
-            name = "Zsh"
-          },
-        };
-        -- globally enable default icons (default to false)
-        -- will get overriden by `get_icons` option
-        default = false;
-        override_by_filename = {
-          ["containerfile"] = {
-            icon = "*",
-            color = "#458ee5",
-            cterm_color = "68",
-            name = "containerfile",
-          },
-        };
-      }
-      require("nvim-web-devicons").set_icon {
-        containerfile = {
-          icon = "",
-          color = "#428850",
-          cterm_color = "65",
-          name = "containerfile"
-        },
-        dockerfile = {
-          icon = "",
-          color = "#428850",
-          cterm_color = "65",
-          name = "dockerfile"
-        }
-      }
-      require("nvim-web-devicons").set_default_icon('', '#6d8086', 65)
-
-    end
-  },
-  {
-    'nvim-tree/nvim-tree.lua',
-    enabled = false,
-    dependencies = {'nvim-tree/nvim-web-devicons'},
-    config = function()
-      vim.keymap.set('n', '<F5>', ':NvimTreeFindFileToggle<CR>', { noremap = true, silent = true })
-    end
-  },
-  {
-  "nvim-neo-tree/neo-tree.nvim",
-    branch = "v2.x",
-    enabled = true,
-    dependencies = { 
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
-    },
-    config = function()
-      require('lua.plugins.neo-tree')
-      vim.keymap.set('n', '<F5>', ':NeoTreeShowToggle<CR>', { noremap = true, silent = true })
-    end
-  },
-  {
-    'haoliplus/vimwiki',
-    config = function()
-      vim.g.vimwiki_list = {
-        {
-          path= vim.g.wiki_path .. '/text/',
-          index='Home',
-          path_html= vim.g.wiki_path..'/html/',
-          syntax= 'markdown',
-          inner_link_syntax= 'mediawiki',
-          ext= '.md',
-          auto_diary_index= 1,
-          diary_rel_path= 'summary/diary/',
-          auto_generate_links= 1,
-          template_path= vim.g.wiki_path .. '/templates/',
-          template_default= 'def_template',
-          template_ext= '.html'
-        }
-      }
-      vim.g.vimwiki_ext2syntax = {
-        ['.md'] = 'markdown',
-        ['.markdown'] = 'markdown',
-        ['.mdown'] = 'markdown',
-      }
-      vim.g.vimwiki_hl_headers = 1
-      vim.g.vimwiki_global_ext = 0
-      vim.cmd([[
-        autocmd BufNewFile,BufRead */vimwiki/**.md :autocmd TextChanged,TextChangedI <buffer> silent write
-      ]])
     end
   },
   {
@@ -400,36 +170,12 @@ require("lazy").setup({
     end
   },
   {
-    'romgrk/barbar.nvim',
-    dependencies = 'nvim-tree/nvim-web-devicons',
-    enabled=false,
-    config = function()
-      local map = vim.api.nvim_set_keymap
-      local opts = { noremap = true, silent = true }
-      -- Move to previous/next
-      map('n', '<A-,>', '<Cmd>BufferPrevious<CR>', opts)
-      map('n', '<A-.>', '<Cmd>BufferNext<CR>', opts)
-      map('n', '<Leader>1', '<Cmd>BufferGoto 1<CR>', opts)
-      map('n', '<Leader>2', '<Cmd>BufferGoto 2<CR>', opts)
-      map('n', '<Leader>3', '<Cmd>BufferGoto 3<CR>', opts)
-      map('n', '<Leader>4', '<Cmd>BufferGoto 4<CR>', opts)
-      map('n', '<Leader>5', '<Cmd>BufferGoto 5<CR>', opts)
-      map('n', '<Leader>6', '<Cmd>BufferGoto 6<CR>', opts)
-      map('n', '<Leader>7', '<Cmd>BufferGoto 7<CR>', opts)
-      map('n', '<Leader>8', '<Cmd>BufferGoto 8<CR>', opts)
-      map('n', '<Leader>9', '<Cmd>BufferGoto 9<CR>', opts)
-      map('n', '<Leader>0', '<Cmd>BufferLast<CR>', opts)
-      -- Close buffer
-      map('n', '<Leader>c', '<Cmd>BufferClose<CR>', opts)
-    end
-  }, -- barbar.nvim
-  {
     'akinsho/bufferline.nvim',
     version = "v4.1.0",
     dependencies = 'nvim-tree/nvim-web-devicons',
     config = function()
       -- require('bufferline').setup({animation=false})
-      require('lua.plugins.bufferline')
+      -- require('plugins.bufferline')
     end
   }, -- bufferline.nvim
   {
@@ -438,7 +184,7 @@ require("lazy").setup({
       require('colorizer').setup()
     end
   },
-  -- install without yarn or npm
+  ---- install without yarn or npm
   {
       "iamcco/markdown-preview.nvim",
       build = function() vim.fn["mkdp#util#install"]() end,
@@ -468,32 +214,5 @@ require("lazy").setup({
     end,
     dependencies = {'nvim-tree/nvim-web-devicons'}
   },
-  -- Format code
-  {
-    'google/vim-codefmt',
-    dependencies = {
-      'google/vim-glaive',
-      'google/vim-maktaba'
-    },
-    config = function()
-      vim.cmd('call glaive#Install()')
-      -- FileType
-      vim.cmd([[
-      autocmd FileType c,cpp,proto,javascript  let b:codefmt_formatter = 'clang-format'
-      autocmd FileType bzl let b:codefmt_formatter = 'buildifier'
-      autocmd FileType python let b:codefmt_formatter = 'black'
-      ]])
-      -- Only format manually
-      vim.cmd(
-        [[
-        autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
-      ]])
-    end
-  },
-}) -- packer.setup
-
-
-require('lua.plugins.nvim-cmp')
--- require('plugins.nvim-tree')
-require('lua.plugins.lsp')
-
+  ---- Format code
+} -- packer.setup

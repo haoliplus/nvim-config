@@ -19,7 +19,10 @@ vim.g.palenight_color_overrides = {
   cursor_grey= { gui= "#3E4452", cterm= "White", cterm16= "White" },
 }
 
-vim.cmd('colorscheme palenight')
+local call_requires = function()
+  vim.cmd('colorscheme palenight')
+end
+pcall(call_requires)
 
 vim.opt.colorcolumn={80,120}
 
