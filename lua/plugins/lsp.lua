@@ -67,73 +67,73 @@ return  {
       local lsp_opts = {}
       for _, server_name in pairs(servers) do
         lsp_opts[server_name] = {
-          -- capabilities = capabilities,
-          -- flags = {
-          --   debounce_text_changes = 150,
-          -- }
+          capabilities = capabilities,
+          flags = {
+            debounce_text_changes = 150,
+          }
         }
       end
 
-      -- local util = require("lspconfig/util")
+      local util = require("lspconfig/util")
 
-      -- lsp_opts["clangd"] = {
-      --   cmd = { "clangd", "--background-index", "--clang-tidy"},
-      --   filetypes = { "c", "cpp", "cc", "h"},
-      --   root_dir = function(fname)
-      --     return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
-      --   end,
-      -- }
+      lsp_opts["clangd"] = {
+        cmd = { "clangd", "--background-index", "--clang-tidy"},
+        filetypes = { "c", "cpp", "cc", "h"},
+        root_dir = function(fname)
+          return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
+        end,
+      }
 
-      -- lsp_opts["pyright"] = {
-      --   cmd = { "pyright-langserver", "--stdio"},
-      --   root_dir = function(fname)
-      --     return util.root_pattern(".git", "setup.py",  "setup.cfg",
-      --       "pyproject.toml", "requirements.txt")(fname) or util.path.dirname(fname)
-      --   end,
-      --   settings = {
-      --     python = {
-      --       analysis = {
-      --         autoSearchPaths = true,
-      --         diagnosticMode = "workspace",
-      --         useLibraryCodeForTypes = false -- this is for avoiding lib member access error like cv.imread
-      --       }
-      --     }
-      --   },
-      --   single_file_support = true
-      -- }
+      lsp_opts["pyright"] = {
+        cmd = { "pyright-langserver", "--stdio"},
+        root_dir = function(fname)
+          return util.root_pattern(".git", "setup.py",  "setup.cfg",
+            "pyproject.toml", "requirements.txt")(fname) or util.path.dirname(fname)
+        end,
+        settings = {
+          python = {
+            analysis = {
+              autoSearchPaths = true,
+              diagnosticMode = "workspace",
+              useLibraryCodeForTypes = false -- this is for avoiding lib member access error like cv.imread
+            }
+          }
+        },
+        single_file_support = true
+      }
 
 
       -- -- Loop through the servers listed above.
       for _, server_name in pairs(servers) do
         local opts = lsp_opts[server_name]
-        -- require('lspconfig')[server_name].setup(opts)
+        require('lspconfig')[server_name].setup(opts)
       end
 
 
-      -- require'lspconfig'.lua_ls.setup {
-      --   capabilities = capabilities,
-      --   settings = {
-      --     Lua = {
-      --       runtime = {
-      --         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-      --         version = 'LuaJIT',
-      --       },
-      --       diagnostics = {
-      --         -- Get the language server to recognize the `vim` global
-      --         globals = {'vim'},
-      --       },
-      --       workspace = {
-      --         -- Make the server aware of Neovim runtime files
-      --         library = vim.api.nvim_get_runtime_file("", true),
-      --         checkThirdParty = false, -- THIS IS THE IMPORTANT LINE TO ADD
-      --       },
-      --       -- Do not send telemetry data containing a randomized but unique identifier
-      --       telemetry = {
-      --         enable = false,
-      --       },
-      --     },
-      --   },
-      -- }
+      require'lspconfig'.lua_ls.setup {
+        capabilities = capabilities,
+        settings = {
+          Lua = {
+            runtime = {
+              -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+              version = 'LuaJIT',
+            },
+            diagnostics = {
+              -- Get the language server to recognize the `vim` global
+              globals = {'vim'},
+            },
+            workspace = {
+              -- Make the server aware of Neovim runtime files
+              library = vim.api.nvim_get_runtime_file("", true),
+              checkThirdParty = false, -- THIS IS THE IMPORTANT LINE TO ADD
+            },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {
+              enable = false,
+            },
+          },
+        },
+      }
     end
 }
 

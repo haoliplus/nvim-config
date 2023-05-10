@@ -170,15 +170,6 @@ return {
     end
   },
   {
-    'akinsho/bufferline.nvim',
-    version = "v4.1.0",
-    dependencies = 'nvim-tree/nvim-web-devicons',
-    config = function()
-      -- require('bufferline').setup({animation=false})
-      -- require('plugins.bufferline')
-    end
-  }, -- bufferline.nvim
-  {
     'norcalli/nvim-colorizer.lua',
     config = function() 
       require('colorizer').setup()
@@ -196,7 +187,21 @@ return {
     branch = "main",
     event = "LspAttach",
     config = function()
-        require("lspsaga").setup({})
+      local default = " "
+      require("lspsaga").setup({
+        ui = {
+          kind = {
+            ["String"] = { default, 'String' },
+            ["Number"] = { default, 'Number' },
+            ["Array"] = { default, 'Type' },
+            ["Null"] = { default, 'Constant' },
+            ["Text"] = { default, 'String' },
+            ["Function"] = { default, 'Function' },
+            ["Unit"] = { default, 'Number' },
+            ["Folder"] = { " ", "@comment" },
+          }
+        }
+      })
     end,
     dependencies = {
         {"nvim-tree/nvim-web-devicons"},

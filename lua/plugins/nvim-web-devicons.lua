@@ -27,6 +27,12 @@ return {
         };
       }
       require("nvim-web-devicons").set_icon {
+        txt = {
+          icon = '', 
+          color = '#6d8086',
+          cterm_color = "65",
+          name = "txt"
+        },
         containerfile = {
           icon = "",
           color = "#428850",
