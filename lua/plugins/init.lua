@@ -253,7 +253,15 @@ return {
     event = 'VimEnter',
     config = function()
       require('dashboard').setup {
-        -- config
+        config = {
+          packages = { enable = true }, -- show how many plugins neovim loaded
+          mru = { limit = 10, icon = '* ', label = 'Recent Files', },
+          footer = {"hello"}, -- footer
+          -- limit how many projects list, action when you press key or enter it will run this action.
+          -- action can be a functino type, e.g.
+          -- action = func(path) vim.cmd('Telescope find_files cwd=' .. path) end
+          project = { enable = true, limit = 8, icon = '- ', label = 'Recent Project' },
+        },
       }
     end,
     dependencies = {'nvim-tree/nvim-web-devicons'}
