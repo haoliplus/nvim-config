@@ -46,7 +46,7 @@ return {
       dependencies = {
         'williamboman/mason.nvim',
       },
-      config = function() 
+      config = function()
         require("mason").setup()
         require("mason-lspconfig").setup{
           ensure_installed = { "lua_ls", "rust_analyzer" }
@@ -95,7 +95,7 @@ return {
       vim.g.ctrlp_map = '<c-f>'
     end
   },
-  {'nvimdev/template.nvim', 
+  {'nvimdev/template.nvim',
     dependencies = {{'nvim-telescope/telescope.nvim'}},
     -- this allow us to load this plugin only when we type this command.
     -- But this makes the config ineffect sometimes
@@ -171,7 +171,7 @@ return {
   },
   {
     'norcalli/nvim-colorizer.lua',
-    config = function() 
+    config = function()
       require('colorizer').setup()
     end
   },
@@ -187,7 +187,7 @@ return {
     branch = "main",
     event = "LspAttach",
     config = function()
-      local default = " "
+      local default = ""
       require("lspsaga").setup({
         ui = {
           kind = {
@@ -200,6 +200,45 @@ return {
             ["Unit"] = { default, 'Number' },
             ["Folder"] = { " ", "@comment" },
           }
+          -- kind = {
+          --   [1] = { 'File', ' ', 'Tag' },
+          --   [2] = { 'Module', ' ', 'Exception' },
+          --   [3] = { 'Namespace', ' ', 'Include' },
+          --   [4] = { 'Package', ' ', 'Label' },
+          --   [5] = { 'Class', ' ', 'Include' },
+          --   [6] = { 'Method', ' ', 'Function' },
+          --   [7] = { 'Property', ' ', '@property' },
+          --   [8] = { 'Field', ' ', '@field' },
+          --   [9] = { 'Constructor', ' ', '@constructor' },
+          --   [10] = { 'Enum', ' ', '@number' },
+          --   [11] = { 'Interface', ' ', 'Type' },
+          --   [12] = { 'Function', '󰊕', 'Function' },
+          --   [13] = { 'Variable', ' ', '@variable' },
+          --   [14] = { 'Constant', ' ', 'Constant' },
+          --   [15] = { 'String', '󰅳 ', 'String' },
+          --   [16] = { 'Number', '󰎠 ', 'Number' },
+          --   [17] = { 'Boolean', ' ', 'Boolean' },
+          --   [18] = { 'Array', '󰅨 ', 'Type' },
+          --   [19] = { 'Object', ' ', 'Type' },
+          --   [20] = { 'Key', ' ', 'Constant' },
+          --   [21] = { 'Null', '󰟢 ', 'Constant' },
+          --   [22] = { 'EnumMember', ' ', 'Number' },
+          --   [23] = { 'Struct', ' ', 'Type' },
+          --   [24] = { 'Event', ' ', 'Constant' },
+          --   [25] = { 'Operator', ' ', 'Operator' },
+          --   [26] = { 'TypeParameter', ' ', 'Type' },
+          --   -- ccls
+          --   [252] = { 'TypeAlias', ' ', 'Type' },
+          --   [253] = { 'Parameter', ' ', '@parameter' },
+          --   [254] = { 'StaticMethod', ' ', 'Function' },
+          --   [255] = { 'Macro', ' ', 'Macro' },
+          --   -- for completion sb microsoft!!!
+          --   [300] = { 'Text', '󰭷 ', 'String' },
+          --   [301] = { 'Snippet', ' ', '@variable' },
+          --   [302] = { 'Folder', ' ', 'Title' },
+          --   [303] = { 'Unit', '󰊱 ', 'Number' },
+          --   [304] = { 'Value', ' ', '@variable' },
+          -- }
         }
       })
     end,
