@@ -8,7 +8,7 @@
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 
-function contains(list, x)
+function Contains(list, x)
 	for _, v in pairs(list) do
 		if v == x then return true end
 	end
@@ -24,7 +24,13 @@ vim.opt.rtp:prepend(vim.g.config_path)
 require('setup')
 require('custom_filetype')
 
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", {
+  performance = {
+    rpt = {
+      paths = {vim.g.config_path}
+    }
+  }
+})
 
 require('themes')
 require('keymap')

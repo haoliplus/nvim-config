@@ -28,7 +28,7 @@ return {
       }
       require("nvim-web-devicons").set_icon {
         txt = {
-          icon = '', 
+          icon = '',
           color = '#6d8086',
           cterm_color = "65",
           name = "txt"

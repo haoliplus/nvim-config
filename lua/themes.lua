@@ -5,7 +5,7 @@ vim.cmd("syntax on")
 vim.opt.cursorcolumn = true
 vim.opt.cursorline = true
 
-vim.opt.background=dark
+vim.opt.background="dark"
 -- vim.fn.setenv("NVIM_TUI_ENABLE_TRUE_COLOR", 1)
 vim.env.NVIM_TUI_ENABLE_TRUE_COLOR = 1
 

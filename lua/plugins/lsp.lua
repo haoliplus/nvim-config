@@ -60,20 +60,14 @@ return  {
       local servers = {
         "clangd",
         "pyright",
-        -- "beautysh"
+        "lua_ls",
       -- "jedi_language_server",
       }
       local lsp_opts = {}
-      for _, server_name in pairs(servers) do
-        lsp_opts[server_name] = {
-          capabilities = capabilities,
-          flags = {
-            debounce_text_changes = 150,
-          }
-        }
-      end
 
       local util = require("lspconfig/util")
+
+      -- Clangd
 
       lsp_opts["clangd"] = {
         cmd = { "clangd", "--background-index", "--clang-tidy"},
@@ -82,6 +76,8 @@ return  {
           return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
         end,
       }
+
+      -- Pyright
 
       lsp_opts["pyright"] = {
         cmd = { "pyright-langserver", "--stdio"},
@@ -101,16 +97,9 @@ return  {
         single_file_support = true
       }
 
+      -- lua_ls
 
-      -- -- Loop through the servers listed above.
-      for _, server_name in pairs(servers) do
-        local opts = lsp_opts[server_name]
-        require('lspconfig')[server_name].setup(opts)
-      end
-
-
-      require'lspconfig'.lua_ls.setup {
-        capabilities = capabilities,
+      lsp_opts["lua_ls"] = {
         settings = {
           Lua = {
             runtime = {
@@ -131,8 +120,19 @@ return  {
               enable = false,
             },
           },
-        },
+        }
       }
+
+      -- -- Loop through the servers listed above.
+      for _, server_name in pairs(servers) do
+        local opts = lsp_opts[server_name]
+        opts["capabilities"] = capabilities
+        opts["flags"] = {
+            debounce_text_changes = 150,
+        }
+        require('lspconfig')[server_name].setup(opts)
+      end
+
     end
 }
 

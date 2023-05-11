@@ -5,7 +5,7 @@ return {-- status bar
       'mengelbrecht/lightline-bufferline',
       'akinsho/bufferline.nvim'
     },
-    setup = function()
+    init = function()
       vim.g.lightline = {
         colorscheme = 'one',
         active = {
@@ -31,14 +31,22 @@ return {-- status bar
       }
     end
   },
-  ---- show indent line
-  {'Yggdroot/indentLine',
-    setup = function()
-      -- Indent Line
-      vim.g.indentLine_bufNameExclude = {'_.*', 'NERD_tree.*', '*.wiki'}
-      vim.g.indentLine_fileTypeExclude = {'vimwiki'}
-      vim.g.indentLine_bufTypeExclude = {'help', 'terminal', 'vimwiki'}
-      vim.g.indentLine_color_term = 239
-    end
-  }
+  {
+    'glepnir/dashboard-nvim',
+    event = 'VimEnter',
+    config = function()
+      require('dashboard').setup {
+        config = {
+          packages = { enable = true }, -- show how many plugins neovim loaded
+          mru = { limit = 10, icon = '* ', label = 'Recent Files', },
+          footer = {"hello"}, -- footer
+          -- limit how many projects list, action when you press key or enter it will run this action.
+          -- action can be a functino type, e.g.
+          -- action = func(path) vim.cmd('Telescope find_files cwd=' .. path) end
+          project = { enable = true, limit = 8, icon = '- ', label = 'Recent Project' },
+        },
+      }
+    end,
+    dependencies = {'nvim-tree/nvim-web-devicons'}
+  },
 }

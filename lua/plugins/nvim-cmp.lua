@@ -9,7 +9,7 @@
 -- Setup nvim-cmp.
 return {
   'hrsh7th/nvim-cmp',
-  config = function() 
+  config = function()
     local cmp = require('cmp')
 
     cmp.setup({

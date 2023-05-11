@@ -5,7 +5,7 @@ return {
     branch = "main",
     event = "LspAttach",
     config = function()
-      local default = ""
+      local default = " "
       require("lspsaga").setup({
         ui = {
           kind = {

@@ -44,8 +44,6 @@ end
 
 -- -------------------------- vars for plugins ---------------------------------
 
-local plugin_conf_path = "$VIM_CONFIG_DIR/plugins"
-
 vim.g.LanguageClient_serverStderr = '/tmp/clangd.stderr'
 
 vim.g.username = vim.fn.getenv("NICKNAME")

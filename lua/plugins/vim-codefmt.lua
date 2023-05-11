@@ -9,9 +9,9 @@ return {
       vim.cmd('call glaive#Install()')
       -- FileType
       vim.cmd([[
-      autocmd FileType c,cpp,proto,javascript  let b:codefmt_formatter = 'clang-format'
-      autocmd FileType bzl let b:codefmt_formatter = 'buildifier'
-      autocmd FileType python let b:codefmt_formatter = 'black'
+        autocmd FileType c,cpp,proto,javascript  let b:codefmt_formatter = 'clang-format'
+        autocmd FileType bzl let b:codefmt_formatter = 'buildifier'
+        autocmd FileType python let b:codefmt_formatter = 'black'
       ]])
       -- Only format manually
       vim.cmd(
