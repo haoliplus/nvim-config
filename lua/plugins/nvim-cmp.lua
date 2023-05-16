@@ -9,6 +9,16 @@
 -- Setup nvim-cmp.
 return {
   'hrsh7th/nvim-cmp',
+  dependencies = {
+    {"quangnguyen30192/cmp-nvim-ultisnips",
+    config = function()
+      -- optional call to setup (see customization section)
+      require("cmp_nvim_ultisnips").setup{}
+    end},
+    {'SirVer/ultisnips'},
+    -- If you want to enable filetype detection based on treesitter:
+    -- requires = { "nvim-treesitter/nvim-treesitter" },
+  },
   config = function()
     local cmp = require('cmp')
 
@@ -46,7 +56,7 @@ return {
             },
           },
         },
-        { name = 'ultisnips' }, -- For ultisnips users.
+        { name = 'ultisnips', priority = 10 }, -- For ultisnips users.
       }, {
         { name = 'buffer' },
       })

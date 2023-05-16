@@ -15,9 +15,10 @@ return {
       })
       -- vim.keymap.set('n', '<F10>', ':Template ',  { remap = true})
       require("telescope").load_extension('find_template')
-    end},
-    -- Using jj to escape
-    {'jdhao/better-escape.vim',
+    end,
+  },
+  -- Using jj to escape
+  {'jdhao/better-escape.vim',
     init = function()
       vim.g.better_escape_shortcut = 'jj'
     end
@@ -27,7 +28,7 @@ return {
     'SirVer/ultisnips',
     init = function()
       -- UltiSnips
-      vim.g.UltiSnipsSnippetDirectories={"UltiSnips", "mysnips"}
+      vim.g.UltiSnipsSnippetDirectories={vim.g.config_path.."/UltiSnips", vim.g.config_path.."/mysnips"}
       vim.g.ultisnips_python_quoting_style = "double"
     end,
     config = function()
