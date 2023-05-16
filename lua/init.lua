@@ -24,6 +24,12 @@ vim.opt.rtp:prepend(vim.g.config_path)
 require('setup')
 require('custom_filetype')
 
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath .. "/lua/lazy/init.lua") then
+  print("lazy.nvim loading failed.")
+  return
+end
+
 require("lazy").setup("plugins", {
   performance = {
     rpt = {
