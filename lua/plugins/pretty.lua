@@ -22,13 +22,14 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     init = function()
+        -- vim.cmd([[highlight IndentBlanklineContextStart guisp=#00FF00 gui=italic cterm=italic]])
         vim.g.indent_blankline_filetype_exclude = {'help', 'help', 'terminal', 'vimwiki', 'dashboard'}
     end,
     config = function()
       require("indent_blankline").setup {
           -- for example, context is off by default, use this to turn it on
           show_current_context = true,
-          show_current_context_start = true,
+          show_current_context_start = false,
           show_end_of_line = true,
       }
     end
