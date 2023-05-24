@@ -28,6 +28,7 @@ return {
     'SirVer/ultisnips',
     init = function()
       -- UltiSnips
+      vim.g.UltiSnipsExpandTrigger = "<F7>"  -- I just want my tab back
       vim.g.UltiSnipsSnippetDirectories={vim.g.config_path.."/UltiSnips", vim.g.config_path.."/mysnips"}
       vim.g.ultisnips_python_quoting_style = "double"
     end,
