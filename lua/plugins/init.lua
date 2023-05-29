@@ -63,6 +63,7 @@ return {
   ---- most recently used file
   {
     'vim-scripts/mru.vim',
+    enabled = false,
     config = function ()
       -- """"""""""""""""""""""""""""""
       -- " => MRU plugin

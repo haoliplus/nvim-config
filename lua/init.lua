@@ -21,6 +21,13 @@ vim.g.config_path=vim.fn.getenv("VIM_CONFIG_DIR")
 vim.g.plug_dir=vim.fn.getenv("VIMPLUGDIR")
 vim.opt.rtp:prepend(vim.g.config_path)
 
+if vim.fn.isdirectory(vim.g.config_path) == 0 then
+  vim.g.config_path=vim.g.home_path.."/.config/nvim"
+end
+if vim.fn.isdirectory(vim.g.wiki_path) == 0 then
+  vim.g.wiki_path=vim.g.home_path.."/vimwiki"
+end
+
 require('setup')
 require('custom_filetype')
 
