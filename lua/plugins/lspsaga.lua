@@ -8,16 +8,16 @@ return {
       local default = " "
       require("lspsaga").setup({
         ui = {
-          kind = {
-            ["String"] = { default, 'String' },
-            ["Number"] = { default, 'Number' },
-            ["Array"] = { default, 'Type' },
-            ["Null"] = { default, 'Constant' },
-            ["Text"] = { default, 'String' },
-            ["Function"] = { default, 'Function' },
-            ["Unit"] = { default, 'Number' },
-            ["Folder"] = { " ", "@comment" },
-          }
+          -- kind = {
+          --   ["String"] = { default, 'String' },
+          --   ["Number"] = { default, 'Number' },
+          --   ["Array"] = { default, 'Type' },
+          --   ["Null"] = { default, 'Constant' },
+          --   ["Text"] = { default, 'String' },
+          --   ["Function"] = { default, 'Function' },
+          --   ["Unit"] = { default, 'Number' },
+          --   ["Folder"] = { " ", "@comment" },
+          -- }
           -- kind = {
           --   [1] = { 'File', ' ', 'Tag' },
           --   [2] = { 'Module', ' ', 'Exception' },
