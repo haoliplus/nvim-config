@@ -23,20 +23,56 @@ return {
       vim.g.better_escape_shortcut = 'jj'
     end
   },
-  ---- For ultisnips users.
   {
-    'SirVer/ultisnips',
-    init = function()
-      -- UltiSnips
-      vim.g.UltiSnipsExpandTrigger = "<F7>"  -- I just want my tab back
-      vim.g.UltiSnipsSnippetDirectories={vim.g.config_path.."/UltiSnips", vim.g.config_path.."/mysnips"}
-      vim.g.ultisnips_python_quoting_style = "double"
-    end,
+    "L3MON4D3/LuaSnip",
+    -- follow latest release.
+    version = "1.2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+    -- install jsregexp (optional!).
+    -- sudo apt install libluajit-5.1-dev
+    build = "make install_jsregexp",
+    dependencies = { "rafamadriz/friendly-snippets" },
     config = function()
-      vim.cmd(
-      [[
-      autocmd BufNewFile,BufRead python_my.snippets set ft=python
-      ]])
+      -- press <Tab> to expand or jump in a snippet. These can also be mapped separately
+      -- via <Plug>luasnip-expand-snippet and <Plug>luasnip-jump-next.
+      vim.cmd([[imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' ]])
+      -- -1 for jumping backwards.
+      vim.cmd([[inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>]])
+
+      vim.cmd([[snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>]])
+      vim.cmd([[snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>]])
+
+      -- For changing choices in choiceNodes (not strictly necessary for a basic setup).
+      vim.cmd([[imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>']])
+      vim.cmd([[smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>']])
+      -- require("luasnip.loaders.from_vscode").lazy_load()
+      require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./mysnips/" } })
+      require("luasnip.loaders.from_vscode").lazy_load()
+      local ls = require "luasnip"
+      local s = ls.snippet
+      local t = ls.text_node
+      local i = ls.insert_node
+      ls.add_snippets("all", {
+        s("ternary", {
+            -- equivalent to "${1:cond} ? ${2:then} : ${3:else}"
+            i(1, "cosssssnd"), t(" ? "), i(2, "then"), t(" : "), i(3, "else")
+        })
+    })
     end
   },
+  ---- For ultisnips users.
+  -- {
+  --   'SirVer/ultisnips',
+  --   init = function()
+  --     -- UltiSnips
+  --     vim.g.UltiSnipsExpandTrigger = "<F7>"  -- I just want my tab back
+  --     vim.g.UltiSnipsSnippetDirectories={vim.g.config_path.."/UltiSnips", vim.g.config_path.."/mysnips"}
+  --     vim.g.ultisnips_python_quoting_style = "double"
+  --   end,
+  --   config = function()
+  --     vim.cmd(
+  --     [[
+  --     autocmd BufNewFile,BufRead python_my.snippets set ft=python
+  --     ]])
+  --   end
+  -- },
 }

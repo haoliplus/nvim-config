@@ -10,14 +10,10 @@
 return {
   'hrsh7th/nvim-cmp',
   dependencies = {
-    {"quangnguyen30192/cmp-nvim-ultisnips",
-    config = function()
-      -- optional call to setup (see customization section)
-      require("cmp_nvim_ultisnips").setup{}
-    end},
-    {'SirVer/ultisnips'},
     -- If you want to enable filetype detection based on treesitter:
     -- requires = { "nvim-treesitter/nvim-treesitter" },
+    {"L3MON4D3/LuaSnip"},
+    {'saadparwaiz1/cmp_luasnip'}
   },
   config = function()
     local cmp = require('cmp')
@@ -26,7 +22,8 @@ return {
       snippet = {
         -- REQUIRED - you must specify a snippet engine
         expand = function(args)
-          vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+          -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+          require('luasnip').lsp_expand(args.body)
         end,
       },
       -- i: insert
@@ -56,7 +53,7 @@ return {
             },
           },
         },
-        { name = 'ultisnips', priority = 10 }, -- For ultisnips users.
+        { name = 'luasnip', priority = 10 }, -- For ultisnips users.
       }, {
         { name = 'buffer' },
       })
