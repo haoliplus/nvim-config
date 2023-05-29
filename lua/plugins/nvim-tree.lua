@@ -36,7 +36,7 @@
 -- `bmv`             bulk_move           Move all bookmarked nodes into specified location
 return {
     'nvim-tree/nvim-tree.lua',
-    enabled = true,
+    enabled = false,
     dependencies = {'nvim-tree/nvim-web-devicons'},
     config = function()
       vim.keymap.set('n', '<F5>', ':NvimTreeFindFileToggle<CR>', { noremap = true, silent = true })
