@@ -29,7 +29,8 @@ return {
     version = "1.2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
     -- install jsregexp (optional!).
     -- sudo apt install libluajit-5.1-dev
-    build = "make install_jsregexp",
+    -- this sometimes cause fatal error
+    -- build = "make install_jsregexp",
     dependencies = { "rafamadriz/friendly-snippets" },
     config = function()
       -- press <Tab> to expand or jump in a snippet. These can also be mapped separately
