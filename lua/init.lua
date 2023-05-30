@@ -19,14 +19,11 @@ vim.g.home_path=vim.fn.getenv("HOME")
 vim.g.wiki_path=vim.fn.getenv("WIKI_PATH")
 vim.g.config_path=vim.fn.getenv("VIM_CONFIG_DIR")
 vim.g.plug_dir=vim.fn.getenv("VIMPLUGDIR")
-vim.opt.rtp:prepend(vim.g.config_path)
-
+vim.g.wiki_path=vim.g.home_path.."/vimwiki"
 if vim.fn.isdirectory(vim.g.config_path) == 0 then
   vim.g.config_path=vim.g.home_path.."/.config/nvim"
 end
-if vim.fn.isdirectory(vim.g.wiki_path) == 0 then
-  vim.g.wiki_path=vim.g.home_path.."/vimwiki"
-end
+vim.opt.rtp:prepend(vim.g.config_path)
 
 require('setup')
 require('custom_filetype')
@@ -45,15 +42,17 @@ require("lazy").setup("plugins", {
   }
 })
 
-require('themes')
-require('keymap')
-require('autocommands')
+local function call_requires()
+  require('themes')
+  require('keymap')
+  require('autocommands')
+end
 
--- local status, ret = pcall(call_requires)
+local status, ret = pcall(call_requires)
 
--- if (not status) then
---   print("Failed to init")
---   print(ret)
---   return
--- end
+if (not status) then
+  print("Failed to init")
+  print(ret)
+  return
+end
 
