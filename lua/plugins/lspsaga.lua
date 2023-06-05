@@ -5,8 +5,15 @@ return {
     branch = "main",
     event = "LspAttach",
     config = function()
-      local default = " "
+      -- local default = " "
       require("lspsaga").setup({
+        lightbulb = {
+          enable = false,
+          enable_in_insert = true,
+          sign = true,
+          sign_priority = 40,
+          virtual_text = true,
+        },
         ui = {
           -- kind = {
           --   ["String"] = { default, 'String' },
