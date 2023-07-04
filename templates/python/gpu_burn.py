@@ -37,3 +37,9 @@ time.sleep(args.delay)
 x = torch.linspace(0, 4, 16 * 1024 ** 2).cuda()
 
 timeout = time.time() + args.runtime
+
+logging.info(f"Running GPU stress test loop [{args.runtime}s]")
+while True:
+    x = x * (1.0 - x)
+    if time.time() > timeout:
+        sys.exit(os.EX_OK)
