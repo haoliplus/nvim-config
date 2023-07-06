@@ -6,5 +6,19 @@
       "line2"
     ],
     "description": "HHHHHHH"
+  },
+  "jsoncls": {
+    "prefix": "custom_json_cls",
+    "body": [
+       "class CustomEncoder(json.JSONEncoder):",
+       "    def default(self, obj):",
+       "        try:",
+       "            ret = json.JSONEncoder.default(self, obj)",
+       "            return ret",
+       "        except Exception:",
+       "            return str(obj)",
+       "# json.dumps(data, cls=CustomEncoder)"
+
+    ]
   }
 }
