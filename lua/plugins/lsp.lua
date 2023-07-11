@@ -61,6 +61,7 @@ return  {
         "clangd",
         "pyright",
         "lua_ls",
+        "gopls",
       -- "jedi_language_server",
       }
       local lsp_opts = {}
@@ -122,6 +123,7 @@ return  {
           },
         }
       }
+      lsp_opts["gopls"] = {}
 
       -- -- Loop through the servers listed above.
       for _, server_name in pairs(servers) do
