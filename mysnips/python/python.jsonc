@@ -7,6 +7,12 @@
     ],
     "description": "HHHHHHH"
   },
+  "json.dumps": {
+    "prefix": "json.dumps",
+    "body": [
+       "json.dumps(data, indent=2, default=str)"
+    ]
+  },
   "jsoncls": {
     "prefix": "custom_json_cls",
     "body": [

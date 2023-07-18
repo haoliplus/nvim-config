@@ -34,7 +34,11 @@ return {
   {'skywind3000/asyncrun.vim'},
   -- git
   {'tpope/vim-fugitive'},
-  {'airblade/vim-gitgutter'},
+  {'airblade/vim-gitgutter',
+    init = function()
+      vim.g.gitgutter_enabled = 0
+    end
+  },
   {'junegunn/fzf.vim'},
   -- fuzzy search using c-p
   -- c-b show buffer
@@ -138,4 +142,5 @@ return {
     "iamcco/markdown-preview.nvim",
     build = function() vim.fn["mkdp#util#install"]() end,
   },
+  {"sindrets/diffview.nvim"}
 }

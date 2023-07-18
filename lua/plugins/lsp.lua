@@ -86,20 +86,31 @@ return  {
           return util.root_pattern(".git", "setup.py",  "setup.cfg",
             "pyproject.toml", "requirements.txt")(fname) or util.path.dirname(fname)
         end,
+        capabilities = (function()
+            local py_capabilities = vim.lsp.protocol.make_client_capabilities()
+            py_capabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
+            return py_capabilities
+        end)(),
         settings = {
           python = {
             analysis = {
               autoSearchPaths = true,
+              typeCheckingMode = "basic",
               diagnosticMode = "workspace",
-              useLibraryCodeForTypes = false -- this is for avoiding lib member access error like cv.imread
+              useLibraryCodeForTypes = false, -- this is for avoiding lib member access error like cv.imread
+              diagnosticSeverityOverrides = {
+                    reportUnusedImport = "none",
+                    reportUnusedClass = "none",
+                    reportUnusedFunction = "none",
+                    reportUnusedVariable = "none",
+              }
             }
           }
         },
         single_file_support = true
-      }
+      } -- end pyright
 
       -- lua_ls
-
       lsp_opts["lua_ls"] = {
         settings = {
           Lua = {
@@ -128,7 +139,9 @@ return  {
       -- -- Loop through the servers listed above.
       for _, server_name in pairs(servers) do
         local opts = lsp_opts[server_name]
-        opts["capabilities"] = capabilities
+        if (opts["capabilities"] == nil) then
+          opts["capabilities"] = capabilities
+        end
         opts["flags"] = {
             debounce_text_changes = 150,
         }
