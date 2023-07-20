@@ -38,6 +38,11 @@ return {{
     enabled=true,
     opts = {
         -- Set the filetypes which barbar will offset itself for
+        animation = false,
+        tabpages = false,
+        icons = {
+          buffer_index= true,
+        },
         sidebar_filetypes = {
           -- Use the default values: {event = 'BufWinLeave', text = nil}
           NvimTree = true,

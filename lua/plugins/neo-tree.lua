@@ -10,8 +10,9 @@ return {
       end,
       desc = "Explorer NeoTree (cwd)",
     },
+    {'<F5>', '<leader>fe', desc = "Explorer NeoTree (root dir)", remap = true },
     { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (root dir)", remap = true },
-    { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
+    { "<leader>E", "<leader>fe", desc = "Explorer NeoTree (cwd)", remap = true },
   },
   enabled = true,
   dependencies = {
@@ -105,7 +106,6 @@ return {
   },
   -- config = function()
   config = function(_, opts)
-    vim.keymap.set('n', '<F5>', ':NeoTreeShowToggle<CR>', { noremap = true, silent = true })
     -- Unless you are still migrating, remove the deprecated commands from v1.x
     vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
