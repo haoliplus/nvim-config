@@ -1,6 +1,7 @@
 return {{
     "akinsho/bufferline.nvim",
-    enabled=false,
+    enabled=true,
+    dependencies = 'nvim-tree/nvim-web-devicons',
     keys = {
       { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
       { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
@@ -30,12 +31,28 @@ return {{
       },
     },
     config = function (_, opts)
+      local map = vim.api.nvim_set_keymap
+      local keymap_opts = { noremap = true, silent = true }
+      -- Move to previous/next
+      map('n', '<A-,>', '<Cmd>BufferLineMovePrev<CR>', keymap_opts)
+      map('n', '<A-.>', '<Cmd>BufferLineGoToBuffer<CR>', keymap_opts)
+      map('n', '<Leader>1', '<Cmd>BufferLineGoToBuffer 1<CR>', keymap_opts)
+      map('n', '<Leader>2', '<Cmd>BufferLineGoToBuffer 2<CR>', keymap_opts)
+      map('n', '<Leader>3', '<Cmd>BufferLineGoToBuffer 3<CR>', keymap_opts)
+      map('n', '<Leader>4', '<Cmd>BufferLineGoToBuffer 4<CR>', keymap_opts)
+      map('n', '<Leader>5', '<Cmd>BufferLineGoToBuffer 5<CR>', keymap_opts)
+      map('n', '<Leader>6', '<Cmd>BufferLineGoToBuffer 6<CR>', keymap_opts)
+      map('n', '<Leader>7', '<Cmd>BufferLineGoToBuffer 7<CR>', keymap_opts)
+      map('n', '<Leader>8', '<Cmd>BufferLineGoToBuffer 8<CR>', keymap_opts)
+      map('n', '<Leader>9', '<Cmd>BufferLineGoToBuffer 9<CR>', keymap_opts)
+      -- Close buffer
+      map('n', '<Leader>c', '<Cmd>BufferLinePickClose<CR>', keymap_opts)
       require("bufferline").setup(opts)
     end
   },
   {'romgrk/barbar.nvim',
     dependencies = 'nvim-tree/nvim-web-devicons',
-    enabled=true,
+    enabled=false,
     opts = {
         -- Set the filetypes which barbar will offset itself for
         animation = false,
