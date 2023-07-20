@@ -103,6 +103,8 @@ return  {
                     reportUnusedClass = "none",
                     reportUnusedFunction = "none",
                     reportUnusedVariable = "none",
+                    reportOptionalMemberAccess = "none",
+                    reportUnknownMemberType = "none"
               }
             }
           }
