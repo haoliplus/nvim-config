@@ -59,7 +59,8 @@ return  {
 
       local servers = {
         "clangd",
-        "pyright",
+        -- "pyright",
+        "ruff_lsp",
         "lua_ls",
         "gopls",
       -- "jedi_language_server",
@@ -76,6 +77,16 @@ return  {
         root_dir = function(fname)
           return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
         end,
+      }
+      -- ruff_lsp
+      
+      lsp_opts["ruff_lsp"] = {
+        init_options = {
+          settings = {
+            -- Any extra CLI arguments for `ruff` go here.
+            args = {},
+          }
+        }
       }
 
       -- Pyright
