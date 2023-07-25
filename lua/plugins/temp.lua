@@ -12,8 +12,15 @@ return {
         providers = { "lsp" },
       },
     },
+    init = function()
+    end,
     config = function(_, opts)
       require("illuminate").configure(opts)
+      -- illuminatedWord
+      -- bold underline undercurl
+      -- underdouble underdotted
+      -- underdashed inverse italic
+      -- standout nocombine strikethrough
 
       local function map(key, dir, buffer)
         vim.keymap.set("n", key, function()

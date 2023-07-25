@@ -59,7 +59,7 @@ return  {
 
       local servers = {
         "clangd",
-        -- "pyright",
+        "pyright",
         "ruff_lsp",
         "lua_ls",
         "gopls",
