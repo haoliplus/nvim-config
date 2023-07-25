@@ -26,5 +26,18 @@
        "# json.dumps(data, cls=CustomEncoder)"
 
     ]
+  },
+  "run_scripts": {
+      "prefix": "run_scripts":,
+      "body": [
+          "import subprocess",
+          "proc = subprocess.Popen(['bash', '-c', script_str],",
+              "stdout=None, stderr=None, stdin=subprocess.PIPE", ")",
+          "stdout, stderr = proc.communicate()",
+          "if proc.returncode:",
+          "    raise ScriptException(proc.returncode, stdout, stderr, script_str)"
+
+
+      ]
   }
 }
