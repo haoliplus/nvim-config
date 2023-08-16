@@ -83,6 +83,7 @@ return  {
       lsp_opts["ruff_lsp"] = {
         init_options = {
           settings = {
+            path = "ruff-lsp",
             -- Any extra CLI arguments for `ruff` go here.
             args = {},
           }

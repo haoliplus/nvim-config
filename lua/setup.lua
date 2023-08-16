@@ -6,6 +6,7 @@ vim.g.is_linux = (vim.fn.has('unix') == 1 and vim.fn.has('macunix') == 0)
 vim.g.is_mac = vim.fn.has('macunix') == 1
 vim.g.logging_level = 'info'
 vim.g.is_bash=1
+vim.g.conceallevel=0
 
 -- {{ Builtin variables
 -- Disable Python2 support
@@ -81,6 +82,8 @@ vim.opt.expandtab = true
 vim.opt.mouse = ""
 
 vim.opt.updatetime = 300
+
+vim.opt.conceallevel=0
 
 -- """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 -- => Files, backups and undo

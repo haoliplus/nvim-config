@@ -1,6 +1,7 @@
 
 return {
     'haoliplus/vimwiki',
+    enabled=false,
     config = function()
       vim.g.vimwiki_list = {
         {
