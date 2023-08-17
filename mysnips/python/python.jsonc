@@ -8,7 +8,7 @@
     "description": "HHHHHHH"
   },
   "json.dumps": {
-    "prefix": "json.dumps",
+    "prefix": "jsondumps",
     "body": [
        "json.dumps(data, indent=2, default=str)"
     ]
@@ -39,5 +39,12 @@
 
 
       ]
+  },
+  "aaa": {
+    "prefix": "time",
+    "body": [
+      "datetime.strptime(ts, \"%Y-%m-%dT%H:%M:%SZ\")"
+    ],
+    "description": "parse time str"
   }
 }
