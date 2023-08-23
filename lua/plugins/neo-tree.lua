@@ -4,15 +4,15 @@ return {
   cmd = "Neotree",
   keys = {
     {
-      "<leader>fe",
+      "<F5>",
       function()
-        require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
+        require("neo-tree.command").execute({ toggle = true, position=left, dir = vim.loop.cwd() })
       end,
       desc = "Explorer NeoTree (cwd)",
     },
-    {'<F5>', ':NeoTreeFloatToggle<CR>', desc = "Explorer NeoTree (root dir)", remap = true },
-    { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (root dir)", remap = true },
-    { "<leader>E", "<leader>fe", desc = "Explorer NeoTree (cwd)", remap = true },
+    { "<leader>fe", ':NeoTreeFloatToggle<CR>', desc = "Explorer NeoTree (root dir)", remap = true },
+    { "<leader>e", ":Neotree toggle left<CR>", desc = "Explorer NeoTree (root dir)", remap = true },
+    { "<leader>E", ":Neotree toggle float git_status<CR>", desc = "Explorer NeoTree (cwd)", remap = true },
   },
   enabled = true,
   dependencies = {
