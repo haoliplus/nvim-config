@@ -10,7 +10,7 @@ return {
       end,
       desc = "Explorer NeoTree (cwd)",
     },
-    {'<F5>', '<leader>fe', desc = "Explorer NeoTree (root dir)", remap = true },
+    {'<F5>', ':NeoTreeFloatToggle<CR>', desc = "Explorer NeoTree (root dir)", remap = true },
     { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (root dir)", remap = true },
     { "<leader>E", "<leader>fe", desc = "Explorer NeoTree (cwd)", remap = true },
   },
