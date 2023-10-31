@@ -71,13 +71,24 @@ return  {
 
       -- Clangd
 
-      lsp_opts["clangd"] = {
-        cmd = { "clangd", "--background-index", "--clang-tidy"},
-        filetypes = { "c", "cpp", "cc", "h"},
-        root_dir = function(fname)
-          return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
-        end,
-      }
+      if vim.fn.hostname() == "in_dev_docker" then 
+        -- do thing
+        lsp_opts["clangd"] = {
+          cmd = { "/usr/bin/clangd", "--background-index", "--clang-tidy"},
+          filetypes = { "c", "cpp", "cc", "h"},
+          root_dir = function(fname)
+            return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
+          end,
+        }
+      else
+        lsp_opts["clangd"] = {
+          cmd = { "clangd", "--background-index", "--clang-tidy"},
+          filetypes = { "c", "cpp", "cc", "h"},
+          root_dir = function(fname)
+            return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
+          end,
+        }
+      end
       -- ruff_lsp
       
       lsp_opts["ruff_lsp"] = {
