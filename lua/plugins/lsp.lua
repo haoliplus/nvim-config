@@ -81,8 +81,27 @@ return  {
           end,
         }
       else
+        -- ${XDG_CONFIG_HOME}/.config/clangd/config.yaml
+        -- https://github.com/clangd/clangd/issues/363
+        -- CompileFlags:
+        --   Add: [
+        --     # -I=/usr/include/c++/11
+        --       -isystem,
+        --       /usr/include/c++/11,
+        --       -isystem,
+        --       /usr/include/c++/11/backward,
+        --       -isystem,
+        --       /usr/local/include,
+        --       -isystem,
+        --       /usr/include,
+        --       -isystem,
+        --       /usr/include/x86_64-linux-gnu/c++/11,
+        --   ]
+
+        -- Using `CLANGD_FLAGS="--query-driver=/usr/bin/c++" clangd  --enable-config --check=main.cpp` to debug
         lsp_opts["clangd"] = {
-          cmd = { "clangd", "--background-index", "--clang-tidy"},
+          -- cmd = { "clangd", "--background-index", "--clang-tidy"},
+          cmd = { "clangd", "--background-index", "--offset-encoding=utf-16"},
           filetypes = { "c", "cpp", "cc", "h"},
           root_dir = function(fname)
             return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
