@@ -60,25 +60,25 @@ return {
       })
     end
   },
-  {
-    'williamboman/mason-lspconfig.nvim',
-    dependencies = {
-      'williamboman/mason.nvim',
-    },
-    config = function()
-      require("mason-lspconfig").setup{
-        ensure_installed = { "lua_ls", "rust_analyzer", "clangd", "pyright"}
-      }
-    end
-  },
-  ---- language server protocol
-  {
-    'neovim/nvim-lspconfig',
-    dependencies = {
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
-    },
-  },
+  -- {
+  --   'williamboman/mason-lspconfig.nvim',
+  --   dependencies = {
+  --     'williamboman/mason.nvim',
+  --   },
+  --   config = function()
+  --     require("mason-lspconfig").setup{
+  --       ensure_installed = { "lua_ls", "rust_analyzer", "clangd", "pyright", "nginx-language-server", "typescript-language-server"}
+  --     }
+  --   end
+  -- },
+  -- ---- language server protocol
+  -- {
+  --   'neovim/nvim-lspconfig',
+  --   dependencies = {
+  --     'williamboman/mason.nvim',
+  --     'williamboman/mason-lspconfig.nvim',
+  --   },
+  -- },
 
   ---- most recently used file
   {

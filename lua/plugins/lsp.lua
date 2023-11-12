@@ -6,192 +6,210 @@
 -- Distributed under terms of the MIT license.
 --
 return  {
-    'neovim/nvim-lspconfig',
+  {
+    'williamboman/mason-lspconfig.nvim',
     dependencies = {
       'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
     },
     config = function()
-      -- require('plugins.utils.lsp_callbacks')
-      -- print(vim.inspect(vim.api.nvim_list_runtime_paths()))
-      require('plugins.utils.lsp_callbacks')
-
-      -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-      vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
-      vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-      vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-      vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
-
-      -- Use LspAttach autocommand to only map the following keys
-      -- after the language server attaches to the current buffer
-      vim.api.nvim_create_autocmd('LspAttach', {
-        group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-        callback = function(ev)
-          -- Enable completion triggered by <c-x><c-o>
-          vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-          -- Buffer local mappings.
-          -- See `:help vim.lsp.*` for documentation on any of the below functions
-          local opts = { buffer = ev.buf }
-          vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-          vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-          vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-          vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-          vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
-          vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
-          vim.keymap.set('n', '<space>wl', function()
-            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-          end, opts)
-          vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-          vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-          vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
-          vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-          vim.keymap.set('n', '<space>f', function()
-            vim.lsp.buf.format { async = true }
-          end, opts)
-        end,
-      })
-
-
-      local capabilities = require('cmp_nvim_lsp').default_capabilities(
-        vim.lsp.protocol.make_client_capabilities())
-
-      local servers = {
-        "clangd",
-        "pyright",
-        "ruff_lsp",
-        "lua_ls",
-        "gopls",
-      -- "jedi_language_server",
+      require("mason-lspconfig").setup{
+        ensure_installed = { "lua_ls", "rust_analyzer", "clangd", "pyright", "tsserver", "bashls"}
       }
-      local lsp_opts = {}
+    end
+  },
+    {
+      'neovim/nvim-lspconfig',
+      dependencies = {
+        'williamboman/mason.nvim',
+        'williamboman/mason-lspconfig.nvim',
+      },
+      config = function()
+        -- require('plugins.utils.lsp_callbacks')
+        -- print(vim.inspect(vim.api.nvim_list_runtime_paths()))
+        require('plugins.utils.lsp_callbacks')
 
-      local util = require("lspconfig/util")
+        -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+        vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+        vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+        vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+        vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
-      -- Clangd
+        -- Use LspAttach autocommand to only map the following keys
+        -- after the language server attaches to the current buffer
+        vim.api.nvim_create_autocmd('LspAttach', {
+          group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+          callback = function(ev)
+            -- Enable completion triggered by <c-x><c-o>
+            vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-      if vim.fn.hostname() == "in_dev_docker" then 
-        -- do thing
-        lsp_opts["clangd"] = {
-          cmd = { "/usr/bin/clangd", "--background-index", "--clang-tidy"},
-          filetypes = { "c", "cpp", "cc", "h"},
-          root_dir = function(fname)
-            return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
+            -- Buffer local mappings.
+            -- See `:help vim.lsp.*` for documentation on any of the below functions
+            local opts = { buffer = ev.buf }
+            vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+            vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+            vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+            vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+            vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+            vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+            vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+            vim.keymap.set('n', '<space>wl', function()
+              print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+            end, opts)
+            vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+            vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+            vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
+            vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+            vim.keymap.set('n', '<space>f', function()
+              vim.lsp.buf.format { async = true }
+            end, opts)
           end,
-        }
-      else
-        -- ${XDG_CONFIG_HOME}/.config/clangd/config.yaml
-        -- https://github.com/clangd/clangd/issues/363
-        -- CompileFlags:
-        --   Add: [
-        --     # -I=/usr/include/c++/11
-        --       -isystem,
-        --       /usr/include/c++/11,
-        --       -isystem,
-        --       /usr/include/c++/11/backward,
-        --       -isystem,
-        --       /usr/local/include,
-        --       -isystem,
-        --       /usr/include,
-        --       -isystem,
-        --       /usr/include/x86_64-linux-gnu/c++/11,
-        --   ]
+        })
 
-        -- Using `CLANGD_FLAGS="--query-driver=/usr/bin/c++" clangd  --enable-config --check=main.cpp` to debug
-        lsp_opts["clangd"] = {
-          -- cmd = { "clangd", "--background-index", "--clang-tidy"},
-          cmd = { "clangd", "--background-index", "--offset-encoding=utf-16"},
-          filetypes = { "c", "cpp", "cc", "h"},
-          root_dir = function(fname)
-            return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
-          end,
+
+        local capabilities = require('cmp_nvim_lsp').default_capabilities(
+          vim.lsp.protocol.make_client_capabilities())
+
+        local servers = {
+          "clangd",
+          "pyright",
+          "ruff_lsp",
+          "lua_ls",
+          "gopls",
+          "tsserver",
+          "bashls"
+        -- "jedi_language_server",
         }
-      end
-      -- ruff_lsp
-      
-      lsp_opts["ruff_lsp"] = {
-        init_options = {
-          settings = {
-            path = "ruff-lsp",
-            -- Any extra CLI arguments for `ruff` go here.
-            args = {},
+        local lsp_opts = {}
+
+        local util = require("lspconfig/util")
+
+        -- Clangd
+
+        if vim.fn.hostname() == "in_dev_docker" then
+          -- do thing
+          lsp_opts["clangd"] = {
+            cmd = { "/usr/bin/clangd", "--background-index", "--clang-tidy"},
+            filetypes = { "c", "cpp", "cc", "h"},
+            root_dir = function(fname)
+              return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
+            end,
           }
-        }
-      }
+        else
+          -- ${XDG_CONFIG_HOME}/.config/clangd/config.yaml
+          -- https://github.com/clangd/clangd/issues/363
+          -- CompileFlags:
+          --   Add: [
+          --     # -I=/usr/include/c++/11
+          --       -isystem,
+          --       /usr/include/c++/11,
+          --       -isystem,
+          --       /usr/include/c++/11/backward,
+          --       -isystem,
+          --       /usr/local/include,
+          --       -isystem,
+          --       /usr/include,
+          --       -isystem,
+          --       /usr/include/x86_64-linux-gnu/c++/11,
+          --   ]
 
-      -- Pyright
+          -- Using `CLANGD_FLAGS="--query-driver=/usr/bin/c++" clangd  --enable-config --check=main.cpp` to debug
+          lsp_opts["clangd"] = {
+            -- cmd = { "clangd", "--background-index", "--clang-tidy"},
+            cmd = { "clangd", "--background-index", "--offset-encoding=utf-16"},
+            filetypes = { "c", "cpp", "cc", "h"},
+            root_dir = function(fname)
+              return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
+            end,
+          }
+        end
+        -- ruff_lsp
 
-      lsp_opts["pyright"] = {
-        cmd = { "pyright-langserver", "--stdio"},
-        root_dir = function(fname)
-          return util.root_pattern(".git", "setup.py",  "setup.cfg",
-            "pyproject.toml", "requirements.txt")(fname) or util.path.dirname(fname)
-        end,
-        capabilities = (function()
-            local py_capabilities = vim.lsp.protocol.make_client_capabilities()
-            py_capabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
-            return py_capabilities
-        end)(),
-        settings = {
-          python = {
-            analysis = {
-              autoSearchPaths = true,
-              typeCheckingMode = "basic",
-              diagnosticMode = "workspace",
-              useLibraryCodeForTypes = false, -- this is for avoiding lib member access error like cv.imread
-              diagnosticSeverityOverrides = {
-                    reportUnusedImport = "none",
-                    reportUnusedClass = "none",
-                    reportUnusedFunction = "none",
-                    reportUnusedVariable = "none",
-                    reportOptionalMemberAccess = "none",
-                    reportUnknownMemberType = "none"
-              }
+        lsp_opts["ruff_lsp"] = {
+          init_options = {
+            settings = {
+              path = "ruff-lsp",
+              -- Any extra CLI arguments for `ruff` go here.
+              args = {},
             }
           }
-        },
-        single_file_support = true
-      } -- end pyright
+        }
 
-      -- lua_ls
-      lsp_opts["lua_ls"] = {
-        settings = {
-          Lua = {
-            runtime = {
-              -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-              version = 'LuaJIT',
-            },
-            diagnostics = {
-              -- Get the language server to recognize the `vim` global
-              globals = {'vim'},
-            },
-            workspace = {
-              -- Make the server aware of Neovim runtime files
-              library = vim.api.nvim_get_runtime_file("", true),
-              checkThirdParty = false, -- THIS IS THE IMPORTANT LINE TO ADD
-            },
-            -- Do not send telemetry data containing a randomized but unique identifier
-            telemetry = {
-              enable = false,
-            },
+        -- Pyright
+
+        lsp_opts["pyright"] = {
+          cmd = { "pyright-langserver", "--stdio"},
+          root_dir = function(fname)
+            return util.root_pattern(".git", "setup.py",  "setup.cfg",
+              "pyproject.toml", "requirements.txt")(fname) or util.path.dirname(fname)
+          end,
+          capabilities = (function()
+              local py_capabilities = vim.lsp.protocol.make_client_capabilities()
+              py_capabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
+              return py_capabilities
+          end)(),
+          settings = {
+            python = {
+              analysis = {
+                autoSearchPaths = true,
+                typeCheckingMode = "basic",
+                diagnosticMode = "workspace",
+                useLibraryCodeForTypes = false, -- this is for avoiding lib member access error like cv.imread
+                diagnosticSeverityOverrides = {
+                      reportUnusedImport = "none",
+                      reportUnusedClass = "none",
+                      reportUnusedFunction = "none",
+                      reportUnusedVariable = "none",
+                      reportOptionalMemberAccess = "none",
+                      reportUnknownMemberType = "none"
+                }
+              }
+            }
           },
-        }
-      }
-      lsp_opts["gopls"] = {}
+          single_file_support = true
+        } -- end pyright
 
-      -- -- Loop through the servers listed above.
-      for _, server_name in pairs(servers) do
-        local opts = lsp_opts[server_name]
-        if (opts["capabilities"] == nil) then
-          opts["capabilities"] = capabilities
+        -- lua_ls
+        lsp_opts["lua_ls"] = {
+          settings = {
+            Lua = {
+              runtime = {
+                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                version = 'LuaJIT',
+              },
+              diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = {'vim'},
+              },
+              workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = vim.api.nvim_get_runtime_file("", true),
+                checkThirdParty = false, -- THIS IS THE IMPORTANT LINE TO ADD
+              },
+              -- Do not send telemetry data containing a randomized but unique identifier
+              telemetry = {
+                enable = false,
+              },
+            },
+          }
+        }
+        lsp_opts["gopls"] = {}
+
+        -- -- Loop through the servers listed above.
+        for _, server_name in pairs(servers) do
+          if (lsp_opts[server_name] == nil) then
+            lsp_opts[server_name] = {}
+          end
+          local opts = lsp_opts[server_name]
+          if (opts["capabilities"] == nil) then
+            opts["capabilities"] = capabilities
+          end
+          opts["flags"] = {
+              debounce_text_changes = 150,
+          }
+          require('lspconfig')[server_name].setup(opts)
         end
-        opts["flags"] = {
-            debounce_text_changes = 150,
-        }
-        require('lspconfig')[server_name].setup(opts)
-      end
 
-    end
+      end
+  }
 }
 
