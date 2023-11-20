@@ -122,6 +122,15 @@ return  {
             end,
           }
         end
+        -- tsserver
+        lsp_opts["tsserver"] = {
+          init_options = {
+              preferences = {
+                  -- File is a CommonJS module; it may be converted to an ES module.
+                  disableSuggestions = true,
+              }
+          }
+        }
         -- ruff_lsp
 
         lsp_opts["ruff_lsp"] = {
