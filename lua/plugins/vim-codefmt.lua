@@ -1,6 +1,7 @@
 
 return {
     'google/vim-codefmt',
+    enabled=function() return jit.os ~= "Windows" end,
     dependencies = {
       'google/vim-glaive',
       'google/vim-maktaba'

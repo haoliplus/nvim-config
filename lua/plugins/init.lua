@@ -22,7 +22,7 @@ return {
   { 'lambdalisue/suda.vim' },
   { 'sindrets/diffview.nvim', dependencies = 'nvim-lua/plenary.nvim' },
   {'rcarriga/nvim-notify'},
-  {'google/vim-glaive', dependencies = {'google/vim-maktaba' }},
+  -- {'google/vim-glaive', dependencies = {'google/vim-maktaba' }},
   -- jump between .h/.cc
   -- { 'for': {'c', 'cpp'} }
   {'vim-scripts/a.vim', ft = {"c", "cpp", "cc"} },

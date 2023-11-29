@@ -27,7 +27,7 @@ vim.g.did_install_default_menus = 1  -- do not load menu
 
 -- Path to Python 3 interpreter (must be an absolute path), make startup
 -- faster. See https://neovim.io/doc/user/provider.html.
-if vim.fn.executable('python') == 1 or vim.fn.executable('python3') == 1 then
+if vim.fn.executable('python3.exe') or vim.fn.executable('python') == 1 or vim.fn.executable('python3') == 1 then
   if vim.g.is_win then
     vim.g.python3_host_prog=vim.fn.substitute(vim.fn.exepath('python3'), '.exe$', '', 'g')
   elseif vim.g.is_linux or vim.g.is_mac then
