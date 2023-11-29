@@ -7,6 +7,10 @@
 --
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+vim.g.is_win = (vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1)
+vim.g.is_linux = (vim.fn.has('unix') == 1 and vim.fn.has('macunix') == 0)
+vim.g.is_mac = vim.fn.has('macunix') == 1
+vim.g.logging_level = 'info'
 
 function Contains(list, x)
 	for _, v in pairs(list) do
@@ -20,8 +24,17 @@ vim.g.wiki_path=vim.fn.getenv("WIKI_PATH")
 vim.g.config_path=vim.fn.getenv("VIM_CONFIG_DIR")
 vim.g.plug_dir=vim.fn.getenv("VIMPLUGDIR")
 vim.g.wiki_path=vim.g.home_path.."/vimwiki"
-if vim.fn.isdirectory(vim.g.config_path) == 0 then
-  vim.g.config_path=vim.g.home_path.."/.config/nvim"
+
+if vim.g.is_linux or vim.g.is_mac then
+  if vim.fn.isdirectory(vim.g.config_path) == 0 then
+    vim.g.config_path=vim.g.home_path.."/.config/nvim"
+  end
+elseif vim.g.is_win then
+  if vim.fn.isdirectory(vim.g.config_path) == 0 then
+    vim.g.config_path=vim.g.home_path.."/AppData/Local/nvim"
+  end
+else
+  print('!')
 end
 vim.opt.rtp:prepend(vim.g.config_path)
 

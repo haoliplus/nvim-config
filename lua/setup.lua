@@ -1,10 +1,6 @@
 vim.cmd("autocmd!") -- Remove all auto cmd
 vim.g.mapleader = ";"
 ------------------------ basic for nvim --------------------------------------
-vim.g.is_win = (vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1)
-vim.g.is_linux = (vim.fn.has('unix') == 1 and vim.fn.has('macunix') == 0)
-vim.g.is_mac = vim.fn.has('macunix') == 1
-vim.g.logging_level = 'info'
 vim.g.is_bash=1
 vim.g.conceallevel=0
 
