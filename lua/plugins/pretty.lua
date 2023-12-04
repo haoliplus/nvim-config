@@ -1,29 +1,29 @@
 return {
-  -- Themes
-  {'drewtempelmeyer/palenight.vim'},
-  {
-    'norcalli/nvim-colorizer.lua',
-    config = function()
-      require('colorizer').setup()
-    end
-  },
-  ---- show indent line
-  {
-    'Yggdroot/indentLine',
-    enabled = false,
-    init = function()
-      -- Indent Line
-      vim.g.indentLine_bufNameExclude = {'_.*', 'NERD_tree.*', '*.wiki', 'dashboard'}
-      vim.g.indentLine_fileTypeExclude = {'vimwiki', 'dashboard'}
-      vim.g.indentLine_bufTypeExclude = {'help', 'terminal', 'vimwiki', 'dashboard'}
-      vim.g.indentLine_color_term = 239
-    end
-  },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    opts = {},
-    config = function()
+	-- Themes
+	{ "drewtempelmeyer/palenight.vim" },
+	{
+		"norcalli/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup()
+		end,
+	},
+	---- show indent line
+	{
+		"Yggdroot/indentLine",
+		enabled = false,
+		init = function()
+			-- Indent Line
+			vim.g.indentLine_bufNameExclude = { "_.*", "NERD_tree.*", "*.wiki", "dashboard" }
+			vim.g.indentLine_fileTypeExclude = { "vimwiki", "dashboard" }
+			vim.g.indentLine_bufTypeExclude = { "help", "terminal", "vimwiki", "dashboard" }
+			vim.g.indentLine_color_term = 239
+		end,
+	},
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		opts = {},
+		config = function()
 			local highlight = {
 				"RainbowRed",
 				"RainbowYellow",
@@ -51,28 +51,28 @@ return {
 				scope = {
 					highlight = highlight,
 				},
-        -- show_current_context = true,
-        -- show_current_context_start = false,
-        -- show_end_of_line = true,
+				-- show_current_context = true,
+				-- show_current_context_start = false,
+				-- show_end_of_line = true,
 			})
 
 			hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 
 			require("ibl").overwrite({
-				exclude = { filetypes = { "help", "terminal", 'vimwiki', "dashboard" } },
+				exclude = { filetypes = { "help", "terminal", "vimwiki", "dashboard" } },
 			})
 		end,
-    -- init = function()
-    --     -- vim.cmd([[highlight IndentBlanklineContextStart guisp=#00FF00 gui=italic cterm=italic]])
-    --     vim.g.indent_blankline_filetype_exclude = {'help', 'help', 'terminal', 'vimwiki', 'dashboard'}
-    -- end,
-    -- config = function()
-    --   require("indent_blankline").setup {
-    --       -- for example, context is off by default, use this to turn it on
-    --       show_current_context = true,
-    --       show_current_context_start = false,
-    --       show_end_of_line = true,
-    --   }
-    -- end
-  },
+		-- init = function()
+		--     -- vim.cmd([[highlight IndentBlanklineContextStart guisp=#00FF00 gui=italic cterm=italic]])
+		--     vim.g.indent_blankline_filetype_exclude = {'help', 'help', 'terminal', 'vimwiki', 'dashboard'}
+		-- end,
+		-- config = function()
+		--   require("indent_blankline").setup {
+		--       -- for example, context is off by default, use this to turn it on
+		--       show_current_context = true,
+		--       show_current_context_start = false,
+		--       show_end_of_line = true,
+		--   }
+		-- end
+	},
 }
