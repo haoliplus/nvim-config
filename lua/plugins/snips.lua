@@ -56,7 +56,7 @@ return {
 			local t = ls.text_node
 			local i = ls.insert_node
 			ls.add_snippets("all", {
-				s("ternary", {
+				s("sample", {
 					-- equivalent to "${1:cond} ? ${2:then} : ${3:else}"
 					i(1, "cosssssnd"),
 					t(" ? "),

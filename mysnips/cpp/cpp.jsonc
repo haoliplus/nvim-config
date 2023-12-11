@@ -1,0 +1,48 @@
+{
+  "basic": {
+    "prefix": "basic",
+    "body": [
+      "#include <fstream>",
+      "#include <iomanip>",
+      "#include <iostream>",
+      "#include <sstream>",
+      "#include <string>",
+      "#include <vector>",
+      "int main(int argc, char* argv[]) {",
+      "  std::string current_exec_name = argv[0]; // Name of the current exec program",
+      "  std::vector<std::string> all_args;",
+      "  if (argc > 1) {",
+      "    all_args.assign(argv + 1, argv + argc);",
+      "  }",
+      "  if (all_args.size() == 0) {",
+      "    std::cout << \"Usage: \" << current_exec_name << \" filename\" << std::endl;",
+      "    return 1;",
+      "  }",
+      "  for (int i = 0; i < all_args.size(); i++) {",
+      "    std::cout << \"Arg\" << i << \": \" << all_args[i] << std::endl;",
+      "  }",
+      "  std::ifstream fin(all_args[0]);",
+      "  std::string line;",
+      "  while (std::getline(fin, line) && line.size()) {",
+      "    std::istringstream ss(line);",
+      "    char id;",
+      "    double a1, a2, a3, a4, a5, a6;",
+      "    if (ss >> a1 >> a3 >> a3 >> a4 >> a5 >> a6) {",
+      "      std::cout << std::fixed << std::setprecision(2) << a1 << \" \" << a2 << \" \" ",
+      "                << a3 << \" \" << a4 << \" \" << a5 << \" \" << a6 << std::endl;",
+      "    }",
+      "  }",
+      "  return 0;",
+      "}"
+    ],
+    "description": "Basic cpp"
+  },
+  "aaa": {
+    "prefix": "aaa",
+    "body": [
+      "line1",
+      "line2"
+    ],
+    "description": "HHHHHHH"
+  }
+}

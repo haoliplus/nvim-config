@@ -2,6 +2,25 @@ return {
 	-- Themes
 	{ "drewtempelmeyer/palenight.vim" },
 	{
+		"folke/tokyonight.nvim",
+		config = function()
+			require("tokyonight").setup({
+				-- use the night style
+				style = "night",
+				-- disable italic for functions
+				styles = {
+					functions = {},
+				},
+				sidebars = { "qf", "vista_kind", "terminal", "packer" },
+				-- Change the "hint" color to the "orange" color, and make the "error" color bright red
+				on_colors = function(colors)
+					-- colors.hint = colors.orange
+					colors.error = colors.orange
+				end,
+			})
+		end,
+	},
+	{
 		"norcalli/nvim-colorizer.lua",
 		config = function()
 			require("colorizer").setup()

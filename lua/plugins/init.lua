@@ -11,14 +11,6 @@ return {
 	{ "tpope/vim-commentary" },
 	-- Utility for other plugin
 	{ "google/vim-maktaba" },
-	-- lsp complete
-	{ "hrsh7th/nvim-cmp" },
-	-- complete sources for nvim-cmp
-	{ "hrsh7th/cmp-nvim-lsp", dependencies = "hrsh7th/nvim-cmp" },
-	{ "hrsh7th/cmp-buffer", dependencies = "hrsh7th/nvim-cmp" },
-	{ "haoliplus/cmp-path", dependencies = "hrsh7th/nvim-cmp" },
-	{ "hrsh7th/cmp-cmdline", dependencies = "hrsh7th/nvim-cmp" },
-	-- {'quangnguyen30192/cmp-nvim-ultisnips'},
 	{ "lambdalisue/suda.vim" },
 	{ "sindrets/diffview.nvim", dependencies = "nvim-lua/plenary.nvim" },
 	{ "rcarriga/nvim-notify" },

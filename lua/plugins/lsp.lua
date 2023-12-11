@@ -6,8 +6,10 @@
 -- Distributed under terms of the MIT license.
 --
 return {
+	{ "hrsh7th/cmp-nvim-lsp", dependencies = "hrsh7th/nvim-cmp", enabled = true },
 	{
 		"williamboman/mason-lspconfig.nvim",
+		enabled = true,
 		dependencies = {
 			"williamboman/mason.nvim",
 		},
@@ -19,6 +21,7 @@ return {
 	},
 	{
 		"neovim/nvim-lspconfig",
+		enabled = true,
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
