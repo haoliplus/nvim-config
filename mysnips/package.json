@@ -25,6 +25,12 @@
 					"cpp"
 				],
 				"path": "./cpp/cpp.jsonc"
+			},
+			{
+				"language": [
+					"bash"
+				],
+				"path": "./bash/bash.jsonc"
 			}
 		]
 	}

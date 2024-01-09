@@ -1,0 +1,45 @@
+
+snippet heredoc1 "heredoc without parse" b
+read -r -d '' VAR <<'EOF'
+abc'asdf"
+$NAME
+EOF
+endsnippet
+
+snippet heredoc2 "heredoc with parse" b
+read -r -d '' VAR <<EOF
+abc'asdf"
+EOF
+endsnippet
+
+snippet date "datetime" b
+date '+%Y%m%d%H%M'
+endsnippet
+
+snippet localpath "local path" b
+LOCAL_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+endsnippet
+
+snippet batchfiles "batch files" b
+# Disable glob
+shopt -s nullglob
+array=(${TARGET_DIR}/*txt)
+
+batch_size=32
+for (( i = 0; i < ${#array[@]}; i+=${batch_size} )); do
+	ids=""
+	for (( j=0; j < ${batch_size}; j+=1 )); do
+		fname=${array[i+j]}
+		if [[ -n "${fname}" ]]; then
+			process &
+			ids="${ids} $!"
+		fi
+	done
+	# Wait the batch done
+	wait ${ids}
+done
+endsnippet
+
+snippet checkcmd "" b
+command -v envsubst >/dev/null 2>&1 || sudo apt update && sudo apt install -y gettext
+endsnippet
