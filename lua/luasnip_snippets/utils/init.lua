@@ -22,7 +22,7 @@ local utils = {}
 -- -- args is a table, where 1 is the text in Placeholder 1, 2 the text in
 -- -- placeholder 2,...
 utils.copy = function(args)
-    return args[1]
+	return args[1]
 end
 
 -- Returns a snippet_node wrapped around an insert_node whose initial
@@ -44,12 +44,18 @@ utils.bash = function(_, _, command)
 end
 
 utils.part = function(func, ...)
-	local args = {...}
-	return function() return func(unpack(args)) end
+	local args = { ... }
+	return function()
+		return func(unpack(args))
+	end
 end
 
 utils.pair = function(pair_begin, pair_end, expand_func, ...)
-	return s({trig = pair_begin, wordTrig=false}, {t({pair_begin}), i(1), t({pair_end})}, {condition = utils.part(expand_func, utils.part(..., pair_begin, pair_end))})
+	return s(
+		{ trig = pair_begin, wordTrig = false },
+		{ t({ pair_begin }), i(1), t({ pair_end }) },
+		{ condition = utils.part(expand_func, utils.part(..., pair_begin, pair_end)) }
+	)
 end
 
 -- complicated function for dynamicNode.
@@ -86,10 +92,7 @@ utils.jdocsnip = function(args, _, old_state)
 			else
 				inode = i(insert)
 			end
-			vim.list_extend(
-				nodes,
-				{ t({ " * @param " .. arg .. " " }), inode, t({ "", "" }) }
-			)
+			vim.list_extend(nodes, { t({ " * @param " .. arg .. " " }), inode, t({ "", "" }) })
 			param_nodes["arg" .. arg] = inode
 
 			insert = insert + 1
@@ -104,10 +107,7 @@ utils.jdocsnip = function(args, _, old_state)
 			inode = i(insert)
 		end
 
-		vim.list_extend(
-			nodes,
-			{ t({ " * ", " * @return " }), inode, t({ "", "" }) }
-		)
+		vim.list_extend(nodes, { t({ " * ", " * @return " }), inode, t({ "", "" }) })
 		param_nodes.ret = inode
 		insert = insert + 1
 	end
@@ -120,10 +120,7 @@ utils.jdocsnip = function(args, _, old_state)
 		else
 			ins = i(insert)
 		end
-		vim.list_extend(
-			nodes,
-			{ t({ " * ", " * @throws " .. exc .. " " }), ins, t({ "", "" }) }
-		)
+		vim.list_extend(nodes, { t({ " * ", " * @throws " .. exc .. " " }), ins, t({ "", "" }) })
 		param_nodes.ex = ins
 		insert = insert + 1
 	end
@@ -171,10 +168,7 @@ utils.luadocsnip = function(args, _, old_state)
 			else
 				inode = i(insert)
 			end
-			vim.list_extend(
-				nodes,
-				{ t({ " * @param " .. arg .. " " }), inode, t({ "", "" }) }
-			)
+			vim.list_extend(nodes, { t({ " * @param " .. arg .. " " }), inode, t({ "", "" }) })
 			param_nodes["arg" .. arg] = inode
 
 			insert = insert + 1
@@ -189,10 +183,7 @@ utils.luadocsnip = function(args, _, old_state)
 			inode = i(insert)
 		end
 
-		vim.list_extend(
-			nodes,
-			{ t({ " * ", " * @return " }), inode, t({ "", "" }) }
-		)
+		vim.list_extend(nodes, { t({ " * ", " * @return " }), inode, t({ "", "" }) })
 		param_nodes.ret = inode
 		insert = insert + 1
 	end
@@ -205,10 +196,7 @@ utils.luadocsnip = function(args, _, old_state)
 		else
 			ins = i(insert)
 		end
-		vim.list_extend(
-			nodes,
-			{ t({ " * ", " * @throws " .. exc .. " " }), ins, t({ "", "" }) }
-		)
+		vim.list_extend(nodes, { t({ " * ", " * @throws " .. exc .. " " }), ins, t({ "", "" }) })
 		param_nodes.ex = ins
 		insert = insert + 1
 	end

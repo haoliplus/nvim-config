@@ -9,20 +9,23 @@ local d = ls.d
 local pi = ls.parent_indexer
 local isn = require("luasnip.nodes.snippet").ISN
 local psn = require("luasnip.nodes.snippet").PSN
-local l = require'luasnip.extras'.l
-local r = require'luasnip.extras'.rep
+local l = require("luasnip.extras").l
+local r = require("luasnip.extras").rep
 local p = require("luasnip.extras").partial
 local types = require("luasnip.util.types")
 local events = require("luasnip.util.events")
 local util = require("luasnip.util.util")
 
 return {
-    rust = {
-        ls.parser.parse_snippet({trig = "fn"}, [[
+	rust = {
+		ls.parser.parse_snippet(
+			{ trig = "fn" },
+			[[
 /// $1
 fn $2($3) ${4:-> ${5:i32}} \{
 	$0
 \}
-]])
-    }
+]]
+		),
+	},
 }

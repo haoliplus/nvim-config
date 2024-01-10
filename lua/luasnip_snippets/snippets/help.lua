@@ -9,19 +9,21 @@ local utils = require("luasnip_snippets.utils")
 
 return {
 	help = {
-        s({trig="con", wordTrig=true}, {
-            i(1),
-            f(function(args) return {" "..string.rep(".", 80-(#args[1][1]+#args[2][1]+2+2)).." "} end, {1, 2}),
-            t({"|"}),
-            i(2),
-            t({"|"}),
-            i(0)
-        }),
-        s({trig="*", wordTrig=true}, {
-            t({"*"}),
-            i(1),
-            t({"*"}),
-            i(0)
-        }, { cond = utils.part(neg, even_count, '%*') }),
-	}
+		s({ trig = "con", wordTrig = true }, {
+			i(1),
+			f(function(args)
+				return { " " .. string.rep(".", 80 - (#args[1][1] + #args[2][1] + 2 + 2)) .. " " }
+			end, { 1, 2 }),
+			t({ "|" }),
+			i(2),
+			t({ "|" }),
+			i(0),
+		}),
+		s({ trig = "*", wordTrig = true }, {
+			t({ "*" }),
+			i(1),
+			t({ "*" }),
+			i(0),
+		}, { cond = utils.part(neg, even_count, "%*") }),
+	},
 }

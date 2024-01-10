@@ -10,7 +10,5 @@ local isn = ls.indent_snippet_node
 local utils = require("luasnip_snippets.utils")
 
 return {
-    lua = {
-
-    }
+	lua = {},
 }

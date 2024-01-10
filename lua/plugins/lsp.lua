@@ -135,20 +135,20 @@ return {
 			}
 			-- ruff_lsp
 
-
-      lsp_opts["ruff_lsp"] = {
-        root_dir = function(fname)
-          return util.root_pattern(".git", "setup.py",  "setup.cfg",
-            "pyproject.toml", "requirements.txt")(fname) or util.path.dirname(fname)
-        end,
-        init_options = {
-          settings = {
-            path = "ruff-lsp",
-            -- Any extra CLI arguments for `ruff` go here.
-            args = {},
-          }
-        }
-      }
+			lsp_opts["ruff_lsp"] = {
+				root_dir = function(fname)
+					return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(
+						fname
+					) or util.path.dirname(fname)
+				end,
+				init_options = {
+					settings = {
+						path = "ruff-lsp",
+						-- Any extra CLI arguments for `ruff` go here.
+						args = {},
+					},
+				},
+			}
 
 			-- Pyright
 			lsp_opts["pyright"] = {

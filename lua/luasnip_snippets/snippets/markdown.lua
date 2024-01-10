@@ -21,8 +21,7 @@ local events = require("luasnip.util.events")
 local utils = require("luasnip_snippets.utils")
 
 return {
-    markdown = {
-        -- todo
-    }
+	markdown = {
+		-- todo
+	},
 }
-
