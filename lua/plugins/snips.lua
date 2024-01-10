@@ -27,7 +27,8 @@ return {
 	{
 		"L3MON4D3/LuaSnip",
 		-- follow latest release.
-		version = "1.2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+		version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+    build = "make install_jsregexp",
 		-- install jsregexp (optional!).
 		-- sudo apt install libluajit-5.1-dev
 		-- this sometimes cause fatal error
@@ -50,11 +51,24 @@ return {
 			vim.cmd([[smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>']])
 			-- require("luasnip.loaders.from_vscode").lazy_load()
 			-- require("luasnip.loaders.from_vscode").lazy_load()
-			require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./mysnips/" } })
 			local ls = require("luasnip")
+      local community_snippets = require("luasnip_snippets").load_snippets()
+      -- ls.snippets = community_snippets
 			local s = ls.snippet
 			local t = ls.text_node
 			local i = ls.insert_node
+      -- local sn = ls.snippet_node
+      -- local f = ls.function_node
+      -- local d = ls.dynamic_node
+      -- local c = ls.choice_node
+			require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snips/vscode" } })
+      -- require("luasnip.loaders.from_snipmate").lazy_load({ paths = { "./snips/snipmate/mine" } })
+      -- require("luasnip.loaders.from_snipmate").lazy_load({ paths = { "./snips/snipmate/ulti" } })
+      -- require("luasnip.loaders.from_lua").load({
+      --   paths = {
+      --     "./lua/luasnip_snippets/snippets"
+      --   },
+      -- })
 			ls.add_snippets("all", {
 				s("sample", {
 					-- equivalent to "${1:cond} ? ${2:then} : ${3:else}"
@@ -65,22 +79,9 @@ return {
 					i(3, "else"),
 				}),
 			})
+      for k,v in pairs(community_snippets) do
+        ls.add_snippets(k, v)
+      end
 		end,
 	},
-	---- For ultisnips users.
-	-- {
-	--   'SirVer/ultisnips',
-	--   init = function()
-	--     -- UltiSnips
-	--     vim.g.UltiSnipsExpandTrigger = "<F7>"  -- I just want my tab back
-	--     vim.g.UltiSnipsSnippetDirectories={vim.g.config_path.."/UltiSnips", vim.g.config_path.."/mysnips"}
-	--     vim.g.ultisnips_python_quoting_style = "double"
-	--   end,
-	--   config = function()
-	--     vim.cmd(
-	--     [[
-	--     autocmd BufNewFile,BufRead python_my.snippets set ft=python
-	--     ]])
-	--   end
-	-- },
 }
