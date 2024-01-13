@@ -17,18 +17,11 @@ return {
 			require("telescope").load_extension("find_template")
 		end,
 	},
-	-- Using jj to escape
-	{
-		"jdhao/better-escape.vim",
-		init = function()
-			vim.g.better_escape_shortcut = "jj"
-		end,
-	},
 	{
 		"L3MON4D3/LuaSnip",
 		-- follow latest release.
 		version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-		build = "make install_jsregexp",
+		-- build = "make install_jsregexp",
 		-- install jsregexp (optional!).
 		-- sudo apt install libluajit-5.1-dev
 		-- this sometimes cause fatal error

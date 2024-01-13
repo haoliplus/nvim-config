@@ -26,6 +26,18 @@ return {
 	{ "skywind3000/asyncrun.vim" },
 	-- git
 	{ "tpope/vim-fugitive" },
+	-- Using jj to escape
+	{
+		"max397574/better-escape.nvim",
+		config = function()
+			require("better_escape").setup({
+				mapping = { "jk", "jj" },
+				timeout = vim.o.timeoutlen,
+				clear_empty_lines = true,
+				keys = "<Esc>",
+			})
+		end,
+	},
 	{
 		"airblade/vim-gitgutter",
 		init = function()
