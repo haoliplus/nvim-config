@@ -17,6 +17,7 @@ return {
 			require("telescope").load_extension("find_template")
 		end,
 	},
+	{ "rafamadriz/friendly-snippets" },
 	{
 		"L3MON4D3/LuaSnip",
 		-- follow latest release.

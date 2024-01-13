@@ -8,18 +8,6 @@
 return {
 	{ "hrsh7th/cmp-nvim-lsp", dependencies = "hrsh7th/nvim-cmp", enabled = true },
 	{
-		"williamboman/mason-lspconfig.nvim",
-		enabled = true,
-		dependencies = {
-			"williamboman/mason.nvim",
-		},
-		config = function()
-			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "rust_analyzer", "clangd", "pyright", "tsserver", "bashls" },
-			})
-		end,
-	},
-	{
 		"neovim/nvim-lspconfig",
 		enabled = true,
 		dependencies = {
@@ -29,7 +17,7 @@ return {
 		config = function()
 			-- require('plugins.utils.lsp_callbacks')
 			-- print(vim.inspect(vim.api.nvim_list_runtime_paths()))
-			require("plugins.utils.lsp_callbacks")
+			-- require("plugins.utils.lsp_callbacks")
 
 			-- See `:help vim.diagnostic.*` for documentation on any of the below functions
 			vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)

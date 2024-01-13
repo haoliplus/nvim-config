@@ -12,6 +12,7 @@ return {
 	{ "hrsh7th/cmp-buffer", dependencies = "hrsh7th/nvim-cmp", enabled = true },
 	{ "haoliplus/cmp-path", dependencies = "hrsh7th/nvim-cmp", enabled = true },
 	{ "hrsh7th/cmp-cmdline", dependencies = "hrsh7th/nvim-cmp", enabled = true },
+	{ "saadparwaiz1/cmp_luasnip" },
 	-- {'quangnguyen30192/cmp-nvim-ultisnips'},
 	{
 		"hrsh7th/nvim-cmp",

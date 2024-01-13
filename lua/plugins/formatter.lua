@@ -2,7 +2,7 @@ return {
 	{
 		"mhartington/formatter.nvim",
 		enabled = true,
-		config = function(_, opts)
+		config = function(_, _) -- stylua: ignore
 			-- Utilities for creating configurations
 			local util = require("formatter.util")
 

@@ -1,0 +1,232 @@
+return {
+	-- Themes
+	-- ""
+	-- syntax highlight
+	{ "jackguo380/vim-lsp-cxx-highlight" },
+	{ "MunifTanjim/nui.nvim" },
+	{ "drewtempelmeyer/palenight.vim" },
+	{
+		"folke/tokyonight.nvim",
+		config = function()
+			require("tokyonight").setup({
+				-- use the night style
+				style = "night",
+				-- disable italic for functions
+				styles = {
+					functions = {},
+				},
+				sidebars = { "qf", "vista_kind", "terminal", "packer" },
+				-- Change the "hint" color to the "orange" color, and make the "error" color bright red
+				on_colors = function(colors)
+					-- colors.hint = colors.orange
+					colors.error = colors.orange
+				end,
+			})
+		end,
+	},
+	{
+		"norcalli/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup()
+		end,
+	},
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		opts = {},
+		config = function()
+			local highlight = {
+				"RainbowRed",
+				"RainbowYellow",
+				"RainbowBlue",
+				"RainbowOrange",
+				"RainbowGreen",
+				"RainbowViolet",
+				"RainbowCyan",
+			}
+			local hooks = require("ibl.hooks")
+
+			hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+				vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+				vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+				vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+				vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+				vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+				vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+				vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+			end)
+
+			vim.g.rainbow_delimiters = { highlight = highlight }
+
+			require("ibl").setup({
+				scope = {
+					highlight = highlight,
+				},
+				-- show_current_context = true,
+				-- show_current_context_start = false,
+				-- show_end_of_line = true,
+			})
+
+			hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+
+			require("ibl").overwrite({
+				exclude = { filetypes = { "help", "terminal", "vimwiki", "dashboard" } },
+			})
+		end,
+		-- init = function()
+		--     -- vim.cmd([[highlight IndentBlanklineContextStart guisp=#00FF00 gui=italic cterm=italic]])
+		--     vim.g.indent_blankline_filetype_exclude = {'help', 'help', 'terminal', 'vimwiki', 'dashboard'}
+		-- end,
+		-- config = function()
+		--   require("indent_blankline").setup {
+		--       -- for example, context is off by default, use this to turn it on
+		--       show_current_context = true,
+		--       show_current_context_start = false,
+		--       show_end_of_line = true,
+		--   }
+		-- end
+	},
+	{ ------ Better syntax highlightingG
+		"nvim-treesitter/nvim-treesitter",
+		enabled = true,
+		build = ":TSUpdate",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				-- A list of parser names, or "all" (the five listed parsers should always be installed)
+				ensure_installed = { "c", "lua", "vim", "query" },
+
+				-- Install parsers synchronously (only applied to `ensure_installed`)
+				sync_install = false,
+
+				-- Automatically install missing parsers when entering buffer
+				-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+				auto_install = true,
+
+				-- List of parsers to ignore installing (for "all")
+				ignore_install = { "javascript", "help" },
+
+				---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
+				-- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+
+				highlight = {
+					enable = false,
+
+					-- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+					-- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+					-- the name of the parser)
+					-- list of language that will be disabled
+					disable = { "c", "rust" },
+					-- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
+					-- disable = function(lang, buf)
+					--   local max_filesize = 100 * 1024 -- 100 KB
+					--   local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+					--   if ok and stats and stats.size > max_filesize then
+					--     return true
+					--   end
+					-- end,
+
+					-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+					-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+					-- Using this option may slow down your editor, and you may see some duplicate highlights.
+					-- Instead of true it can also be a list of languages
+					additional_vim_regex_highlighting = false,
+				},
+			})
+		end,
+	},
+	{
+		"nvim-tree/nvim-web-devicons",
+		config = function()
+			-- require('nvim-web-devicons').setup {
+			--   -- your personnal icons can go here (to override)
+			--   -- you can specify color or cterm_color instead of specifying both of them
+			--   -- DevIcon will be appended to `name`
+			--   -- override = {
+			--   --   zsh = {
+			--   --     icon = "#",
+			--   --     color = "#428850",
+			--   --     cterm_color = "65",
+			--   --     name = "Zsh"
+			--   --   },
+			--   -- };
+			--   -- -- globally enable default icons (default to false)
+			--   -- -- will get overriden by `get_icons` option
+			--   -- default = false;
+			--   -- override_by_filename = {
+			--   --   ["containerfile"] = {
+			--   --     icon = "*",
+			--   --     color = "#458ee5",
+			--   --     cterm_color = "68",
+			--   --     name = "containerfile",
+			--   --   },
+			--   -- };
+			-- }
+			-- require("nvim-web-devicons").set_icon {
+			--   txt = {
+			--     icon = '',
+			--     color = '#6d8086',
+			--     cterm_color = "65",
+			--     name = "txt"
+			--   },
+			--   containerfile = {
+			--     icon = "",
+			--     color = "#428850",
+			--     cterm_color = "65",
+			--     name = "containerfile"
+			--   },
+			--   dockerfile = {
+			--     icon = "",
+			--     color = "#428850",
+			--     cterm_color = "65",
+			--     name = "dockerfile"
+			--   }
+			-- }
+			-- require("nvim-web-devicons").set_default_icon('', '#6d8086', 65)
+		end,
+	},
+	-- Automatically highlights other instances of the word under your cursor.
+	-- This works with LSP, Treesitter, and regexp matching to find the other
+	-- instances.
+	{ -- hightlight word which is same with the word under cursor
+		"RRethy/vim-illuminate",
+		event = { "BufReadPost", "BufNewFile" },
+		opts = {
+			delay = 200,
+			large_file_cutoff = 2000,
+			large_file_overrides = {
+				providers = { "lsp" },
+			},
+		},
+		init = function() end,
+		config = function(_, opts)
+			require("illuminate").configure(opts)
+			-- illuminatedWord
+			-- bold underline undercurl
+			-- underdouble underdotted
+			-- underdashed inverse italic
+			-- standout nocombine strikethrough
+
+			local function map(key, dir, buffer)
+				vim.keymap.set("n", key, function()
+					require("illuminate")["goto_" .. dir .. "_reference"](false)
+				end, { desc = dir:sub(1, 1):upper() .. dir:sub(2) .. " Reference", buffer = buffer })
+			end
+
+			map("]]", "next")
+			map("[[", "prev")
+
+			-- also set it after loading ftplugins, since a lot overwrite [[ and ]]
+			vim.api.nvim_create_autocmd("FileType", {
+				callback = function()
+					local buffer = vim.api.nvim_get_current_buf()
+					map("]]", "next", buffer)
+					map("[[", "prev", buffer)
+				end,
+			})
+		end,
+		keys = {
+			{ "]]", desc = "Next Reference" },
+			{ "[[", desc = "Prev Reference" },
+		},
+	},
+}

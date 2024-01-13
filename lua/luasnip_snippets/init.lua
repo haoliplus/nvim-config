@@ -5,19 +5,19 @@ local luasnip_snippets_path = "lua/luasnip_snippets/snippets/"
 local nvim_snippets_modules = "snippets."
 local luasnip_snippets_modules = "luasnip_snippets.snippets."
 
-function str_2_table(s, delimiter)
-	result = {}
+local function str_2_table(s, delimiter)
+	local result = {}
 	for match in (s .. delimiter):gmatch("(.-)" .. delimiter) do
 		table.insert(result, match)
 	end
 	return result
 end
 
-function get_file_name(file)
+local function get_file_name(file)
 	return file:match("^.+/(.+)$")
 end
 
-function insert_snippets_into_table(t, modules_str, paths_table)
+local function insert_snippets_into_table(t, modules_str, paths_table)
 	for _, snip_fpath in ipairs(paths_table) do
 		local snip_mname = get_file_name(snip_fpath):sub(1, -5)
 
