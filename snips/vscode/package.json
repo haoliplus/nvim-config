@@ -19,6 +19,12 @@
 					"python"
 				],
 				"path": "./python/python.jsonc"
+      },
+			{
+				"language": [
+					"dockerfile"
+				],
+				"path": "./dockerfile/dockerfile.jsonc"
       }
 		]
 	}
