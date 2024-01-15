@@ -135,7 +135,6 @@ export HISTFILE="${HOME}/.cache/.docker_zsh_history"
 export PATH="${LOCAL_DIR}/bin:${PATH}"
 export PATH="/usr/local/node/bin:${PATH}"
 export VIM_RESOURCE_DIR=${VIM_RESOURCE_DIR:-"${LOCAL_DIR}/share/nvim"}
-export WIKI_PATH="${HOME}/vimwiki"
 
 export VIMPLUGDIR="${VIM_RESOURCE_DIR}/plugged"
 export VIMRUNTIME="${VIM_RESOURCE_DIR}/runtime"
@@ -158,7 +157,6 @@ export HISTFILE="${HOME}/.cache/.docker_bash_history"
 export PATH="${LOCAL_DIR}/bin:${PATH}"
 export PATH="/usr/local/node/bin:${PATH}"
 export VIM_RESOURCE_DIR=${VIM_RESOURCE_DIR:-"${LOCAL_DIR}/share/nvim"}
-export WIKI_PATH="${HOME}/vimwiki"
 export VIMPLUGDIR="${VIM_RESOURCE_DIR}/plugged"
 export VIMRUNTIME="${VIM_RESOURCE_DIR}/runtime"
 export MYVIMRC=${MYVIMRC:-"${VIM_CONFIG_DIR}/init.vim"}

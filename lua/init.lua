@@ -22,10 +22,7 @@ function Contains(list, x)
 end
 
 vim.g.home_path = vim.fn.getenv("HOME")
-vim.g.wiki_path = vim.fn.getenv("WIKI_PATH")
 vim.g.config_path = vim.fn.getenv("VIM_CONFIG_DIR")
-vim.g.plug_dir = vim.fn.getenv("VIMPLUGDIR")
-vim.g.wiki_path = vim.g.home_path .. "/vimwiki"
 
 if vim.g.is_linux or vim.g.is_mac then
 	if vim.fn.isdirectory(vim.g.config_path) == 0 then
