@@ -70,7 +70,7 @@ return {
 			hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 
 			require("ibl").overwrite({
-				exclude = { filetypes = { "help", "terminal", "vimwiki", "dashboard" } },
+				exclude = { filetypes = { "help", "terminal", "vimwiki", "dashboard"} },
 			})
 		end,
 		-- init = function()
