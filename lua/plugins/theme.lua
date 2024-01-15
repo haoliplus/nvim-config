@@ -34,11 +34,11 @@ return {
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
 		opts = {},
-    -- enabled = function()
-    --  return vim.version().major > 0 or vim.version().minor > 8
-    -- end,
-    -- enabled = true,
-    enabled = vim.version().major > 0 or vim.version().minor > 8,
+		-- enabled = function()
+		--  return vim.version().major > 0 or vim.version().minor > 8
+		-- end,
+		-- enabled = true,
+		enabled = vim.version().major > 0 or vim.version().minor > 8,
 		config = function()
 			local highlight = {
 				"RainbowRed",
@@ -75,7 +75,7 @@ return {
 			hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 
 			require("ibl").overwrite({
-				exclude = { filetypes = { "help", "terminal", "vimwiki", "dashboard"} },
+				exclude = { filetypes = { "help", "terminal", "vimwiki", "dashboard" } },
 			})
 		end,
 		-- init = function()
@@ -141,52 +141,81 @@ return {
 	},
 	{
 		"nvim-tree/nvim-web-devicons",
+		enabled = true,
+		lazy = false,
+		opts = {
+			override = {
+				toml = {
+					icon = "#",
+					color = "#428850",
+					cterm_color = "65",
+					name = "toml",
+				},
+				lua = {
+					icon = "#",
+					color = "#428850",
+					cterm_color = "65",
+					name = "lua",
+				},
+			},
+			override_by_filename = {
+				[".gitignore"] = {
+					icon = "a",
+					color = "#f1502f",
+					name = "gitignore",
+				},
+				["a.toml"] = {
+					icon = "",
+					color = "#f1502f",
+					name = "gitignore",
+				},
+			},
+			override_by_extension = {
+				["toml"] = {
+					icon = "",
+					color = "#f1502f",
+					name = "gitignore",
+				},
+			},
+		},
 		config = function()
-			-- require('nvim-web-devicons').setup {
-			--   -- your personnal icons can go here (to override)
-			--   -- you can specify color or cterm_color instead of specifying both of them
-			--   -- DevIcon will be appended to `name`
-			--   -- override = {
-			--   --   zsh = {
-			--   --     icon = "#",
-			--   --     color = "#428850",
-			--   --     cterm_color = "65",
-			--   --     name = "Zsh"
-			--   --   },
-			--   -- };
-			--   -- -- globally enable default icons (default to false)
-			--   -- -- will get overriden by `get_icons` option
-			--   -- default = false;
-			--   -- override_by_filename = {
-			--   --   ["containerfile"] = {
-			--   --     icon = "*",
-			--   --     color = "#458ee5",
-			--   --     cterm_color = "68",
-			--   --     name = "containerfile",
-			--   --   },
-			--   -- };
-			-- }
-			-- require("nvim-web-devicons").set_icon {
-			--   txt = {
-			--     icon = '',
-			--     color = '#6d8086',
-			--     cterm_color = "65",
-			--     name = "txt"
-			--   },
-			--   containerfile = {
-			--     icon = "",
-			--     color = "#428850",
-			--     cterm_color = "65",
-			--     name = "containerfile"
-			--   },
-			--   dockerfile = {
-			--     icon = "",
-			--     color = "#428850",
-			--     cterm_color = "65",
-			--     name = "dockerfile"
-			--   }
-			-- }
-			-- require("nvim-web-devicons").set_default_icon('', '#6d8086', 65)
+			-- require("lualine").setup({})
+			require("nvim-web-devicons").setup({
+				-- your personnal icons can go here (to override)
+				-- you can specify color or cterm_color instead of specifying both of them
+				-- DevIcon will be appended to `name`
+				override = {
+					toml = {
+						icon = "",
+						color = "#428850",
+						cterm_color = "65",
+						name = "toml",
+					},
+				},
+				override_by_filename = {
+					[".gitignore"] = {
+						icon = "",
+						color = "#f1502f",
+						name = "gitignore",
+					},
+				},
+				override_by_extension = {
+					["toml"] = {
+						icon = "",
+						color = "#f1502f",
+						name = "toml",
+					},
+				},
+			})
+
+			require("nvim-web-devicons").set_icon({
+				toml = {
+					icon = "",
+					color = "#6d8086",
+					cterm_color = "65",
+					name = "toml",
+				},
+			})
 		end,
 	},
 	-- Automatically highlights other instances of the word under your cursor.

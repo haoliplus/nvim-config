@@ -37,6 +37,8 @@ else
 end
 vim.opt.rtp:prepend(vim.g.config_path)
 
+-- print(vim.inspect({Hello="world"}))
+
 require("setup")
 require("custom_filetype")
 
