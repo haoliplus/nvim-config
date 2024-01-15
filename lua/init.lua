@@ -33,11 +33,10 @@ elseif vim.g.is_win then
 		vim.g.config_path = vim.g.home_path .. "/AppData/Local/nvim"
 	end
 else
-	print("!")
+	print(vim.inspect(vim.g)) -- use `:messages` to see the log
 end
 vim.opt.rtp:prepend(vim.g.config_path)
 
--- print(vim.inspect({Hello="world"}))
 
 require("setup")
 require("custom_filetype")
