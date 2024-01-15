@@ -34,6 +34,11 @@ return {
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
 		opts = {},
+    -- enabled = function()
+    --  return vim.version().major > 0 or vim.version().minor > 8
+    -- end,
+    -- enabled = true,
+    enabled = vim.version().major > 0 or vim.version().minor > 8,
 		config = function()
 			local highlight = {
 				"RainbowRed",
