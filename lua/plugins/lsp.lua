@@ -78,7 +78,12 @@ return {
 			if vim.fn.hostname() == "in_dev_docker" then
 				-- do thing
 				lsp_opts["clangd"] = {
-					cmd = { "/usr/bin/clangd", "--background-index", "--clang-tidy", "--offset-encoding=utf-16" },
+					cmd = {
+						"/usr/bin/clangd",
+						"--background-index",
+						"--clang-tidy",
+						"--offset-encoding=utf-16",
+					},
 					filetypes = { "c", "cpp", "cc", "h" },
 					root_dir = function(fname)
 						return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
@@ -213,5 +218,12 @@ return {
 				require("lspconfig")[server_name].setup(opts)
 			end
 		end,
+	}, -- lsp "neovim/nvim-lspconfig",
+	{
+		"j-hui/fidget.nvim",
+		opts = {
+			-- options
+		},
 	},
+	{ "kevinhwang91/nvim-bqf" },
 }
