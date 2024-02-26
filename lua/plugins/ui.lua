@@ -180,6 +180,9 @@ return {
 		config = function()
 			require("dashboard").setup({
 				config = {
+          week_header = {
+           enable = true,
+          },
 					packages = { enable = true }, -- show how many plugins neovim loaded
 					mru = { limit = 10, icon = "* ", label = "Recent Files" },
 					footer = { "hello" }, -- footer
@@ -187,6 +190,23 @@ return {
 					-- action can be a functino type, e.g.
 					-- action = func(path) vim.cmd('Telescope find_files cwd=' .. path) end
 					project = { enable = true, limit = 8, icon = "- ", label = "Recent Project" },
+          shortcut = {
+            { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
+            {
+              icon = ' ',
+              icon_hl = '@variable',
+              desc = 'Files',
+              group = 'Label',
+              action = 'Telescope find_files',
+              key = 'f',
+            },
+            {
+              desc = ' Recent Files',
+              group = 'Files',
+              action = 'Telescope oldfiles',
+              key = 'a',
+            },
+          },
 				},
 			})
 		end,
