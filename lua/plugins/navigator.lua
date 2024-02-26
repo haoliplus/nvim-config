@@ -24,18 +24,18 @@ return {
 			vim.cmd([[autocmd FileType fzf call feedkeys("i\<Bs>")]])
 		end,
 	},
-	{
-		"ctrlpvim/ctrlp.vim",
-		init = function()
-			vim.g.ctrlp_working_path_mode = 0
-			vim.g.ctrlp_max_height = 20
-			vim.g.ctrlp_custom_ignore = "node_modules|^.DS_Store|^.git|^.coffee"
-			--"""""""""""""""""""""""""""""
-			-- => CTRL-P
-			--"""""""""""""""""""""""""""""
-			vim.g.ctrlp_map = "<c-f>"
-		end,
-	},
+	--{
+	--	"ctrlpvim/ctrlp.vim",
+	--	init = function()
+	--		vim.g.ctrlp_working_path_mode = 0
+	--		vim.g.ctrlp_max_height = 20
+	--		vim.g.ctrlp_custom_ignore = "node_modules|^.DS_Store|^.git|^.coffee"
+	--		--"""""""""""""""""""""""""""""
+	--		-- => CTRL-P
+	--		--"""""""""""""""""""""""""""""
+	--		vim.g.ctrlp_map = "<c-f>"
+	--	end,
+	--},
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.5",
@@ -82,10 +82,10 @@ return {
 				},
 			})
 			require("telescope").load_extension("fzf")
-      local builtin = require('telescope.builtin')
-      vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-      vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-      vim.keymap.set('n', '<leader>fr', builtin.oldfiles, {})
+			local builtin = require("telescope.builtin")
+			vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+			vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+			vim.keymap.set("n", "<leader>fr", builtin.oldfiles, {})
 		end,
 	},
 }
