@@ -19,8 +19,8 @@ return {
 		build = "./install --all",
 		config = function()
 			-- Fzf
-			vim.keymap.set("n", "<F6>", ":Buffers<CR>", { noremap = true, silent = true })
-			vim.keymap.set("n", "<F7>", ":Marks<CR>", { noremap = true, silent = true })
+			-- vim.keymap.set("n", "<F6>", ":Buffers<CR>", { noremap = true, silent = true })
+			-- vim.keymap.set("n", "<F7>", ":Marks<CR>", { noremap = true, silent = true })
 			vim.cmd([[autocmd FileType fzf call feedkeys("i\<Bs>")]])
 		end,
 	},
@@ -87,7 +87,9 @@ return {
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
 			vim.keymap.set("n", "<leader>fr", builtin.oldfiles, {})
 			vim.keymap.set("n", "<c-f>", builtin.find_files, {})
-	--		vim.g.ctrlp_map = "<c-f>"
+			-- vim.keymap.set("n", "<F6>", ":Buffers<CR>", { noremap = true, silent = true })
+			-- vim.keymap.set("n", "<F7>", ":Marks<CR>", { noremap = true, silent = true })
+      --		vim.g.ctrlp_map = "<c-f>"
 		end,
 	},
 }
