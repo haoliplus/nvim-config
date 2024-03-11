@@ -55,8 +55,7 @@ return {
 			-- 2. Metatable magic
 			ft.javascript = { "//%s", "/*%s*/" }
 			ft.yaml = "#%s"
-			ft.cpp = { "///%s", "/*%s*/" }
-      ft({'cuda', 'cpp'}, {"///%s", "/*%s*/"})
+      ft({'cuda', 'cpp'}, {"///%s", "/**%s**/"})
 
 			require("Comment").setup()
 		end,
