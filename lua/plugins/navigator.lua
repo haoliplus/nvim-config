@@ -11,7 +11,7 @@ return {
 	},
 	-- jump between .h/.cc
 	-- { 'for': {'c', 'cpp'} }
-	{ "vim-scripts/a.vim", ft = { "c", "cpp", "cc" } },
+	{ "vim-scripts/a.vim", ft = { "c", "cpp", "cc", "cuda" } },
 	---- fuzzy search using c-t
 	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 	{

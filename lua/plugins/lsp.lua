@@ -90,6 +90,7 @@ return {
 					end,
 				}
 			else
+        -- !!! You should instgall both clang-x/gcc-x/g++-x
 				-- ${XDG_CONFIG_HOME}/.config/clangd/config.yaml
 				-- https://github.com/clangd/clangd/issues/363
 				-- CompileFlags:
@@ -111,7 +112,7 @@ return {
 				lsp_opts["clangd"] = {
 					-- cmd = { "clangd", "--background-index", "--clang-tidy"},
 					cmd = { "clangd", "--background-index", "--offset-encoding=utf-16" },
-					filetypes = { "c", "cpp", "cc", "h" },
+					filetypes = { "c", "cpp", "cc", "h", "cuda" },
 					root_dir = function(fname)
 						return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
 					end,

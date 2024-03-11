@@ -10,7 +10,8 @@ vim.opt.background = "dark"
 vim.env.NVIM_TUI_ENABLE_TRUE_COLOR = 1
 
 -- Change comment in C++ to ///
-vim.cmd([[autocmd FileType cpp setlocal commentstring=///\ %s]])
+-- vim.cmd([[autocmd FileType cpp setlocal commentstring=///\ %s]])
+-- vim.cmd([[autocmd FileType cuda setlocal commentstring=///\ %s]])
 -- Italics for my themes
 vim.g.palenight_terminal_italics = 1
 -- simily with 'highlight Comment cterm=italic gui=italic'
