@@ -68,3 +68,16 @@ if not status then
 	print(ret)
 	return
 end
+
+-- sample for my function
+function _G.show_my_text()
+  require("notify")(
+  [[
+  My super important 
+  message
+  ]]
+  )
+end
+vim.keymap.set("n", "<c-h>", show_my_text, {})
+-- nnoremap <leader>h :lua show_my_text()<CR>
+
