@@ -1,6 +1,19 @@
 return {
 	-- Themes
 	-- ""
+  {"m00qek/baleia.nvim",
+    config = function()
+      local baleia = require('baleia').setup { log = 'DEBUG' }
+      vim.api.nvim_create_user_command("BaleiaLogs", function(_)
+        baleia.logger.show()
+      end, { bang = true, nargs = 0})
+
+      vim.api.nvim_create_user_command("BaleiaColorize", function(_)
+        baleia.once(vim.api.nvim_get_current_buf())
+      end, { bang = true})
+    end
+  },
+  -- {"chrisbra/Colorizer"},
 	-- syntax highlight
 	{ "jackguo380/vim-lsp-cxx-highlight" },
 	{ "MunifTanjim/nui.nvim" },

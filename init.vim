@@ -19,3 +19,8 @@ set guicursor=
 
 lua require('init')
 
+
+" let s:baleia = luaeval("require('baleia').setup { log = 'DEBUG' }")
+"
+" command! BaleiaLogs call s:baleia.logger.show()
+" command! BaleiaColorize call s:baleia.once(bufnr('%'))
