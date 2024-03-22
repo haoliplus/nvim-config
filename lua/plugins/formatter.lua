@@ -42,7 +42,7 @@ return {
 								stdin = true,
 							}
 						end,
-					},
+					}, -- lua
 
 					python = {
 						require("formatter.filetypes.python").black,
@@ -58,12 +58,24 @@ return {
 								stdin = false,
 							}
 						end,
-					},
+					}, -- python
+
 					cpp = {
 						require("formatter.filetypes.cpp").clangformat,
 					},
 					cuda = {
 						require("formatter.filetypes.cpp").clangformat,
+					},
+
+					json = {
+						-- 使用 jq 来格式化 JSON 文件
+						function()
+							return {
+								exe = "jq",
+								args = { "." },
+								stdin = true,
+							}
+						end,
 					},
 
 					-- Use the special "*" filetype for defining formatter configurations on
@@ -73,7 +85,7 @@ return {
 						-- filetype
 						require("formatter.filetypes.any").remove_trailing_whitespace,
 					},
-				},
+				}, -- filetype
 			})
 		end,
 	},
