@@ -21,6 +21,9 @@ vim.api.nvim_create_autocmd("FileType", {
 -- """"""""""""""""""""""""""""""
 -- " => Other
 -- """"""""""""""""""""""""""""""
+vim.api.nvim_create_user_command("Binary", function(_)
+	vim.cmd("%!xxd")
+end, { bang = true, desc = "read binary" })
 -- " Format json
 -- vim.api.nvim_create_user_command("FormatJson", function(_)
 -- 	vim.cmd("%!json_pp -json_opt utf8,pretty")
@@ -46,26 +49,24 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufReadPost" }, {
 	end,
 })
 
-
-
 -- 为 Python 文件类型创建一个自定义命令
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "json",
-    callback = function()
-        vim.api.nvim_create_user_command(
-            'JsonFormat', -- 命令名称
-            function()
-                vim.cmd("%!json_pp -json_opt utf8,pretty")
-            end,
-            {desc = "format json"} -- 命令描述
-        )
-    end
+	pattern = "json",
+	callback = function()
+		vim.api.nvim_create_user_command(
+			"JsonFormat", -- 命令名称
+			function()
+				vim.cmd("%!json_pp -json_opt utf8,pretty")
+			end,
+			{ desc = "format json" } -- 命令描述
+		)
+	end,
 })
 
 -- 当离开 Python 文件时，移除 DoLint 命令
 vim.api.nvim_create_autocmd("BufLeave", {
-    pattern = "*.json",
-    callback = function()
-        vim.api.nvim_del_user_command('JsonFormat')
-    end
+	pattern = "*.json",
+	callback = function()
+		vim.api.nvim_del_user_command("JsonFormat")
+	end,
 })

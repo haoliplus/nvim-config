@@ -16,14 +16,10 @@
 " append the parent directory to runtimepath
 let &runtimepath.=','.escape(expand('<sfile>:p:h'), '\,')
 set guicursor=
-set listchars=eol:↵,trail:~,tab:>-,nbsp:␣,extends:◣,precedes:◢
+set listchars=eol:↵,trail:~,tab:>→,nbsp:␣,extends:◣,precedes:◢
+" set listchars=eol:↵,trail:~,tab:→→,nbsp:␣,extends:◣,precedes:◢
+" →
 " tab:▷ ,trail:·,extends:◣,precedes:◢,nbsp:○
 set list
 
 lua require('init')
-
-
-" let s:baleia = luaeval("require('baleia').setup { log = 'DEBUG' }")
-"
-" command! BaleiaLogs call s:baleia.logger.show()
-" command! BaleiaColorize call s:baleia.once(bufnr('%'))
