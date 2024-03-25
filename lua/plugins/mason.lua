@@ -26,7 +26,7 @@ return {
 				pip = {
 					-- Whether to upgrade pip to the latest version 
           -- in the virtual environment before installing packages.
-					upgrade_pip = false,
+					upgrade_pip = true,
 
 					-- These args will be added to `pip install` calls. 
           -- Note that setting extra args might impact intended behavior
