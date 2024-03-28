@@ -17,6 +17,7 @@
 let &runtimepath.=','.escape(expand('<sfile>:p:h'), '\,')
 set guicursor=
 set listchars=eol:↵,trail:~,tab:>→,nbsp:␣,extends:◣,precedes:◢
+" nnoremap * :keepjumps normal! mi*`i<CR>
 " set listchars=eol:↵,trail:~,tab:→→,nbsp:␣,extends:◣,precedes:◢
 " →
 " tab:▷ ,trail:·,extends:◣,precedes:◢,nbsp:○

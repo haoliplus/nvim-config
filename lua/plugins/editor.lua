@@ -1,6 +1,7 @@
 return {
   {
       'tzachar/local-highlight.nvim',
+      enabled=false,
       config = function()
         require('local-highlight').setup({
             -- file_types = {'python', 'cpp'}, -- If this is given only attach to this
