@@ -67,6 +67,9 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("BufLeave", {
 	pattern = "*.json",
 	callback = function()
-		vim.api.nvim_del_user_command("JsonFormat")
+    if vim.fn.exists(":JsonFormat") == 2 then
+      -- vim.cmd("silent! delcommand JsonFormat")
+      vim.api.nvim_del_user_command("JsonFormat")
+    end
 	end,
 })
