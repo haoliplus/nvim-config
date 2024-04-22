@@ -55,6 +55,7 @@ require("lazy").setup("plugins", {
 	},
 })
 
+require("check_deps")
 local function call_requires()
 	require("themes")
 	require("keymap")
@@ -70,14 +71,34 @@ if not status then
 end
 
 -- sample for my function
+local node_ok, _ = pcall(
+  vim.cmd, -- ignore
+  'node --version > /dev/null 2>&1'
+)
 function _G.show_my_text()
   require("notify")(
   [[
   My super important 
   message
-  ]]
+  node 
+  ]] .. tostring(node_ok)
   )
 end
 vim.keymap.set("n", "<c-h>", show_my_text, {})
 -- nnoremap <leader>h :lua show_my_text()<CR>
 
+-- local sample_exe = vim.fn.executable("isort")
+
+
+-- local ok, result = pcall(
+--   vim.cmd,'!isort --version > /dev/null 2>&1'
+--   -- 'isort --version 2&>1 /dev/null'
+-- )
+-- local ok, result = pcall(
+--   vim.cmd, -- ignore
+--   'isort --version > /dev/null 2>&1'
+-- )
+--   -- vim.cmd('isort --version 2&>1 /dev/null')
+--
+-- require("notify")("isort: " .. sample_exe .. " " .. tostring(ok) .. " " .. tostring(result), "info ", { title = "Formatter" })
+--
