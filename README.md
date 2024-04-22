@@ -3,6 +3,11 @@
 ## FONT
 1. nvim-config/resources/JetBrainsMonoNLRegularNerdFontComplete.ttf
 
+### REQUIRE
+
+1. node, npm
+2. python3, python3-venv, python3-pip, black, pyright
+
 ## INSTALL
 
 ```bash
