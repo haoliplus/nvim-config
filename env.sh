@@ -10,7 +10,6 @@
 
 LOCAL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-export DOTROOT="${DOTROOT:-${HOME}/.dotfiles}"
 # tar zxf nvim-linux64.tar.gz -C ${HOME}/.local/opt/
 export VIM_RESOURCE_DIR=${VIM_RESOURCE_DIR:-"${HOME}/.local/share/nvim"}
 export VIM_CONFIG_DIR=${VIM_CONFIG_DIR:-"${HOME}/.config/nvim"}

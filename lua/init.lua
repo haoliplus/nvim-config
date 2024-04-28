@@ -23,6 +23,18 @@ end
 
 vim.g.home_path = vim.fn.getenv("HOME")
 vim.g.config_path = vim.fn.getenv("VIM_CONFIG_DIR")
+vim.g.clipboard = {
+             name = 'myClipboard',
+             cache_enabled= 1,
+             copy = {
+                ['+'] = {'tmux', 'load-buffer', '-'},
+                ['*'] = {'tmux', 'load-buffer', '-'}
+              },
+             paste= {
+                ['+']= {'tmux', 'save-buffer', '-'},
+                ['*']= {'tmux', 'save-buffer', '-'},
+             },
+          }
 
 if vim.g.is_linux or vim.g.is_mac then
 	if vim.fn.isdirectory(vim.g.config_path) == 0 then

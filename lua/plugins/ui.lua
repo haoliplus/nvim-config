@@ -52,11 +52,12 @@ return {
 		end,
 	},
 	{
-		"glepnir/lspsaga.nvim",
+		"nvimdev/lspsaga.nvim",
 		lazy = true,
 		enabled = true,
 		branch = "main",
 		event = "LspAttach",
+    -- ft = {'c','cpp', 'lua', 'rust', 'go'},
 		config = function()
 			-- local default = " "
 			require("lspsaga").setup({
