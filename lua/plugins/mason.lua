@@ -15,8 +15,8 @@ return {
 					"tsserver",
 					"bashls",
 					"ruff_lsp",
-          "gopls",
-          "ast_grep",
+          -- "gopls",
+          -- "ast_grep",
           -- "black",
           -- "bash-language-server",
           --"prettier"
