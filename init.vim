@@ -16,11 +16,12 @@
 " append the parent directory to runtimepath
 let &runtimepath.=','.escape(expand('<sfile>:p:h'), '\,')
 set guicursor=
-set listchars=eol:↵,trail:~,tab:>→,nbsp:␣,extends:◣,precedes:◢
+set listchars=trail:~,tab:>→,nbsp:␣,extends:◣,precedes:◢
+" set listchars=eol:↵,trail:~,tab:>→,nbsp:␣,extends:◣,precedes:◢
 " nnoremap * :keepjumps normal! mi*`i<CR>
 " set listchars=eol:↵,trail:~,tab:→→,nbsp:␣,extends:◣,precedes:◢
 " →
 " tab:▷ ,trail:·,extends:◣,precedes:◢,nbsp:○
-set list
+set nolist
 
 lua require('init')
