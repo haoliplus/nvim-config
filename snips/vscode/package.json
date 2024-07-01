@@ -16,6 +16,12 @@
 			},
 			{
 				"language": [
+					"bash"
+				],
+				"path": "./bash/bash.jsonc"
+      },
+			{
+				"language": [
 					"python"
 				],
 				"path": "./python/python.jsonc"

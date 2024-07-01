@@ -1,4 +1,27 @@
 {
+  "heredoc1": {
+    "prefix": "heredoc",
+    "body": [
+      "read -r -d '' VAR <<'EOF'",
+      "abc'asdf\"",
+      "$NAME",
+      "EOF"
+    ]
+  },
+  "heredoc2": {
+    "prefix": "heredoc",
+    "body": [
+      "read -r -d '' VAR <<EOF",
+      "abc'asdf\"",
+      "EOF"
+    ]
+  },
+  "datetime": {
+    "prefix": "datetime",
+    "body": [
+      "date '+%Y%m%d%H%M'"
+    ]
+  },
 	"ifexis": {
 		"prefix": "ifcommand",
 		"body": [
