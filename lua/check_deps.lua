@@ -1,11 +1,14 @@
 local function check_command_existence(cmd)
     local result = io.popen(cmd .. " --version 2>&1")
+    if not result then
+        return false
+    end
     local output = result:read("*a")
     result:close()
     return output ~= "" and not output:match("not found") and not output:match("No such file or directory")
 end
 
-local function os_capture(cmd, raw)
+local function os_capture(cmd, raw) 
     local f = assert(io.popen(cmd, 'r'))
     local s = assert(f:read('*a'))
     f:close()
@@ -15,6 +18,7 @@ local function os_capture(cmd, raw)
     s = string.gsub(s, '[\n\r]+', ' ')
     return s
 end
+
 local function os_git_capture(cmd, raw)
     local f = assert(io.popen(cmd, 'r'))
     local s = assert(f:read('*a'))

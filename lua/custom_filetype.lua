@@ -12,7 +12,7 @@ vim.filetype.add({
     [".*%.cfg"] = "cfg",
     -- A pattern containing an environment variable
     ["${XDG_CONFIG_HOME}/foo/git"] = "git",
-    ["README.(a+)$"] = function(path, bufnr, ext)
+    ["README.(a+)$"] = function(_, _, ext)
       if ext == "md" then
         return "markdown"
       elseif ext == "rst" then
