@@ -23,18 +23,18 @@ vim.g.did_install_default_menus = 1 -- do not load menu
 -- Path to Python 3 interpreter (must be an absolute path), make startup
 -- faster. See https://neovim.io/doc/user/provider.html.
 if vim.fn.executable("python3.exe") or vim.fn.executable("python") == 1 or vim.fn.executable("python3") == 1 then
-	if vim.g.is_win then
-		vim.g.python3_host_prog = vim.fn.substitute(vim.fn.exepath("python3"), ".exe$", "", "g")
-	elseif vim.g.is_linux or vim.g.is_mac then
-		vim.g.python3_host_prog = vim.fn.exepath("python3")
-		if vim.g.is_linux then
-			vim.scriptencoding = "utf-8"
-			vim.opt.encoding = "utf-8"
-			vim.opt.fileencoding = "utf-8"
-		end
-	end
+  if vim.g.is_win then
+    vim.g.python3_host_prog = vim.fn.substitute(vim.fn.exepath("python3"), ".exe$", "", "g")
+  elseif vim.g.is_linux or vim.g.is_mac then
+    vim.g.python3_host_prog = vim.fn.exepath("python3")
+    if vim.g.is_linux then
+      vim.scriptencoding = "utf-8"
+      vim.opt.encoding = "utf-8"
+      vim.opt.fileencoding = "utf-8"
+    end
+  end
 else
-	print("Python 3 executable not found! You must install Python 3 and set its PATH correctly!")
+  print("Python 3 executable not found! You must install Python 3 and set its PATH correctly!")
 end
 
 -- -------------------------- vars for plugins ---------------------------------
@@ -103,14 +103,14 @@ vim.opt.splitright = true
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-	print("cloning lazy.nvim... " .. lazypath)
-	vim.fn.system({
-		"git",
-		"clone",
-		-- "--filter=blob:none", -- this require git version
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable", -- latest stable release
-		lazypath,
-	})
+  print("cloning lazy.nvim... " .. lazypath)
+  vim.fn.system({
+    "git",
+    "clone",
+    -- "--filter=blob:none", -- this require git version
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
 vim.opt.rtp:prepend(lazypath)

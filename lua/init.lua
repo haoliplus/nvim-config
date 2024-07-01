@@ -13,94 +13,90 @@ vim.g.is_mac = vim.fn.has("macunix") == 1
 vim.g.logging_level = "info"
 
 function Contains(list, x)
-	for _, v in pairs(list) do
-		if v == x then
-			return true
-		end
-	end
-	return false
+  for _, v in pairs(list) do
+    if v == x then
+      return true
+    end
+  end
+  return false
 end
 
 vim.g.home_path = vim.fn.getenv("HOME")
 vim.g.config_path = vim.fn.getenv("VIM_CONFIG_DIR")
 vim.g.clipboard = {
-             name = 'myClipboard',
-             cache_enabled= 1,
-             copy = {
-                ['+'] = {'tmux', 'load-buffer', '-'},
-                ['*'] = {'tmux', 'load-buffer', '-'}
-              },
-             paste= {
-                ['+']= {'tmux', 'save-buffer', '-'},
-                ['*']= {'tmux', 'save-buffer', '-'},
-             },
-          }
+  name = "myClipboard",
+  cache_enabled = 1,
+  copy = {
+    ["+"] = { "tmux", "load-buffer", "-" },
+    ["*"] = { "tmux", "load-buffer", "-" },
+  },
+  paste = {
+    ["+"] = { "tmux", "save-buffer", "-" },
+    ["*"] = { "tmux", "save-buffer", "-" },
+  },
+}
 
 if vim.g.is_linux or vim.g.is_mac then
-	if vim.fn.isdirectory(vim.g.config_path) == 0 then
-		vim.g.config_path = vim.g.home_path .. "/.config/nvim"
-	end
+  if vim.fn.isdirectory(vim.g.config_path) == 0 then
+    vim.g.config_path = vim.g.home_path .. "/.config/nvim"
+  end
 elseif vim.g.is_win then
-	if vim.fn.isdirectory(vim.g.config_path) == 0 then
-		vim.g.config_path = vim.g.home_path .. "/AppData/Local/nvim"
-	end
+  if vim.fn.isdirectory(vim.g.config_path) == 0 then
+    vim.g.config_path = vim.g.home_path .. "/AppData/Local/nvim"
+  end
 else
-	print(vim.inspect(vim.g)) -- use `:messages` to see the log
+  print(vim.inspect(vim.g)) -- use `:messages` to see the log
 end
 vim.opt.rtp:prepend(vim.g.config_path)
-
 
 require("setup")
 require("custom_filetype")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath .. "/lua/lazy/init.lua") then
-	print("lazy.nvim loading failed.")
-	return
+  print("lazy.nvim loading failed.")
+  return
 end
 
 require("lazy").setup("plugins", {
-	performance = {
-		rpt = {
-			paths = { vim.g.config_path },
-		},
-	},
+  performance = {
+    rpt = {
+      paths = { vim.g.config_path },
+    },
+  },
 })
 
 require("check_deps")
 local function call_requires()
-	require("themes")
-	require("keymap")
-	require("autocommands")
+  require("themes")
+  require("keymap")
+  require("autocommands")
 end
 
 local status, ret = pcall(call_requires)
 
 if not status then
-	print("Failed to init")
-	print(ret)
-	return
+  print("Failed to init")
+  print(ret)
+  return
 end
 
 -- sample for my function
 local node_ok, _ = pcall(
   vim.cmd, -- ignore
-  'node --version > /dev/null 2>&1'
+  "node --version > /dev/null 2>&1"
 )
 function _G.show_my_text()
-  require("notify")(
-  [[
-  My super important 
+  require("notify")([[
+  My super important
   message
-  node 
-  ]] .. tostring(node_ok)
-  )
+  node
+  ]] .. tostring(node_ok))
 end
 vim.keymap.set("n", "<c-h>", show_my_text, {})
 -- nnoremap <leader>h :lua show_my_text()<CR>
 
 -- local sample_exe = vim.fn.executable("isort")
-
 
 -- local ok, result = pcall(
 --   vim.cmd,'!isort --version > /dev/null 2>&1'
