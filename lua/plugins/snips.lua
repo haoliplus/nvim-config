@@ -43,7 +43,6 @@ return {
       vim.cmd([[smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>']])
       ----------------------------------------------------------------------------------------------------------------
       local ls = require("luasnip")
-      local community_snippets = require("luasnip_snippets").load_snippets()
       require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snips/vscode" } })
       -- require("luasnip.loaders.from_snipmate").lazy_load({ paths = { "./snips/snipmate/mine" } })
       -- require("luasnip.loaders.from_snipmate").lazy_load({ paths = { "./snips/snipmate/ulti" } })
@@ -52,9 +51,10 @@ return {
       --     "./lua/luasnip_snippets/snippets"
       --   },
       -- })
-      for k, v in pairs(community_snippets) do
-        ls.add_snippets(k, v)
-      end
+      -- local community_snippets = require("luasnip_snippets").load_snippets()
+      -- for k, v in pairs(community_snippets) do
+      --   ls.add_snippets(k, v)
+      -- end
       ----------------------------------------------------------------------------------------------------------------
       local s = ls.snippet
       local t = ls.text_node
