@@ -27,9 +27,9 @@ end
 
 -- Returns a snippet_node wrapped around an insert_node whose initial
 -- text value is set to the current date in the desired format.
-utils.date_input = function(args, state, fmt)
-  local fmt = fmt or "%Y-%m-%d"
-  return sn(nil, i(1, os.date(fmt)))
+utils.date_input = function(_, _, fmts)
+  fmts = fmts or "%Y-%m-%d"
+  return sn(nil, i(1, os.date(fmts)))
 end
 
 -- Make sure to not pass an invalid command, as io.popen() may write over nvim-text.
@@ -207,6 +207,18 @@ utils.luadocsnip = function(args, _, old_state)
   -- Error on attempting overwrite.
   snip.old_state = param_nodes
   return snip
+end
+
+-- 'recursive' dynamic snippet. Expands to some text followed by itself.
+utils.rec_ls = function()
+  return sn(
+    nil,
+    c(1, {
+      -- Order is important, sn(...) first would cause infinite loop of expansion.
+      t(""),
+      sn(nil, { t({ "", "\t\\item " }), i(1), d(2, utils.rec_ls, {}) }),
+    })
+  )
 end
 
 return utils
