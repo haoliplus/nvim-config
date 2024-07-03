@@ -1,8 +1,8 @@
 {
-	"snip1": {
-		"prefix": "lua",
-		"body": [
-			"lualualua"
-		]
-	}
+  "snip1": {
+    "prefix": "lua",
+    "body": [
+      "lualualua"
+    ]
+  }
 }

@@ -18,12 +18,12 @@ priority 50
 snippet multithread "async multi thread(Only for io program)" b
 import threading
 class MyThread(threading.Thread):
-	def run(self):
-		pass
+  def run(self):
+    pass
 
 for f in range(4):
-	t = MyThread()
-	t.start()
-	t.join()
+  t = MyThread() 
+  t.start()
+  t.join()
 endsnippet
 
