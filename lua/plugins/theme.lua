@@ -27,6 +27,7 @@ return {
         style = "night",
         -- disable italic for functions
         styles = {
+          comments = { italic = true },
           functions = {},
         },
         sidebars = { "qf", "vista_kind", "terminal", "packer" },

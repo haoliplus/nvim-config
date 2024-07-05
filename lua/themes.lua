@@ -37,7 +37,7 @@ vim.g.palenight_color_overrides = {
   -- white = { gui = "#3E4452", cterm = "White", cterm16 = "White" },
   -- -- black = { gui = "#3E4452", cterm = "White", cterm16 = "White" },
   -- visual_black = { gui = "#3E4452", cterm = "White", cterm16 = "White" },
-  -- comment_grey = { gui = "#3E4452", cterm = "White", cterm16 = "White" },
+  comment_grey = { gui = "#3E4452", cterm = "White", cterm16 = "White" },
   -- gutter_fg_grey = { gui = "#3E4452", cterm = "White", cterm16 = "White" },
   -- visual_grey = { gui = "#3E4452", cterm = "White", cterm16 = "White" },
   menu_grey = { gui = "#3E4452", cterm = "White", cterm16 = "White" },
@@ -56,6 +56,9 @@ if vim.fn.exists("+termguicolors") == 1 then
   vim.cmd([[let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"]])
   vim.cmd([[let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"]])
   vim.opt.termguicolors = false
+  vim.cmd([[
+  set t_Co=256
+  ]])
 else
   vim.opt.termguicolors = true
   vim.g.palenight_color_overrides = {
@@ -66,9 +69,9 @@ end
 
 local call_requires = function()
   vim.cmd("colorscheme tokyonight")
+  -- vim.cmd("colorscheme palenight")
 end
 pcall(call_requires)
-
 vim.opt.colorcolumn = { 80, 120 }
 vim.cmd([[
 hi DiagnosticError guifg=White
