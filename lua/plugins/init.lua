@@ -14,10 +14,18 @@ return {
     "max397574/better-escape.nvim",
     config = function()
       require("better_escape").setup({
-        mapping = { "jk", "jj" },
-        timeout = vim.o.timeoutlen,
-        clear_empty_lines = true,
-        keys = "<Esc>",
+        i = {
+            [" "] = {
+                ["<tab>"] = function()
+                    -- Defer execution to avoid side-effects
+                    vim.defer_fn(function()
+                        -- set undo point
+                        vim.o.ul = vim.o.ul
+                        require("luasnip").expand_or_jump()
+                    end, 1)
+                end
+            }
+        }
       })
     end,
   },
