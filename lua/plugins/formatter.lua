@@ -5,9 +5,10 @@ return {
     config = function(_, _) -- stylua: ignore
       -- Utilities for creating configurations
       local util = require("formatter.util")
+      vim.keymap.set("n", "<Leader>F", ":FormatWrite<CR>", { noremap = true, silent = true })
 
       -- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
-      require("formatter").setup({
+      require("formatter").setup({ -- stylua: ignore
         -- Enable or disable logging
         logging = true,
         -- Set the log level
