@@ -67,11 +67,11 @@ end
 local function check_commands()
   local commands = {
     git = "git",
-    node = "node",
+    -- node = "node",
     python3 = "python3",
-    yarn = "yarn",
-    isort = "isort",
-    black = "black",
+    -- yarn = "yarn",
+    -- isort = "isort",
+    -- black = "black",
   }
 
   for key, cmd in pairs(commands) do
