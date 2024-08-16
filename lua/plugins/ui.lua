@@ -194,6 +194,8 @@ return {
         config = {
           week_header = {
             enable = true,
+            concat = "vim:"..version,
+            append = {"Hello"}
           },
           packages = { enable = true }, -- show how many plugins neovim loaded
           mru = { limit = 10, icon = "* ", label = "Recent Files" },
