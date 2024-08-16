@@ -8,6 +8,7 @@ return {
     config = function()
       require("mason-lspconfig").setup({
         ensure_installed = {
+          -- "tree-sitter-cli",
           "lua_ls",
           "rust_analyzer",
           "clangd",
