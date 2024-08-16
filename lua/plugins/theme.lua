@@ -168,41 +168,41 @@ return {
     "nvim-tree/nvim-web-devicons",
     enabled = true,
     lazy = false,
-    opts = {
-      override = {
-        toml = {
-          icon = "#",
-          color = "#428850",
-          cterm_color = "65",
-          name = "toml",
-        },
-        lua = {
-          icon = "#",
-          color = "#428850",
-          cterm_color = "65",
-          name = "lua",
-        },
-      },
-      override_by_filename = {
-        [".gitignore"] = {
-          icon = "a",
-          color = "#f1502f",
-          name = "gitignore",
-        },
-        ["a.toml"] = {
-          icon = "",
-          color = "#f1502f",
-          name = "gitignore",
-        },
-      },
-      override_by_extension = {
-        ["toml"] = {
-          icon = "",
-          color = "#f1502f",
-          name = "gitignore",
-        },
-      },
-    },
+    -- opts = {
+    --   override = {
+    --     toml = {
+    --       icon = "#",
+    --       color = "#428850",
+    --       cterm_color = "65",
+    --       name = "toml",
+    --     },
+    --     lua = {
+    --       icon = "#",
+    --       color = "#428850",
+    --       cterm_color = "65",
+    --       name = "lua",
+    --     },
+    --   },
+    --   override_by_filename = {
+    --     [".gitignore"] = {
+    --       icon = "a",
+    --       color = "#f1502f",
+    --       name = "gitignore",
+    --     },
+    --     ["a.toml"] = {
+    --       icon = "",
+    --       color = "#f1502f",
+    --       name = "gitignore",
+    --     },
+    --   },
+    --   override_by_extension = {
+    --     ["toml"] = {
+    --       icon = "",
+    --       color = "#f1502f",
+    --       name = "gitignore",
+    --     },
+    --   },
+    -- },
     config = function()
       -- require("lualine").setup({})
       require("nvim-web-devicons").setup({
@@ -216,6 +216,10 @@ return {
             cterm_color = "65",
             name = "toml",
           },
+          dconf = {
+            icon = "",
+            name = "dconf",
+          },
         },
         override_by_filename = {
           [".gitignore"] = {
@@ -226,7 +230,7 @@ return {
         },
         override_by_extension = {
           ["toml"] = {
-            icon = "",
+            icon = "",
             color = "#f1502f",
             name = "toml",
           },
@@ -241,6 +245,7 @@ return {
           name = "toml",
         },
       })
+      require("nvim-web-devicons").set_default_icon('', '#6d8086', 65)
     end,
   },
   -- Automatically highlights other instances of the word under your cursor.

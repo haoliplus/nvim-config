@@ -179,6 +179,17 @@ return {
     "glepnir/dashboard-nvim",
     event = "VimEnter",
     config = function()
+      local vim_version_major = vim.version().major
+      local vim_version_minor = vim.version().minor
+      local vim_version_patch = vim.version().patch
+      local vim_version_build = vim.version().build
+      local version = vim_version_major
+        .. "."
+        .. vim_version_minor
+        .. "."
+        .. vim_version_patch
+        .. "+"
+        .. vim_version_build
       require("dashboard").setup({
         config = {
           week_header = {
@@ -186,7 +197,7 @@ return {
           },
           packages = { enable = true }, -- show how many plugins neovim loaded
           mru = { limit = 10, icon = "* ", label = "Recent Files" },
-          footer = { "hello" }, -- footer
+          footer = { "hello: " .. version }, -- footer
           -- limit how many projects list, action when you press key or enter it will run this action.
           -- action can be a functino type, e.g.
           -- action = func(path) vim.cmd('Telescope find_files cwd=' .. path) end
@@ -290,7 +301,8 @@ return {
           folder_empty = "",
           -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
           -- then these will never be used.
-          default = "*",
+          -- default = "*",
+          default = "",
           highlight = "NeoTreeFileIcon",
         },
         modified = {

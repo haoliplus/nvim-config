@@ -68,6 +68,7 @@ require("lazy").setup("plugins", {
 
 require("check_deps")
 local function call_requires()
+  require("my_utils")
   require("themes")
   require("keymap")
   require("autocommands")
@@ -109,4 +110,3 @@ vim.keymap.set("n", "<c-h>", show_my_text, {})
 --   -- vim.cmd('isort --version 2&>1 /dev/null')
 --
 -- require("notify")("isort: " .. sample_exe .. " " .. tostring(ok) .. " " .. tostring(result), "info ", { title = "Formatter" })
---
