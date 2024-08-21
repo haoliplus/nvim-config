@@ -234,7 +234,7 @@ return {
       {
         "<F5>",
         function()
-          require("neo-tree.command").execute({ toggle = true, position = "left", dir = vim.loop.cwd() })
+          require("neo-tree.command").execute({ toggle = true, position = "left", dir = vim.uv.cwd() })
         end,
         desc = "Explorer NeoTree (cwd)",
       },
@@ -249,13 +249,14 @@ return {
       "MunifTanjim/nui.nvim",
       -- 'mengelbrecht/lightline-bufferline',
       "akinsho/bufferline.nvim",
+      "3rd/image.nvim",
     },
     deactivate = function()
       vim.cmd([[Neotree close]])
     end,
     init = function()
       if vim.fn.argc() == 1 then
-        local stat = vim.loop.fs_stat(vim.fn.argv(0))
+        local stat = vim.uv.fs_stat(tostring(vim.fn.argv(0)))
         if stat and stat.type == "directory" then
           require("neo-tree")
         end

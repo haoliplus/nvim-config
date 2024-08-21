@@ -102,7 +102,8 @@ vim.opt.undofile = true
 vim.opt.splitright = true
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+-- vim.loop to vim.uv
+if not vim.uv.fs_stat(lazypath) then
   print("cloning lazy.nvim... " .. lazypath)
   vim.fn.system({
     "git",

@@ -106,12 +106,20 @@ return {
     --   }
     -- end
   },
+  {
+    "IndianBoy42/tree-sitter-just",
+    config = function()
+      require("tree-sitter-just").setup({})
+    end,
+  },
   { ------ Better syntax highlightingG
     "nvim-treesitter/nvim-treesitter",
     enabled = true,
+    dependencies = { "IndianBoy42/tree-sitter-just" },
     build = ":TSUpdate",
     config = function()
       require("nvim-treesitter.configs").setup({
+        modules = {},
         -- A list of parser names, or "all" (the five listed parsers should always be installed)
         ensure_installed = {
           "c",
@@ -123,6 +131,7 @@ return {
           "vimdoc",
           "html",
           "javascript",
+          "just"
         },
 
         -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -139,7 +148,7 @@ return {
         -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
 
         highlight = {
-          enable = false,
+          enable = true,
 
           -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
           -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
@@ -162,6 +171,15 @@ return {
           additional_vim_regex_highlighting = false,
         },
       })
+      -- require("nvim-treesitter.parsers").get_parser_configs().just = {
+      --   install_info = {
+      --     url = "https://github.com/IndianBoy42/tree-sitter-just", -- local path or git repo
+      --     files = { "src/parser.c", "src/scanner.c" },
+      --     branch = "main",
+      --     -- use_makefile = true -- this may be necessary on MacOS (try if you see compiler errors)
+      --   },
+      --   maintainers = { "@IndianBoy42" },
+      -- }
     end,
   },
   {
@@ -245,7 +263,7 @@ return {
           name = "toml",
         },
       })
-      require("nvim-web-devicons").set_default_icon('', '#6d8086', 65)
+      require("nvim-web-devicons").set_default_icon("", "#6d8086", 65)
     end,
   },
   -- Automatically highlights other instances of the word under your cursor.

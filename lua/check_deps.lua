@@ -84,6 +84,11 @@ local function check_commands()
   end
 end
 
+function CheckDep()
+  cmd_exists("git")
+  check_git_version("2.20")
+end
+
 -- local success, message = check_git_version("2.20")
 --
 -- if success then

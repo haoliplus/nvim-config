@@ -1,4 +1,4 @@
--- using :lua print_r(table)
+-- using :lua Print_r(table)
 function Print_r(t)
   local print_r_cache = {}
   local function sub_print_r(sub_t, indent)

@@ -83,16 +83,12 @@ if not status then
 end
 
 -- sample for my function
-local node_ok, _ = pcall(
-  vim.cmd, -- ignore
-  "node --version > /dev/null 2>&1"
-)
 function _G.show_my_text()
   require("notify")([[
   My super important
   message
   node
-  ]] .. tostring(node_ok))
+  ]])
 end
 vim.keymap.set("n", "<c-h>", show_my_text, {})
 -- nnoremap <leader>h :lua show_my_text()<CR>
