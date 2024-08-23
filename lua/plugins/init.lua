@@ -25,6 +25,14 @@ return {
                     end, 1)
                 end
             }
+        },
+        mappings = {
+          v = {
+              j = {
+                  -- 不知道为什么，如果不这么设置。会在visual模式里，按下jk后自动退出
+                  k = false,
+              }
+          }
         }
       })
     end,
