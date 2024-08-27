@@ -37,6 +37,8 @@ return {
       -- Move to previous/next
       map("n", "<A-,>", "<Cmd>BufferLineMovePrev<CR>", keymap_opts)
       map("n", "<A-.>", "<Cmd>BufferLineGoToBuffer<CR>", keymap_opts)
+      map("n", "<Leader>[", "<Cmd>BufferLineCyclePrev<CR>", keymap_opts)
+      map("n", "<Leader>]", "<Cmd>BufferLineCycleNext<CR>", keymap_opts)
       map("n", "<Leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", keymap_opts)
       map("n", "<Leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>", keymap_opts)
       map("n", "<Leader>3", "<Cmd>BufferLineGoToBuffer 3<CR>", keymap_opts)
