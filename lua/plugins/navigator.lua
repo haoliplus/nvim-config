@@ -90,7 +90,8 @@ return {
       vim.keymap.set("n", "<leader>fr", builtin.oldfiles, {})
       vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
       vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
-      vim.keymap.set("n", "<leader>fm", builtin.marks, {})
+      -- vim.keymap.set("n", "<leader>fm", builtin.marks, {})
+      vim.keymap.set("n", "<leader>fm", ":Telescope bookmarks<CR>", {})
       vim.keymap.set("n", "<leader>ft", builtin.tags, {})
       vim.keymap.set("n", "<c-f>", builtin.find_files, {})
       -- vim.keymap.set("n", "<F6>", ":Buffers<CR>", { noremap = true, silent = true })
@@ -153,7 +154,7 @@ return {
           -- •	%S: Two-digit second (00 to 59)
           -- •	%p: AM/PM indicator
       })
-        require("telescope").load_extension("bookmarks")
+        -- require("telescope").load_extension("bookmarks")
 
     end
 }
