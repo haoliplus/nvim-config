@@ -89,10 +89,17 @@ return {
       vim.keymap.set("n", "<leader>fr", builtin.oldfiles, {})
       vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
       vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
+      vim.keymap.set("n", "<leader>fm", builtin.marks, {})
+      vim.keymap.set("n", "<leader>ft", builtin.tags, {})
       vim.keymap.set("n", "<c-f>", builtin.find_files, {})
       -- vim.keymap.set("n", "<F6>", ":Buffers<CR>", { noremap = true, silent = true })
       -- vim.keymap.set("n", "<F7>", ":Marks<CR>", { noremap = true, silent = true })
       --		vim.g.ctrlp_map = "<c-f>"
     end,
   },
+  {
+  "chentoast/marks.nvim",
+    event = "VeryLazy",
+    opts = {},
+  }
 }
