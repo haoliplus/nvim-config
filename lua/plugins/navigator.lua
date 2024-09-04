@@ -100,11 +100,6 @@ return {
     end,
   },
   {
-  "chentoast/marks.nvim",
-    event = "VeryLazy",
-    opts = {},
-  },
-  {
     'crusj/bookmarks.nvim',
     keys = {
         { "<tab><tab>", mode = { "n" } },
