@@ -34,7 +34,9 @@ LOCAL_DIR="${HOME}/.local"
 SHARE_DIR="${LOCAL_DIR}/share"
 BIN_DIR="${LOCAL_DIR}/bin"
 LIB_DIR="${LOCAL_DIR}/lib"
-
+mkdir -p ${LIB_DIR}
+mkdir -p ${BIN_DIR}
+mkdir -p ${SHARE_DIR}
 
 # curl -L ${NVIM_DOWNLOAD_URL} | tar -xz -C ${TMP_DIR}
 wget -O - -c ${NVIM_DOWNLOAD_URL} | tar -xz -C ${TMP_DIR}
