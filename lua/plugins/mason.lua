@@ -29,6 +29,9 @@ return {
     "williamboman/mason.nvim",
     config = function()
       require("mason").setup({
+        -- npm = {
+        --   install_args = { "--registry", "https://registry.npmmirror.com" }
+        -- },
         pip = {
           -- Whether to upgrade pip to the latest version
           -- in the virtual environment before installing packages.

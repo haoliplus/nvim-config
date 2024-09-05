@@ -251,7 +251,7 @@ return {
       "MunifTanjim/nui.nvim",
       -- 'mengelbrecht/lightline-bufferline',
       "akinsho/bufferline.nvim",
-      "3rd/image.nvim",
+      -- "3rd/image.nvim",
     },
     deactivate = function()
       vim.cmd([[Neotree close]])
