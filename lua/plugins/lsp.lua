@@ -64,7 +64,7 @@ return {
         "ruff_lsp",
         "lua_ls",
         "gopls",
-        "tsserver",
+        "ts_ls",
         "bashls",
         -- "jedi_language_server",
       }
@@ -118,7 +118,7 @@ return {
         }
       end
       -- tsserver
-      lsp_opts["tsserver"] = {
+      lsp_opts["ts_ls"] = {
         init_options = {
           preferences = {
             -- File is a CommonJS module; it may be converted to an ES module.
