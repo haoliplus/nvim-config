@@ -13,7 +13,7 @@ return {
           "rust_analyzer",
           "clangd",
           "pyright",
-          "tsserver",
+          "ts_ls", -- "typescript-language-server",
           "bashls",
           "ruff_lsp",
           -- "gopls",

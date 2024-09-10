@@ -155,8 +155,12 @@ return {
           return py_capabilities
         end)(),
         settings = {
+          pyright = {
+            disableOrganizeImports = true, -- Using Ruff
+          },
           python = {
             analysis = {
+              ignore = { '*' }, -- Using Ruff
               autoSearchPaths = true,
               typeCheckingMode = "basic",
               diagnosticMode = "workspace",
