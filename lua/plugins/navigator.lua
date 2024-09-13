@@ -90,6 +90,7 @@ return {
       vim.keymap.set("n", "<leader>fr", builtin.oldfiles, {})
       vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
       vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
+      vim.keymap.set("n", "<leader>fd", builtin.diagnostics, {})
       -- vim.keymap.set("n", "<leader>fm", builtin.marks, {})
       vim.keymap.set("n", "<leader>fm", ":Telescope bookmarks<CR>", {})
       vim.keymap.set("n", "<leader>ft", builtin.tags, {})
