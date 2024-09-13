@@ -106,3 +106,24 @@ vim.keymap.set("n", "<c-h>", show_my_text, {})
 --   -- vim.cmd('isort --version 2&>1 /dev/null')
 --
 -- require("notify")("isort: " .. sample_exe .. " " .. tostring(ok) .. " " .. tostring(result), "info ", { title = "Formatter" })
+
+-------------------------------------
+-- Set border for floating windows
+local _border = "single"
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+  vim.lsp.handlers.hover, {
+    border = _border
+  }
+)
+
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+  vim.lsp.handlers.signature_help, {
+    border = _border
+  }
+)
+
+vim.diagnostic.config{
+  float={border=_border}
+}
+-----------------------------------------------------------------

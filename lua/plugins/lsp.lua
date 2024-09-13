@@ -54,7 +54,7 @@ return {
             vim.lsp.buf.format({ async = true })
           end, opts)
         end,
-      })
+      }) -- end LspAttach
 
       local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
