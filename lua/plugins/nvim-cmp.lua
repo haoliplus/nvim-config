@@ -11,7 +11,11 @@ return {
   -- complete sources for nvim-cmp
   { "hrsh7th/cmp-buffer", dependencies = "hrsh7th/nvim-cmp", enabled = true },
   { "haoliplus/cmp-path", dependencies = "hrsh7th/nvim-cmp", enabled = true },
-  { "hrsh7th/cmp-cmdline", dependencies = "hrsh7th/nvim-cmp", enabled = true },
+  {
+    "hrsh7th/cmp-cmdline",
+    dependencies = "hrsh7th/nvim-cmp",
+    enabled = true,
+  },
   { "saadparwaiz1/cmp_luasnip" },
   -- {'quangnguyen30192/cmp-nvim-ultisnips'},
   {
@@ -32,6 +36,14 @@ return {
             -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
             require("luasnip").lsp_expand(args.body)
           end,
+        },
+        window = {
+          completion = cmp.config.window.bordered({
+            border = "rounded",
+          }),
+          documentation = cmp.config.window.bordered({
+            border = "rounded",
+          }),
         },
         -- i: insert
         -- c: command
@@ -77,6 +89,9 @@ return {
 
       -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
       cmp.setup.cmdline(":", {
+        window = {
+          documentation = { border = "single" },
+        },
         sources = cmp.config.sources(
           -- {
           --   { name = 'path' }

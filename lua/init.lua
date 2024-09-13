@@ -109,7 +109,7 @@ vim.keymap.set("n", "<c-h>", show_my_text, {})
 
 -------------------------------------
 -- Set border for floating windows
-local _border = "single"
+local _border = "rounded"
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
   vim.lsp.handlers.hover, {

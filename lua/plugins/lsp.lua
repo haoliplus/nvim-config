@@ -71,6 +71,9 @@ return {
       local lsp_opts = {}
 
       local util = require("lspconfig/util")
+      require('lspconfig.ui.windows').default_options = {
+        border = "rounded"
+      }
 
       -- Clangd
 
