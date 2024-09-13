@@ -7,19 +7,18 @@
 --
 
 -- Setup nvim-cmp.
+local flag = true
 return {
   -- complete sources for nvim-cmp
-  { "hrsh7th/cmp-buffer", dependencies = "hrsh7th/nvim-cmp", enabled = true },
-  { "haoliplus/cmp-path", dependencies = "hrsh7th/nvim-cmp", enabled = true },
-  {
-    "hrsh7th/cmp-cmdline",
-    dependencies = "hrsh7th/nvim-cmp",
-    enabled = true,
-  },
-  { "saadparwaiz1/cmp_luasnip" },
+  { "hrsh7th/cmp-buffer", enabled = flag, dependencies = "hrsh7th/nvim-cmp" },
+  { "hrsh7th/cmp-nvim-lsp", enabled = flag, dependencies = "hrsh7th/nvim-cmp" },
+  { "haoliplus/cmp-path", enabled = flag, dependencies = "hrsh7th/nvim-cmp" },
+  { "hrsh7th/cmp-cmdline", enabled = flag, dependencies = "hrsh7th/nvim-cmp" },
+  { "saadparwaiz1/cmp_luasnip", enabled = flag },
   -- {'quangnguyen30192/cmp-nvim-ultisnips'},
   {
     "hrsh7th/nvim-cmp",
+    enabled = flag,
     dependencies = {
       -- If you want to enable filetype detection based on treesitter:
       -- requires = { "nvim-treesitter/nvim-treesitter" },
@@ -55,11 +54,17 @@ return {
           ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
           ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
           ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-          ["<C-e>"] = cmp.mapping({
+          ["<C-e>"] = cmp.mapping({ -- useful when cowork copilot
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
           }),
+          ['<C-g>'] = cmp.mapping(function(_)
+            vim.api.nvim_feedkeys(vim.fn['copilot#Accept'](vim.api.nvim_replace_termcodes('<Tab>', true, true, true)), 'n', true)
+          end),
           ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        },
+        expirimental = {
+          ghost_text = false
         },
         sources = cmp.config.sources({
           { name = "lazydev", group_index = 0 },
@@ -89,9 +94,6 @@ return {
 
       -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
       cmp.setup.cmdline(":", {
-        window = {
-          documentation = { border = "single" },
-        },
         sources = cmp.config.sources(
           -- {
           --   { name = 'path' }

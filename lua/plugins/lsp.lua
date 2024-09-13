@@ -4,9 +4,7 @@
 -- Copyright (C) 2022 lihao <haoliplus@gmail.com>
 --
 -- Distributed under terms of the MIT license.
---
 return {
-  { "hrsh7th/cmp-nvim-lsp", dependencies = "hrsh7th/nvim-cmp", enabled = true },
   {
     "neovim/nvim-lspconfig",
     enabled = true,
@@ -56,7 +54,16 @@ return {
         end,
       }) -- end LspAttach
 
-      local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+      -- local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+      local function call_requires()
+        return require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+      end
+
+      local capabilities = nil
+      local status, ret = pcall(call_requires)
+      if status then
+        capabilities = ret
+      end
 
       local servers = {
         "clangd",

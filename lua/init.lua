@@ -53,7 +53,7 @@ require("setup")
 require("custom_filetype")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath .. "/lua/lazy/init.lua") then
+if not vim.uv.fs_stat(lazypath .. "/lua/lazy/init.lua") then
   print("lazy.nvim loading failed.")
   return
 end
@@ -65,6 +65,8 @@ require("lazy").setup("plugins", {
     },
   },
 })
+require("lazy.core.config").options.ui.border = "rounded"
+require("lazy.core.config").options.git.filter = false -- for old git version
 
 require("check_deps")
 local function call_requires()
@@ -111,19 +113,15 @@ vim.keymap.set("n", "<c-h>", show_my_text, {})
 -- Set border for floating windows
 local _border = "rounded"
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover, {
-    border = _border
-  }
-)
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = _border,
+})
 
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-  vim.lsp.handlers.signature_help, {
-    border = _border
-  }
-)
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+  border = _border,
+})
 
-vim.diagnostic.config{
-  float={border=_border}
-}
+vim.diagnostic.config({
+  float = { border = _border },
+})
 -----------------------------------------------------------------
