@@ -15,29 +15,35 @@ return {
     config = function()
       require("better_escape").setup({
         i = {
-            [" "] = {
-                ["<tab>"] = function()
-                    -- Defer execution to avoid side-effects
-                    vim.defer_fn(function()
-                        -- set undo point
-                        vim.o.ul = vim.o.ul
-                        require("luasnip").expand_or_jump()
-                    end, 1)
-                end
-            }
+          [" "] = {
+            ["<tab>"] = function()
+              -- Defer execution to avoid side-effects
+              vim.defer_fn(function()
+                -- set undo point
+                vim.o.ul = vim.o.ul
+                require("luasnip").expand_or_jump()
+              end, 1)
+            end,
+          },
         },
         mappings = {
           v = {
-              j = {
-                  -- 不知道为什么，如果不这么设置。会在visual模式里，按下jk后自动退出
-                  k = false,
-              }
-          }
-        }
+            j = {
+              -- 不知道为什么，如果不这么设置。会在visual模式里，按下jk后自动退出
+              k = false,
+            },
+          },
+        },
       })
     end,
   },
   -- git
+  {
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require("gitsigns").setup()
+    end,
+  },
   { "tpope/vim-fugitive" },
   {
     "airblade/vim-gitgutter",
