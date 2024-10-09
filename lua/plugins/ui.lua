@@ -35,8 +35,9 @@ return {
       local map = vim.api.nvim_set_keymap
       local keymap_opts = { noremap = true, silent = true }
       -- Move to previous/next
-      map("n", "<A-,>", "<Cmd>BufferLineMovePrev<CR>", keymap_opts)
-      map("n", "<A-.>", "<Cmd>BufferLineGoToBuffer<CR>", keymap_opts)
+      map("n", "<M-,>", "<Cmd>BufferLineMovePrev<CR>", keymap_opts)
+      map("n", "<M-.>", "<Cmd>BufferLineGoToBuffer<CR>", keymap_opts)
+      map("n", "<Tab><Tab>", "<Cmd>BufferLineCycleNext<CR>", keymap_opts)
       map("n", "<Leader>[", "<Cmd>BufferLineCyclePrev<CR>", keymap_opts)
       map("n", "<Leader>]", "<Cmd>BufferLineCycleNext<CR>", keymap_opts)
       map("n", "<Leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", keymap_opts)
@@ -50,6 +51,7 @@ return {
       map("n", "<Leader>9", "<Cmd>BufferLineGoToBuffer 9<CR>", keymap_opts)
       -- Close buffer
       map("n", "<Leader>c", "<Cmd>BufferLinePickClose<CR>", keymap_opts)
+
       require("bufferline").setup(opts)
     end,
   },

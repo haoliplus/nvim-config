@@ -103,7 +103,7 @@ return {
   {
     "crusj/bookmarks.nvim",
     keys = {
-      { "<tab><tab>", mode = { "n" } },
+      { "<Leader><tab>", mode = { "n" } },
     },
     branch = "main",
     dependencies = { "nvim-web-devicons" },
@@ -112,7 +112,7 @@ return {
         storage_dir = "", -- Default path: vim.fn.stdpath("data").."/bookmarks,  if not the default directory, should be absolute path",
         mappings_enabled = true, -- If the value is false, only valid for global keymaps: toggle、add、delete_on_virt、show_desc
         keymap = {
-          toggle = "<tab><tab>", -- Toggle bookmarks(global keymap)
+          toggle = "<Leader><tab>", -- Toggle bookmarks(global keymap)
           close = "q", -- close bookmarks (buf keymap)
           add = "\\z", -- Add bookmarks(global keymap)
           add_global = "\\g", -- Add global bookmarks(global keymap), global bookmarks will appear in all projects. Identified with the symbol '󰯾'
