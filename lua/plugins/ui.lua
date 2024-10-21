@@ -274,6 +274,35 @@ return {
         bind_to_cwd = false,
         follow_current_file = { enabled = true },
         use_libuv_file_watcher = true,
+        filtered_items = {
+            visible = false, -- when true, they will just be displayed differently than normal items
+            hide_dotfiles = true,
+            hide_gitignored = false,
+            hide_hidden = true, -- only works on Windows for hidden files/directories
+            hide_by_name = {
+              "node_modules"
+            },
+            hide_by_pattern = { -- uses glob style patterns
+              --"*.meta",
+              --"*/src/*/tsconfig.json",
+              "*.pyc",
+              "bazel-*"
+            },
+            always_show = { -- remains visible even if other settings would normally hide it
+              ".gitignored",
+              ".gitignore",
+            },
+            always_show_by_pattern = { -- uses glob style patterns
+              ".env*",
+            },
+            never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
+              ".DS_Store",
+              "thumbs.db"
+            },
+            never_show_by_pattern = { -- uses glob style patterns
+              --".null-ls_*",
+            },
+          },
       },
       buffers = {
         follow_current_file = { enabled = true }, -- This will find and focus the file in the active buffer every
@@ -282,8 +311,13 @@ return {
         mappings = {
           ["<space>"] = "none",
         },
-        width = 25,
+        width = 30,
+        auto_expand = true,
       },
+       source_selector = {
+            winbar = true,
+            statusline = false
+        },
       default_component_configs = {
         container = {
           enable_character_fade = true,
