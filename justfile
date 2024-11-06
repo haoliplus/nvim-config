@@ -4,7 +4,7 @@ default:
 link:
   echo "Add nvim"
 
-[unix]
+[linux]
 prepare_deps:
   #!/usr/bin/env sh
   echo "Unix"
