@@ -24,7 +24,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- mason
 vim.api.nvim_create_user_command("InitMasonPackage", function(_)
   vim.cmd("MasonInstall black@22.12.0 prettier ast-grep bash-language-server clangd lua-language-server ")
-  vim.cmd("MasonInstall pyright ruff-lsp rust-analyzer typescript-language-server isort@4.3.21 clangd gofumpt stylua")
+  vim.cmd("MasonInstall pyright ruff rust-analyzer typescript-language-server isort@4.3.21 clangd gofumpt stylua")
 end, { bang = true, desc = "install mason" })
 
 vim.api.nvim_create_user_command("Binary", function(_)

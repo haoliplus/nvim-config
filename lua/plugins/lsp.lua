@@ -68,7 +68,7 @@ return {
       local servers = {
         "clangd",
         "pyright",
-        "ruff_lsp",
+        "ruff",
         "lua_ls",
         "gopls",
         "ts_ls",
@@ -138,7 +138,7 @@ return {
       }
       -- ruff_lsp
 
-      lsp_opts["ruff_lsp"] = {
+      lsp_opts["ruff"] = {
         root_dir = function(fname)
           return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(fname)
             or util.path.dirname(fname)

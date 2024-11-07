@@ -15,7 +15,7 @@ return {
           "pyright",
           "ts_ls", -- "typescript-language-server",
           "bashls",
-          "ruff_lsp",
+          "ruff",
           -- "gopls",
           -- "ast_grep",
           -- "black",
