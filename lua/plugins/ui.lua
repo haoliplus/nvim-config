@@ -66,7 +66,7 @@ return {
       -- local default = " "
       require("lspsaga").setup({
         lightbulb = {
-          enable = true,
+          enable = false,
           enable_in_insert = true,
           sign = false, -- false: only show bulb at the end of line
           sign_priority = 40,
