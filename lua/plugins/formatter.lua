@@ -5,7 +5,7 @@ return {
     config = function(_, _) -- stylua: ignore
       -- Utilities for creating configurations
       local util = require("formatter.util")
-      vim.keymap.set("n", "<Leader>F", ":FormatWrite<CR>", { noremap = true, silent = true })
+      vim.keymap.set("n", "<Leader>F", ":FormatWrite<CR>", { noremap = true, silent = true, desc="FormatWrite" })
 
       -- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
       require("formatter").setup({ -- stylua: ignore

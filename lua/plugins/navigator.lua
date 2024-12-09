@@ -5,7 +5,7 @@ return {
     init = function()
       if vim.fn.executable("ag") == 1 then
         vim.g.ackprg = "ag --vimgrep"
-        vim.keymap.set("n", "<Leader>a", ":Ack<Space>", { noremap = true, silent = true })
+        vim.keymap.set("n", "<Leader>a", ":Ack<Space>", { noremap = true, silent = true , desc="Ack"})
       end
     end,
   },
@@ -84,17 +84,17 @@ return {
       require("telescope").load_extension("fzf")
       require("telescope").load_extension("bookmarks")
       local builtin = require("telescope.builtin")
-      vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-      vim.keymap.set("n", "<leader>fq", builtin.quickfix, {})
-      vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-      vim.keymap.set("n", "<leader>fr", builtin.oldfiles, {})
-      vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
-      vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
-      vim.keymap.set("n", "<leader>fd", builtin.diagnostics, {})
+      vim.keymap.set("n", "<leader>ff", builtin.find_files, {desc="find_files"})
+      vim.keymap.set("n", "<leader>fq", builtin.quickfix, {desc="quickfix"})
+      vim.keymap.set("n", "<leader>fg", builtin.live_grep, {desc="live_grep"})
+      vim.keymap.set("n", "<leader>fr", builtin.oldfiles, {desc="oldfiles"})
+      vim.keymap.set("n", "<leader>fb", builtin.buffers, {desc="buffers"})
+      vim.keymap.set("n", "<leader>fh", builtin.help_tags, {desc="help_tags"})
+      vim.keymap.set("n", "<leader>fd", builtin.diagnostics, {desc="diagnostics"})
       -- vim.keymap.set("n", "<leader>fm", builtin.marks, {})
-      vim.keymap.set("n", "<leader>fm", ":Telescope bookmarks<CR>", {})
-      vim.keymap.set("n", "<leader>ft", builtin.tags, {})
-      vim.keymap.set("n", "<c-f>", builtin.find_files, {})
+      vim.keymap.set("n", "<leader>fm", ":Telescope bookmarks<CR>", {desc="bookmarks"})
+      vim.keymap.set("n", "<leader>ft", builtin.tags, {desc="tags"})
+      vim.keymap.set("n", "<c-f>", builtin.find_files, {desc="find_files"})
       -- vim.keymap.set("n", "<F6>", ":Buffers<CR>", { noremap = true, silent = true })
       -- vim.keymap.set("n", "<F7>", ":Marks<CR>", { noremap = true, silent = true })
       --		vim.g.ctrlp_map = "<c-f>"

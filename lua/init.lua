@@ -92,7 +92,7 @@ function _G.show_my_text()
   node
   ]])
 end
-vim.keymap.set("n", "<c-h>", show_my_text, {})
+vim.keymap.set("n", "<c-h>", show_my_text, {desc="Show my text"})
 -- nnoremap <leader>h :lua show_my_text()<CR>
 
 -- local sample_exe = vim.fn.executable("isort")

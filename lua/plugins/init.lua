@@ -60,7 +60,7 @@ return {
         -- your configuration comes here
         -- or leave it empty to use the default settings
         -- refer to the configuration section below
-        vim.keymap.set("n", "<F9>", ":TroubleToggle<cr>", { silent = true, noremap = true }),
+        vim.keymap.set("n", "<F9>", ":TroubleToggle<cr>", { silent = true, noremap = true, desc="TroubleToggle" }),
       })
     end,
   },
