@@ -11,6 +11,8 @@ vim.g.is_win = (vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1)
 vim.g.is_linux = (vim.fn.has("unix") == 1 and vim.fn.has("macunix") == 0)
 vim.g.is_mac = vim.fn.has("macunix") == 1
 vim.g.logging_level = "info"
+-- views can only be fully collapsed with the global statusline
+vim.opt.laststatus = 3
 
 function Contains(list, x)
   for _, v in pairs(list) do
