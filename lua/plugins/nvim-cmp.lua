@@ -12,7 +12,7 @@ return {
   -- complete sources for nvim-cmp
   { "hrsh7th/cmp-buffer", enabled = flag, dependencies = "hrsh7th/nvim-cmp" },
   { "hrsh7th/cmp-nvim-lsp", enabled = flag, dependencies = "hrsh7th/nvim-cmp" },
-  { "haoliplus/cmp-path", enabled = flag, dependencies = "hrsh7th/nvim-cmp" },
+  -- { "haoliplus/cmp-path", enabled = flag, dependencies = "hrsh7th/nvim-cmp" },
   { "hrsh7th/cmp-cmdline", enabled = flag, dependencies = "hrsh7th/nvim-cmp" },
   { "saadparwaiz1/cmp_luasnip", enabled = flag },
   -- {'quangnguyen30192/cmp-nvim-ultisnips'},
@@ -69,16 +69,16 @@ return {
         sources = cmp.config.sources({
           { name = "lazydev", group_index = 0 },
           { name = "nvim_lsp" },
-          {
-            name = "path",
-            option = {
-              trailing_slash = true,
-              exclude = {
-                "onboard_data",
-                "/onboard_data",
-              },
-            },
-          },
+          -- {
+          --   name = "path",
+          --   option = {
+          --     trailing_slash = true,
+          --     exclude = {
+          --       "onboard_data",
+          --       "/onboard_data",
+          --     },
+          --   },
+          -- },
           { name = "luasnip", priority = 10 }, -- For ultisnips users.
         }, {
           { name = "buffer" },

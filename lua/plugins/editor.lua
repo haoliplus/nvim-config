@@ -1,5 +1,10 @@
 return {
   {
+    'BranimirE/fix-auto-scroll.nvim',
+    config = true,
+    event = 'VeryLazy'
+  },
+  {
     "tzachar/local-highlight.nvim",
     enabled = false,
     config = function()
