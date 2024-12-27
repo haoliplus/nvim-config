@@ -7,7 +7,7 @@
 --
 
 -- Setup nvim-cmp.
-local flag = true
+local flag = false
 return {
   -- complete sources for nvim-cmp
   { "hrsh7th/cmp-buffer", enabled = flag, dependencies = "hrsh7th/nvim-cmp" },

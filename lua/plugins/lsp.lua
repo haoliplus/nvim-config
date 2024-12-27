@@ -11,6 +11,7 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+      'saghen/blink.cmp',
     },
     config = function()
       -- require('plugins.utils.lsp_callbacks')
@@ -64,6 +65,7 @@ return {
       if status then
         capabilities = ret
       end
+      capabilities = require('blink.cmp').get_lsp_capabilities()
 
       local servers = {
         "clangd",
@@ -143,6 +145,7 @@ return {
           return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(fname)
             or util.path.dirname(fname)
         end,
+        capabilities = capabilities,
         init_options = {
           settings = {
             path = "ruff-lsp",
