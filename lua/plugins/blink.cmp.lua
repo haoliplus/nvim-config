@@ -20,6 +20,19 @@ return {
     -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
     -- See the full "keymap" documentation for information on defining your own keymap.
     keymap = { preset = 'default' },
+    signature = {
+      -- Enable signature help
+      enabled = true,
+    },
+    completion = {
+      documentation = {
+        auto_show = true,
+        auto_show_delay_ms = 500,
+      },
+      list = {
+        selection = "auto_insert"
+      }
+    },
 
     appearance = {
       -- Sets the fallback highlight groups to nvim-cmp's highlight groups
