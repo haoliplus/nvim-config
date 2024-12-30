@@ -19,9 +19,13 @@ return {
     -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
     -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
     -- See the full "keymap" documentation for information on defining your own keymap.
-    keymap = { preset = 'default' },
+    keymap = {
+      preset = 'default',
+      ['<C-y>'] = {'select_and_accept'},
+      ['<C-e>'] = {'hide'}
+  },
     signature = {
-      -- Enable signature help
+      -- Enable signature help, 显示函数参数
       enabled = true,
     },
     completion = {
@@ -30,7 +34,7 @@ return {
         auto_show_delay_ms = 500,
       },
       list = {
-        selection = "auto_insert"
+        selection = "auto_insert" -- 选择时自动插入
       }
     },
 
