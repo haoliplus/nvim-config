@@ -17,7 +17,6 @@ return {
       require("telescope").load_extension("find_template")
     end,
   },
-  { "rafamadriz/friendly-snippets" },
   {
     "L3MON4D3/LuaSnip",
     -- follow latest release.
@@ -27,7 +26,7 @@ return {
     -- sudo apt install libluajit-5.1-dev
     -- this sometimes cause fatal error
     -- build = "make install_jsregexp",
-    dependencies = { "rafamadriz/friendly-snippets" },
+    dependencies = { "haoliplus/friendly-snippets" },
     config = function()
       -- press <Tab> to expand or jump in a snippet. These can also be mapped separately
       -- via <Plug>luasnip-expand-snippet and <Plug>luasnip-jump-next.
@@ -43,7 +42,8 @@ return {
       vim.cmd([[smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>']])
       ----------------------------------------------------------------------------------------------------------------
       local ls = require("luasnip")
-      require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snips/vscode" } })
+      -- require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snips/vscode" } })
+      require("luasnip.loaders.from_vscode").lazy_load()
       -- require("luasnip.loaders.from_snipmate").lazy_load({ paths = { "./snips/snipmate/mine" } })
       -- require("luasnip.loaders.from_snipmate").lazy_load({ paths = { "./snips/snipmate/ulti" } })
       -- require("luasnip.loaders.from_lua").load({

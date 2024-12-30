@@ -77,11 +77,17 @@
     ],
     "description": ""
   },
+  "iff": {
+    "prefix": "iff",
+    "body": [
+        "???",
+    ],
+    "description": ""
+  },
   "ifx": {
     "prefix": "ifmain",
     "body": [
-        "if __name__ == `__main__:",
-        "  ${1:${VISUAL:main()}}"
+        "if __nxame__ == `__main__:",
     ],
     "description": ""
   },
