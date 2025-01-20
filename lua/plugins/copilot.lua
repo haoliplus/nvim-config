@@ -9,6 +9,7 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
+    enabled = true,
     config = function()
       -- vim.g.copilot_no_tab_map = true
       --
@@ -61,17 +62,20 @@ return {
   {
     "yetone/avante.nvim",
     event = "VeryLazy",
+    enabled = false,
     lazy = false,
     version = false, -- set this if you want to always pull the latest change
     opts = {
       provider = "deepseek",
+      -- auto_suggestions_provider="deepseek",
       vendors = {
         deepseek = {
           __inherited_from = "openai",
           api_key_name = "DEEPSEEK_API_KEY",
-          endpoint = "https://api.deepseek.com",
+          endpoint = "https://api.deepseek.com/",
           model = "deepseek-chat",
         },
+
       },
       -- add any opts here
       -- @alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
