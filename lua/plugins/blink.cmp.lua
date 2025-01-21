@@ -25,6 +25,11 @@ local config = {
   'saghen/blink.cmp',
   -- optional: provides snippets for the snippet source
   dependencies = 'rafamadriz/friendly-snippets',
+  enabled = function()
+    return not vim.tbl_contains({ "lua", "markdown" }, vim.bo.filetype)
+      and vim.bo.buftype ~= "prompt"
+      and vim.b.completion ~= false
+  end,
 
   -- use a release tag to download pre-built binaries
   version = '*',
@@ -42,13 +47,19 @@ local config = {
     -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
     -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
     -- See the full "keymap" documentation for information on defining your own keymap.
-    keymap = { preset = 'default' },
+    keymap = {
+      preset = 'default',
+      ['<C-]>'] = { 'accept' },
+    },
     signature = {
       -- Enable signature help
       enabled = true,
+      window = { border = 'single' }
     },
     completion = {
+      menu = { border = 'single' },
       documentation = {
+        window = { border = 'single' },
         auto_show = true,
         auto_show_delay_ms = 500,
       },
