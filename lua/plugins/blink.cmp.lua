@@ -1,12 +1,35 @@
 #! /usr/bin/env lua
 
-return {
+-- 检查文件是否存在并读取内容的函数
+local function read_os_release()
+    local file = io.open("/etc/os-release", "r")
+    if not file then
+        return nil
+    end
+    local content = file:read("*all")
+    file:close()
+    return content
+end
+
+-- 检查是否为 Ubuntu 16.04
+local function is_ubuntu_1604()
+    local content = read_os_release()
+    if not content then
+        return false
+    end
+    -- 检查是否包含 Ubuntu 16.04 的特征
+    return string.match(content, "Ubuntu") and string.match(content, "16.04")
+end
+
+local config = {
   'saghen/blink.cmp',
   -- optional: provides snippets for the snippet source
   dependencies = 'rafamadriz/friendly-snippets',
 
   -- use a release tag to download pre-built binaries
   version = '*',
+  --- 
+  --- curl https://sh.rustup.rs -sSf | sh
   -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
   -- build = 'cargo build --release',
   -- If you use nix, you can build from source using latest nightly rust with:
@@ -55,3 +78,11 @@ return {
   },
   opts_extend = { "sources.default" }
 }
+
+
+-- 根据系统版本设置变量
+if is_ubuntu_1604() then
+    config['build'] = 'cargo build --release'
+end
+
+return config
