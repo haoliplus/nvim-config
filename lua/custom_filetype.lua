@@ -1,6 +1,12 @@
 vim.filetype.add({
   filename = {
     ["this_is_a_speci"] = "yaml",
+    ["/etc/sing-box/config.json"] = "jsonc",
+    ["/etc/sing-box/basic.json"] = "jsonc",
+    ["/etc/sing-box/dns.json"] = "jsonc",
+    ["/etc/sing-box/inbounds.json"] = "jsonc",
+    ["/etc/sing-box/outbounds.json"] = "jsonc",
+    ["/etc/sing-box/rules.json"] = "jsonc",
     [".kube/config"] = "yaml",
     -- ['a.sh'] = 'yaml',
   },
