@@ -35,7 +35,8 @@ return {
           hide_during_completion = true,
           debounce = 75,
           keymap = {
-            accept = "<C-;>",
+            -- accept = "<C-;>",
+            accept = "<M-;>", -- alt
             -- accept_word = false,
             -- accept_line = false,
             next = "<C-,>",
@@ -62,7 +63,7 @@ return {
   {
     "yetone/avante.nvim",
     event = "VeryLazy",
-    -- enabled = false,
+    enabled = true,
     lazy = false,
     version = false, -- set this if you want to always pull the latest change
     opts = {
