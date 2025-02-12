@@ -16,6 +16,7 @@ return {
           "ts_ls", -- "typescript-language-server",
           "bashls",
           "ruff",
+          "omnisharp"
           -- "gopls",
           -- "ast_grep",
           -- "black",
