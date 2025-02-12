@@ -1,3 +1,7 @@
+
+-- check "~/.config/github-copilot/hosts.json", read content
+
+
 return {
   {
     "github/copilot.vim",
@@ -63,7 +67,32 @@ return {
   {
     "yetone/avante.nvim",
     event = "VeryLazy",
-    enabled = true,
+    enabled = function()
+      local Path = require("plenary.path")
+      local Utils = require("avante.utils")
+      local xdg_config = vim.fn.expand("$XDG_CONFIG_HOME")
+      local os_name = Utils.get_os_name()
+      ---@type string
+      local config_dir
+
+      if xdg_config and vim.fn.isdirectory(xdg_config) > 0 then
+        config_dir = xdg_config
+      elseif vim.tbl_contains({ "linux", "darwin" }, os_name) then
+        config_dir = vim.fn.expand("~/.config")
+      else
+        config_dir = vim.fn.expand("~/AppData/Local")
+      end
+
+      --- hosts.json (copilot.lua), apps.json (copilot.vim)
+      ---@type Path[]
+      local paths = vim.iter({ "hosts.json", "apps.json" }):fold({}, function(acc, path)
+        local yason = Path:new(config_dir):joinpath("github-copilot", path)
+        if yason:exists() then table.insert(acc, yason) end
+        return acc
+      end)
+      if #paths == 0 then return false end
+      return true
+    end,
     lazy = false,
     version = false, -- set this if you want to always pull the latest change
     opts = {
