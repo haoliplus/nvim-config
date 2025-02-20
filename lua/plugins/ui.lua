@@ -310,7 +310,7 @@ return {
         mappings = {
           ["<space>"] = "none",
         },
-        width = 30,
+        width = 40,
         auto_expand = true,
       },
        source_selector = {
