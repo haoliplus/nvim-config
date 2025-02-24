@@ -61,14 +61,20 @@ if not vim.uv.fs_stat(lazypath .. "/lua/lazy/init.lua") then
 end
 
 require("lazy").setup("plugins", {
+  git = {
+    filter = false
+
+  },
+  ui = {
+    border = "rounded"
+
+  },
   performance = {
     rpt = {
       paths = { vim.g.config_path },
     },
   },
 })
-require("lazy.core.config").options.ui.border = "rounded"
-require("lazy.core.config").options.git.filter = false -- for old git version
 
 require("check_deps")
 local function call_requires()
