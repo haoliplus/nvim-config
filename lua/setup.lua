@@ -28,12 +28,15 @@ if
   or vim.fn.executable("python3") == 1
   or vim.fn.executable("/usr/bin/python3") == 1
   or vim.fn.executable("/usr/bin/python2") == 1
+  or vim.fn.executable(vim.fn.getenv("HOME") .. "/.local/share/mise/installs/python/latest/bin/python") == 1
 then
   if vim.g.is_win then
     vim.g.python3_host_prog = vim.fn.substitute(vim.fn.exepath("python3"), ".exe$", "", "g")
   elseif vim.g.is_linux or vim.g.is_mac then
     if vim.g.is_linux then
-      if vim.fn.executable("/usr/bin/python3") == 1 then
+      if vim.fn.executable(vim.fn.getenv("HOME") .. "/.local/share/mise/installs/python/latest/bin/python") == 1 then
+        vim.g.python3_host_prog = vim.fn.exepath(vim.fn.getenv("HOME") .. "/.local/share/mise/installs/python/latest/bin/python")
+      elseif vim.fn.executable("/usr/bin/python3") == 1 then
         vim.g.python3_host_prog = vim.fn.exepath("/usr/bin/python3")
       else
         vim.g.python3_host_prog = vim.fn.exepath("python3")

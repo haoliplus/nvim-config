@@ -107,5 +107,6 @@ local config = {
 if is_ubuntu_1604() then
     config['build'] = 'cargo build --release'
 end
+config['build'] = 'cargo build --release'
 
 return config
