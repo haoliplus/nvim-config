@@ -25,6 +25,7 @@ local config = {
   'saghen/blink.cmp',
   -- optional: provides snippets for the snippet source
   dependencies = {'rafamadriz/friendly-snippets', "fang2hou/blink-copilot"},
+  submodules = false,
   enabled = function()
     return not vim.tbl_contains({ "lua", "markdown" }, vim.bo.filetype)
       and vim.bo.buftype ~= "prompt"
