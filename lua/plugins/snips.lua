@@ -21,6 +21,7 @@ return {
     "L3MON4D3/LuaSnip",
     -- follow latest release.
     version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+    submodules = false,
     -- build = "make install_jsregexp",
     -- install jsregexp (optional!).
     -- sudo apt install libluajit-5.1-dev
