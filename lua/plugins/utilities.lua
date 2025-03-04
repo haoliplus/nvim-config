@@ -14,6 +14,11 @@ return {
       -- <leader>bs: 
     },
   },
+  { 'RaafatTurki/hex.nvim' ,
+    config = function()
+      require('hex').setup()
+    end
+  },
   -- run command :AsyncRun[!]
   { "skywind3000/asyncrun.vim" },
   { "nvim-lua/plenary.nvim" },
