@@ -34,7 +34,7 @@ local config = {
 
   -- use a release tag to download pre-built binaries
   version = '*',
-  --- 
+  ---
   --- curl https://sh.rustup.rs -sSf | sh
   -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
   -- build = 'cargo build --release',
@@ -70,6 +70,13 @@ local config = {
           auto_insert = true
         }
       }
+    },
+    cmdline = {
+      keymap = {
+        -- recommended, as the default keymap will only show and select the next item
+        ['<Tab>'] = { 'show', 'accept' },
+      },
+      completion = { menu = { auto_show = true } },
     },
 
     appearance = {
