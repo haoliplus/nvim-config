@@ -5,11 +5,10 @@ local function  enable_avante_impl()
       local os_name = vim.loop.os_uname().sysname
       local xdg_config = vim.fn.expand("$XDG_CONFIG_HOME")
       ---@type string
-      local config_dir
-
+      local config_dir = xdg_config
       if xdg_config and vim.fn.isdirectory(xdg_config) > 0 then
         config_dir = xdg_config
-      elseif vim.tbl_contains({ "linux", "darwin" }, os_name) then
+      elseif os_name == "Linux" or os_name == "Darwin" then
         config_dir = vim.fn.expand("~/.config")
       else
         config_dir = vim.fn.expand("~/AppData/Local")
