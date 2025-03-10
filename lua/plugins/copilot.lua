@@ -2,9 +2,8 @@
 -- check "~/.config/github-copilot/hosts.json", read content
 local function  enable_avante_impl()
       local Path = require("plenary.path")
-      local Utils = require("avante.utils")
+      local os_name = vim.loop.os_uname().sysname
       local xdg_config = vim.fn.expand("$XDG_CONFIG_HOME")
-      local os_name = Utils.get_os_name()
       ---@type string
       local config_dir
 
