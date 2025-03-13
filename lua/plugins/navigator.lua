@@ -5,15 +5,43 @@ return {
     init = function()
       if vim.fn.executable("ag") == 1 then
         vim.g.ackprg = "ag --vimgrep"
-        vim.keymap.set("n", "<Leader>a", ":Ack<Space>", { noremap = true, silent = true , desc="Ack"})
+        vim.keymap.set("n", "<Leader>a", ":Ack<Space>", { noremap = true, silent = true, desc = "Ack" })
       end
     end,
   },
   -- jump between .h/.cc
   -- { 'for': {'c', 'cpp'} }
-  { "vim-scripts/a.vim", ft = { "c", "cpp", "cc", "cuda" } },
+  -- { "vim-scripts/a.vim", ft = { "c", "cpp", "cc", "cuda" } },
   ---- fuzzy search using c-t
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+  { -- switch between heading and impl
+    "jakemason/ouroboros",
+    dependencies = { { "nvim-lua/plenary.nvim" } },
+    config = function()
+      -- these are the defaults, customize as desired
+      require('ouroboros').setup({
+          extension_preferences_table = {
+                -- Higher numbers are a heavier weight and thus preferred.
+                -- In the following, .c would prefer to open .h before .hpp
+                c = {h = 2, hpp = 1},
+                h = {c = 2, cpp = 1},
+                cpp = {hpp = 2, h = 1},
+                hpp = {cpp = 1, c = 2},
+
+                -- Ouroboros supports any combination of filetypes you like, simply
+                -- add them as desired:
+                -- myext = { myextsrc = 2, myextoldsrc = 1},
+                -- tpp = {hpp = 2, h = 1},
+                -- inl = {cpp = 3, hpp = 2, h = 1},
+                -- cu = {cuh = 3, hpp = 2, h = 1},
+                -- cuh = {cu = 1}
+          },
+          -- if this is true and the matching file is already open in a pane, we'll
+          -- switch to that pane instead of opening it in the current buffer
+          switch_to_open_pane_if_possible = false,
+      })
+    end
+  },
   {
     "junegunn/fzf",
     build = "./install --all",
@@ -118,17 +146,17 @@ return {
       require("telescope").load_extension("fzf")
       require("telescope").load_extension("bookmarks")
       local builtin = require("telescope.builtin")
-      vim.keymap.set("n", "<leader>ff", builtin.find_files, {desc="find_files"})
-      vim.keymap.set("n", "<leader>fq", builtin.quickfix, {desc="quickfix"})
-      vim.keymap.set("n", "<leader>fg", builtin.live_grep, {desc="live_grep"})
-      vim.keymap.set("n", "<leader>fr", builtin.oldfiles, {desc="oldfiles"})
-      vim.keymap.set("n", "<leader>fb", builtin.buffers, {desc="buffers"})
-      vim.keymap.set("n", "<leader>fh", builtin.help_tags, {desc="help_tags"})
-      vim.keymap.set("n", "<leader>fd", builtin.diagnostics, {desc="diagnostics"})
+      vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "find_files" })
+      vim.keymap.set("n", "<leader>fq", builtin.quickfix, { desc = "quickfix" })
+      vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "live_grep" })
+      vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "oldfiles" })
+      vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "buffers" })
+      vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "help_tags" })
+      vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "diagnostics" })
       -- vim.keymap.set("n", "<leader>fm", builtin.marks, {})
-      vim.keymap.set("n", "<leader>fm", ":Telescope bookmarks<CR>", {desc="bookmarks"})
-      vim.keymap.set("n", "<leader>ft", builtin.tags, {desc="tags"})
-      vim.keymap.set("n", "<c-f>", builtin.find_files, {desc="find_files"})
+      vim.keymap.set("n", "<leader>fm", ":Telescope bookmarks<CR>", { desc = "bookmarks" })
+      vim.keymap.set("n", "<leader>ft", builtin.tags, { desc = "tags" })
+      vim.keymap.set("n", "<c-f>", builtin.find_files, { desc = "find_files" })
       -- vim.keymap.set("n", "<F6>", ":Buffers<CR>", { noremap = true, silent = true })
       -- vim.keymap.set("n", "<F7>", ":Marks<CR>", { noremap = true, silent = true })
       --		vim.g.ctrlp_map = "<c-f>"

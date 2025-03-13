@@ -97,7 +97,8 @@ return {
   {
     "yetone/avante.nvim",
     event = "VeryLazy",
-    enabled = enable_avante(),
+    -- enabled = enable_avante(),
+    enabled = false,
     lazy = false,
     version = false, -- set this if you want to always pull the latest change
     opts = {
