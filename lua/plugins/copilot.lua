@@ -292,9 +292,9 @@ return {
             -- topic_prompt = "You only respond with 3 to 4 words to summarize the past conversation.",
             -- usually a cheap and fast model to generate the chat topic based on
             -- the whole chat history
-                  -- parameters to summarize chat
+            -- parameters to summarize chat
             topic = {
-              model = "gpt-4o-mini",
+              model = "openai/gpt-4o-mini",
               params = { max_completion_tokens = 64 },
             },
             -- default parameters
@@ -304,6 +304,7 @@ return {
             },
           },
         },
+        chat_dir = vim.loop.fs_realpath(vim.fn.stdpath("data"):gsub("/$", "") .. "/parrot/chats"),
       })
     end,
   },
