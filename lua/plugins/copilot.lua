@@ -1,28 +1,31 @@
-
 -- check "~/.config/github-copilot/hosts.json", read content
-local function  enable_avante_impl()
-      local Path = require("plenary.path")
-      local os_name = vim.loop.os_uname().sysname
-      local xdg_config = vim.fn.expand("$XDG_CONFIG_HOME")
-      ---@type string
-      local config_dir = xdg_config
-      if xdg_config and vim.fn.isdirectory(xdg_config) > 0 then
-        config_dir = xdg_config
-      elseif os_name == "Linux" or os_name == "Darwin" then
-        config_dir = vim.fn.expand("~/.config")
-      else
-        config_dir = vim.fn.expand("~/AppData/Local")
-      end
+local function enable_avante_impl()
+  local Path = require("plenary.path")
+  local os_name = vim.loop.os_uname().sysname
+  local xdg_config = vim.fn.expand("$XDG_CONFIG_HOME")
+  ---@type string
+  local config_dir = xdg_config
+  if xdg_config and vim.fn.isdirectory(xdg_config) > 0 then
+    config_dir = xdg_config
+  elseif os_name == "Linux" or os_name == "Darwin" then
+    config_dir = vim.fn.expand("~/.config")
+  else
+    config_dir = vim.fn.expand("~/AppData/Local")
+  end
 
-      --- hosts.json (copilot.lua), apps.json (copilot.vim)
-      ---@type Path[]
-      local paths = vim.iter({ "hosts.json", "apps.json" }):fold({}, function(acc, path)
-        local yason = Path:new(config_dir):joinpath("github-copilot", path)
-        if yason:exists() then table.insert(acc, yason) end
-        return acc
-      end)
-      if #paths == 0 then return false end
-      return true
+  --- hosts.json (copilot.lua), apps.json (copilot.vim)
+  ---@type Path[]
+  local paths = vim.iter({ "hosts.json", "apps.json" }):fold({}, function(acc, path)
+    local yason = Path:new(config_dir):joinpath("github-copilot", path)
+    if yason:exists() then
+      table.insert(acc, yason)
+    end
+    return acc
+  end)
+  if #paths == 0 then
+    return false
+  end
+  return true
 end
 
 local function enable_avante()
@@ -265,5 +268,43 @@ return {
         ft = { "markdown", "Avante" },
       },
     },
+  },
+  {
+    "frankroeder/parrot.nvim",
+    dependencies = { "ibhagwan/fzf-lua", "nvim-lua/plenary.nvim" },
+    opts = {},
+    config = function()
+      require("parrot").setup({
+        -- Providers must be explicitly added to make them available.
+        providers = {
+          custom = {
+            style = "openai",
+            api_key = os.getenv("OPENROUTER_API_KEY"),
+            -- OPTIONAL: Alternative methods to retrieve API key
+            -- Using GPG for decryption:
+            -- api_key = { "gpg", "--decrypt", vim.fn.expand("$HOME") .. "/anthropic_api_key.txt.gpg" },
+            -- Using macOS Keychain:
+            -- api_key = { "/usr/bin/security", "find-generic-password", "-s anthropic-api-key", "-w" },
+            -- endpoint = "https://api.anthropic.com/v1/messages",
+            -- endpoint = "https://openrouter.ai/api/v1",
+            endpoint = "https://openrouter.ai/api/v1/chat/completions",
+            models = { "anthropic/claude-3.7-sonnet", "deepseek/deepseek-r1", "google/gemini-2.0-pro-exp-02-05:free" },
+            -- topic_prompt = "You only respond with 3 to 4 words to summarize the past conversation.",
+            -- usually a cheap and fast model to generate the chat topic based on
+            -- the whole chat history
+                  -- parameters to summarize chat
+            topic = {
+              model = "gpt-4o-mini",
+              params = { max_completion_tokens = 64 },
+            },
+            -- default parameters
+            params = {
+              chat = { temperature = 1.1, top_p = 1 },
+              command = { temperature = 1.1, top_p = 1 },
+            },
+          },
+        },
+      })
+    end,
   },
 }

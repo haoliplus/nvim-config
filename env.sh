@@ -19,3 +19,5 @@
 # export VIMINIT='source $MYVIMRC'
 
 # this_is_a_word
+
+# get current path of script
