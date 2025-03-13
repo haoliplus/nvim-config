@@ -11,12 +11,13 @@ return {
   },
   -- jump between .h/.cc
   -- { 'for': {'c', 'cpp'} }
-  -- { "vim-scripts/a.vim", ft = { "c", "cpp", "cc", "cuda" } },
+  { "vim-scripts/a.vim", ft = { "c", "cpp", "cc", "cuda" } },
   ---- fuzzy search using c-t
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   { -- switch between heading and impl
     "jakemason/ouroboros",
     dependencies = { { "nvim-lua/plenary.nvim" } },
+    enabled = false,
     config = function()
       -- these are the defaults, customize as desired
       require('ouroboros').setup({
