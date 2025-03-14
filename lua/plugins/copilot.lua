@@ -308,7 +308,7 @@ return {
             },
           },
         },
-        chat_dir = vim.loop.fs_realpath(vim.fn.stdpath("data"):gsub("/$", "") .. "/parrot/chats"),
+        chat_dir = vim.uv.fs_realpath(tostring(vim.fn.stdpath("data")):gsub("/$", "") .. "/parrot/chats"),
       })
     end,
   },
