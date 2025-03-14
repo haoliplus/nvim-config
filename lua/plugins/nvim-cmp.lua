@@ -58,13 +58,17 @@ return {
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
           }),
-          ['<C-g>'] = cmp.mapping(function(_)
-            vim.api.nvim_feedkeys(vim.fn['copilot#Accept'](vim.api.nvim_replace_termcodes('<Tab>', true, true, true)), 'n', true)
+          ["<C-g>"] = cmp.mapping(function(_)
+            vim.api.nvim_feedkeys(
+              vim.fn["copilot#Accept"](vim.api.nvim_replace_termcodes("<Tab>", true, true, true)),
+              "n",
+              true
+            )
           end),
           ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         },
         expirimental = {
-          ghost_text = false
+          ghost_text = false,
         },
         sources = cmp.config.sources({
           { name = "lazydev", group_index = 0 },

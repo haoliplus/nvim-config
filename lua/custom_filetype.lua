@@ -38,7 +38,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 -- 为 JSON 文件添加 JSONC 检测
-vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = "*.json",
   callback = function()
     -- 获取第一行内容
@@ -52,7 +52,7 @@ vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
       -- 如果不是注释，保持为 json
       vim.bo.filetype = "json"
     end
-  end
+  end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {

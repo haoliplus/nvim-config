@@ -76,8 +76,8 @@ local function check_commands()
 
   for key, cmd in pairs(commands) do
     if check_command_existence(cmd) then
-      -- require("notify")(key .. " is installed.")
-      -- only pass
+    -- require("notify")(key .. " is installed.")
+    -- only pass
     else
       require("notify")(key .. " is not installed.")
     end

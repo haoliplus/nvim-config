@@ -4,20 +4,22 @@ return {
   { "rcarriga/nvim-notify" },
   -- fuzzy search using c-p
   -- c-b show buffer
-  { "jlanzarotta/bufexplorer",
+  {
+    "jlanzarotta/bufexplorer",
     lazy = false,
     keys = {
       -- { "<leader>be", ":BufExplorer<CR>", desc = "Show Buffer" },
       -- { "<leader>bt", ":ToggleBufExplorer<CR>", desc = "Show Buffer" },
       -- { "<leader>bs", ":BufExplorerHorizonSplit<CR>", desc = "Show Buffer" },
       -- { "<leader>bv", ":BufExplorerVerticalSplit<CR>", desc = "Show Buffer" },
-      -- <leader>bs: 
+      -- <leader>bs:
     },
   },
-  { 'RaafatTurki/hex.nvim' ,
+  {
+    "RaafatTurki/hex.nvim",
     config = function()
-      require('hex').setup()
-    end
+      require("hex").setup()
+    end,
   },
   -- run command :AsyncRun[!]
   { "skywind3000/asyncrun.vim" },

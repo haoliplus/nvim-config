@@ -62,12 +62,10 @@ end
 
 require("lazy").setup("plugins", {
   git = {
-    filter = false
-
+    filter = false,
   },
   ui = {
-    border = "rounded"
-
+    border = "rounded",
   },
   performance = {
     rpt = {
@@ -100,7 +98,7 @@ function _G.show_my_text()
   node
   ]])
 end
-vim.keymap.set("n", "<c-h>", show_my_text, {desc="Show my text"})
+vim.keymap.set("n", "<c-h>", show_my_text, { desc = "Show my text" })
 -- nnoremap <leader>h :lua show_my_text()<CR>
 
 -- local sample_exe = vim.fn.executable("isort")

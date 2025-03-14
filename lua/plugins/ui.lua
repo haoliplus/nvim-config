@@ -34,20 +34,85 @@ return {
     config = function(_, opts)
       local map = vim.api.nvim_set_keymap
       -- Move to previous/next
-      map("n", "<M-,>", "<Cmd>BufferLineMovePrev<CR>", { noremap = true, silent = true, desc = "Move to previous buffer" })
+      map(
+        "n",
+        "<M-,>",
+        "<Cmd>BufferLineMovePrev<CR>",
+        { noremap = true, silent = true, desc = "Move to previous buffer" }
+      )
       map("n", "<M-.>", "<Cmd>BufferLineGoToBuffer<CR>", { noremap = true, silent = true, desc = "Move to buffer" })
-      map("n", "<Tab><Tab>", "<Cmd>BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Move to next buffer" })
-      map("n", "<Leader>[", "<Cmd>BufferLineCyclePrev<CR>", { noremap = true, silent = true, desc = "Move to previous buffer" })
-      map("n", "<Leader>]", "<Cmd>BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Move to next buffer" })
-      map("n", "<Leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", { noremap = true, silent = true, desc = "Move to buffer 1" })
-      map("n", "<Leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>", { noremap = true, silent = true, desc = "Move to buffer 2" })
-      map("n", "<Leader>3", "<Cmd>BufferLineGoToBuffer 3<CR>", { noremap = true, silent = true, desc = "Move to buffer 3" })
-      map("n", "<Leader>4", "<Cmd>BufferLineGoToBuffer 4<CR>", { noremap = true, silent = true, desc = "Move to buffer 4" })
-      map("n", "<Leader>5", "<Cmd>BufferLineGoToBuffer 5<CR>", { noremap = true, silent = true, desc = "Move to buffer 5" })
-      map("n", "<Leader>6", "<Cmd>BufferLineGoToBuffer 6<CR>", { noremap = true, silent = true, desc = "Move to buffer 6" })
-      map("n", "<Leader>7", "<Cmd>BufferLineGoToBuffer 7<CR>", { noremap = true, silent = true, desc = "Move to buffer 7" })
-      map("n", "<Leader>8", "<Cmd>BufferLineGoToBuffer 8<CR>", { noremap = true, silent = true, desc = "Move to buffer 8" })
-      map("n", "<Leader>9", "<Cmd>BufferLineGoToBuffer 9<CR>", { noremap = true, silent = true, desc = "Move to buffer 9" })
+      map(
+        "n",
+        "<Tab><Tab>",
+        "<Cmd>BufferLineCycleNext<CR>",
+        { noremap = true, silent = true, desc = "Move to next buffer" }
+      )
+      map(
+        "n",
+        "<Leader>[",
+        "<Cmd>BufferLineCyclePrev<CR>",
+        { noremap = true, silent = true, desc = "Move to previous buffer" }
+      )
+      map(
+        "n",
+        "<Leader>]",
+        "<Cmd>BufferLineCycleNext<CR>",
+        { noremap = true, silent = true, desc = "Move to next buffer" }
+      )
+      map(
+        "n",
+        "<Leader>1",
+        "<Cmd>BufferLineGoToBuffer 1<CR>",
+        { noremap = true, silent = true, desc = "Move to buffer 1" }
+      )
+      map(
+        "n",
+        "<Leader>2",
+        "<Cmd>BufferLineGoToBuffer 2<CR>",
+        { noremap = true, silent = true, desc = "Move to buffer 2" }
+      )
+      map(
+        "n",
+        "<Leader>3",
+        "<Cmd>BufferLineGoToBuffer 3<CR>",
+        { noremap = true, silent = true, desc = "Move to buffer 3" }
+      )
+      map(
+        "n",
+        "<Leader>4",
+        "<Cmd>BufferLineGoToBuffer 4<CR>",
+        { noremap = true, silent = true, desc = "Move to buffer 4" }
+      )
+      map(
+        "n",
+        "<Leader>5",
+        "<Cmd>BufferLineGoToBuffer 5<CR>",
+        { noremap = true, silent = true, desc = "Move to buffer 5" }
+      )
+      map(
+        "n",
+        "<Leader>6",
+        "<Cmd>BufferLineGoToBuffer 6<CR>",
+        { noremap = true, silent = true, desc = "Move to buffer 6" }
+      )
+      map(
+        "n",
+        "<Leader>7",
+        "<Cmd>BufferLineGoToBuffer 7<CR>",
+        { noremap = true, silent = true, desc = "Move to buffer 7" }
+      )
+      map(
+        "n",
+        "<Leader>8",
+        "<Cmd>BufferLineGoToBuffer 8<CR>",
+        { noremap = true, silent = true, desc = "Move to buffer 8" }
+      )
+      map(
+        "n",
+        "<Leader>9",
+        "<Cmd>BufferLineGoToBuffer 9<CR>",
+        { noremap = true, silent = true, desc = "Move to buffer 9" }
+      )
       -- Close buffer
       map("n", "<Leader>c", "<Cmd>BufferLinePickClose<CR>", { noremap = true, silent = true, desc = "Close buffer" })
 
@@ -197,8 +262,8 @@ return {
         config = {
           week_header = {
             enable = true,
-            concat = "vim:"..version,
-            append = {"Hello"}
+            concat = "vim:" .. version,
+            append = { "Hello" },
           },
           packages = { enable = true }, -- show how many plugins neovim loaded
           mru = { limit = 10, icon = "* ", label = "Recent Files" },
@@ -274,34 +339,34 @@ return {
         follow_current_file = { enabled = false },
         use_libuv_file_watcher = true,
         filtered_items = {
-            visible = false, -- when true, they will just be displayed differently than normal items
-            hide_dotfiles = true,
-            hide_gitignored = false,
-            hide_hidden = true, -- only works on Windows for hidden files/directories
-            hide_by_name = {
-              "node_modules"
-            },
-            hide_by_pattern = { -- uses glob style patterns
-              --"*.meta",
-              --"*/src/*/tsconfig.json",
-              "*.pyc",
-              "bazel-*"
-            },
-            always_show = { -- remains visible even if other settings would normally hide it
-              ".gitignored",
-              ".gitignore",
-            },
-            always_show_by_pattern = { -- uses glob style patterns
-              ".env*",
-            },
-            never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
-              ".DS_Store",
-              "thumbs.db"
-            },
-            never_show_by_pattern = { -- uses glob style patterns
-              --".null-ls_*",
-            },
+          visible = false, -- when true, they will just be displayed differently than normal items
+          hide_dotfiles = true,
+          hide_gitignored = false,
+          hide_hidden = true, -- only works on Windows for hidden files/directories
+          hide_by_name = {
+            "node_modules",
           },
+          hide_by_pattern = { -- uses glob style patterns
+            --"*.meta",
+            --"*/src/*/tsconfig.json",
+            "*.pyc",
+            "bazel-*",
+          },
+          always_show = { -- remains visible even if other settings would normally hide it
+            ".gitignored",
+            ".gitignore",
+          },
+          always_show_by_pattern = { -- uses glob style patterns
+            ".env*",
+          },
+          never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
+            ".DS_Store",
+            "thumbs.db",
+          },
+          never_show_by_pattern = { -- uses glob style patterns
+            --".null-ls_*",
+          },
+        },
       },
       buffers = {
         follow_current_file = { enabled = true }, -- This will find and focus the file in the active buffer every
@@ -313,10 +378,10 @@ return {
         width = 40,
         auto_expand = true,
       },
-       source_selector = {
-            winbar = true,
-            statusline = false
-        },
+      source_selector = {
+        winbar = true,
+        statusline = false,
+      },
       default_component_configs = {
         container = {
           enable_character_fade = true,

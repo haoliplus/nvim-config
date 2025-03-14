@@ -6,6 +6,7 @@ return {
       -- Utilities for creating configurations
       local util = require("formatter.util")
       vim.keymap.set("n", "<Leader>F", ":FormatWrite<CR>", { noremap = true, silent = true, desc = "FormatWrite" })
+      vim.cmd("command! F FormatWrite")
 
       -- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
       require("formatter").setup({ -- stylua: ignore
@@ -30,9 +31,9 @@ return {
               end
 
               -- Full specification of configurations is down below and in Vim help
-              -- files
+              --files
               return {
-                exe = "stylua",
+                exe = "${HOME}/.cargo/bin/stylua",
                 args = {
                   "--indent-type Spaces",
                   "--indent-width 2",

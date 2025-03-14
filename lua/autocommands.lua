@@ -4,7 +4,9 @@
 -- mason
 vim.api.nvim_create_user_command("InitMasonPackage", function(_)
   vim.cmd("MasonInstall black@22.12.0 prettier ast-grep bash-language-server clangd lua-language-server --force ")
-  vim.cmd("MasonInstall pyright ruff rust-analyzer typescript-language-server isort@4.3.21 clangd gofumpt stylua --force")
+  vim.cmd(
+    "MasonInstall pyright ruff rust-analyzer typescript-language-server isort@4.3.21 clangd gofumpt stylua --force"
+  )
 end, { bang = true, desc = "install mason" })
 
 vim.api.nvim_create_user_command("Binary", function(_)

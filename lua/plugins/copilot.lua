@@ -288,7 +288,11 @@ return {
             -- endpoint = "https://api.anthropic.com/v1/messages",
             -- endpoint = "https://openrouter.ai/api/v1",
             endpoint = "https://openrouter.ai/api/v1/chat/completions",
-            models = { "anthropic/claude-3.7-sonnet", "deepseek/deepseek-r1", "google/gemini-2.0-pro-exp-02-05:free" },
+            models = {
+              "anthropic/claude-3.7-sonnet",
+              "deepseek/deepseek-r1",
+              "google/gemini-2.0-pro-exp-02-05:free",
+            },
             -- topic_prompt = "You only respond with 3 to 4 words to summarize the past conversation.",
             -- usually a cheap and fast model to generate the chat topic based on
             -- the whole chat history

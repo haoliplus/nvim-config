@@ -131,7 +131,7 @@ return {
           "vimdoc",
           "html",
           "javascript",
-          "just"
+          "just",
         },
 
         -- Install parsers synchronously (only applied to `ensure_installed`)

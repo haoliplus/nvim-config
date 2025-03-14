@@ -2,29 +2,29 @@
 
 -- 检查文件是否存在并读取内容的函数
 local function read_os_release()
-    local file = io.open("/etc/os-release", "r")
-    if not file then
-        return nil
-    end
-    local content = file:read("*all")
-    file:close()
-    return content
+  local file = io.open("/etc/os-release", "r")
+  if not file then
+    return nil
+  end
+  local content = file:read("*all")
+  file:close()
+  return content
 end
 
 -- 检查是否为 Ubuntu 16.04
 local function is_ubuntu_1604()
-    local content = read_os_release()
-    if not content then
-        return false
-    end
-    -- 检查是否包含 Ubuntu 16.04 的特征
-    return string.match(content, "Ubuntu") and string.match(content, "16.04")
+  local content = read_os_release()
+  if not content then
+    return false
+  end
+  -- 检查是否包含 Ubuntu 16.04 的特征
+  return string.match(content, "Ubuntu") and string.match(content, "16.04")
 end
 
 local config = {
-  'saghen/blink.cmp',
+  "saghen/blink.cmp",
   -- optional: provides snippets for the snippet source
-  dependencies = {'rafamadriz/friendly-snippets', "fang2hou/blink-copilot"},
+  dependencies = { "rafamadriz/friendly-snippets", "fang2hou/blink-copilot" },
   submodules = false,
   enabled = function()
     return not vim.tbl_contains({ "lua", "markdown" }, vim.bo.filetype)
@@ -33,7 +33,7 @@ local config = {
   end,
 
   -- use a release tag to download pre-built binaries
-  version = '*',
+  version = "*",
   ---
   --- curl https://sh.rustup.rs -sSf | sh
   -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
@@ -49,32 +49,32 @@ local config = {
     -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
     -- See the full "keymap" documentation for information on defining your own keymap.
     keymap = {
-      preset = 'default',
-      ['<C-]>'] = { 'accept' },
+      preset = "default",
+      ["<C-]>"] = { "accept" },
     },
     signature = {
       -- Enable signature help
       enabled = true,
-      window = { border = 'single' }
+      window = { border = "single" },
     },
     completion = {
-      menu = { border = 'single' },
+      menu = { border = "single" },
       documentation = {
-        window = { border = 'single' },
+        window = { border = "single" },
         auto_show = true,
         auto_show_delay_ms = 500,
       },
       list = {
         selection = {
           preselect = true,
-          auto_insert = true
-        }
-      }
+          auto_insert = true,
+        },
+      },
     },
     cmdline = {
       keymap = {
         -- recommended, as the default keymap will only show and select the next item
-        ['<Tab>'] = { 'show', 'accept' },
+        ["<Tab>"] = { "show", "accept" },
       },
       completion = { menu = { auto_show = true } },
     },
@@ -86,7 +86,7 @@ local config = {
       use_nvim_cmp_as_default = true,
       -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
       -- Adjusts spacing to ensure icons are aligned
-      nerd_font_variant = 'mono',
+      nerd_font_variant = "mono",
       kind_icons = {
         Copilot = "",
       },
@@ -95,7 +95,7 @@ local config = {
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { 'copilot', 'lsp', 'path', 'snippets', 'buffer' },
+      default = { "copilot", "lsp", "path", "snippets", "buffer" },
       providers = {
         copilot = {
           name = "copilot",
@@ -106,13 +106,12 @@ local config = {
       },
     },
   },
-  opts_extend = { "sources.default" }
+  opts_extend = { "sources.default" },
 }
-
 
 -- 根据系统版本设置变量
 if is_ubuntu_1604() then
-    config['build'] = 'cargo build --release'
+  config["build"] = "cargo build --release"
 end
 -- config['build'] = 'cargo build --release'
 

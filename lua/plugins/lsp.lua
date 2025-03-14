@@ -11,7 +11,7 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      'saghen/blink.cmp',
+      "saghen/blink.cmp",
     },
     config = function()
       -- require('plugins.utils.lsp_callbacks')
@@ -19,10 +19,10 @@ return {
       -- require("plugins.utils.lsp_callbacks")
 
       -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-      vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, { desc="Open diagnostic float" })
-      vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc="Go to previous diagnostic" })
-      vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc="Go to next diagnostic" })
-      vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, { desc="Set loclist" })
+      vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, { desc = "Open diagnostic float" })
+      vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+      vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
+      vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, { desc = "Set loclist" })
 
       -- Use LspAttach autocommand to only map the following keys
       -- after the language server attaches to the current buffer
@@ -35,20 +35,35 @@ return {
           -- Buffer local mappings.
           -- See `:help vim.lsp.*` for documentation on any of the below functions
           local opts = { buffer = ev.buf }
-          vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = ev.buf , desc="Go to declaration" })
-          vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = ev.buf , desc="Go to definition" })
-          vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = ev.buf , desc="Show hover" })
-          vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = ev.buf , desc="Go to implementation" })
-          vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { buffer = ev.buf , desc="Show signature help" })
-          vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, { buffer = ev.buf , desc="Add workspace folder" })
-          vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, { buffer = ev.buf , desc="Remove workspace folder" })
+          vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = ev.buf, desc = "Go to declaration" })
+          vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = ev.buf, desc = "Go to definition" })
+          vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = ev.buf, desc = "Show hover" })
+          vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = ev.buf, desc = "Go to implementation" })
+          vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { buffer = ev.buf, desc = "Show signature help" })
+          vim.keymap.set(
+            "n",
+            "<space>wa",
+            vim.lsp.buf.add_workspace_folder,
+            { buffer = ev.buf, desc = "Add workspace folder" }
+          )
+          vim.keymap.set(
+            "n",
+            "<space>wr",
+            vim.lsp.buf.remove_workspace_folder,
+            { buffer = ev.buf, desc = "Remove workspace folder" }
+          )
           vim.keymap.set("n", "<space>wl", function()
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-          end, { buffer = ev.buf , desc="List workspace folders" })
-          vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, { buffer = ev.buf , desc="Go to type definition" })
-          vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, { buffer = ev.buf , desc="Rename" })
-          vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, { buffer = ev.buf , desc="Code action" })
-          vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = ev.buf , desc="References" })
+          end, { buffer = ev.buf, desc = "List workspace folders" })
+          vim.keymap.set(
+            "n",
+            "<space>D",
+            vim.lsp.buf.type_definition,
+            { buffer = ev.buf, desc = "Go to type definition" }
+          )
+          vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, { buffer = ev.buf, desc = "Rename" })
+          vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, { buffer = ev.buf, desc = "Code action" })
+          vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = ev.buf, desc = "References" })
           vim.keymap.set("n", "<space>f", function()
             vim.lsp.buf.format({ async = true })
           end, opts)
@@ -65,7 +80,7 @@ return {
       if status then
         capabilities = ret
       end
-      capabilities = require('blink.cmp').get_lsp_capabilities()
+      capabilities = require("blink.cmp").get_lsp_capabilities()
 
       local servers = {
         "clangd",
@@ -80,8 +95,8 @@ return {
       local lsp_opts = {}
 
       local util = require("lspconfig/util")
-      require('lspconfig.ui.windows').default_options = {
-        border = "rounded"
+      require("lspconfig.ui.windows").default_options = {
+        border = "rounded",
       }
 
       -- Clangd
@@ -173,7 +188,7 @@ return {
           },
           python = {
             analysis = {
-              ignore = { '*' }, -- Using Ruff
+              ignore = { "*" }, -- Using Ruff
               autoSearchPaths = true,
               typeCheckingMode = "basic",
               diagnosticMode = "workspace",
