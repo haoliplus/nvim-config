@@ -3,6 +3,7 @@ return {
   enabled = false,
   priority = 1000,
   lazy = false,
+  ---@diagnostic disable-next-line: undefined-doc-name
   ---@type snacks.Config
   opts = {
     -- your configuration comes here

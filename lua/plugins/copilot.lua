@@ -1,4 +1,5 @@
 -- check "~/.config/github-copilot/hosts.json", read content
+---@diagnostic disable-next-line: undefined-global, missing-fields, undefined-field, unused-function, unused-local, undefined-doc-class, undefined-doc-param
 local function enable_avante_impl()
   local Path = require("plenary.path")
   local os_name = vim.loop.os_uname().sysname
@@ -14,6 +15,8 @@ local function enable_avante_impl()
   end
 
   --- hosts.json (copilot.lua), apps.json (copilot.vim)
+  ---@diagnostic disable-next-line: undefined-global, missing-fields, undefined-field, unused-function, unused-local, undefined-doc-class, undefined-doc-param
+  ---@diagnostic disable-next-line: undefined-doc-name
   ---@type Path[]
   local paths = vim.iter({ "hosts.json", "apps.json" }):fold({}, function(acc, path)
     local yason = Path:new(config_dir):joinpath("github-copilot", path)
@@ -28,6 +31,7 @@ local function enable_avante_impl()
   return true
 end
 
+---@diagnostic disable-next-line: undefined-global, missing-fields, undefined-field, unused-function, unused-local
 local function enable_avante()
   if pcall(enable_avante_impl) then
     return true
@@ -214,6 +218,7 @@ return {
         },
       },
       highlights = {
+        ---@diagnostic disable-next-line: undefined-doc-name
         ---@type AvanteConflictHighlights
         diff = {
           current = "DiffText",

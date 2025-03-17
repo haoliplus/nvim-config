@@ -42,6 +42,7 @@ local config = {
   -- build = 'nix run .#build-plugin',
 
   ---@module 'blink.cmp'
+  ---@diagnostic disable-next-line: undefined-doc-name
   ---@type blink.cmp.Config
   opts = {
     -- 'default' for mappings similar to built-in completion
