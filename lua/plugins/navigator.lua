@@ -117,6 +117,7 @@ return {
               ["<C-i>"] = "which_key",
             },
           },
+          initial_mode = "normal",
         },
         pickers = {
           -- Default configuration for builtin pickers goes here:

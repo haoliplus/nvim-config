@@ -309,7 +309,7 @@ return {
       { "<leader>fe", ":NeoTreeFloatToggle<CR>", desc = "Explorer NeoTree (root dir)", remap = true },
       { "<leader>e", ":Neotree toggle left<CR>", desc = "Explorer NeoTree (root dir)", remap = true },
       { "<leader>E", ":Neotree toggle float git_status<CR>", desc = "Explorer NeoTree (cwd)", remap = true },
-      { "<leader>B", ":Neotree toggle float buffers<CR>", desc = "Explorer NeoTree (cwd)", remap = true },
+      -- { "<leader>B", ":Neotree toggle float buffers<CR>", desc = "Explorer NeoTree (cwd)", remap = true },
     },
     enabled = true,
     dependencies = {
