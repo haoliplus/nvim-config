@@ -1,4 +1,13 @@
 return {
+  {
+    "ojroques/vim-oscyank",
+    branch = "main",
+    config = function()
+      vim.cmd([[nmap <leader>c <Plug>OSCYankOperator]])
+      vim.cmd([[nmap <leader>cc <leader>c_]])
+      vim.cmd([[vmap <leader>c <Plug>OSCYankVisual]])
+    end,
+  },
   -- Utility for other plugin
   { "google/vim-maktaba" },
   { "rcarriga/nvim-notify" },
