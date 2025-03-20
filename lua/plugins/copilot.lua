@@ -32,6 +32,9 @@ local function enable_avante_impl()
 end
 
 local function enable_parrot()
+  if os.getenv("OPENROUTER_API_KEY") == nil then
+    return false
+  end
   return true
 end
 
@@ -46,10 +49,18 @@ local function enable_avante()
   return false
 end
 
+local function enable_copilot_lua()
+  return true
+end
+
+local function enable_copilot_vim()
+  return not enable_copilot_lua()
+end
+
 return {
   {
     "github/copilot.vim",
-    enabled = false,
+    enabled = enable_copilot_vim(),
     config = function()
       -- vim.g.copilot_no_tab_map = true
       --
@@ -57,7 +68,7 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
-    enabled = true,
+    enabled = enable_copilot_lua(),
     config = function()
       -- vim.g.copilot_no_tab_map = true
       --

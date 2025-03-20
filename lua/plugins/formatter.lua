@@ -33,6 +33,7 @@ return {
               -- Full specification of configurations is down below and in Vim help
               --files
               return {
+                -- cargo install stylua
                 exe = "stylua",
                 args = {
                   "--indent-type Spaces",
