@@ -33,7 +33,7 @@ return {
               -- Full specification of configurations is down below and in Vim help
               --files
               return {
-                exe = "${HOME}/.cargo/bin/stylua",
+                exe = "stylua",
                 args = {
                   "--indent-type Spaces",
                   "--indent-width 2",

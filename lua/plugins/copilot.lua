@@ -31,8 +31,15 @@ local function enable_avante_impl()
   return true
 end
 
+local function enable_parrot()
+  return true
+end
+
 ---@diagnostic disable-next-line: undefined-global, missing-fields, undefined-field, unused-function, unused-local
 local function enable_avante()
+  if enable_parrot() == false then
+    return false
+  end
   if pcall(enable_avante_impl) then
     return true
   end
@@ -104,8 +111,7 @@ return {
   {
     "yetone/avante.nvim",
     event = "VeryLazy",
-    -- enabled = enable_avante(),
-    enabled = false,
+    enabled = enable_avante(),
     lazy = false,
     version = false, -- set this if you want to always pull the latest change
     opts = {
@@ -277,6 +283,7 @@ return {
   {
     "frankroeder/parrot.nvim",
     dependencies = { "ibhagwan/fzf-lua", "nvim-lua/plenary.nvim" },
+    enabled = enable_parrot(),
     opts = {},
     config = function()
       require("parrot").setup({
