@@ -1,5 +1,3 @@
-#! /usr/bin/env lua
---
 -- init.lua
 -- Copyright (C) 2022 lihao <haoliplus@gmail.com>
 --
