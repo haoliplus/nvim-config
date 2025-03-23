@@ -44,7 +44,7 @@ local function enable_avante()
     return false
   end
   if pcall(enable_avante_impl) then
-    return true
+    return false
   end
   return false
 end
