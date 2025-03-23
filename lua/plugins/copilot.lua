@@ -40,7 +40,7 @@ end
 
 ---@diagnostic disable-next-line: undefined-global, missing-fields, undefined-field, unused-function, unused-local
 local function enable_avante()
-  if enable_parrot() == false then
+  if enable_parrot() == true then
     return false
   end
   if pcall(enable_avante_impl) then
