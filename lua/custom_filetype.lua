@@ -16,6 +16,7 @@ vim.filetype.add({
     [".*%.html"] = "html",
     [".*%.mock"] = "text",
     [".*%.cfg"] = "cfg",
+    [".*%.dconf"] = "conf",
     -- A pattern containing an environment variable
     ["${XDG_CONFIG_HOME}/foo/git"] = "git",
     ["README.(a+)$"] = function(_, _, ext)
