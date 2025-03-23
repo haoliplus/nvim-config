@@ -10,8 +10,8 @@ return {
         ensure_installed = {
           -- "tree-sitter-cli",
           "lua_ls",
-          "rust_analyzer",
-          "clangd",
+          -- "rust_analyzer",
+          -- "clangd",
           "pyright",
           "ts_ls", -- "typescript-language-server",
           "bashls",
