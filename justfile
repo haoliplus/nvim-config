@@ -30,5 +30,4 @@ prepare_deps:
 
 install:
   echo 'source ${HOME}/.dotfiles/config/zshrc.sh' >> ${HOME}/.zshrc
-  echo 'source -q ${HOME}/.dotfiles/config/tmux.conf' >> ${HOME}/.tmux.conf
 
