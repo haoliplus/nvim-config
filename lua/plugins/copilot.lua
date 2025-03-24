@@ -40,17 +40,17 @@ end
 
 ---@diagnostic disable-next-line: undefined-global, missing-fields, undefined-field, unused-function, unused-local
 local function enable_avante()
-  if enable_parrot() == true then
-    return false
-  end
-  if pcall(enable_avante_impl) then
-    return false
-  end
+  -- if enable_parrot() == true then
+  --   return false
+  -- end
+  -- if pcall(enable_avante_impl) then
+  --   return false
+  -- end
   return false
 end
 
 local function enable_copilot_lua()
-  return true
+  return false
 end
 
 local function enable_copilot_vim()
