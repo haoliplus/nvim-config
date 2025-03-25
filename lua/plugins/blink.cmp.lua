@@ -51,13 +51,29 @@ local config = {
     keymap = {
       preset = "default",
       ["<C-]>"] = { "accept" },
-      ['<C-y>'] = { 'select_and_accept' },
+      ["<C-y>"] = { "select_and_accept" },
       ["<C-e>"] = { "hide" },
       ["<C-w>"] = { "show" },
       ["<Up>"] = { "select_prev", "fallback" },
       ["<Down>"] = { "select_next", "fallback" },
       ["<C-p>"] = { "select_prev", "fallback_to_mappings" },
       ["<C-n>"] = { "select_next", "fallback_to_mappings" },
+      ["<C-a>"] = {
+        function(cmp)
+          cmp.show({
+            --- Only show copilot suggestion
+            providers = { "copilot" },
+          })
+        end,
+      },
+      ["<C-s>"] = {
+        function(cmp)
+          cmp.show({
+            --- Only show copilot suggestion
+            providers = { "snippets" },
+          })
+        end,
+      },
     },
     signature = {
       -- Enable signature help
