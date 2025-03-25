@@ -50,6 +50,8 @@ local config = {
     -- See the full "keymap" documentation for information on defining your own keymap.
     keymap = {
       preset = "default",
+      -- 取消默认的 <Tab> 占用
+      ["<Tab>"] = {  },
       ["<C-]>"] = { "accept" },
       ["<C-y>"] = { "select_and_accept" },
       ["<C-e>"] = { "hide" },
