@@ -300,8 +300,22 @@ return {
       require("parrot").setup({
         -- Providers must be explicitly added to make them available.
         providers = {
+          deepseek = {
+            api_key = os.getenv("DEEPSEEK_API_KEY"),
+            endpoint = "https://api.deepseek.com/chat/completions",
+            -- topic_prompt = topic_prompt,
+            topic = {
+              model = "deepseek-chat",
+              params = { max_tokens = 64 },
+            },
+            params = {
+              chat = { temperature = 1.1, top_p = 1 },
+              command = { temperature = 1.1, top_p = 1 },
+            },
+          },
           custom = {
             style = "openai",
+            -- api_key = os.getenv("DEEPSEEK_API_KEY"),
             api_key = os.getenv("OPENROUTER_API_KEY"),
             -- OPTIONAL: Alternative methods to retrieve API key
             -- Using GPG for decryption:
