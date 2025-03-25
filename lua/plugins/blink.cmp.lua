@@ -1,5 +1,4 @@
 #! /usr/bin/env lua
-
 -- 检查文件是否存在并读取内容的函数
 local function read_os_release()
   local file = io.open("/etc/os-release", "r")
@@ -52,6 +51,12 @@ local config = {
     keymap = {
       preset = "default",
       ["<C-]>"] = { "accept" },
+      ['<C-y>'] = { 'select_and_accept' },
+      ["<C-e>"] = { "hide" },
+      ["<Up>"] = { "select_prev", "fallback" },
+      ["<Down>"] = { "select_next", "fallback" },
+      ["<C-p>"] = { "select_prev", "fallback_to_mappings" },
+      ["<C-n>"] = { "select_next", "fallback_to_mappings" },
     },
     signature = {
       -- Enable signature help
@@ -96,7 +101,13 @@ local config = {
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { "copilot", "lsp", "path", "snippets", "buffer" },
+      default = {
+        -- "copilot",
+        "path",
+        "lsp",
+        "snippets",
+        "buffer",
+      },
       providers = {
         copilot = {
           name = "copilot",

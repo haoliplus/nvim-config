@@ -74,7 +74,7 @@ return {
       --
       require("copilot").setup({
         panel = {
-          enabled = false,
+          enabled = true,
           auto_refresh = false,
           keymap = {
             jump_prev = "[[",
@@ -89,13 +89,13 @@ return {
           },
         },
         suggestion = {
-          enabled = false,
+          enabled = true,
           auto_trigger = true,
           hide_during_completion = true,
           debounce = 75,
           keymap = {
             -- accept = "<C-;>",
-            accept = "<M-;>", -- alt
+            accept = "<C-i>", -- alt
             -- accept_word = false,
             -- accept_line = false,
             next = "<C-,>",
@@ -106,6 +106,9 @@ return {
         filetypes = {
           yaml = false,
           markdown = false,
+          txt = false,
+          conf = false,
+          json = false,
           help = false,
           gitcommit = false,
           gitrebase = false,
