@@ -50,7 +50,7 @@ local function enable_avante()
 end
 
 local function enable_copilot_lua()
-  return false
+  return true
 end
 
 local function enable_copilot_vim()

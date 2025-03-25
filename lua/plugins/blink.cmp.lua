@@ -53,6 +53,7 @@ local config = {
       ["<C-]>"] = { "accept" },
       ['<C-y>'] = { 'select_and_accept' },
       ["<C-e>"] = { "hide" },
+      ["<C-w>"] = { "show" },
       ["<Up>"] = { "select_prev", "fallback" },
       ["<Down>"] = { "select_next", "fallback" },
       ["<C-p>"] = { "select_prev", "fallback_to_mappings" },
