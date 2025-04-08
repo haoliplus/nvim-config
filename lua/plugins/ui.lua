@@ -357,6 +357,12 @@ return {
           always_show = { -- remains visible even if other settings would normally hide it
             ".gitignored",
             ".gitignore",
+            ".dotfiles",
+            ".zshrc",
+            ".zshenv",
+            ".config",
+            ".kube",
+            ".ssh"
           },
           always_show_by_pattern = { -- uses glob style patterns
             ".env*",
