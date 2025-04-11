@@ -9,7 +9,7 @@ return {
     init = function()
       -- vim.g.vimwiki_map_prefix = '<Leader>i'
       vim.g.vimwiki_list = {
-          {path = '~/.notes/', syntax = 'markdown', ext = '.md'}
+          {path = '~/cloud_data/notebook/vimwiki/', syntax = 'markdown', ext = '.md'}
       }
       -- vim.keymap.set('n', '<Leader>in', '<CMD>lua custom_behavior()<CR>', {noremap=true, silent=true})
     end
