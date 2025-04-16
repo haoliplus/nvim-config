@@ -27,7 +27,20 @@ return {
   {
     "RaafatTurki/hex.nvim",
     config = function()
-      require("hex").setup()
+      require("hex").setup({
+          -- function that runs on BufReadPre to determine if it's binary or not
+          is_file_binary_pre_read = function()
+            -- logic that determines if a buffer contains binary data or not
+            -- must return a bool
+            return false
+          end,
+          -- function that runs on BufReadPost to determine if it's binary or not
+          is_file_binary_post_read = function()
+            -- logic that determines if a buffer contains binary data or not
+            -- must return a bool
+            return false
+          end,
+      })
     end,
   },
   -- run command :AsyncRun[!]
