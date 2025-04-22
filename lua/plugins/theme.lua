@@ -132,8 +132,7 @@ return {
           "html",
           "javascript",
           "just",
-          "css",
-          "latex",
+          "css"
         },
 
         -- Install parsers synchronously (only applied to `ensure_installed`)
