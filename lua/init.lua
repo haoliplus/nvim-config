@@ -5,6 +5,12 @@
 --
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+
+if vim.version().major == 0 and vim.version().minor < 9 then
+  print("Neovim version is too old, please update to 0.9 or later.")
+  return
+end
+
 vim.g.is_win = (vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1)
 vim.g.is_linux = (vim.fn.has("unix") == 1 and vim.fn.has("macunix") == 0)
 vim.g.is_mac = vim.fn.has("macunix") == 1
