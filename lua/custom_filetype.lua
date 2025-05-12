@@ -1,4 +1,12 @@
+-- vim.g.do_filetype_lua = 1
+-- vim.g.did_load_filetypes = 0
+
 vim.filetype.add({
+  extension = {
+    xyz = "cpp",
+    make = "makefile",
+    makefile = "makefile"
+  },
   filename = {
     ["this_is_a_speci"] = "yaml",
     ["/etc/sing-box/config.json"] = "jsonc",
@@ -11,6 +19,8 @@ vim.filetype.add({
     -- ['a.sh'] = 'yaml',
   },
   pattern = {
+    -- ["makefile"] = "makefile",
+    -- ["make"] = "makefile",
     [".*%.h"] = "cpp",
     [".*%.sh"] = "bash",
     [".*%.html"] = "html",
@@ -57,23 +67,23 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 })
 
 -- 为 tpl 文件添加 tpl 检测
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = "*.tpl",
-  callback = function()
-    -- 获取第一行内容
-    local first_line = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]
-
-    -- 检查第一行是否以注释开头
-    if first_line and (first_line:match("^%s*;;"))  then
-      -- 如果是注释, 获取注释后的有效内容
-      local filetype = first_line:match("^%s*;;%s*(.*)")
-      vim.bo.filetype = filetype
-    else
-      -- 如果不是注释，保持为 smarty
-      vim.bo.filetype = "smarty"
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+--   pattern = "*.tpl",
+--   callback = function()
+--     -- 获取第一行内容
+--     local first_line = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]
+--
+--     -- 检查第一行是否以注释开头
+--     if first_line and (first_line:match("^%s*;;"))  then
+--       -- 如果是注释, 获取注释后的有效内容
+--       local filetype = first_line:match("^%s*;;%s*(.*)")
+--       vim.bo.filetype = filetype
+--     else
+--       -- 如果不是注释，保持为 smarty
+--       vim.bo.filetype = "smarty"
+--     end
+--   end,
+-- })
 
 vim.api.nvim_create_autocmd("FileType", {
   desc = "Format python",
