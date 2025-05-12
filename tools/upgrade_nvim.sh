@@ -21,9 +21,9 @@ export CURRENT_OS=$(uname)
 export OS=$(uname)
 
 if [[ "$OS" == 'Linux' ]]; then
-  NVIM_NAME="nvim-linux-x86_64"
+  NVIM_NAME="nvim-linux-$(uname -m)"
 elif [[ "$OS" == 'Darwin' ]]; then
-  NVIM_NAME="nvim-macos-arm64"
+  NVIM_NAME="nvim-macos-$(uname -m)"
 fi
 
 NVIM_DOWNLOAD_URL="https://github.com/neovim/neovim/releases/latest/download/${NVIM_NAME}.tar.gz"
