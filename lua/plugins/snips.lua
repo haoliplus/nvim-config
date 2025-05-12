@@ -7,7 +7,8 @@ return {
     -- cmd = {'Template','TemProject'},
     config = function()
       -- vim.filetype.add ( filename = { ['main.sh'] = 'sh' })
-      -- vim.filetype.add ( filename = { ['a.html'] = 'html' })
+      -- vim.filetype.add ( filename = { ['default.makefile'] = 'make' })
+
       require("template").setup({
         temp_dir = vim.g.config_path .. "/templates",
         author = vim.fn.getenv("NICKNAME"), -- your name

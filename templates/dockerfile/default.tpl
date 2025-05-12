@@ -1,3 +1,4 @@
+;; dockerfile
 FROM python:3.7-alphine AS prod
 FROM ubuntu:20.04
 RUN rm -rf /var/lib/apt/lists/* && sed -i s@/archive.ubuntu.com/@/mirrors.tuna.tsinghua.edu.cn/@g /etc/apt/sources.list
