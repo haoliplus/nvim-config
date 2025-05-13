@@ -1,8 +1,8 @@
 return {
   {
     "mason-org/mason-lspconfig.nvim",
-    enabled = true,
-    version = "v1.*",
+    enabled = false,
+    -- version = "v1.*",
     dependencies = {
       "mason-org/mason.nvim",
     },
@@ -10,7 +10,7 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {
           -- "tree-sitter-cli",
-          "lua_ls",
+          -- "lua_ls",
           -- "rust_analyzer",
           -- "clangd",
           "pyright",

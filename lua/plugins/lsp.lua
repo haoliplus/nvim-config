@@ -9,8 +9,8 @@ return {
     "neovim/nvim-lspconfig",
     enabled = true,
     dependencies = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
+      "mason-org/mason.nvim",
+      -- "mason-org/mason-lspconfig.nvim",
       "saghen/blink.cmp",
     },
     config = function()
@@ -245,7 +245,11 @@ return {
         opts["flags"] = {
           debounce_text_changes = 150,
         }
-        require("lspconfig")[server_name].setup(opts)
+        -- legacy
+        -- require("lspconfig")[server_name].setup(opts)
+        -- new
+        vim.lsp.enable(server_name, opts)
+        vim.lsp.config(server_name, opts)
       end
     end,
   }, -- lsp "neovim/nvim-lspconfig",
