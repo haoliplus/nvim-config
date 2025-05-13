@@ -270,6 +270,7 @@ return {
   }, -- lsp "neovim/nvim-lspconfig",
   {
     "j-hui/fidget.nvim",
+    enabled = false,
     opts = {
       -- options
     },
