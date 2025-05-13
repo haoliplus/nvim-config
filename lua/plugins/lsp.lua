@@ -13,6 +13,15 @@ return {
       -- "mason-org/mason-lspconfig.nvim",
       "saghen/blink.cmp",
     },
+    opts = {
+      ui = {
+        windows = {
+          default_options = {
+            border = "rounded",
+          },
+        },
+      }
+    },
     config = function()
       -- require('plugins.utils.lsp_callbacks')
       -- print(vim.inspect(vim.api.nvim_list_runtime_paths()))
@@ -101,16 +110,16 @@ return {
 
       -- Clangd
 
+      local cpp_root_dir_func = function()
+        local cwd = vim.fn.getcwd()
+        local cwf = vim.fn.expand("%:p")
+        local path = util.root_pattern("compile_flags.txt", ".git")(cwf) or cwd
+        -- vim.notify("clangd root_dir: " .. path)
+        -- vim.notify("clangd root_dir: " .. cwf)
+        return path
+      end
       if vim.fn.hostname() == "in_dev_docker" then
         -- do thing
-        root_dir_func = function(fname)
-          cwd = vim.fn.getcwd()
-          cwf = vim.fn.expand("%:p")
-          path = util.root_pattern("compile_flags.txt", ".git")(cwf) or cwd
-          -- vim.notify("clangd root_dir: " .. path)
-          -- vim.notify("clangd root_dir: " .. cwf)
-          return path
-        end
         lsp_opts["clangd"] = {
           cmd = {
             "/usr/bin/clangd",
@@ -121,7 +130,7 @@ return {
           single_file_support = true,
           filetypes = { "c", "cpp", "cc", "h" },
           -- root_dir = root_dir_func,
-          root_dir = root_dir_func(),
+          root_dir = cpp_root_dir_func(),
         }
       else
         -- !!! You should instgall both clang-x/gcc-x/g++-x
@@ -147,9 +156,7 @@ return {
           -- cmd = { "clangd", "--background-index", "--clang-tidy"},
           cmd = { "clangd", "--background-index", "--offset-encoding=utf-16" },
           filetypes = { "c", "cpp", "cc", "h", "cuda" },
-          root_dir = function(fname)
-            return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
-          end,
+          root_dir = cpp_root_dir_func()
         }
       end
       -- tsserver
@@ -162,12 +169,15 @@ return {
         },
       }
       -- ruff_lsp
+      local py_root_dir = function()
+        local cwd = vim.fn.getcwd()
+        local cwf = vim.fn.expand("%:p")
+        return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(cwf)
+          or cwd
+      end
 
       lsp_opts["ruff"] = {
-        root_dir = function(fname)
-          return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(fname)
-            or util.path.dirname(fname)
-        end,
+        root_dir = py_root_dir(),
         capabilities = capabilities,
         init_options = {
           settings = {
@@ -181,10 +191,7 @@ return {
       -- Pyright
       lsp_opts["pyright"] = {
         cmd = { "pyright-langserver", "--stdio" },
-        root_dir = function(fname)
-          return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(fname)
-            or util.path.dirname(fname)
-        end,
+        root_dir = py_root_dir(),
         capabilities = (function()
           local py_capabilities = vim.lsp.protocol.make_client_capabilities()
           py_capabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }

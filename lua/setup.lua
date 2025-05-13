@@ -54,7 +54,7 @@ end
 
 -- -------------------------- vars for plugins ---------------------------------
 
-vim.g.LanguageClient_serverStderr = "/tmp/clangd.stderr"
+-- vim.g.LanguageClient_serverStderr = "/tmp/clangd.stderr"
 
 vim.g.username = vim.fn.getenv("NICKNAME")
 vim.g.email = vim.fn.getenv("MAIL")
