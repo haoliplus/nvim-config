@@ -87,7 +87,7 @@ return {
         "pyright",
         "ruff",
         "lua_ls",
-        "gopls",
+        -- "gopls",
         "ts_ls",
         "bashls",
         -- "jedi_language_server",
@@ -103,6 +103,14 @@ return {
 
       if vim.fn.hostname() == "in_dev_docker" then
         -- do thing
+        root_dir_func = function(fname)
+          cwd = vim.fn.getcwd()
+          cwf = vim.fn.expand("%:p")
+          path = util.root_pattern("compile_flags.txt", ".git")(cwf) or cwd
+          -- vim.notify("clangd root_dir: " .. path)
+          -- vim.notify("clangd root_dir: " .. cwf)
+          return path
+        end
         lsp_opts["clangd"] = {
           cmd = {
             "/usr/bin/clangd",
@@ -110,10 +118,10 @@ return {
             "--clang-tidy",
             "--offset-encoding=utf-16",
           },
+          single_file_support = true,
           filetypes = { "c", "cpp", "cc", "h" },
-          root_dir = function(fname)
-            return util.root_pattern("compile_flags.txt")(fname) or util.path.dirname(fname)
-          end,
+          -- root_dir = root_dir_func,
+          root_dir = root_dir_func(),
         }
       else
         -- !!! You should instgall both clang-x/gcc-x/g++-x
