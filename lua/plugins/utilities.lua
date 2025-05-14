@@ -28,18 +28,18 @@ return {
     "RaafatTurki/hex.nvim",
     config = function()
       require("hex").setup({
-          -- function that runs on BufReadPre to determine if it's binary or not
-          is_file_binary_pre_read = function()
-            -- logic that determines if a buffer contains binary data or not
-            -- must return a bool
-            return false
-          end,
-          -- function that runs on BufReadPost to determine if it's binary or not
-          is_file_binary_post_read = function()
-            -- logic that determines if a buffer contains binary data or not
-            -- must return a bool
-            return false
-          end,
+        -- function that runs on BufReadPre to determine if it's binary or not
+        is_file_binary_pre_read = function()
+          -- logic that determines if a buffer contains binary data or not
+          -- must return a bool
+          return false
+        end,
+        -- function that runs on BufReadPost to determine if it's binary or not
+        is_file_binary_post_read = function()
+          -- logic that determines if a buffer contains binary data or not
+          -- must return a bool
+          return false
+        end,
       })
     end,
   },
@@ -58,4 +58,18 @@ return {
     },
   },
   { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+  {
+    "AckslD/nvim-neoclip.lua",
+    enabled = false,
+    dependencies = {
+      { "kkharji/sqlite.lua", module = "sqlite" },
+      -- you'll need at least one of these
+      { "nvim-telescope/telescope.nvim" },
+      -- {'ibhagwan/fzf-lua'},
+    },
+    config = function()
+      require("neoclip").setup()
+    end,
+  },
+  -- { "edluffy/hologram.nvim" },
 }

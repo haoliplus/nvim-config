@@ -20,7 +20,7 @@ return {
             border = "rounded",
           },
         },
-      }
+      },
     },
     config = function()
       -- require('plugins.utils.lsp_callbacks')
@@ -156,7 +156,7 @@ return {
           -- cmd = { "clangd", "--background-index", "--clang-tidy"},
           cmd = { "clangd", "--background-index", "--offset-encoding=utf-16" },
           filetypes = { "c", "cpp", "cc", "h", "cuda" },
-          root_dir = cpp_root_dir_func()
+          root_dir = cpp_root_dir_func(),
         }
       end
       -- tsserver
@@ -172,8 +172,7 @@ return {
       local py_root_dir = function()
         local cwd = vim.fn.getcwd()
         local cwf = vim.fn.expand("%:p")
-        return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(cwf)
-          or cwd
+        return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(cwf) or cwd
       end
 
       lsp_opts["ruff"] = {
@@ -276,4 +275,5 @@ return {
     },
   },
   { "kevinhwang91/nvim-bqf" },
+  { "nvim-lua/lsp-status.nvim" },
 }
