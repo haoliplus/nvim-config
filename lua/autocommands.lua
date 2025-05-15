@@ -67,3 +67,8 @@ if vim.fn.filereadable(vim.fn.stdpath("config") .. "/lua/custom_command.lua") ==
   -- load the file
   require("custom_command")
 end
+
+vim.api.nvim_create_user_command("DirNvim", function(_)
+  local config_dir = vim.fn.expand("$HOME") .. "/.config/nvim"
+  vim.cmd("Neotree " .. config_dir)
+end, { bang = true, desc = "" })
