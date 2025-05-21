@@ -61,6 +61,9 @@ else
 end
 vim.opt.rtp:prepend(vim.g.config_path)
 
+-- disable vim deprecated notification
+vim.deprecate = function() end
+
 require("setup")
 require("custom_filetype")
 
