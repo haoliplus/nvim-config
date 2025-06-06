@@ -301,9 +301,18 @@ return {
     opts = {},
     config = function()
       require("parrot").setup({
+        chat_user_prefix = "🗨(Leader+;):",
+        chat_shortcut_respond = { modes = { "n", "i", "v", "x" }, shortcut = "<Leader>g" },
+        prompts = {
+          ["Spell"] = "I want you to proofread the provided text and fix the errors.", -- e.g., :'<,'>PrtRewrite Spell
+          ["Comment"] = "Provide a comment that explains what the snippet is doing.", -- e.g., :'<,'>PrtPrepend Comment
+          ["Complete"] = "Continue the implementation of the provided snippet in the file {{filename}}.", -- e.g., :'<,'>PrtAppend Complete
+        },
         -- Providers must be explicitly added to make them available.
         providers = {
           deepseek = {
+            name = "deepseek", -- this name shold match the key in the providers table
+            style = "openai",
             api_key = os.getenv("DEEPSEEK_API_KEY"),
             endpoint = "https://api.deepseek.com/chat/completions",
             -- topic_prompt = topic_prompt,
@@ -311,13 +320,28 @@ return {
               model = "deepseek-chat",
               params = { max_tokens = 64 },
             },
+            models = {"deepseek-chat"},
             params = {
-              chat = { temperature = 1.1, top_p = 1 },
               command = { temperature = 1.1, top_p = 1 },
+              chat = { temperature = 1.1, top_p = 1 },
             },
+            -- Custom payload preprocessing
+            preprocess_payload = function(payload)
+              -- Modify payload for your API format
+              return payload
+            end,
+            -- Custom response processing
+            process_stdout = function(response)
+              -- Parse streaming response from your API
+              local success, decoded = pcall(vim.json.decode, response)
+              if success and decoded.content then
+                return decoded.content
+              end
+            end,
           },
-          custom = {
+          openrouter = {
             style = "openai",
+            name = "openrouter", -- this name shold match the key in the providers table
             -- api_key = os.getenv("DEEPSEEK_API_KEY"),
             api_key = os.getenv("OPENROUTER_API_KEY"),
             -- OPTIONAL: Alternative methods to retrieve API key
@@ -331,6 +355,7 @@ return {
             models = {
               "anthropic/claude-3.7-sonnet",
               "deepseek/deepseek-r1",
+              "openai/gpt-4o-mini",
               "google/gemini-2.0-pro-exp-02-05:free",
             },
             -- topic_prompt = "You only respond with 3 to 4 words to summarize the past conversation.",
@@ -343,9 +368,22 @@ return {
             },
             -- default parameters
             params = {
-              chat = { temperature = 1.1, top_p = 1 },
               command = { temperature = 1.1, top_p = 1 },
+              chat = { temperature = 1.1, top_p = 1 },
             },
+            -- Custom payload preprocessing
+            preprocess_payload = function(payload)
+              -- Modify payload for your API format
+              return payload
+            end,
+            -- Custom response processing
+            process_stdout = function(response)
+              -- Parse streaming response from your API
+              local success, decoded = pcall(vim.json.decode, response)
+              if success and decoded.content then
+                return decoded.content
+              end
+            end,
           },
         },
         chat_dir = vim.uv.fs_realpath(tostring(vim.fn.stdpath("data")):gsub("/$", "") .. "/parrot/chats"),
