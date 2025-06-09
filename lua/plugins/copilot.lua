@@ -385,6 +385,50 @@ return {
               end
             end,
           },
+          volcengine = {
+            style = "openai",
+            name = "volcengine", -- this name shold match the key in the providers table
+            -- api_key = os.getenv("DEEPSEEK_API_KEY"),
+            api_key = os.getenv("VOLCENGINE_API_KEY"),
+            -- OPTIONAL: Alternative methods to retrieve API key
+            -- Using GPG for decryption:
+            -- api_key = { "gpg", "--decrypt", vim.fn.expand("$HOME") .. "/anthropic_api_key.txt.gpg" },
+            -- Using macOS Keychain:
+            -- api_key = { "/usr/bin/security", "find-generic-password", "-s anthropic-api-key", "-w" },
+            -- endpoint = "https://api.anthropic.com/v1/messages",
+            -- endpoint = "https://openrouter.ai/api/v1",
+            endpoint = "https://ark.cn-beijing.volces.com/api/v3/chat/completions",
+            models = {
+              "deepseek-r1-250528",
+              "deepseek-v3-250324"
+            },
+            -- topic_prompt = "You only respond with 3 to 4 words to summarize the past conversation.",
+            -- usually a cheap and fast model to generate the chat topic based on
+            -- the whole chat history
+            -- parameters to summarize chat
+            topic = {
+              model = "deepseek-v3-250324",
+              params = { max_completion_tokens = 64 },
+            },
+            -- default parameters
+            params = {
+              command = { temperature = 1.1, top_p = 1 },
+              chat = { temperature = 1.1, top_p = 1 },
+            },
+            -- Custom payload preprocessing
+            preprocess_payload = function(payload)
+              -- Modify payload for your API format
+              return payload
+            end,
+            -- Custom response processing
+            process_stdout = function(response)
+              -- Parse streaming response from your API
+              local success, decoded = pcall(vim.json.decode, response)
+              if success and decoded.content then
+                return decoded.content
+              end
+            end,
+          },
         },
         chat_dir = vim.uv.fs_realpath(tostring(vim.fn.stdpath("data")):gsub("/$", "") .. "/parrot/chats"),
       })
