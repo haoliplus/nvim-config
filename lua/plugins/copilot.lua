@@ -320,7 +320,7 @@ return {
               model = "deepseek-chat",
               params = { max_tokens = 64 },
             },
-            models = {"deepseek-chat"},
+            models = { "deepseek-chat" },
             params = {
               command = { temperature = 1.1, top_p = 1 },
               chat = { temperature = 1.1, top_p = 1 },
@@ -400,7 +400,7 @@ return {
             endpoint = "https://ark.cn-beijing.volces.com/api/v3/chat/completions",
             models = {
               "deepseek-r1-250528",
-              "deepseek-v3-250324"
+              "deepseek-v3-250324",
             },
             -- topic_prompt = "You only respond with 3 to 4 words to summarize the past conversation.",
             -- usually a cheap and fast model to generate the chat topic based on
@@ -431,6 +431,69 @@ return {
           },
         },
         chat_dir = vim.uv.fs_realpath(tostring(vim.fn.stdpath("data")):gsub("/$", "") .. "/parrot/chats"),
+      })
+    end,
+  },
+  {
+    "olimorris/codecompanion.nvim",
+    enabled = true,
+    config = function()
+      -- vim.g.copilot_no_tab_map = true
+      require("codecompanion").setup({
+        strategies = {
+          chat = {
+            adapter = {
+              name = "deepseek",
+              model = "deepseek-chat",
+            },
+          },
+          inline = {
+            adapter = {
+              name = "deepseek",
+              model = "deepseek-chat",
+            },
+          },
+        },
+        opts = {
+          log_level = "DEBUG", -- or "TRACE"
+        },
+        adapters = {
+          deepseek = function()
+            return require("codecompanion.adapters").extend("deepseek", {
+              env = {
+                api_key = os.getenv("DEEPSEEK_API_KEY"),
+              },
+            })
+          end,
+        },
+        prompt_library = {
+          ["Docusaurus"] = {
+            strategy = "chat",
+            description = "Write code comment for me",
+            opts = {
+              index = 11,
+              is_slash_cmd = false,
+              auto_submit = true,
+              short_name = "docs",
+            },
+            references = {
+              {
+                type = "file",
+                path = {
+                  -- "doc/.vitepress/config.mjs",
+                  -- "lua/codecompanion/config.lua",
+                  -- "README.md",
+                },
+              },
+            },
+            prompts = {
+              {
+                role = "user",
+                content = [[I'm rewriting the comment as documentation for this code snip]],
+              },
+            },
+          },
+        },
       })
     end,
   },
