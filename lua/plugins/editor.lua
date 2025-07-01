@@ -4,23 +4,6 @@ return {
     config = true,
     event = "VeryLazy",
   },
-  {
-    "tzachar/local-highlight.nvim",
-    enabled = false,
-    config = function()
-      require("local-highlight").setup({
-        -- file_types = {'python', 'cpp'}, -- If this is given only attach to this
-        -- OR attach to every filetype except:
-        disable_file_types = { "txt" },
-        -- hlgroup = 'Search',
-        -- cw_hlgroup = nil,
-        -- Whether to display highlights in INSERT mode or not
-        insert_mode = false,
-        min_match_len = 1,
-        max_match_len = math.huge,
-      })
-    end,
-  },
   -- quick commentary
   -- { "tpope/vim-commentary" },
   {

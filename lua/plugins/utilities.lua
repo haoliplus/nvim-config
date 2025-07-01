@@ -58,18 +58,4 @@ return {
     },
   },
   { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
-  {
-    "AckslD/nvim-neoclip.lua",
-    enabled = false,
-    dependencies = {
-      { "kkharji/sqlite.lua", module = "sqlite" },
-      -- you'll need at least one of these
-      { "nvim-telescope/telescope.nvim" },
-      -- {'ibhagwan/fzf-lua'},
-    },
-    config = function()
-      require("neoclip").setup()
-    end,
-  },
-  -- { "edluffy/hologram.nvim" },
 }

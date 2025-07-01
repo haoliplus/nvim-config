@@ -46,13 +46,6 @@ return {
   },
   { "tpope/vim-fugitive" },
   {
-    "airblade/vim-gitgutter",
-    enabled = false,
-    init = function()
-      vim.g.gitgutter_enabled = 0
-    end,
-  },
-  {
     "folke/trouble.nvim",
     dependencies = "nvim-tree/nvim-web-devicons",
     config = function()

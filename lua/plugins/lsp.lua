@@ -267,13 +267,6 @@ return {
       end
     end,
   }, -- lsp "neovim/nvim-lspconfig",
-  {
-    "j-hui/fidget.nvim",
-    enabled = false,
-    opts = {
-      -- options
-    },
-  },
   { "kevinhwang91/nvim-bqf" },
   { "nvim-lua/lsp-status.nvim" },
 }
