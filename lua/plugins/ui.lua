@@ -578,6 +578,7 @@ return {
         --   filter = { event = "msg_show" },
         -- },
       })
+      vim.keymap.set('n', '<Esc>', ':NoiceDismiss<CR>', { noremap = true, silent = true })
     end,
   },
 }
