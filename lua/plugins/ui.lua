@@ -362,7 +362,7 @@ return {
             ".zshenv",
             ".config",
             ".kube",
-            ".ssh"
+            ".ssh",
           },
           always_show_by_pattern = { -- uses glob style patterns
             ".env*",
@@ -472,9 +472,54 @@ return {
       lsp = {
         hover = {
           silent = true,
+        },
+      },
+      cmdline = {
+        view = "cmdline_popup",
+        format = {
+          -- title: set to anything or empty string to hide
+          title = {"cmdline"},
+          cmdline = { pattern = "^:", icon = "", lang = "vim" },
+          search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
+          search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
+          filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
+          lua = { pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = "", lang = "lua" },
+          help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
+          input = { view = "cmdline_input", icon = "󰥻 " }, -- Used by input()
+        },
+      },
+      messages = {
+        -- NOTE: If you enable messages, then the cmdline is enabled automatically.
+        -- This is a current Neovim limitation.
+        enabled = true, -- enables the Noice messages UI
+        view = "notify", -- default view for messages
+        view_error = "notify", -- view for errors
+        view_warn = "notify", -- view for warnings
+        view_history = "messages", -- view for :messages
+        view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
+        format = {
+          title = {"messages"}
         }
-      }
+      },
+      popupmenu = {
+        enabled = true, -- enables the Noice popupmenu UI
+        ---@type 'nui'|'cmp'
+        backend = "nui", -- backend to use to show regular cmdline completions
+        ---@type NoicePopupmenuItemKind|false
+        -- Icons for completion item kinds (see defaults at noice.config.icons.kinds)
+        kind_icons = {}, -- set to `false` to disable icons
+        format = {
+          title = {"popupmenu"}
+        }
+      },
+      -- default options for require('noice').redirect
+      -- see the section on Command Redirection
+      ---@type NoiceRouteConfig
+      redirect = {
+        view = "popup",
+        filter = { event = "msg_show" },
+      },
     },
-  }
+  },
 }
 -- return {}
