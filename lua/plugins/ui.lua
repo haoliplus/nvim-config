@@ -549,7 +549,7 @@ return {
         messages = {
           -- NOTE: If you enable messages, then the cmdline is enabled automatically.
           -- This is a current Neovim limitation.
-          enabled = false, -- enables the Noice messages UI
+          enabled = true, -- enables the Noice messages UI
           view = "notify", -- default view for messages
           view_error = "notify", -- view for errors
           view_warn = "notify", -- view for warnings
@@ -560,7 +560,7 @@ return {
           },
         }, -- messages
         popupmenu = {
-          enabled = false, -- enables the Noice popupmenu UI
+          enabled = true, -- enables the Noice popupmenu UI
           ---@type 'nui'|'cmp'
           backend = "nui", -- backend to use to show regular cmdline completions
           ---@type NoicePopupmenuItemKind|false
