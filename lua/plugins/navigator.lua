@@ -8,6 +8,9 @@ return {
         vim.keymap.set("n", "<Leader>a", ":Ack<Space>", { noremap = true, silent = true, desc = "Ack" })
       end
     end,
+    keys = {
+      { "<Leader>a", "<cmd>Ack<Space>", mode = "n", desc = "Ack" },
+    },
   },
   -- jump between .h/.cc
   -- { 'for': {'c', 'cpp'} }
@@ -73,27 +76,26 @@ return {
       })
       require("telescope").load_extension("fzf")
       require("telescope").load_extension("bookmarks")
-      local builtin = require("telescope.builtin")
-      vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "find_files" })
-      vim.keymap.set("n", "<leader>fq", builtin.quickfix, { desc = "quickfix" })
-      vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "live_grep" })
-      vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "oldfiles" })
-      vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "buffers" })
-      vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "help_tags" })
-      vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "diagnostics" })
-      -- vim.keymap.set("n", "<leader>fm", builtin.marks, {})
-      vim.keymap.set("n", "<leader>fm", ":Telescope bookmarks<CR>", { desc = "bookmarks" })
-      vim.keymap.set("n", "<leader>ft", builtin.tags, { desc = "tags" })
-      vim.keymap.set("n", "<c-f>", builtin.find_files, { desc = "find_files" })
-      -- vim.keymap.set("n", "<F6>", ":Buffers<CR>", { noremap = true, silent = true })
-      -- vim.keymap.set("n", "<F7>", ":Marks<CR>", { noremap = true, silent = true })
-      --		vim.g.ctrlp_map = "<c-f>"
+      -- local builtin = require("telescope.builtin")
+      -- -- vim.keymap.set("n", "<leader>fm", builtin.marks, {})
     end,
+    keys = {
+      { "<Leader>ff", require("telescope.builtin").find_files, mode = "n", desc = "find files" },
+      { "<Leader>fq", require("telescope.builtin").quickfix, mode = "n", desc = "quickfix" },
+      { "<Leader>fg", require("telescope.builtin").live_grep, mode = "n", desc = "live grep" },
+      { "<Leader>fr", require("telescope.builtin").oldfiles, mode = "n", desc = "old files" },
+      { "<Leader>fb", require("telescope.builtin").buffers, mode = "n", desc = "buffers" },
+      { "<Leader>fh", require("telescope.builtin").help_tags, mode = "n", desc = "help tags" },
+      { "<Leader>fd", require("telescope.builtin").diagnostics, mode = "n", desc = "diagnostics" },
+      { "<Leader>fm", "<cmd>Telescope bookmarks<cr>", mode = "n", desc = "bookmarks" },
+      { "<Leader>ft", require("telescope.builtin").tags, mode = "n", desc = "tags" },
+      { "<c-f>", require("telescope.builtin").find_files, mode = "n", desc = "find files" },
+    },
   },
   {
     "crusj/bookmarks.nvim",
     keys = {
-      { "<Leader><tab>", mode = { "n" } },
+      { "<Leader><tab>", mode = "n", desc = "add bookmark" },
     },
     branch = "main",
     dependencies = { "nvim-web-devicons" },
