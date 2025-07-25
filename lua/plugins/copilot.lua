@@ -109,9 +109,10 @@ return {
             description = "Write code comment for me",
             opts = {
               index = 11,
-              is_slash_cmd = false,
+              is_slash_cmd = true,
+              -- mapping = "<Leader>e",
               auto_submit = true,
-              short_name = "docs",
+              short_name = "docs", -- using this will allow you to use `/docs` to trigger this prompt
             },
             references = {
               {
@@ -130,8 +131,30 @@ return {
               },
             },
           },
+          ["Boilerplate HTML"] = {
+            strategy = "inline",
+            description = "Generate some boilerplate HTML",
+            opts = {
+              mapping = "<Leader>ch",
+              short_name = "html",
+              is_slash_cmd = true,
+            },
+            prompts = {
+              {
+                role = "system",
+                content = "You are an expert HTML programmer",
+              },
+              {
+                role = "user",
+                content = "<user_prompt>Please generate some HTML boilerplate for me. Return the code only and no markdown codeblocks</user_prompt>",
+              },
+            },
+          },
         },
       })
+      -- vim.keymap.set("n", "<Leader>d", function()
+      --   require("codecompanion").prompt("docs")
+      -- end, { noremap = true, silent = true })
     end,
   },
 }
