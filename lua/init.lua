@@ -6,6 +6,7 @@
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 
+---@diagnostic disable: undefined-doc-name
 if vim.fn.has("nvim-0.9") == 0 then
   print("Neovim version is too old, please update to 0.9 or later.")
   return

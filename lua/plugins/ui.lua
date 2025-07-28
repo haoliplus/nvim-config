@@ -1,3 +1,6 @@
+---@diagnostic disable: undefined-doc-name
+-- stylua: ignore
+
 return {
   {
     "akinsho/bufferline.nvim",
