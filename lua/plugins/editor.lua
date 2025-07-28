@@ -1,7 +1,6 @@
 return {
   {
     "BranimirE/fix-auto-scroll.nvim",
-    -- config = true,
     event = "VeryLazy",
   },
   -- quick commentary
@@ -53,7 +52,7 @@ return {
       post_hook = nil,
     },
     lazy = false,
-    config = function()
+    config = function(opts)
       -- vim.cmd([[autocmd FileType cpp setlocal commentstring=///\ %s]])
       -- vim.cmd([[autocmd FileType cuda setlocal commentstring=///\ %s]])
       local ft = require("Comment.ft")
@@ -62,7 +61,7 @@ return {
       ft.yaml = "#%s"
       ft({ "cuda", "cpp" }, { "///%s", "/**%s**/" })
 
-      require("Comment").setup()
+      require("Comment").setup(opts)
     end,
   },
   { "lambdalisue/suda.vim" },

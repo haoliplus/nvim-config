@@ -10,9 +10,8 @@ return {
   {
     "github/copilot.vim",
     enabled = enable_copilot_vim(),
-    config = function()
-      -- vim.g.copilot_no_tab_map = true
-      --
+    init = function()
+      vim.g.copilot_no_tab_map = true
     end,
   },
   {
@@ -112,8 +111,6 @@ return {
             {
               type = "file",
               path = {
-                -- "doc/.vitepress/config.mjs",
-                -- "lua/codecompanion/config.lua",
                 -- "README.md",
               },
             },
@@ -146,12 +143,5 @@ return {
         },
       },
     },
-    -- config = function()
-    --   -- vim.g.copilot_no_tab_map = true
-    --   require("codecompanion").setup()
-    --   -- vim.keymap.set("n", "<Leader>d", function()
-    --   --   require("codecompanion").prompt("docs")
-    --   -- end, { noremap = true, silent = true })
-    -- end,
   },
 }

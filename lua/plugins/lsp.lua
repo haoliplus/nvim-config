@@ -23,10 +23,6 @@ return {
       },
     },
     config = function()
-      -- require('plugins.utils.lsp_callbacks')
-      -- print(vim.inspect(vim.api.nvim_list_runtime_paths()))
-      -- require("plugins.utils.lsp_callbacks")
-
       -- See `:help vim.diagnostic.*` for documentation on any of the below functions
       vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, { desc = "Open diagnostic float" })
       vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })

@@ -2,11 +2,11 @@ return {
   {
     "ojroques/vim-oscyank",
     branch = "main",
-    config = function()
-      vim.cmd([[nmap <leader>c <Plug>OSCYankOperator]])
-      vim.cmd([[nmap <leader>cc <leader>c_]])
-      vim.cmd([[vmap <leader>c <Plug>OSCYankVisual]])
-    end,
+    keys = {
+      { "<leader>c", "<Plug>OSCYankOperator", mode = "n", desc = "Yank with OSCYank" },
+      { "<leader>cc", "<leader>c_", mode = "n", desc = "Yank with OSCYank" },
+      { "<leader>c", "<Plug>OSCYankVisual", mode = "v", desc = "Yank with OSCYank" },
+    },
   },
   -- Utility for other plugin
   { "google/vim-maktaba" },
