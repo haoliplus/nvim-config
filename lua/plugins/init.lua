@@ -12,50 +12,44 @@ return {
   -- Using jj to escape
   {
     "max397574/better-escape.nvim",
-    config = function()
-      require("better_escape").setup({
-        i = {
-          [" "] = {
-            ["<tab>"] = function()
-              -- Defer execution to avoid side-effects
-              vim.defer_fn(function()
-                -- set undo point
-                vim.o.ul = vim.o.ul
-                require("luasnip").expand_or_jump()
-              end, 1)
-            end,
+    opts = {
+      i = {
+        [" "] = {
+          ["<tab>"] = function()
+            -- Defer execution to avoid side-effects
+            vim.defer_fn(function()
+              -- set undo point
+              vim.o.ul = vim.o.ul
+              require("luasnip").expand_or_jump()
+            end, 1)
+          end,
+        },
+      },
+      mappings = {
+        v = {
+          j = {
+            -- 不知道为什么，如果不这么设置。会在visual模式里，按下jk后自动退出
+            k = false,
           },
         },
-        mappings = {
-          v = {
-            j = {
-              -- 不知道为什么，如果不这么设置。会在visual模式里，按下jk后自动退出
-              k = false,
-            },
-          },
-        },
-      })
-    end,
+      },
+    },
   },
   -- git
   {
     "lewis6991/gitsigns.nvim",
-    config = function()
-      require("gitsigns").setup()
-    end,
+    opts = {},
   },
   { "tpope/vim-fugitive" },
   {
     "folke/trouble.nvim",
     dependencies = "nvim-tree/nvim-web-devicons",
-    config = function()
-      require("trouble").setup({
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-        vim.keymap.set("n", "<F9>", ":TroubleToggle<cr>", { silent = true, noremap = true, desc = "TroubleToggle" }),
-      })
-    end,
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+      vim.keymap.set("n", "<F9>", ":TroubleToggle<cr>", { silent = true, noremap = true, desc = "TroubleToggle" }),
+    },
   },
   {
     -- Install markdown preview, use npx if available.

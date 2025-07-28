@@ -6,29 +6,25 @@ return {
   { "drewtempelmeyer/palenight.vim" },
   {
     "folke/tokyonight.nvim",
-    config = function()
-      require("tokyonight").setup({
-        -- use the night style
-        style = "night",
-        -- disable italic for functions
-        styles = {
-          comments = { italic = true },
-          functions = {},
-        },
-        sidebars = { "qf", "vista_kind", "terminal", "packer" },
-        -- Change the "hint" color to the "orange" color, and make the "error" color bright red
-        on_colors = function(colors)
-          -- colors.hint = colors.orange
-          colors.error = colors.orange
-        end,
-      })
-    end,
+    opts = {
+      -- use the night style
+      style = "night",
+      -- disable italic for functions
+      styles = {
+        comments = { italic = true },
+        functions = {},
+      },
+      sidebars = { "qf", "vista_kind", "terminal", "packer" },
+      -- Change the "hint" color to the "orange" color, and make the "error" color bright red
+      on_colors = function(colors)
+        -- colors.hint = colors.orange
+        colors.error = colors.orange
+      end,
+    },
   },
   {
     "norcalli/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup()
-    end,
+    opts = {},
   },
   {
     "lukas-reineke/indent-blankline.nvim",
@@ -93,9 +89,7 @@ return {
   },
   {
     "IndianBoy42/tree-sitter-just",
-    config = function()
-      require("tree-sitter-just").setup({})
-    end,
+    opts = {},
   },
   { ------ Better syntax highlightingG
     "nvim-treesitter/nvim-treesitter",
@@ -117,7 +111,7 @@ return {
           "html",
           "javascript",
           "just",
-          "css"
+          "css",
         },
 
         -- Install parsers synchronously (only applied to `ensure_installed`)

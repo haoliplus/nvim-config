@@ -1,7 +1,7 @@
 return {
   {
     "BranimirE/fix-auto-scroll.nvim",
-    config = true,
+    -- config = true,
     event = "VeryLazy",
   },
   -- quick commentary
@@ -77,15 +77,11 @@ return {
     -- <b>or tag* types</b>        csth1<CR>       <h1>or tag types</h1>
     -- delete(functi*on calls)     dsf             function calls
     "kylechui/nvim-surround",
-    config = function()
-      require("nvim-surround").setup()
-    end,
+    opts = {},
   },
   -- automatically insert/delete parenthesis, brackets, quotes
   {
     "windwp/nvim-autopairs",
-    config = function()
-      require("nvim-autopairs").setup()
-    end,
+    opts = {},
   },
 }

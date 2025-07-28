@@ -1,6 +1,18 @@
 ---@diagnostic disable: undefined-doc-name
 -- stylua: ignore
 
+local vim_version_major = vim.version().major
+local vim_version_minor = vim.version().minor
+local vim_version_patch = vim.version().patch
+local vim_version_build = vim.version().build
+local version = vim_version_major
+  .. "."
+  .. vim_version_minor
+  .. "."
+  .. vim_version_patch
+  .. "+"
+  .. vim_version_build
+
 return {
   {
     "akinsho/bufferline.nvim",
@@ -129,9 +141,7 @@ return {
     branch = "main",
     event = "LspAttach",
     -- ft = {'c','cpp', 'lua', 'rust', 'go'},
-    config = function()
-      -- local default = " "
-      require("lspsaga").setup({
+    opts = {
         lightbulb = {
           enable = false,
           enable_in_insert = true,
@@ -190,8 +200,7 @@ return {
           --   [304] = { 'Value', ' ', '@variable' },
           -- }
         },
-      })
-    end,
+      },
     dependencies = {
       { "nvim-tree/nvim-web-devicons" },
       --Please make sure you install markdown and markdown_inline parser
@@ -204,8 +213,7 @@ return {
       "nvim-tree/nvim-web-devicons",
       -- 'AndreM222/copilot-lualine',
     },
-    config = function()
-      require("lualine").setup({
+    opts = {
         options = {
           icons_enabled = true,
           theme = "auto",
@@ -244,25 +252,12 @@ return {
         winbar = {},
         inactive_winbar = {},
         extensions = {},
-      })
-    end,
+      },
   },
   {
     "glepnir/dashboard-nvim",
     event = "VimEnter",
-    config = function()
-      local vim_version_major = vim.version().major
-      local vim_version_minor = vim.version().minor
-      local vim_version_patch = vim.version().patch
-      local vim_version_build = vim.version().build
-      local version = vim_version_major
-        .. "."
-        .. vim_version_minor
-        .. "."
-        .. vim_version_patch
-        .. "+"
-        .. vim_version_build
-      require("dashboard").setup({
+    opts = {
         config = {
           week_header = {
             enable = true,
@@ -294,8 +289,7 @@ return {
             },
           },
         },
-      })
-    end,
+      },
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   {
