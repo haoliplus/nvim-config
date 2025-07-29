@@ -7,14 +7,14 @@ local function enable_copilot_vim()
 end
 
 return {
-  {
+  { -- github copilot
     "github/copilot.vim",
     enabled = enable_copilot_vim(),
     init = function()
       vim.g.copilot_no_tab_map = true
     end,
   },
-  {
+  { -- better copilot 
     "zbirenbaum/copilot.lua",
     enabled = enable_copilot_lua(),
     opts = {
@@ -66,7 +66,7 @@ return {
       server_opts_overrides = {},
     },
   },
-  {
+  { -- ai ui
     "olimorris/codecompanion.nvim",
     enabled = true,
     opts = {

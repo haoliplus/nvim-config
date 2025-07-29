@@ -1,11 +1,11 @@
 return {
-  {
+  { -- 切换buffer时禁止自动滚动
     "BranimirE/fix-auto-scroll.nvim",
     event = "VeryLazy",
   },
   -- quick commentary
   -- { "tpope/vim-commentary" },
-  {
+  { -- better comment cmd
     "numToStr/Comment.nvim",
     opts = {
       -- add any options here
@@ -64,7 +64,9 @@ return {
       require("Comment").setup(opts)
     end,
   },
-  { "lambdalisue/suda.vim" },
+  { -- add sudo command
+    "lambdalisue/suda.vim",
+  },
   -- {'google/vim-glaive', dependencies = {'google/vim-maktaba' }},
   ---- motions to surround text with other text
   {
@@ -79,7 +81,7 @@ return {
     opts = {},
   },
   -- automatically insert/delete parenthesis, brackets, quotes
-  {
+  { -- autopairs
     "windwp/nvim-autopairs",
     opts = {},
   },

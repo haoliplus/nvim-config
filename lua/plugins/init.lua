@@ -40,6 +40,7 @@ return {
     "lewis6991/gitsigns.nvim",
     opts = {},
   },
+  -- git wrapper
   { "tpope/vim-fugitive" },
   {
     "folke/trouble.nvim",

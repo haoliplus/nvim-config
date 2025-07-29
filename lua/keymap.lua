@@ -46,7 +46,3 @@ keymap.set(
   { noremap = true, silent = true, desc = "Highlight word under cursor" }
 )
 
--- nnoremap * :keepjumps normal! mi*`i<CR>
-
--- keymap.set('n', '<Leader>t', ':Template ',  { remap = true})
--- keymap.set('n', '<F10>', ':MRU', { noremap = true, silent = true })

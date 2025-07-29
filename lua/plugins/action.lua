@@ -1,6 +1,6 @@
 return {
   -- buffer remove
-  {
+  { -- remote buffer
     "echasnovski/mini.bufremove",
     -- stylua: ignore
     keys = {
@@ -9,7 +9,7 @@ return {
       -- <leader>bs:
     },
   },
-  {
+  { -- show key mappings
     "folke/which-key.nvim",
     event = "VeryLazy",
     init = function()

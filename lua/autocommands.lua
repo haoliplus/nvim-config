@@ -12,14 +12,6 @@ end, { bang = true, desc = "install mason" })
 vim.api.nvim_create_user_command("Binary", function(_)
   vim.cmd("%!xxd")
 end, { bang = true, desc = "read binary" })
--- " Format json
--- vim.api.nvim_create_user_command("FormatJson", function(_)
--- vim.cmd("%!json_pp -json_opt utf8,pretty")
--- end, { bang = true, desc = "Format json" })
---
-vim.api.nvim_create_user_command("TrailingSpace", function(_)
-  vim.cmd([[%s/\s\+$//e]])
-end, { bang = true, desc = "clear space" })
 
 -- vim.cmd(
 --   [[
@@ -37,7 +29,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufReadPost" }, {
   end,
 })
 
--- 为 Python 文件类型创建一个自定义命令
+-- 为 Json 文件类型创建一个自定义命令
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "json",
   callback = function()
@@ -51,7 +43,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- 当离开 Python 文件时，移除 DoLint 命令
+-- 当离开 Json 文件时，移除 DoLint 命令
 vim.api.nvim_create_autocmd("BufLeave", {
   pattern = "*.json",
   callback = function()

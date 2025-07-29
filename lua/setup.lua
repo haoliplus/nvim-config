@@ -2,6 +2,7 @@ vim.cmd("autocmd!") -- Remove all auto cmd
 vim.g.mapleader = ";"
 ------------------------ basic for nvim --------------------------------------
 vim.g.is_bash = 1
+-- no folding
 vim.g.conceallevel = 0
 
 -- {{ Builtin variables
@@ -64,8 +65,8 @@ vim.g.vim_json_conceal = 0
 vim.g.markdown_syntax_conceal = 0
 
 -- disable netrw at the very start of your init.lua (strongly advised)
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
 
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
@@ -112,7 +113,7 @@ vim.opt.smartcase = true
 --  => Turn persistent undo on
 --     means that you can undo even when you close a buffer/VIM
 -- """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-vim.opt.undodir = vim.fn.getenv("HOME") .. "/.cache/temp_dirs/undodir"
+vim.opt.undodir = vim.fn.getenv("HOME") .. "/.cache/nvim_temp_dirs/undodir"
 vim.opt.undofile = true
 vim.opt.splitright = true
 

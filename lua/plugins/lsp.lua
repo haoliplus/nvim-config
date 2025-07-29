@@ -263,6 +263,10 @@ return {
       end
     end,
   }, -- lsp "neovim/nvim-lspconfig",
-  { "kevinhwang91/nvim-bqf" },
-  { "nvim-lua/lsp-status.nvim" },
+  { -- better quickfix window
+    "kevinhwang91/nvim-bqf",
+  },
+  { -- show lsp parse status
+    "nvim-lua/lsp-status.nvim",
+  },
 }

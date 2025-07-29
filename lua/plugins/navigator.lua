@@ -1,6 +1,5 @@
 return {
-  ---- community-maintained snippets
-  {
+  { -- fuzzy search using ack
     "mileszs/ack.vim",
     init = function()
       if vim.fn.executable("ag") == 1 then
@@ -14,10 +13,16 @@ return {
   },
   -- jump between .h/.cc
   -- { 'for': {'c', 'cpp'} }
-  { "vim-scripts/a.vim", ft = { "c", "cpp", "cc", "cuda" } },
+  { -- jump between .h/.cc
+    "vim-scripts/a.vim",
+    ft = { "c", "cpp", "cc", "cuda" },
+  },
   ---- fuzzy search using c-t
-  { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-  {
+  { -- fuzzy search using c-t
+    "nvim-telescope/telescope-fzf-native.nvim",
+    build = "make",
+  },
+  { -- fuzzy search using fzf
     "junegunn/fzf",
     build = "./install --all",
     config = function()
@@ -27,11 +32,11 @@ return {
       vim.cmd([[autocmd FileType fzf call feedkeys("i\<Bs>")]])
     end,
   },
-  {
+  { -- fuzzy search using telescope
     "nvim-telescope/telescope.nvim",
     tag = "0.1.5",
     submodules = false,
-    -- or                            , branch = '0.1.x',
+    -- or , branch = '0.1.x',
     dependencies = { { "nvim-lua/plenary.nvim" }, { "crusj/bookmarks.nvim" } },
     config = function()
       require("telescope").setup({
@@ -92,7 +97,7 @@ return {
       { "<c-f>", require("telescope.builtin").find_files, mode = "n", desc = "find files" },
     },
   },
-  {
+  { -- add bookmarks
     "crusj/bookmarks.nvim",
     keys = {
       { "<Leader><tab>", mode = "n", desc = "add bookmark" },

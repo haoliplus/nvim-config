@@ -1,5 +1,5 @@
 return {
-  {
+  { -- format current code
     "mhartington/formatter.nvim",
     enabled = true,
     config = function(_, _) -- stylua: ignore

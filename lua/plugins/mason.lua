@@ -1,5 +1,5 @@
 return {
-  {
+  { -- install language servers, formatters, linters, etc.
     "mason-org/mason-lspconfig.nvim",
     enabled = false,
     -- version = "v1.*",
@@ -25,7 +25,7 @@ return {
       },
     },
   },
-  {
+  { -- install formatters, linters, etc.
     "mason-org/mason.nvim",
     opts = {
       -- npm = {

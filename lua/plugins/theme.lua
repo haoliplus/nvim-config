@@ -3,7 +3,9 @@ return {
   -- syntax highlight
   { "jackguo380/vim-lsp-cxx-highlight" },
   { "MunifTanjim/nui.nvim" },
-  { "drewtempelmeyer/palenight.vim" },
+  { -- theme
+    "drewtempelmeyer/palenight.vim",
+  },
   {
     "folke/tokyonight.nvim",
     opts = {

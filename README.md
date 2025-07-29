@@ -11,7 +11,7 @@
 ## INSTALL
 
 ```bash
-git clone git@github.com:haoliplus/nvim-config.git ~/.config/
+git clone git@github.com:haoliplus/nvim-config.git ~/.config/nvim
 # installs NVM (Node Version Manager)
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 # download and install Node.js
