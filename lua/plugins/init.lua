@@ -43,18 +43,6 @@ return {
   -- git wrapper
   { "tpope/vim-fugitive" },
   {
-    "folke/trouble.nvim",
-    dependencies = "nvim-tree/nvim-web-devicons",
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    },
-    keys = {
-      { "<F9>", "<cmd>TroubleToggle<cr>", mode = "n", silent = true, noremap = true, desc = "TroubleToggle" },
-    },
-  },
-  {
     -- Install markdown preview, use npx if available.
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },

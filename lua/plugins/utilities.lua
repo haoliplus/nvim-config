@@ -16,6 +16,7 @@ return {
   {
     "jlanzarotta/bufexplorer",
     lazy = false,
+    enabled = true,
     keys = {
       -- { "<leader>be", ":BufExplorer<CR>", desc = "Show Buffer" },
       -- { "<leader>bt", ":ToggleBufExplorer<CR>", desc = "Show Buffer" },
