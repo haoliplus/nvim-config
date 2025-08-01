@@ -51,7 +51,7 @@ local config = {
     keymap = {
       preset = "default",
       -- 取消默认的 <Tab> 占用
-      ["<Tab>"] = {  },
+      ["<Tab>"] = {},
       ["<C-]>"] = { "accept" },
       ["<C-y>"] = { "select_and_accept" },
       ["<C-e>"] = { "hide" },
@@ -83,7 +83,15 @@ local config = {
       window = { border = "single" },
     },
     completion = {
-      menu = { border = "single" },
+      menu = {
+        border = "single",
+        draw = {
+          columns = {
+            { "label", "label_description", gap = 1 },
+            { "kind_icon", "kind" },
+          },
+        },
+      },
       documentation = {
         window = { border = "single" },
         auto_show = true,

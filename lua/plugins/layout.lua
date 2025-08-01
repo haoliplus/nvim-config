@@ -181,7 +181,7 @@ return {
       -- vim.opt.showtabline = 0 -- hide tabline
       vim.opt.splitkeep = "screen" -- enable splitscreen mode
     end,
-    enabled = true,
+    enabled = false,
     opts = {
       bottom = {
       --   -- toggleterm / lazyterm at the bottom with a height of 40% of the screen
