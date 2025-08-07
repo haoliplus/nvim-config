@@ -6,11 +6,10 @@ let &runtimepath.=','.escape(expand('<sfile>:p:h'), '\,')
 set guicursor=
 set listchars=trail:~,tab:>→,nbsp:␣,extends:◣,precedes:◢
 " set listchars=eol:↵,trail:~,tab:>→,nbsp:␣,extends:◣,precedes:◢
-set listchars=tab:>→
+set listchars=tab:>→,trail:~,eol:↵
 " nnoremap * :keepjumps normal! mi*`i<CR>
 " set listchars=eol:↵,trail:~,tab:→→,nbsp:␣,extends:◣,precedes:◢
 " →
 " tab:▷ ,trail:·,extends:◣,precedes:◢,nbsp:○
 set list
-
 lua require('init')
