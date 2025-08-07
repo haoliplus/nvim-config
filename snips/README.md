@@ -1,0 +1,1 @@
+当前本地snippets仅`vscode`有效，注意检查json文件格式有效性
