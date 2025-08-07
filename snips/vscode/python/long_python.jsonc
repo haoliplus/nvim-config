@@ -1,4 +1,17 @@
 {
+  "logger0": {
+    "prefix": "logger",
+    "body": [
+      "from loguru import logger",
+      "import os",
+      "LOG_LEVEL = os.getenv(\"LOGURU_LEVEL\", \"INFO\")",
+      "LOG_FORMAT = os.getenv(\"LOGURU_FORMAT\", \"<green>[{level:.1} {time:MM-DD HH:mm:ss} {file}:{line}]</green> <level>{message}</level>\")",
+      "LOG_PATH = os.getenv(\"LOGURU_PATH\", \"/tmp/log.txt\"",
+      "logger.remove()",
+      "logger.add(sys.stdout, format=LOG_FORMAT, level=LOG_LEVEL)",
+      "logger.add(LOG_PATH)"
+    ]
+  },
   "logger": {
       "prefix": "logger",
       "body": [

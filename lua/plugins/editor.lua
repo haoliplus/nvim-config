@@ -1,4 +1,5 @@
 return {
+  { "yioneko/nvim-yati", dependencies = "nvim-treesitter/nvim-treesitter" },
   { -- 切换buffer时禁止自动滚动
     "BranimirE/fix-auto-scroll.nvim",
     event = "VeryLazy",
