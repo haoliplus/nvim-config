@@ -1,6 +1,6 @@
 {
-  "sample": {
-    "prefix": "aaa",
+  "aaa": {
+    "prefix": "aaasample",
     "body": [
       "line1",
       "line2"
@@ -80,14 +80,14 @@
   "iff": {
     "prefix": "iff",
     "body": [
-        "???",
+        "???"
     ],
     "description": ""
   },
   "ifx": {
     "prefix": "ifmain",
     "body": [
-        "if __nxame__ == `__main__:",
+        "if __nxame__ == `__main__:"
     ],
     "description": ""
   },

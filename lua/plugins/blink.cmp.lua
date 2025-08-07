@@ -23,7 +23,11 @@ end
 local config = {
   "saghen/blink.cmp",
   -- optional: provides snippets for the snippet source
-  dependencies = { "rafamadriz/friendly-snippets", "fang2hou/blink-copilot" },
+  dependencies = {
+    "haoliplus/friendly-snippets",
+    "fang2hou/blink-copilot",
+    "L3MON4D3/LuaSnip",
+  },
   submodules = false,
   enabled = function()
     return not vim.tbl_contains({ "lua", "markdown" }, vim.bo.filetype)
@@ -51,14 +55,15 @@ local config = {
     keymap = {
       preset = "default",
       -- 取消默认的 <Tab> 占用
-      ["<Tab>"] = {  },
+      ["<Tab>"] = {},
       ["<C-]>"] = { "accept" },
       ["<C-y>"] = { "select_and_accept" },
       ["<C-e>"] = { "hide" },
       ["<C-w>"] = { "show" },
       ["<Up>"] = { "select_prev", "fallback" },
       ["<Down>"] = { "select_next", "fallback" },
-      ["<C-p>"] = { "select_prev", "fallback_to_mappings" },
+      -- ["<C-p>"] = { "select_prev", "fallback_to_mappings" },
+      ["<C-p>"] = { "select_prev", "fallback" },
       ["<C-n>"] = { "select_next", "fallback_to_mappings" },
       ["<C-a>"] = {
         function(cmp)
@@ -71,7 +76,7 @@ local config = {
       ["<C-s>"] = {
         function(cmp)
           cmp.show({
-            --- Only show copilot suggestion
+            --- Only show snippets suggestion
             providers = { "snippets" },
           })
         end,
@@ -116,7 +121,9 @@ local config = {
         Copilot = "",
       },
     },
-
+    snippets = {
+      preset = 'luasnip',
+    },
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {

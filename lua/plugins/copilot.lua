@@ -29,7 +29,8 @@ return {
           open = "<M-CR>",
         },
         layout = {
-          position = "bottom", -- | top | left | right
+          position = "right", -- | top | left | right | bottom
+
           ratio = 0.4,
         },
       },
@@ -40,11 +41,13 @@ return {
         debounce = 75,
         keymap = {
           -- accept = "<C-;>",
+
           accept = "<C-o>", -- alt
           -- accept_word = false,
           -- accept_line = false,
-          next = "<C-,>",
-          prev = "<C-.>",
+          next = "<C-j>",
+          prev = "<C-.>", -- 
+          -- toggle = "<F12>", --  
           -- dismiss = "<C-=>",
         },
       },
@@ -63,7 +66,10 @@ return {
         ["."] = false,
       },
       copilot_node_command = "node", -- Node.js version must be > 18.x
-      server_opts_overrides = {},
+      server_opts_overrides = {
+        listCount = 6, -- #completions for panel
+        inlineSuggestCount = 3, -- #completions for getCompletions
+      },
     },
   },
   { -- ai ui
@@ -122,22 +128,41 @@ return {
             },
           },
         },
-        ["Boilerplate HTML"] = {
+        ["LanConvert"] = {
           strategy = "inline",
-          description = "Generate some boilerplate HTML",
+          description = "Convert code from other languages to the current buffer language",
           opts = {
-            mapping = "<Leader>ch",
-            short_name = "html",
+            -- mapping = "<Leader>ch",
+            short_name = "codeconvert",
             is_slash_cmd = true,
           },
           prompts = {
             {
               role = "system",
-              content = "You are an expert HTML programmer",
+              content = "You are an expert programmer that converts code from one programming language to another.",
             },
             {
               role = "user",
-              content = "<user_prompt>Please generate some HTML boilerplate for me. Return the code only and no markdown codeblocks</user_prompt>",
+              content = "<user_prompt>Please convert the following code to the language of current buffer(keeping the original code in comment for comparing)</user_prompt>",
+            },
+          },
+        },
+        ["ImplCode"] = {
+          strategy = "inline",
+          description = "Implement code descriped in the comment",
+          opts = {
+            -- mapping = "<Leader>ch",
+            short_name = "implcode",
+            is_slash_cmd = true,
+          },
+          prompts = {
+            {
+              role = "system",
+              content = "You are an expert programmer that implements code based on the description in the comment.",
+            },
+            {
+              role = "user",
+              content = "<user_prompt>Please implement the code described in the comment</user_prompt>",
             },
           },
         },
