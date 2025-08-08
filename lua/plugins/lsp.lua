@@ -121,6 +121,7 @@ return {
         id = 0,
         step = 0, -- 0: just created, 1: shown, 2: completed
       }
+      -- local clangd_handlers = {}
       local clangd_handlers = {
         ["textDocument/clangd.fileStatus"] = function(err, result, ctx, config)
           if not result.state then
@@ -217,6 +218,21 @@ return {
           handlers = clangd_handlers,
         }
       end
+      -- function _G.lsp_progress()
+      --   if vim.lsp.buf_get_clients() > 0 then
+      --     local lsp = vim.lsp.util.get_progress_messages()[1]
+      --     if lsp then
+      --       local name = lsp.name or ""
+      --       local msg = lsp.message or ""
+      --       local percentage = lsp.percentage or 0
+      --       local title = lsp.title or ""
+      --       return string.format(" %%<%s: %s %s (%s%%%%) ", name, title, msg, percentage)
+      --     end
+      --   end
+      --   return ""
+      -- end
+      --
+      -- vim.opt.statusline = [[%{%v:lua.require'foo'.lsp_progress()%}]]
       -- tsserver
       lsp_opts["ts_ls"] = {
         init_options = {
@@ -330,6 +346,7 @@ return {
   },
   -- { -- show lsp parse status
   --   "nvim-lua/lsp-status.nvim",
+  --   enabled = false,
   -- },
   { -- show lspprocess
     "j-hui/fidget.nvim",
@@ -337,7 +354,6 @@ return {
       notification = {
         override_vim_notify = true
       }
-
       -- options
     },
   },
