@@ -117,6 +117,53 @@ return {
         -- vim.notify("clangd root_dir: " .. cwf)
         return path
       end
+      local clang_file_state = {
+        id = 0,
+        step = 0, -- 0: just created, 1: shown, 2: completed
+      }
+      local clangd_handlers = {
+        ["textDocument/clangd.fileStatus"] = function(err, result, ctx, config)
+          if not result.state then
+            return
+          end
+          local message = result.state
+          local opts = {
+            key = "clangd.fileStatus",
+            group = ctx.client_id,
+            annote = "clangd",
+            ttl = math.huge,
+          }
+
+          if message == "idle" then
+            if clang_file_state.step ~= 1 then
+              clang_file_state.step = 2
+              return
+            end
+            clang_file_state.step = 2
+            message = "Completed"
+            opts.ttl = 0
+            vim.notify(message, vim.log.levels.INFO, opts)
+            return
+          end
+
+          -- delay notification by 0.5 second
+          -- only show it if it is not complete
+          local id = clang_file_state.id + 1
+          clang_file_state.id = id
+          clang_file_state.step = 0
+          local timer = vim.uv.new_timer()
+          timer:start(500, 0, function()
+            timer:stop()
+            timer:close()
+            vim.schedule(function()
+              if clang_file_state.id == id and clang_file_state.step == 0 then
+                clang_file_state.step = 1
+                vim.notify(message, vim.log.levels.INFO, opts)
+              end
+            end)
+          end)
+        end,
+      }
       if vim.fn.hostname() == "in_dev_docker" then
         -- do thing
         lsp_opts["clangd"] = {
@@ -126,10 +173,16 @@ return {
             "--clang-tidy",
             "--offset-encoding=utf-16",
           },
-          single_file_support = true,
+          -- single_file_support = true,
           filetypes = { "c", "cpp", "cc", "h" },
           -- root_dir = root_dir_func,
           root_dir = cpp_root_dir_func(),
+          init_options = {
+            clangdFileStatus = true, -- show clangd file status
+            usePlaceholders = true, -- enable placeholders
+            completeUnimported = true, -- enable auto import
+          },
+          handlers = clangd_handlers,
         }
       else
         -- !!! You should instgall both clang-x/gcc-x/g++-x
@@ -156,6 +209,12 @@ return {
           cmd = { "clangd", "--background-index", "--offset-encoding=utf-16" },
           filetypes = { "c", "cpp", "cc", "h", "cuda" },
           root_dir = cpp_root_dir_func(),
+          init_options = {
+            clangdFileStatus = true, -- show clangd file status
+            usePlaceholders = true, -- enable placeholders
+            completeUnimported = true, -- enable auto import
+          },
+          handlers = clangd_handlers,
         }
       end
       -- tsserver
@@ -266,7 +325,7 @@ return {
       end
     end,
   }, -- lsp "neovim/nvim-lspconfig",
-  {  -- better quickfix window
+  { -- better quickfix window
     "kevinhwang91/nvim-bqf",
   },
   -- { -- show lsp parse status
@@ -275,7 +334,11 @@ return {
   { -- show lspprocess
     "j-hui/fidget.nvim",
     opts = {
+      notification = {
+        override_vim_notify = true
+      }
+
       -- options
+    },
   },
-}
 }
