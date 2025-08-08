@@ -20,8 +20,26 @@ local function is_ubuntu_1604()
   return string.match(content, "Ubuntu") and string.match(content, "16.04")
 end
 
-local config = {
+local function get_build_cmd()
+  -- 根据系统版本设置变量
+  if is_ubuntu_1604() then
+    return "cargo build --release"
+  else
+    return nil
+  end
+end
+
+
+return {
   "saghen/blink.cmp",
+  ---
+  --- curl https://sh.rustup.rs -sSf | sh
+  -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+  -- build = 'cargo build --release',
+  -- If you use nix, you can build from source using latest nightly rust with:
+  -- build = 'nix run .#build-plugin',
+
+  build = get_build_cmd(),
   -- optional: provides snippets for the snippet source
   dependencies = {
     "haoliplus/friendly-snippets",
@@ -37,13 +55,6 @@ local config = {
 
   -- use a release tag to download pre-built binaries
   version = "*",
-  ---
-  --- curl https://sh.rustup.rs -sSf | sh
-  -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-  -- build = 'cargo build --release',
-  -- If you use nix, you can build from source using latest nightly rust with:
-  -- build = 'nix run .#build-plugin',
-
   ---@module 'blink.cmp'
   ---@diagnostic disable-next-line: undefined-doc-name
   ---@type blink.cmp.Config
@@ -154,11 +165,3 @@ local config = {
   },
   opts_extend = { "sources.default" },
 }
-
--- 根据系统版本设置变量
-if is_ubuntu_1604() then
-  config["build"] = "cargo build --release"
-end
--- config['build'] = 'cargo build --release'
-
-return config
