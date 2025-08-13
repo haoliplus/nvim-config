@@ -1,4 +1,7 @@
 return {
+  {
+    "powerman/vim-plugin-AnsiEsc"
+  },
   { -- 切换buffer时禁止自动滚动
     "BranimirE/fix-auto-scroll.nvim",
     event = "VeryLazy",
