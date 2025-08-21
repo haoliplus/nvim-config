@@ -115,7 +115,7 @@ return {
           ["<space>"] = "none",
           ["e"] = nil,
         },
-        width = 40,
+        width = 30,
         auto_expand = true,
       },
       default_component_configs = {
