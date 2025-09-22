@@ -8,6 +8,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     enabled = true,
+    ft = {'c','cpp', 'lua', 'rust', 'go', 'py', 'js'},
     dependencies = {
       "mason-org/mason.nvim",
       -- "mason-org/mason-lspconfig.nvim",
