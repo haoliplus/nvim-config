@@ -14,6 +14,12 @@ keymap.set(
   { noremap = true, silent = true, desc = "Copy to clipboard" }
 )
 keymap.set(
+  "n",
+  "<Leader>d",
+  "\"_dd",
+  { noremap = true, silent = true, desc = "delete to non-default register" }
+)
+keymap.set(
   "v",
   "<Leader>Y",
   ":w! ${HOME}/.vim_clipboard<CR>",
