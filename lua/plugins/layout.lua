@@ -115,8 +115,8 @@ return {
           ["<space>"] = "none",
           ["e"] = nil,
         },
-        width = 30,
-        auto_expand = true,
+        -- width = 30,
+        auto_expand_width = true,
       },
       default_component_configs = {
         container = {
