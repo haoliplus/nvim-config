@@ -48,6 +48,7 @@ return {
       -- in the form "LspDiagnosticsSignWarning"
     end,
     opts = {
+      hide_root_node = true,
       popup_border_style = "rounded",
       animate = {enabled = false},
       sources = {
