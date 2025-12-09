@@ -1,9 +1,32 @@
+
+local function github_exists()
+  local path = vim.fn.expand("~/.config/github-copilot/apps.json")
+  local stat = vim.loop.fs_stat(path)
+  if stat then
+    return true
+  else
+    return false
+  end
+end
+
 local function enable_copilot_lua()
-  return true
+  if vim.env.DEEPSEEK_API_KEY then
+    return true
+  else
+    return github_exists()
+  end
 end
 
 local function enable_copilot_vim()
-  return not enable_copilot_lua()
+  if enable_copilot_lua() then
+    return false
+  end
+  return github_exists()
+end
+
+local function env_key_exists(key)
+  local value = vim.env[key]
+  return value ~= nil and value ~= ""
 end
 
 return {
@@ -74,7 +97,7 @@ return {
   },
   { -- ai ui
     "olimorris/codecompanion.nvim",
-    enabled = true,
+    enabled = env_key_exists("DEEPSEEK_API_KEY"),
     opts = {
       strategies = {
         chat = {
