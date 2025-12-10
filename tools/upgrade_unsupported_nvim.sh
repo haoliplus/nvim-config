@@ -23,10 +23,10 @@ export OS=$(uname)
 if [[ "$OS" == 'Linux' ]]; then
   NVIM_NAME="nvim-linux64"
 elif [[ "$OS" == 'Darwin' ]]; then
-  NVIM_NAME="nvim-macos-arm64"
+  NVIM_NAME="nvim-macos-arm64" # not supported
 fi
 
-NVIM_DOWNLOAD_URL="https://github.com/neovim/neovim-releases/releases/download/v0.10.2/nvim-linux64.tar.gz"
+NVIM_DOWNLOAD_URL="https://github.com/neovim/neovim-releases/releases/download/v0.11.5/nvim-linux-x86_64.tar.gz"
 
 TMP_DIR=$(mktemp -d)
 LOCAL_DIR="${HOME}/.local"
