@@ -24,6 +24,8 @@ vim.g.is_mac = vim.fn.has("macunix") == 1
 vim.g.logging_level = "info"
 -- views can only be fully collapsed with the global statusline
 vim.opt.laststatus = 3
+-- 文件在外部被修改时，自动加载
+vim.opt.autoread = true
 
 function Contains(list, x)
   for _, v in pairs(list) do

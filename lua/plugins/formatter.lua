@@ -53,14 +53,19 @@ return {
             require("formatter.filetypes.python").black,
             -- require("formatter.filetypes.python").isort
             function()
+              local path = util.get_current_buffer_file_path()
+              -- 入口文件：不要跑 isort，避免动 import 顺序
+              if path:match("main%.py$") or path:match("asgi%.py$") or path:match("wsgi%.py$") then
+                return nil
+              end
+
               return {
                 exe = "isort",
                 args = {
                   "--quiet",
-                  "--",
-                  util.escape_path(util.get_current_buffer_file_path()),
+                  "-"
                 },
-                stdin = false,
+                stdin = true,
               }
             end,
           }, -- python

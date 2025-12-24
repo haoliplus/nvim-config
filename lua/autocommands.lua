@@ -13,6 +13,13 @@ vim.api.nvim_create_user_command("Binary", function(_)
   vim.cmd("%!xxd")
 end, { bang = true, desc = "read binary" })
 
+vim.api.nvim_create_autocmd(
+  { "FocusGained", "BufEnter", "CursorHold" },
+  {
+    command = "checktime",
+  }
+)
+
 -- vim.cmd(
 --   [[
 -- autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
