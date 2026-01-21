@@ -189,6 +189,25 @@ return {
             },
           },
         },
+        ["IImplCode"] = {
+          strategy = "chat",
+          description = "Implement code descriped in the comment(with interaction)",
+          opts = {
+            -- mapping = "<Leader>ch",
+            short_name = "implcodei",
+            is_slash_cmd = true,
+          },
+          prompts = {
+            {
+              role = "system",
+              content = "You are an expert programmer that implements code based on the description in the comment. If you need more information, ask the user before implementing the code.",
+            },
+            {
+              role = "user",
+              content = "<user_prompt>Please implement the code described in the comment</user_prompt>",
+            },
+          },
+        },
       },
     },
   },
