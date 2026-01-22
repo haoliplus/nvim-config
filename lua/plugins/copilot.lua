@@ -1,4 +1,3 @@
-
 local function github_exists()
   local path = vim.fn.expand("~/.config/github-copilot/apps.json")
   local stat = vim.loop.fs_stat(path)
@@ -37,7 +36,7 @@ return {
       vim.g.copilot_no_tab_map = true
     end,
   },
-  { -- better copilot 
+  { -- better copilot
     "zbirenbaum/copilot.lua",
     enabled = enable_copilot_lua(),
     opts = {
@@ -69,8 +68,8 @@ return {
           -- accept_word = false,
           -- accept_line = false,
           next = "<C-j>",
-          prev = "<C-.>", -- 
-          -- toggle = "<F12>", --  
+          prev = "<C-.>", --
+          -- toggle = "<F12>", --
           -- dismiss = "<C-=>",
         },
       },
@@ -102,6 +101,8 @@ return {
       strategies = {
         chat = {
           adapter = {
+            -- name = "deepseek",
+            -- model = "deepseek-chat",
             name = "deepseek",
             model = "deepseek-chat",
           },
@@ -121,6 +122,21 @@ return {
           return require("codecompanion.adapters").extend("deepseek", {
             env = {
               api_key = os.getenv("DEEPSEEK_API_KEY"),
+            },
+          })
+        end,
+        aidoki = function()
+          return require("codecompanion.adapters").extend("openai_compatible", {
+            env = {
+              api_key = os.getenv("AIDOKI_API_KEY"),
+              url = "https://api.aidoki.cn",
+              chat_url = "/v1/chat/completions",
+            },
+            schema = {
+              model = {
+                default = "deepseek-chat",
+                deepseek = "deepseek-chat"
+              },
             },
           })
         end,
