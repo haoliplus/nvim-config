@@ -29,5 +29,5 @@ prepare_deps:
   # brew install git zsh curl
 
 install:
-  echo 'source ${HOME}/.dotfiles/config/zshrc.sh' >> ${HOME}/.zshrc
+  echo 'source ${HOME}/.config/dotfiles/config/zshrc.sh' >> ${HOME}/.zshrc
 
