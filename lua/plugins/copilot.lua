@@ -1,6 +1,7 @@
 local function github_exists()
   local path = vim.fn.expand("~/.config/github-copilot/apps.json")
-  local stat = vim.loop.fs_stat(path)
+  -- local stat = vim.loop.fs_stat(path)
+  local stat = vim.uv.fs_stat(path)
   if stat then
     return true
   else
