@@ -121,14 +121,14 @@ return {
         deepseek = function()
           return require("codecompanion.adapters").extend("deepseek", {
             env = {
-              api_key = os.getenv("DEEPSEEK_API_KEY"),
+              api_key = vim.env.DEEPSEEK_API_KEY
             },
           })
         end,
         aidoki = function()
           return require("codecompanion.adapters").extend("openai_compatible", {
             env = {
-              api_key = os.getenv("AIDOKI_API_KEY"),
+              api_key = vim.env.AIDOKI_API_KEY,
               url = "https://api.aidoki.cn",
               chat_url = "/v1/chat/completions",
             },

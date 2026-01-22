@@ -32,7 +32,7 @@ local function enable_avante_impl()
 end
 
 local function enable_parrot()
-  if os.getenv("OPENROUTER_API_KEY") == nil then
+  if vim.env.OPENROUTER_API_KEY == nil then
     return false
   end
   return true
@@ -241,7 +241,7 @@ return {
           deepseek = {
             name = "deepseek", -- this name shold match the key in the providers table
             style = "openai",
-            api_key = os.getenv("DEEPSEEK_API_KEY"),
+            api_key = vim.env.DEEPSEEK_API_KEY,
             endpoint = "https://api.deepseek.com/chat/completions",
             -- topic_prompt = topic_prompt,
             topic = {
@@ -270,8 +270,8 @@ return {
           openrouter = {
             style = "openai",
             name = "openrouter", -- this name shold match the key in the providers table
-            -- api_key = os.getenv("DEEPSEEK_API_KEY"),
-            api_key = os.getenv("OPENROUTER_API_KEY"),
+            -- api_key = vim.env.DEEPSEEK_API_KEY,
+            api_key = vim.env.OPENROUTER_API_KEY,
             -- OPTIONAL: Alternative methods to retrieve API key
             -- Using GPG for decryption:
             -- api_key = { "gpg", "--decrypt", vim.fn.expand("$HOME") .. "/anthropic_api_key.txt.gpg" },
@@ -316,8 +316,8 @@ return {
           volcengine = {
             style = "openai",
             name = "volcengine", -- this name shold match the key in the providers table
-            -- api_key = os.getenv("DEEPSEEK_API_KEY"),
-            api_key = os.getenv("VOLCENGINE_API_KEY"),
+            -- api_key = vim.env.DEEPSEEK_API_KEY,
+            api_key = vim.env.VOLCENGINE_API_KEY,
             -- OPTIONAL: Alternative methods to retrieve API key
             -- Using GPG for decryption:
             -- api_key = { "gpg", "--decrypt", vim.fn.expand("$HOME") .. "/anthropic_api_key.txt.gpg" },

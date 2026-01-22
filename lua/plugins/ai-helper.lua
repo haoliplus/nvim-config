@@ -8,7 +8,7 @@ return {
     -- dev = true, -- 标记为开发模式
     enabled = false,
     opts = {
-      api_key = os.getenv("DEEPSEEK_API_KEY"),
+      api_key = vim.env.DEEPSEEK_API_KEY,
       prompts = {
         ["改进代码"] = "请改进以下代码，并说明改进原因：",
         ["代码解释"] = "请解释以下代码的功能：",
