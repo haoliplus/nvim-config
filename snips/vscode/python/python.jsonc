@@ -116,7 +116,7 @@
     "description": "parse time str"
   },
   "process": {
-    "prefix": "process",
+    "prefix": "processpool",
     "body": [
       "import concurrent.futures",
       "argvs = []",
@@ -129,7 +129,7 @@
     "description": "multiple processing"
   },
   "process2": {
-    "prefix": "process",
+    "prefix": "multiprocessing",
     "body": [
         "import multiprocessing as mp",
         "def task(slice, shared_data):",
@@ -151,7 +151,7 @@
     "description": "multiple processing"
   },
   "thread": {
-    "prefix": "thread",
+    "prefix": "threadpool",
     "body": [
       "import concurrent.futures",
       "URLS = []",
@@ -171,7 +171,7 @@
     "description": "multiple thread"
   },
   "thread2": {
-    "prefix": "thread",
+    "prefix": "threading",
     "body": [
         "import threading",
         "class MyThread(threading.Thread):",
