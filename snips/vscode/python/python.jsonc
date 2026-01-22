@@ -52,7 +52,7 @@
     "description": ""
   },
   "datetime2": {
-    "prefix": "datetime",
+    "prefix": "dateobj",
     "body": [
         "from datetime import datetime",
         "dt = datetime(year=${1}, month=${2}, day=${3})",
@@ -61,7 +61,7 @@
     "description": ""
   },
   "datetimestr": {
-    "prefix": "datetime",
+    "prefix": "dateparse",
     "body": [
         "from datetime import datetime",
         "datetime.strptime(\"2021-01-02 10:00:00.123\", \"%Y-%m-%d %H:%M:%S.%f\")"
@@ -69,7 +69,7 @@
     "description": ""
   },
   "datetimestr2": {
-    "prefix": "datetime",
+    "prefix": "datestr",
     "body": [
         "from datetime import datetime",
         "now = datetime.now()",
