@@ -7,6 +7,15 @@ local vim_version_patch = vim.version().patch
 local vim_version_build = vim.version().build
 local version = vim_version_major .. "." .. vim_version_minor .. "." .. vim_version_patch .. "+" .. vim_version_build
 
+local function check_env_is_set(env_var, show_value)
+  local value = os.getenv(env_var)
+  if value then
+    return env_var .. (show_value and ": " .. value or " ✔")
+  else
+    return env_var .. " ✘"
+  end
+end
+
 return {
   {
     "glepnir/dashboard-nvim",
@@ -16,7 +25,16 @@ return {
         week_header = {
           enable = true,
           concat = "vim:" .. version,
-          append = { "Hello" },
+          append = {
+            check_env_is_set("AIDOKI_AUTH_TOKEN"),
+            check_env_is_set("ANTHROPIC_AUTH_TOKEN"),
+            check_env_is_set("DEEPSEEK_API_KEY"),
+            "-------",
+            check_env_is_set("ANTHROPIC_MODEL", true),
+            check_env_is_set("ANTHROPIC_FAST_MODEL", true),
+            check_env_is_set("ANTHROPIC_SMALL_FAST_MODEL", true),
+            check_env_is_set("ANTHROPIC_BASE_URL", true),
+          },
         },
         packages = { enable = true }, -- show how many plugins neovim loaded
         mru = { limit = 10, icon = "* ", label = "Recent Files" },
