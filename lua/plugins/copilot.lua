@@ -9,12 +9,13 @@ local function github_exists()
   end
 end
 
+local function env_key_exists(key)
+  local value = vim.env[key]
+  return value ~= nil and value ~= ""
+end
+
 local function enable_copilot_lua()
-  if vim.env.DEEPSEEK_API_KEY then
-    return true
-  else
-    return github_exists()
-  end
+  return github_exists()
 end
 
 local function enable_copilot_vim()
@@ -24,10 +25,6 @@ local function enable_copilot_vim()
   return github_exists()
 end
 
-local function env_key_exists(key)
-  local value = vim.env[key]
-  return value ~= nil and value ~= ""
-end
 
 return {
   { -- github copilot
@@ -97,46 +94,58 @@ return {
   },
   { -- ai ui
     "olimorris/codecompanion.nvim",
-    enabled = env_key_exists("DEEPSEEK_API_KEY"),
+    enabled = env_key_exists("AIDOKI_AUTH_TOKEN"),
     opts = {
       strategies = {
         chat = {
           adapter = {
             -- name = "deepseek",
             -- model = "deepseek-chat",
-            name = "deepseek",
-            model = "deepseek-chat",
+            name = "aidoki",
+            model = "kimi-k2.5",
           },
         },
         inline = {
-          adapter = {
-            name = "deepseek",
-            model = "deepseek-chat",
-          },
+          adapter = "copilot"
         },
+        -- inline = {
+        --   adapter = {
+        --     name = "aidoki",
+        --     model = "kimi-k2.5",
+        --   },
+        -- },
       },
       opts = {
         log_level = "DEBUG", -- or "TRACE"
       },
       adapters = {
-        deepseek = function()
-          return require("codecompanion.adapters").extend("deepseek", {
-            env = {
-              api_key = vim.env.DEEPSEEK_API_KEY
-            },
-          })
-        end,
+        -- deepseek = function()
+        --   return require("codecompanion.adapters").extend("deepseek", {
+        --     env = {
+        --       api_key = vim.env.DEEPSEEK_API_KEY
+        --     },
+        --   })
+        -- end,
         aidoki = function()
           return require("codecompanion.adapters").extend("openai_compatible", {
+            name="aidoki-new-api",
+            formatted_name = "Aidoki New API",
             env = {
-              api_key = vim.env.AIDOKI_API_KEY,
+              api_key = vim.env.AIDOKI_AUTH_TOKEN,
               url = "https://api.aidoki.cn",
               chat_url = "/v1/chat/completions",
+              model = "schema.model.default",
             },
             schema = {
               model = {
-                default = "deepseek-chat",
-                deepseek = "deepseek-chat"
+                default = "kimi-k2.5",
+                choices = {
+                  "kimi-k2.5",
+                  "deepseek-chat",
+                  "claude-sonnet-4-5-20250929-cc",
+                  "claude-haiku-4-5-20251001-cc",
+                  "glm-4.7-cc"
+                },
               },
             },
           })
