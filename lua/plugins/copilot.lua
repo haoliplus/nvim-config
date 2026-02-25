@@ -25,7 +25,6 @@ local function enable_copilot_vim()
   return github_exists()
 end
 
-
 return {
   { -- github copilot
     "github/copilot.vim",
@@ -36,6 +35,12 @@ return {
   },
   { -- better copilot
     "zbirenbaum/copilot.lua",
+    requires = {
+      "copilotlsp-nvim/copilot-lsp", -- (optional) for NES functionality
+      init = function()
+        vim.g.copilot_nes_debounce = 500
+      end,
+    },
     enabled = enable_copilot_lua(),
     opts = {
       panel = {
@@ -91,6 +96,18 @@ return {
         inlineSuggestCount = 3, -- #completions for getCompletions
       },
     },
+    -- config = function()
+    --   require("copilot").setup({
+    --     nes = {
+    --       enabled = true,
+    --       keymap = {
+    --         accept_and_goto = "<leader>p",
+    --         accept = false,
+    --         dismiss = "<Esc>",
+    --       },
+    --     },
+    --   })
+    -- end,
   },
   { -- ai ui
     "olimorris/codecompanion.nvim",
@@ -106,7 +123,7 @@ return {
           },
         },
         inline = {
-          adapter = "copilot"
+          adapter = "copilot",
         },
         -- inline = {
         --   adapter = {
@@ -128,7 +145,7 @@ return {
         -- end,
         aidoki = function()
           return require("codecompanion.adapters").extend("openai_compatible", {
-            name="aidoki-new-api",
+            name = "aidoki-new-api",
             formatted_name = "Aidoki New API",
             env = {
               api_key = vim.env.AIDOKI_AUTH_TOKEN,
@@ -144,7 +161,7 @@ return {
                   "deepseek-chat",
                   "claude-sonnet-4-5-20250929-cc",
                   "claude-haiku-4-5-20251001-cc",
-                  "glm-4.7-cc"
+                  "glm-4.7-cc",
                 },
               },
             },

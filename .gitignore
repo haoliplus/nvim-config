@@ -5,3 +5,4 @@ lazy-lock.json
 env.sh
 lua/custom_command.lua
 cd-project.nvim.json
+.claude
