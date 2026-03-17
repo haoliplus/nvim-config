@@ -43,6 +43,16 @@
     ]
 
   },
+  "logger_basic": {
+    "prefix": "logger_basic",
+    "body": [
+      "from loguru import logger",
+      "import sys",
+      "logger.remove()",
+      "logger.add(sys.stdout, format=\"<green>[{level:.1} {time:MM-DD HH:mm:ss} {file}:{line}]</green> <level>{message}</level>\", level=\"INFO\")",
+      "logger.add(\"/tmp/log.txt\")"
+    ]
+  },
   "logger0": {
     "prefix": "logger",
     "body": [
