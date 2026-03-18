@@ -29,7 +29,6 @@ local function get_build_cmd()
   end
 end
 
-
 return {
   "saghen/blink.cmp",
   ---
@@ -92,6 +91,8 @@ return {
           })
         end,
       },
+      -- ["<A-y>"] = require("minuet").make_blink_map(),
+      -- df
     },
     signature = {
       -- Enable signature help
@@ -141,7 +142,7 @@ return {
       },
     },
     snippets = {
-      preset = 'luasnip',
+      preset = "luasnip",
     },
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
@@ -152,6 +153,7 @@ return {
         "lsp",
         "snippets",
         "buffer",
+        "minuet",
       },
       providers = {
         copilot = {
@@ -159,6 +161,15 @@ return {
           module = "blink-copilot",
           score_offset = 100,
           async = true,
+        },
+        minuet = {
+          name = "minuet",
+          module = "minuet.blink",
+          async = true,
+          -- Should match minuet.config.request_timeout * 1000,
+          -- since minuet.config.request_timeout is in seconds
+          timeout_ms = 3000,
+          score_offset = 50, -- Gives minuet higher priority among suggestions
         },
       },
     },
