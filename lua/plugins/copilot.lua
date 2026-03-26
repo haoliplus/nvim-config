@@ -32,6 +32,7 @@ return {
       "saghen/blink.cmp",
       "nvim-lua/plenary.nvim",
     },
+    enabled=vim.g.minut_enabled,
     config = function()
       local mc = require("minuet.config")
       require("minuet").setup({
