@@ -32,7 +32,7 @@ return {
       "saghen/blink.cmp",
       "nvim-lua/plenary.nvim",
     },
-    enabled=vim.g.minut_enabled,
+    enabled = vim.g.minut_enabled,
     config = function()
       local mc = require("minuet.config")
       require("minuet").setup({
@@ -45,7 +45,7 @@ return {
           },
         },
         virtualtext = {
-          auto_trigger_ft = {"py"},
+          auto_trigger_ft = { "py" },
           keymap = {
             -- accept whole completion
             accept = "<A-A>",
@@ -93,9 +93,13 @@ return {
   },
   { -- github copilot
     "github/copilot.vim",
-    -- enabled = enable_copilot_vim(),
-    enabled = false,
+    -- enabled = false,
+    enabled = true,
     init = function()
+      vim.keymap.set("i", "<C-Y>", 'copilot#Accept("\\<CR>")', {
+        expr = true,
+        replace_keycodes = false,
+      })
       vim.g.copilot_no_tab_map = true
     end,
   },
@@ -178,7 +182,7 @@ return {
   },
   { -- ai ui
     "olimorris/codecompanion.nvim",
-    enabled = env_key_exists("AIDOKI_AUTH_TOKEN"),
+    enabled = false,
     opts = {
       strategies = {
         chat = {
