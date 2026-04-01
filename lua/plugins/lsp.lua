@@ -24,6 +24,7 @@ return {
       },
     },
     config = function()
+      -- require("lazydev").setup()
       -- See `:help vim.diagnostic.*` for documentation on any of the below functions
       vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, { desc = "Open diagnostic float" })
       vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
@@ -80,15 +81,15 @@ return {
       }) -- end LspAttach
 
       -- local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-      local function call_requires()
-        return require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-      end
+      -- local function call_requires()
+      --   return require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+      -- end
 
       local capabilities = nil
-      local status, ret = pcall(call_requires)
-      if status then
-        capabilities = ret
-      end
+      -- local status, ret = pcall(call_requires)
+      -- if status then
+      --   capabilities = ret
+      -- end
       capabilities = require("blink.cmp").get_lsp_capabilities()
 
       local servers = {
@@ -124,7 +125,7 @@ return {
       }
       -- local clangd_handlers = {}
       local clangd_handlers = {
-        ["textDocument/clangd.fileStatus"] = function(err, result, ctx, config)
+        ["textDocument/clangd.fileStatus"] = function(_, result, ctx, _)
           if not result.state then
             return
           end
@@ -315,13 +316,13 @@ return {
             },
             workspace = {
               -- Make the server aware of Neovim runtime files
-              library = vim.api.nvim_get_runtime_file("", true),
+              -- library = vim.api.nvim_get_runtime_file("", true),
               checkThirdParty = false, -- THIS IS THE IMPORTANT LINE TO ADD
             },
             -- Do not send telemetry data containing a randomized but unique identifier
-            telemetry = {
-              enable = false,
-            },
+            -- telemetry = {
+            --   enable = false,
+            -- },
           },
         },
       }
@@ -342,8 +343,8 @@ return {
         -- legacy
         -- require("lspconfig")[server_name].setup(opts)
         -- new
-        vim.lsp.enable(server_name, opts)
         vim.lsp.config(server_name, opts)
+        vim.lsp.enable(server_name, opts)
       end
     end,
   }, -- lsp "neovim/nvim-lspconfig",

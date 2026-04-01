@@ -148,11 +148,12 @@ return {
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
       default = {
-        -- "copilot",
+        "copilot",
         "path",
         "lsp",
         "snippets",
         "buffer",
+        "lazydev",
         -- "minuet",
       },
       providers = {
@@ -161,6 +162,12 @@ return {
           module = "blink-copilot",
           score_offset = 100,
           async = true,
+        },
+        lazydev = {
+          name = "LazyDev",
+          module = "lazydev.integrations.blink",
+          -- make lazydev completions top priority (see `:h blink.cmp`)
+          score_offset = 100,
         },
         -- minuet = {
         --   name = "minuet",
