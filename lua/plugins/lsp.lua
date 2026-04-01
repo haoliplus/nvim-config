@@ -8,7 +8,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     enabled = true,
-    ft = {'c','cpp', 'lua', 'rust', 'go', 'py', 'js'},
+    lazy = false,
     dependencies = {
       "mason-org/mason.nvim",
       -- "mason-org/mason-lspconfig.nvim",
@@ -31,13 +31,97 @@ return {
       vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
       vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, { desc = "Set loclist" })
 
+      local util = require("lspconfig/util")
+      require("lspconfig.ui.windows").default_options = {
+        border = "rounded",
+      }
+
+      local function path_exists(path)
+        return path and vim.uv.fs_stat(path) ~= nil
+      end
+
+      local function python_from_venv(venv)
+        if not venv or venv == "" then
+          return nil
+        end
+        local python = util.path.join(venv, "bin", "python")
+        if path_exists(python) then
+          return python
+        end
+        python = util.path.join(venv, "Scripts", "python.exe")
+        if path_exists(python) then
+          return python
+        end
+        return nil
+      end
+
+      local function current_python_file(bufnr)
+        local name = vim.api.nvim_buf_get_name(bufnr or 0)
+        if name ~= "" then
+          return name
+        end
+        return vim.fn.expand("%:p")
+      end
+
+      local function current_python_workspace(bufnr)
+        local file = current_python_file(bufnr)
+        local path = util.root_pattern(
+          "pyrightconfig.json",
+          "setup.py",
+          "setup.cfg",
+          "pyproject.toml",
+          "requirements.txt",
+          ".git"
+        )(file)
+        if path then
+          return path
+        end
+        if file ~= "" then
+          return util.path.dirname(file)
+        end
+        return vim.fn.getcwd()
+      end
+
+      local function get_python_path(workspace)
+        workspace = workspace or vim.fn.getcwd()
+
+        local activated = python_from_venv(vim.env.VIRTUAL_ENV)
+        if activated then
+          return activated
+        end
+
+        local local_python = python_from_venv(util.path.join(workspace, ".venv"))
+        if local_python then
+          return local_python
+        end
+
+        if vim.fn.executable("python3") == 1 then
+          return vim.fn.exepath("python3")
+        end
+        return vim.fn.exepath("python")
+      end
+
       -- Use LspAttach autocommand to only map the following keys
       -- after the language server attaches to the current buffer
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(ev)
+          local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
           -- Enable completion triggered by <c-x><c-o>
           vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+          if client and client.name == "pyright" then
+            local workspace = current_python_workspace(ev.buf)
+            local python_path = get_python_path(workspace)
+            client.settings = client.settings or {}
+            client.settings.python = vim.tbl_deep_extend(
+              "force",
+              client.settings.python or {},
+              { pythonPath = python_path }
+            )
+            client:notify("workspace/didChangeConfiguration", { settings = nil })
+          end
 
           -- Buffer local mappings.
           -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -45,8 +129,18 @@ return {
           vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = ev.buf, desc = "Go to declaration" })
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = ev.buf, desc = "Go to definition" })
           -- vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = ev.buf, desc = "Show hover" })
+
           vim.keymap.set("n", "K", function()
-            vim.lsp.buf.hover({ border = "single" })
+            local hover_clients = vim.lsp.get_clients({
+              bufnr = ev.buf,
+              method = "textDocument/hover",
+            })
+            if #hover_clients == 0 then
+              vim.diagnostic.open_float()
+              return
+            end
+
+            vim.lsp.buf.hover({ border = "rounded" })
           end, { buffer = ev.buf, desc = "Show hover" })
           vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = ev.buf, desc = "Go to implementation" })
           vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { buffer = ev.buf, desc = "Show signature help" })
@@ -103,11 +197,6 @@ return {
         -- "jedi_language_server",
       }
       local lsp_opts = {}
-
-      local util = require("lspconfig/util")
-      require("lspconfig.ui.windows").default_options = {
-        border = "rounded",
-      }
 
       -- Clangd
 
@@ -249,15 +338,7 @@ return {
           },
         },
       }
-      -- ruff_lsp
-      local py_root_dir = function()
-        local cwd = vim.fn.getcwd()
-        local cwf = vim.fn.expand("%:p")
-        return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(cwf) or cwd
-      end
-
       lsp_opts["ruff"] = {
-        root_dir = py_root_dir(),
         capabilities = capabilities,
         init_options = {
           settings = {
@@ -271,7 +352,11 @@ return {
       -- Pyright
       lsp_opts["pyright"] = {
         cmd = { "pyright-langserver", "--stdio" },
-        root_dir = py_root_dir(),
+        before_init = function(_, config)
+          config.settings = config.settings or {}
+          config.settings.python = config.settings.python or {}
+          config.settings.python.pythonPath = get_python_path(current_python_workspace())
+        end,
         capabilities = (function()
           local py_capabilities = vim.lsp.protocol.make_client_capabilities()
           py_capabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
@@ -287,7 +372,7 @@ return {
               autoSearchPaths = true,
               typeCheckingMode = "basic",
               diagnosticMode = "workspace",
-              useLibraryCodeForTypes = false, -- this is for avoiding lib member access error like cv.imread
+              useLibraryCodeForTypes = true,
               diagnosticSeverityOverrides = {
                 reportUnusedImport = "none",
                 reportUnusedClass = "none",

@@ -42,8 +42,10 @@ return {
           view = "mini",
         },
         override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
+          -- Neovim 0.12 + treesitter markdown rendering can throw conceal_line errors in LSP hovers.
+          -- Keep Noice for UI, but let Neovim handle markdown formatting for hover/signature docs.
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = false,
+          ["vim.lsp.util.stylize_markdown"] = false,
           ["cmp.entry.get_documentation"] = true,
         },
       }, -- lsp
