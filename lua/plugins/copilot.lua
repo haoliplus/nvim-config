@@ -26,81 +26,16 @@ local function enable_copilot_vim()
 end
 
 return {
-  {
-    "milanglacier/minuet-ai.nvim",
-    dependencies = {
-      "saghen/blink.cmp",
-      "nvim-lua/plenary.nvim",
-    },
-    enabled = vim.g.minut_enabled,
-    config = function()
-      local mc = require("minuet.config")
-      require("minuet").setup({
-        -- Your configuration options here
-        lsp = {
-          enabled_ft = { "toml", "lua", "cpp", "py" },
-          completion = {
-            -- Enables automatic completion triggering using `vim.lsp.completion.enable`
-            enabled_auto_trigger_ft = { "cpp", "lua", "py" },
-          },
-        },
-        virtualtext = {
-          auto_trigger_ft = { "py" },
-          keymap = {
-            -- accept whole completion
-            accept = "<A-A>",
-            -- accept one line
-            accept_line = "<A-a>",
-            -- accept n lines (prompts for number)
-            -- e.g. "A-z 2 CR" will accept 2 lines
-            accept_n_lines = "<A-z>",
-            -- Cycle to prev completion item, or manually invoke completion
-            prev = "<A-[>",
-            -- Cycle to next completion item, or manually invoke completion
-            next = "<A-]>",
-            dismiss = "<A-e>",
-          },
-        },
-        provider = "openai_compatible",
-        request_timeout = 2.5,
-        throttle = 1500, -- Increase to reduce costs and avoid rate limits
-        debounce = 600, -- Increase to reduce costs and avoid rate limits
-        provider_options = {
-          openai_compatible = {
-            model = "kimi-k2.5",
-            system = mc.default_system,
-            few_shots = mc.default_few_shots,
-            chat_input = mc.default_chat_input,
-            -- stream = true,
-            end_point = "https://api.aidoki.cn/v1/chat/completions",
-            api_key = "AIDOKI_AUTH_TOKEN",
-            name = "AIDOKI",
-            -- th
-            optional = {
-              max_tokens = 56,
-              top_p = 0.9,
-              provider = {
-                -- Prioritize throughput for faster completion
-                sort = "throughput",
-              },
-            },
-            -- a list of functions to transform the endpoint, header, and request body
-            -- transform = {},
-          },
-        },
-      })
-    end,
-  },
   { -- github copilot
     "github/copilot.vim",
     -- enabled = false,
     enabled = true,
     init = function()
-      vim.keymap.set("i", "<C-Y>", 'copilot#Accept("\\<CR>")', {
-        expr = true,
-        replace_keycodes = false,
-      })
-      vim.g.copilot_no_tab_map = true
+      -- vim.keymap.set("i", "<C-Y>", 'copilot#Accept("\\<CR>")', {
+      --   expr = true,
+      --   replace_keycodes = false,
+      -- })
+      -- vim.g.copilot_no_tab_map = true
     end,
   },
   { -- better copilot
