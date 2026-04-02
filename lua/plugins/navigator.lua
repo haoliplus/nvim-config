@@ -81,6 +81,7 @@ return {
       })
       require("telescope").load_extension("fzf")
       require("telescope").load_extension("bookmarks")
+      pcall(require("telescope").load_extension, "find_template")
       -- local builtin = require("telescope.builtin")
       -- -- vim.keymap.set("n", "<leader>fm", builtin.marks, {})
     end,

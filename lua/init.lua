@@ -42,6 +42,11 @@ vim.opt.rtp:prepend(vim.g.config_path)
 
 require("setup")
 require("custom_filetype")
+require("local_template").setup({
+  temp_dir = vim.g.config_path .. "/templates",
+  author = vim.fn.getenv("NICKNAME"),
+  email = vim.fn.getenv("MAIL"),
+})
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath .. "/lua/lazy/init.lua") then
