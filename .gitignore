@@ -7,3 +7,4 @@ lua/custom_command.lua
 cd-project.nvim.json
 .claude
 playground
+nvim.log
