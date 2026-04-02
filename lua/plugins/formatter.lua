@@ -1,113 +1,111 @@
 return {
-  { -- format current code
-    "mhartington/formatter.nvim",
-    enabled = true,
-    config = function(_, _) -- stylua: ignore
-      -- Utilities for creating configurations
-      local util = require("formatter.util")
-      vim.keymap.set("n", "<Leader>F", ":FormatWrite<CR>", { noremap = true, silent = true, desc = "FormatWrite" })
-      vim.cmd("command! F FormatWrite")
+  {
+    "stevearc/conform.nvim",
+    config = function()
+      local conform = require("conform")
 
-      -- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
-      require("formatter").setup({ -- stylua: ignore
-        -- Enable or disable logging
-        logging = true,
-        -- Set the log level
+      local function file_name(bufnr)
+        return vim.fs.basename(vim.api.nvim_buf_get_name(bufnr))
+      end
+
+      local function python_formatters(bufnr)
+        local name = file_name(bufnr)
+        if name == "main.py" or name == "asgi.py" or name == "wsgi.py" then
+          return { "black" }
+        end
+        return { "black", "isort" }
+      end
+
+      local function format_buffer()
+        local bufnr = vim.api.nvim_get_current_buf()
+        local timeout_ms = vim.bo[bufnr].filetype == "python" and 5000 or 1000
+        conform.format({
+          bufnr = bufnr,
+          async = false,
+          lsp_format = "fallback",
+          timeout_ms = timeout_ms,
+        })
+      end
+
+      local function format_range(line1, line2)
+        local bufnr = vim.api.nvim_get_current_buf()
+        local timeout_ms = vim.bo[bufnr].filetype == "python" and 5000 or 1000
+        conform.format({
+          bufnr = bufnr,
+          async = false,
+          lsp_format = "fallback",
+          timeout_ms = timeout_ms,
+          range = {
+            start = { line1, 0 },
+            ["end"] = { line2, 0 },
+          },
+        })
+      end
+
+      local function format_write()
+        format_buffer()
+        vim.cmd.write()
+      end
+
+      local function format_command(opts)
+        if opts.range and opts.range > 0 then
+          format_range(opts.line1, opts.line2)
+        else
+          format_buffer()
+        end
+      end
+
+      local function format_write_command(opts)
+        format_command(opts)
+        vim.cmd.write()
+      end
+
+      vim.keymap.set("n", "<Leader>F", format_write, { noremap = true, silent = true, desc = "FormatWrite" })
+      vim.keymap.set("x", "<Leader>F", function()
+        local start_line = vim.fn.line("v")
+        local end_line = vim.fn.line(".")
+        format_range(math.min(start_line, end_line), math.max(start_line, end_line))
+      end, { noremap = true, silent = true, desc = "Format selection" })
+      vim.api.nvim_create_user_command("F", format_write_command, { desc = "FormatWrite", range = true })
+      vim.api.nvim_create_user_command("Format", format_command, { desc = "Format current buffer", range = true })
+      vim.api.nvim_create_user_command("FormatLock", format_command, { desc = "Format current buffer", range = true })
+      vim.api.nvim_create_user_command("FormatWrite", format_write_command, { desc = "Format and write current buffer", range = true })
+      vim.api.nvim_create_user_command("FormatWriteLock", format_write_command, { desc = "Format and write current buffer", range = true })
+
+      conform.setup({
         log_level = vim.log.levels.WARN,
-        -- All formatter configurations are opt-in
-        filetype = {
-          -- Formatter configurations for filetype "lua" go here
-          -- and will be executed in order
-          lua = {
-            -- "formatter.filetypes.lua" defines default configurations for the
-            -- "lua" filetype
-            require("formatter.filetypes.lua").stylua,
-
-            -- You can also define your own configuration
-            function()
-              -- Supports conditional formatting
-              if util.get_current_buffer_file_name() == "special.lua" then
-                return nil
-              end
-
-              -- Full specification of configurations is down below and in Vim help
-              --files
-              return {
-                -- cargo install stylua
-                exe = "stylua",
-                args = {
-                  "--indent-type Spaces",
-                  "--indent-width 2",
-                  "--search-parent-directories",
-                  "--stdin-filepath",
-                  util.escape_path(util.get_current_buffer_file_path()),
-                  "--",
-                  "-",
-                },
-                stdin = true,
-              }
-            end,
-          }, -- lua
-
-          python = {
-            require("formatter.filetypes.python").black,
-            -- require("formatter.filetypes.python").isort
-            function()
-              local path = util.get_current_buffer_file_path()
-              -- 入口文件：不要跑 isort，避免动 import 顺序
-              if path:match("main%.py$") or path:match("asgi%.py$") or path:match("wsgi%.py$") then
-                return nil
-              end
-
-              return {
-                exe = "isort",
-                args = {
-                  "--quiet",
-                  "-"
-                },
-                stdin = true,
-              }
-            end,
-          }, -- python
-
-          go = {
-            require("formatter.filetypes.go").gofumpt,
+        notify_on_error = true,
+        formatters_by_ft = {
+          lua = { "stylua" },
+          python = python_formatters,
+          go = { "gofumpt" },
+          cpp = { "clang-format" },
+          cuda = { "clang-format" },
+          yaml = { "prettier" },
+          javascript = { "prettier" },
+          html = { "prettier" },
+          json = { "jq" },
+          ["*"] = { "trim_whitespace" },
+        },
+        formatters = {
+          stylua = function(bufnr)
+            if file_name(bufnr) == "special.lua" then
+              return {}
+            end
+            return {
+              append_args = {
+                "--indent-type",
+                "Spaces",
+                "--indent-width",
+                "2",
+                "--search-parent-directories",
+              },
+            }
+          end,
+          isort = {
+            append_args = { "--quiet" },
           },
-          cpp = {
-            require("formatter.filetypes.cpp").clangformat,
-          },
-          cuda = {
-            require("formatter.filetypes.cpp").clangformat,
-          },
-          yaml = {
-            require("formatter.filetypes.yaml").prettier,
-          },
-          javascript = {
-            require("formatter.filetypes.javascript").prettier,
-          },
-          html = {
-            require("formatter.filetypes.html").prettier,
-          },
-
-          json = {
-            -- 使用 jq 来格式化 JSON 文件
-            function()
-              return {
-                exe = "jq",
-                args = { "." },
-                stdin = true,
-              }
-            end,
-          },
-
-          -- Use the special "*" filetype for defining formatter configurations on
-          -- any filetype
-          ["*"] = {
-            -- "formatter.filetypes.any" defines default configurations for any
-            -- filetype
-            require("formatter.filetypes.any").remove_trailing_whitespace,
-          },
-        }, -- filetype
+        },
       })
     end,
   },
