@@ -39,25 +39,15 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufReadPost" }, {
 -- 为 Json 文件类型创建一个自定义命令
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "json",
-  callback = function()
-    vim.api.nvim_create_user_command(
+  callback = function(args)
+    vim.api.nvim_buf_create_user_command(
+      args.buf,
       "JsonFormat", -- 命令名称
       function()
         vim.cmd("%!json_pp -json_opt utf8,pretty")
       end,
       { desc = "format json" } -- 命令描述
     )
-  end,
-})
-
--- 当离开 Json 文件时，移除 DoLint 命令
-vim.api.nvim_create_autocmd("BufLeave", {
-  pattern = "*.json",
-  callback = function()
-    if vim.fn.exists(":JsonFormat") == 2 then
-      -- vim.cmd("silent! delcommand JsonFormat")
-      vim.api.nvim_del_user_command("JsonFormat")
-    end
   end,
 })
 

@@ -110,7 +110,6 @@ return {
       },
       -- default options for require('noice').redirect
       -- see the section on Command Redirection
-      ---@type NoiceRouteConfig
       -- redirect = {
       --   view = "popup",
       --   filter = { event = "msg_show" },

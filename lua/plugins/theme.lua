@@ -25,18 +25,14 @@ return {
     },
   },
   {
-    "norcalli/nvim-colorizer.lua",
+    "catgoose/nvim-colorizer.lua",
+    main = "colorizer",
     opts = {},
   },
   {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     opts = {},
-    -- enabled = function()
-    --  return vim.version().major > 0 or vim.version().minor > 8
-    -- end,
-    -- enabled = true,
-    enabled = vim.version().major > 0 or vim.version().minor > 8,
     config = function()
       local highlight = {
         "RainbowRed",
@@ -95,15 +91,12 @@ return {
   -- },
   { ------ Better syntax highlightingG
     "nvim-treesitter/nvim-treesitter",
-    enabled = true,
     -- dependencies = { "IndianBoy42/tree-sitter-just" },
     build = ":TSUpdate",
     lazy = false,
     config = function()
-      -- require("nvim-treesitter.configs").setup({
-      require("nvim-treesitter").setup({
+      require("nvim-treesitter.configs").setup({
         modules = {},
-        -- A list of parser names, or "all" (the five listed parsers should always be installed)
         ensure_installed = {
           "c",
           "lua",
@@ -122,105 +115,27 @@ return {
           "toml",
           "bash",
           "rust",
-          "html",
           "cpp",
           "go",
-          "dockerfile"
+          "dockerfile",
         },
-
-        -- Install parsers synchronously (only applied to `ensure_installed`)
         sync_install = false,
-
-        -- Automatically install missing parsers when entering buffer
-        -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-        auto_install = true,
-
-        -- List of parsers to ignore installing (for "all")
-        ignore_install = { "javascript", "help" },
-
-        ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-        -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+        auto_install = false,
+        ignore_install = { "help" },
 
         highlight = {
           enable = true,
-
-          -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-          -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-          -- the name of the parser)
-          -- list of language that will be disabled
-          disable = {"latex" },
-          -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
-          -- disable = function(lang, buf)
-          --   local max_filesize = 100 * 1024 -- 100 KB
-          --   local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-          --   if ok and stats and stats.size > max_filesize then
-          --     return true
-          --   end
-          -- end,
-
-          -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-          -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-          -- Using this option may slow down your editor, and you may see some duplicate highlights.
-          -- Instead of true it can also be a list of languages
+          disable = { "latex" },
           additional_vim_regex_highlighting = false,
         },
       })
-      -- require("nvim-treesitter.parsers").get_parser_configs().just = {
-      --   install_info = {
-      --     url = "https://github.com/IndianBoy42/tree-sitter-just", -- local path or git repo
-      --     files = { "src/parser.c", "src/scanner.c" },
-      --     branch = "main",
-      --     -- use_makefile = true -- this may be necessary on MacOS (try if you see compiler errors)
-      --   },
-      --   maintainers = { "@IndianBoy42" },
-      -- }
     end,
   },
   {
     "nvim-tree/nvim-web-devicons",
-    enabled = true,
     lazy = false,
-    -- opts = {
-    --   override = {
-    --     toml = {
-    --       icon = "#",
-    --       color = "#428850",
-    --       cterm_color = "65",
-    --       name = "toml",
-    --     },
-    --     lua = {
-    --       icon = "#",
-    --       color = "#428850",
-    --       cterm_color = "65",
-    --       name = "lua",
-    --     },
-    --   },
-    --   override_by_filename = {
-    --     [".gitignore"] = {
-    --       icon = "a",
-    --       color = "#f1502f",
-    --       name = "gitignore",
-    --     },
-    --     ["a.toml"] = {
-    --       icon = "",
-    --       color = "#f1502f",
-    --       name = "gitignore",
-    --     },
-    --   },
-    --   override_by_extension = {
-    --     ["toml"] = {
-    --       icon = "",
-    --       color = "#f1502f",
-    --       name = "gitignore",
-    --     },
-    --   },
-    -- },
     config = function()
-      -- require("lualine").setup({})
       require("nvim-web-devicons").setup({
-        -- your personnal icons can go here (to override)
-        -- you can specify color or cterm_color instead of specifying both of them
-        -- DevIcon will be appended to `name`
         override = {
           toml = {
             icon = "",

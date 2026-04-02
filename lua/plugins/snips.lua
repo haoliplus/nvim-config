@@ -8,12 +8,43 @@ return {
     config = function()
       -- vim.filetype.add ( filename = { ['main.sh'] = 'sh' })
       -- vim.filetype.add ( filename = { ['default.makefile'] = 'make' })
+      -- template.nvim still calls the deprecated table form of vim.validate().
+      -- Wrap it locally so Neovim 0.12+ stops warning without patching plugin files.
+      local validate = vim.validate
+      local legacy_validators = {
+        b = "boolean",
+        c = "callable",
+        f = "function",
+        n = "number",
+        s = "string",
+        t = "table",
+      }
+      vim.validate = function(name, value, validator, optional, message)
+        if validator ~= nil or type(name) ~= "table" then
+          return validate(name, value, validator, optional, message)
+        end
 
-      require("template").setup({
+        local keys = vim.tbl_keys(name)
+        table.sort(keys)
+        for _, key in ipairs(keys) do
+          local spec = name[key]
+          local spec_validator = spec[2]
+          if type(spec_validator) == "string" then
+            spec_validator = legacy_validators[spec_validator] or spec_validator
+          end
+          validate(key, spec[1], spec_validator, spec[3], spec[4])
+        end
+      end
+
+      local ok, err = pcall(require("template").setup, {
         temp_dir = vim.g.config_path .. "/templates",
         author = vim.fn.getenv("NICKNAME"), -- your name
         email = vim.fn.getenv("MAIL"), -- email address
       })
+      vim.validate = validate
+      if not ok then
+        error(err)
+      end
       -- vim.keymap.set('n', '<F10>', ':Template ',  { remap = true})
       require("telescope").load_extension("find_template")
     end,

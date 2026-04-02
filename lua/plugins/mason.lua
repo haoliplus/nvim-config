@@ -1,30 +1,4 @@
 return {
-  { -- install language servers, formatters, linters, etc.
-    "mason-org/mason-lspconfig.nvim",
-    enabled = false,
-    -- version = "v1.*",
-    dependencies = {
-      "mason-org/mason.nvim",
-    },
-    opts = {
-      ensure_installed = {
-        -- "tree-sitter-cli",
-        -- "lua_ls",
-        -- "rust_analyzer",
-        -- "clangd",
-        "pyright",
-        "ts_ls", -- "typescript-language-server",
-        "bashls",
-        "ruff",
-        -- "omnisharp",
-        -- "gopls",
-        -- "ast_grep",
-        -- "black",
-        -- "bash-language-server",
-        --"prettier"
-      },
-    },
-  },
   { -- install formatters, linters, etc.
     "mason-org/mason.nvim",
     opts = {

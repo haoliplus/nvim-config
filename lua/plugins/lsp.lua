@@ -27,11 +27,14 @@ return {
       -- require("lazydev").setup()
       -- See `:help vim.diagnostic.*` for documentation on any of the below functions
       vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, { desc = "Open diagnostic float" })
-      vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
-      vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
+      vim.keymap.set("n", "[d", function()
+        vim.diagnostic.jump({ count = -1 })
+      end, { desc = "Go to previous diagnostic" })
+      vim.keymap.set("n", "]d", function()
+        vim.diagnostic.jump({ count = 1 })
+      end, { desc = "Go to next diagnostic" })
       vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, { desc = "Set loclist" })
 
-      local util = require("lspconfig/util")
       require("lspconfig.ui.windows").default_options = {
         border = "rounded",
       }
@@ -40,15 +43,19 @@ return {
         return path and vim.uv.fs_stat(path) ~= nil
       end
 
+      local function join_path(...)
+        return table.concat({ ... }, "/")
+      end
+
       local function python_from_venv(venv)
         if not venv or venv == "" then
           return nil
         end
-        local python = util.path.join(venv, "bin", "python")
+        local python = join_path(venv, "bin", "python")
         if path_exists(python) then
           return python
         end
-        python = util.path.join(venv, "Scripts", "python.exe")
+        python = join_path(venv, "Scripts", "python.exe")
         if path_exists(python) then
           return python
         end
@@ -65,19 +72,19 @@ return {
 
       local function current_python_workspace(bufnr)
         local file = current_python_file(bufnr)
-        local path = util.root_pattern(
+        local path = vim.fs.root(file, {
           "pyrightconfig.json",
           "setup.py",
           "setup.cfg",
           "pyproject.toml",
           "requirements.txt",
           ".git"
-        )(file)
+        })
         if path then
           return path
         end
         if file ~= "" then
-          return util.path.dirname(file)
+          return vim.fs.dirname(file)
         end
         return vim.fn.getcwd()
       end
@@ -90,7 +97,7 @@ return {
           return activated
         end
 
-        local local_python = python_from_venv(util.path.join(workspace, ".venv"))
+        local local_python = python_from_venv(join_path(workspace, ".venv"))
         if local_python then
           return local_python
         end
@@ -106,22 +113,8 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(ev)
-          local client = vim.lsp.get_client_by_id(ev.data.client_id)
-
           -- Enable completion triggered by <c-x><c-o>
           vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-
-          if client and client.name == "pyright" then
-            local workspace = current_python_workspace(ev.buf)
-            local python_path = get_python_path(workspace)
-            client.settings = client.settings or {}
-            client.settings.python = vim.tbl_deep_extend(
-              "force",
-              client.settings.python or {},
-              { pythonPath = python_path }
-            )
-            client:notify("workspace/didChangeConfiguration", { settings = nil })
-          end
 
           -- Buffer local mappings.
           -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -157,7 +150,9 @@ return {
             { buffer = ev.buf, desc = "Remove workspace folder" }
           )
           vim.keymap.set("n", "<space>wl", function()
-            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+            vim.notify(vim.inspect(vim.lsp.buf.list_workspace_folders()), vim.log.levels.INFO, {
+              title = "LSP Workspaces",
+            })
           end, { buffer = ev.buf, desc = "List workspace folders" })
           vim.keymap.set(
             "n",
@@ -200,14 +195,6 @@ return {
 
       -- Clangd
 
-      local cpp_root_dir_func = function()
-        local cwd = vim.fn.getcwd()
-        local cwf = vim.fn.expand("%:p")
-        local path = util.root_pattern("compile_flags.txt", ".git")(cwf) or cwd
-        -- vim.notify("clangd root_dir: " .. path)
-        -- vim.notify("clangd root_dir: " .. cwf)
-        return path
-      end
       local clang_file_state = {
         id = 0,
         step = 0, -- 0: just created, 1: shown, 2: completed
@@ -244,6 +231,9 @@ return {
           clang_file_state.id = id
           clang_file_state.step = 0
           local timer = vim.uv.new_timer()
+          if not timer then
+            return
+          end
           timer:start(500, 0, function()
             timer:stop()
             timer:close()
@@ -272,8 +262,7 @@ return {
           cmd = vim.split(clangd_env_cmd, " ", { trimempty = true }),
           -- single_file_support = true,
           filetypes = { "c", "cpp", "cc", "h" },
-          -- root_dir = root_dir_func,
-          root_dir = cpp_root_dir_func(),
+          root_markers = { "compile_flags.txt", ".git" },
           init_options = {
             clangdFileStatus = true, -- show clangd file status
             usePlaceholders = true, -- enable placeholders
@@ -305,7 +294,15 @@ return {
           -- cmd = { "clangd", "--background-index", "--clang-tidy"},
           cmd = { "clangd", "--background-index", "--offset-encoding=utf-16" },
           filetypes = { "c", "cpp", "cc", "h", "cuda" },
-          root_dir = cpp_root_dir_func(),
+          root_markers = {
+            ".clangd",
+            ".clang-tidy",
+            ".clang-format",
+            "compile_commands.json",
+            "compile_flags.txt",
+            "configure.ac",
+            ".git",
+          },
           init_options = {
             clangdFileStatus = true, -- show clangd file status
             usePlaceholders = true, -- enable placeholders
@@ -340,6 +337,7 @@ return {
       }
       lsp_opts["ruff"] = {
         capabilities = capabilities,
+        root_markers = { "pyproject.toml", "ruff.toml", ".ruff.toml", ".git" },
         init_options = {
           settings = {
             path = "ruff-lsp",
@@ -355,8 +353,18 @@ return {
         before_init = function(_, config)
           config.settings = config.settings or {}
           config.settings.python = config.settings.python or {}
-          config.settings.python.pythonPath = get_python_path(current_python_workspace())
+          local workspace = type(config.root_dir) == "string" and config.root_dir or current_python_workspace()
+          config.settings.python.pythonPath = get_python_path(workspace)
         end,
+        root_markers = {
+          "pyrightconfig.json",
+          "pyproject.toml",
+          "setup.py",
+          "setup.cfg",
+          "requirements.txt",
+          "Pipfile",
+          ".git",
+        },
         capabilities = (function()
           local py_capabilities = vim.lsp.protocol.make_client_capabilities()
           py_capabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
@@ -429,7 +437,7 @@ return {
         -- require("lspconfig")[server_name].setup(opts)
         -- new
         vim.lsp.config(server_name, opts)
-        vim.lsp.enable(server_name, opts)
+        vim.lsp.enable(server_name)
       end
     end,
   }, -- lsp "neovim/nvim-lspconfig",

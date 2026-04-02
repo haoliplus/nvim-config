@@ -2,7 +2,7 @@
 ---@diagnostic disable-next-line: undefined-global, missing-fields, undefined-field, unused-function, unused-local, undefined-doc-class, undefined-doc-param
 local function enable_avante_impl()
   local Path = require("plenary.path")
-  local os_name = vim.loop.os_uname().sysname
+  local os_name = vim.uv.os_uname().sysname
   local xdg_config = vim.fn.expand("$XDG_CONFIG_HOME")
   ---@type string
   local config_dir = xdg_config
@@ -361,5 +361,301 @@ return {
         chat_dir = vim.uv.fs_realpath(tostring(vim.fn.stdpath("data")):gsub("/$", "") .. "/parrot/chats"),
       })
     end,
+  },
+  {
+    "aidoki/aice_craft.nvim",
+    enabled = false,
+    opts = {
+      api_key = vim.env.DEEPSEEK_API_KEY,
+      prompts = {
+        ["改进代码"] = "请改进以下代码，并说明改进原因：",
+        ["代码解释"] = "请解释以下代码的功能：",
+        ["翻译"] = "请将以下内容翻译成英文：",
+        ["添加注释"] = "为这段代码添加注释",
+      },
+    },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    keys = {
+      { "<leader>ai", mode = "v", desc = "AI Prompt" },
+    },
+    cmd = { "AIPrompt" },
+  },
+  {
+    "edluffy/hologram.nvim",
+    enabled = false,
+    opts = {
+      auto_display = true,
+    },
+  },
+  {
+    "mason-org/mason-lspconfig.nvim",
+    enabled = false,
+    dependencies = {
+      "mason-org/mason.nvim",
+    },
+    opts = {
+      ensure_installed = {
+        "pyright",
+        "ts_ls",
+        "bashls",
+        "ruff",
+      },
+    },
+  },
+  {
+    "ahmedkhalf/project.nvim",
+    enabled = false,
+  },
+  {
+    "LintaoAmons/cd-project.nvim",
+    tag = "v1.0.0",
+    enabled = false,
+  },
+  {
+    "folke/snacks.nvim",
+    enabled = false,
+    priority = 1000,
+    lazy = false,
+    ---@diagnostic disable-next-line: undefined-doc-name
+    ---@type snacks.Config
+    opts = {
+      bigfile = { enabled = true },
+      input = { enabled = true },
+      picker = { enabled = true },
+      notifier = { enabled = true },
+      quickfile = { enabled = false },
+      scope = { enabled = false },
+      scroll = { enabled = false },
+      words = { enabled = false },
+    },
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    requires = {
+      "copilotlsp-nvim/copilot-lsp",
+      init = function()
+        vim.g.copilot_nes_debounce = 500
+      end,
+    },
+    enabled = false,
+    opts = {
+      panel = {
+        enabled = true,
+        auto_refresh = true,
+        keymap = {
+          jump_prev = "[[",
+          jump_next = "]]",
+          accept = "<CR>",
+          refresh = "gr",
+          open = "<M-CR>",
+        },
+        layout = {
+          position = "right",
+          ratio = 0.4,
+        },
+      },
+      suggestion = {
+        enabled = true,
+        auto_trigger = true,
+        hide_during_completion = true,
+        debounce = 75,
+        keymap = {
+          accept = "<C-o>",
+          next = "<C-j>",
+          prev = "<C-.>",
+        },
+      },
+      filetypes = {
+        yaml = false,
+        markdown = false,
+        txt = false,
+        conf = false,
+        json = false,
+        help = false,
+        gitcommit = false,
+        gitrebase = false,
+        hgcommit = false,
+        svn = false,
+        cvs = false,
+        ["."] = false,
+      },
+      copilot_node_command = "node",
+      server_opts_overrides = {
+        listCount = 6,
+        inlineSuggestCount = 3,
+      },
+    },
+  },
+  {
+    "olimorris/codecompanion.nvim",
+    enabled = false,
+    opts = {
+      strategies = {
+        chat = {
+          adapter = {
+            name = "aidoki",
+            model = "kimi-k2.5",
+          },
+        },
+        inline = {
+          adapter = "copilot",
+        },
+      },
+      opts = {
+        log_level = "DEBUG",
+      },
+      adapters = {
+        aidoki = function()
+          return require("codecompanion.adapters").extend("openai_compatible", {
+            name = "aidoki-new-api",
+            formatted_name = "Aidoki New API",
+            env = {
+              api_key = vim.env.AIDOKI_AUTH_TOKEN,
+              url = "https://api.aidoki.cn",
+              chat_url = "/v1/chat/completions",
+              model = "schema.model.default",
+            },
+            schema = {
+              model = {
+                default = "kimi-k2.5",
+                choices = {
+                  "kimi-k2.5",
+                  "deepseek-chat",
+                  "claude-sonnet-4-5-20250929-cc",
+                  "claude-haiku-4-5-20251001-cc",
+                  "glm-4.7-cc",
+                },
+              },
+            },
+          })
+        end,
+      },
+      prompt_library = {
+        ["Docusaurus"] = {
+          strategy = "chat",
+          description = "Write code comment for me",
+          opts = {
+            index = 11,
+            is_slash_cmd = true,
+            auto_submit = true,
+            short_name = "docs",
+          },
+          references = {
+            {
+              type = "file",
+              path = {},
+            },
+          },
+          prompts = {
+            {
+              role = "user",
+              content = [[I'm rewriting the comment as documentation for this code snip]],
+            },
+          },
+        },
+        ["LanConvert"] = {
+          strategy = "inline",
+          description = "Convert code from other languages to the current buffer language",
+          opts = {
+            short_name = "codeconvert",
+            is_slash_cmd = true,
+          },
+          prompts = {
+            {
+              role = "system",
+              content = "You are an expert programmer that converts code from one programming language to another.",
+            },
+            {
+              role = "user",
+              content = "<user_prompt>Please convert the following code to the language of current buffer(keeping the original code in comment for comparing)</user_prompt>",
+            },
+          },
+        },
+        ["ImplCode"] = {
+          strategy = "inline",
+          description = "Implement code descriped in the comment",
+          opts = {
+            short_name = "implcode",
+            is_slash_cmd = true,
+          },
+          prompts = {
+            {
+              role = "system",
+              content = "You are an expert programmer that implements code based on the description in the comment.",
+            },
+            {
+              role = "user",
+              content = "<user_prompt>Please implement the code described in the comment</user_prompt>",
+            },
+          },
+        },
+        ["IImplCode"] = {
+          strategy = "chat",
+          description = "Implement code descriped in the comment(with interaction)",
+          opts = {
+            short_name = "implcodei",
+            is_slash_cmd = true,
+          },
+          prompts = {
+            {
+              role = "system",
+              content = "You are an expert programmer that implements code based on the description in the comment. If you need more information, ask the user before implementing the code.",
+            },
+            {
+              role = "user",
+              content = "<user_prompt>Please implement the code described in the comment</user_prompt>",
+            },
+          },
+        },
+      },
+    },
+  },
+  {
+    "folke/edgy.nvim",
+    event = "VeryLazy",
+    init = function()
+      vim.opt.laststatus = 3
+      vim.opt.splitkeep = "screen"
+    end,
+    enabled = false,
+    opts = {
+      bottom = {
+        { ft = "qf", title = "QuickFix" },
+        "Trouble",
+      },
+      left = {
+        {
+          title = "Neo-Tree",
+          ft = "neo-tree",
+          filter = function(buf)
+            return vim.b[buf].neo_tree_source == "filesystem"
+          end,
+          size = { height = 0.5 },
+        },
+        {
+          title = "Neo-Tree Buffers",
+          ft = "neo-tree",
+          filter = function(buf)
+            return vim.b[buf].neo_tree_source == "buffers" and vim.b[buf].neo_tree_position ~= "float"
+          end,
+          pinned = true,
+          collapsed = false,
+          open = "Neotree position=top buffers",
+          size = { height = 0.4 },
+        },
+        {
+          title = function()
+            local buf_name = vim.api.nvim_buf_get_name(0) or "[No Name]"
+            return vim.fn.fnamemodify(buf_name, ":t")
+          end,
+          ft = "Outline",
+          pinned = true,
+          open = "SymbolsOutlineOpen",
+        },
+        "neo-tree",
+      },
+    },
   },
 }

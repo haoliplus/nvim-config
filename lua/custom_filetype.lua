@@ -45,7 +45,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "yaml",
   -- group = vim.api.nvim_create_augroup('black_on_save', { clear = true }),
   callback = function(_)
-    vim.opt.cursorcolumn = false
+    vim.opt_local.cursorcolumn = false
   end,
 })
 -- -- 为 JSON 文件添加 JSONC 检测
@@ -97,8 +97,8 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "python",
   -- group = vim.api.nvim_create_augroup('black_on_save', { clear = true }),
   callback = function(_)
-    vim.opt.shiftwidth = 4
-    vim.opt.tabstop = 2
-    vim.opt.softtabstop = 2
+    vim.bo.shiftwidth = 4
+    vim.bo.tabstop = 4
+    vim.bo.softtabstop = 4
   end,
 })
