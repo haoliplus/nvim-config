@@ -39,74 +39,7 @@ return {
         border = "rounded",
       }
 
-      local function path_exists(path)
-        return path and vim.uv.fs_stat(path) ~= nil
-      end
-
-      local function join_path(...)
-        return table.concat({ ... }, "/")
-      end
-
-      local function python_from_venv(venv)
-        if not venv or venv == "" then
-          return nil
-        end
-        local python = join_path(venv, "bin", "python")
-        if path_exists(python) then
-          return python
-        end
-        python = join_path(venv, "Scripts", "python.exe")
-        if path_exists(python) then
-          return python
-        end
-        return nil
-      end
-
-      local function current_python_file(bufnr)
-        local name = vim.api.nvim_buf_get_name(bufnr or 0)
-        if name ~= "" then
-          return name
-        end
-        return vim.fn.expand("%:p")
-      end
-
-      local function current_python_workspace(bufnr)
-        local file = current_python_file(bufnr)
-        local path = vim.fs.root(file, {
-          "pyrightconfig.json",
-          "setup.py",
-          "setup.cfg",
-          "pyproject.toml",
-          "requirements.txt",
-          ".git"
-        })
-        if path then
-          return path
-        end
-        if file ~= "" then
-          return vim.fs.dirname(file)
-        end
-        return vim.fn.getcwd()
-      end
-
-      local function get_python_path(workspace)
-        workspace = workspace or vim.fn.getcwd()
-
-        local activated = python_from_venv(vim.env.VIRTUAL_ENV)
-        if activated then
-          return activated
-        end
-
-        local local_python = python_from_venv(join_path(workspace, ".venv"))
-        if local_python then
-          return local_python
-        end
-
-        if vim.fn.executable("python3") == 1 then
-          return vim.fn.exepath("python3")
-        end
-        return vim.fn.exepath("python")
-      end
+      local python_workspace = require("python_workspace")
 
       -- Use LspAttach autocommand to only map the following keys
       -- after the language server attaches to the current buffer
@@ -337,7 +270,9 @@ return {
       }
       lsp_opts["ruff"] = {
         capabilities = capabilities,
-        root_markers = { "pyproject.toml", "ruff.toml", ".ruff.toml", ".git" },
+        root_dir = function(bufnr, on_dir)
+          on_dir(python_workspace.current_python_workspace(bufnr))
+        end,
         init_options = {
           settings = {
             path = "ruff-lsp",
@@ -353,18 +288,12 @@ return {
         before_init = function(_, config)
           config.settings = config.settings or {}
           config.settings.python = config.settings.python or {}
-          local workspace = type(config.root_dir) == "string" and config.root_dir or current_python_workspace()
-          config.settings.python.pythonPath = get_python_path(workspace)
+          local workspace = type(config.root_dir) == "string" and config.root_dir or python_workspace.current_python_workspace()
+          config.settings.python.pythonPath = python_workspace.get_python_path(workspace)
         end,
-        root_markers = {
-          "pyrightconfig.json",
-          "pyproject.toml",
-          "setup.py",
-          "setup.cfg",
-          "requirements.txt",
-          "Pipfile",
-          ".git",
-        },
+        root_dir = function(bufnr, on_dir)
+          on_dir(python_workspace.current_python_workspace(bufnr))
+        end,
         capabilities = (function()
           local py_capabilities = vim.lsp.protocol.make_client_capabilities()
           py_capabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
