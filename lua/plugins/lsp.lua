@@ -40,6 +40,7 @@ return {
       }
 
       local python_workspace = require("python_workspace")
+      local python_lsp = require("python_lsp")
 
       -- Use LspAttach autocommand to only map the following keys
       -- after the language server attaches to the current buffer
@@ -116,14 +117,13 @@ return {
 
       local servers = {
         "clangd",
-        "pyright",
-        "ruff",
         "lua_ls",
         -- "gopls",
         "ts_ls",
         "bashls",
         -- "jedi_language_server",
       }
+      vim.list_extend(servers, python_lsp.python_servers())
       local lsp_opts = {}
 
       -- Clangd
@@ -323,6 +323,13 @@ return {
         },
         single_file_support = true,
       } -- end pyright
+
+      lsp_opts["ty"] = {
+        root_dir = function(bufnr, on_dir)
+          on_dir(python_workspace.current_python_workspace(bufnr))
+        end,
+        single_file_support = true,
+      }
 
       -- lua_ls
       lsp_opts["lua_ls"] = {

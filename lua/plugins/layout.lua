@@ -79,11 +79,24 @@ return {
           hide_hidden = true, -- only works on Windows for hidden files/directories
           hide_by_name = {
             "node_modules",
+            "__pycache__",
+            ".pytest_cache",
+            ".mypy_cache",
+            ".ruff_cache",
+            ".tox",
+            ".nox",
+            "htmlcov",
+            ".venv",
+            "dist",
+            "build",
+            ".cache",
           },
           hide_by_pattern = { -- uses glob style patterns
             --"*.meta",
             --"*/src/*/tsconfig.json",
             "*.pyc",
+            "*.egg-info",
+            "*.egg_info",
             "bazel-*",
           },
           always_show = { -- remains visible even if other settings would normally hide it
