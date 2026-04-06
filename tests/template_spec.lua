@@ -52,4 +52,13 @@ eq(rendered[4], "cursor=", "cursor placeholder should be removed from text")
 eq(cursor[1], 4, "cursor line should be tracked")
 eq(cursor[2], 8, "cursor column should point to placeholder position")
 
+module.setup({
+  temp_dir = templates_dir,
+  author = vim.NIL,
+  email = vim.NIL,
+})
+
+eq(module.author, "", "vim.NIL author should normalize to empty string")
+eq(module.email, "", "vim.NIL email should normalize to empty string")
+
 print("template tests passed")

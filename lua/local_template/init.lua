@@ -261,9 +261,21 @@ local function command_complete(arglead, cmdline)
   end, candidates)
 end
 
+local function normalize_optional_string(value)
+  if value == nil or value == vim.NIL then
+    return nil
+  end
+  if type(value) ~= "string" then
+    return value
+  end
+  return value
+end
+
 function M.setup(opts)
   vim.validate("opts", opts, "table")
   vim.validate("opts.temp_dir", opts.temp_dir, "string")
+  opts.author = normalize_optional_string(opts.author)
+  opts.email = normalize_optional_string(opts.email)
   vim.validate("opts.author", opts.author, "string", true)
   vim.validate("opts.email", opts.email, "string", true)
 
