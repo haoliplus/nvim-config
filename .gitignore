@@ -1,6 +1,5 @@
 plugin
 .luarc.json
-lazy-lock.json
 .DS_Store
 env.sh
 lua/custom_command.lua
