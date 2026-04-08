@@ -94,42 +94,6 @@ return {
     -- dependencies = { "IndianBoy42/tree-sitter-just" },
     build = ":TSUpdate",
     lazy = false,
-    config = function()
-      require("nvim-treesitter.configs").setup({
-        modules = {},
-        ensure_installed = {
-          "c",
-          "lua",
-          "python",
-          "vim",
-          "query",
-          "markdown",
-          "markdown_inline",
-          "vimdoc",
-          "html",
-          "javascript",
-          "just",
-          "css",
-          "yaml",
-          "json",
-          "toml",
-          "bash",
-          "rust",
-          "cpp",
-          "go",
-          "dockerfile",
-        },
-        sync_install = false,
-        auto_install = false,
-        ignore_install = { "help" },
-
-        highlight = {
-          enable = true,
-          disable = { "latex" },
-          additional_vim_regex_highlighting = false,
-        },
-      })
-    end,
   },
   {
     "nvim-tree/nvim-web-devicons",
