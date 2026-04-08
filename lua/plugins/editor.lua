@@ -1,14 +1,15 @@
 return {
   {
-    "powerman/vim-plugin-AnsiEsc"
+    "m00qek/baleia.nvim",
+    config = function()
+      vim.g.baleia = require("baleia").setup({ })
+    end,
   },
   { -- 切换buffer时禁止自动滚动
     "BranimirE/fix-auto-scroll.nvim",
     event = "VeryLazy",
     enabled = true,
   },
-  -- quick commentary
-  -- { "tpope/vim-commentary" },
   { -- better comment cmd
     "numToStr/Comment.nvim",
     opts = {

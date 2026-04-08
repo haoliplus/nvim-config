@@ -20,6 +20,7 @@ return {
   {
     "glepnir/dashboard-nvim",
     event = "VimEnter",
+    enabled = false,
     opts = {
       config = {
         week_header = {

@@ -414,24 +414,6 @@ return {
     enabled = false,
   },
   {
-    "folke/snacks.nvim",
-    enabled = false,
-    priority = 1000,
-    lazy = false,
-    ---@diagnostic disable-next-line: undefined-doc-name
-    ---@type snacks.Config
-    opts = {
-      bigfile = { enabled = true },
-      input = { enabled = true },
-      picker = { enabled = true },
-      notifier = { enabled = true },
-      quickfile = { enabled = false },
-      scope = { enabled = false },
-      scroll = { enabled = false },
-      words = { enabled = false },
-    },
-  },
-  {
     "zbirenbaum/copilot.lua",
     requires = {
       "copilotlsp-nvim/copilot-lsp",

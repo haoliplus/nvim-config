@@ -11,20 +11,6 @@ return {
   -- Utility for other plugin
   { "google/vim-maktaba" },
   { "rcarriga/nvim-notify" },
-  -- fuzzy search using c-p
-  -- c-b show buffer
-  {
-    "jlanzarotta/bufexplorer",
-    lazy = false,
-    enabled = true,
-    keys = {
-      -- { "<leader>be", ":BufExplorer<CR>", desc = "Show Buffer" },
-      -- { "<leader>bt", ":ToggleBufExplorer<CR>", desc = "Show Buffer" },
-      -- { "<leader>bs", ":BufExplorerHorizonSplit<CR>", desc = "Show Buffer" },
-      -- { "<leader>bv", ":BufExplorerVerticalSplit<CR>", desc = "Show Buffer" },
-      -- <leader>bs:
-    },
-  },
   {
     "RaafatTurki/hex.nvim",
     opts = {
