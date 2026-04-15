@@ -13,7 +13,7 @@ return {
         if name == "main.py" or name == "asgi.py" or name == "wsgi.py" then
           return { "black" }
         end
-        return { "black", "isort" }
+        return { "isort", "black" }
       end
 
       local function format_buffer()
@@ -88,6 +88,10 @@ return {
           ["*"] = { "trim_whitespace" },
         },
         formatters = {
+          black = {
+            -- Mason may install Black in a Python 3.11 venv while project configs target py312.
+            append_args = { "--fast" },
+          },
           stylua = function(bufnr)
             if file_name(bufnr) == "special.lua" then
               return {}

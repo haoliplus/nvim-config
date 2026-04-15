@@ -17,5 +17,11 @@ end
 if not formatter_source:find('nvim_create_user_command%("F", format_write_command, { desc = "FormatWrite", range = true }%)') then
   error("formatter plugin should allow :F on a visual range")
 end
+if not formatter_source:find('return { "isort", "black" }', 1, true) then
+  error("python imports should be sorted before black runs")
+end
+if not formatter_source:find('append_args = { "%-%-fast" }') then
+  error("black should skip the AST safety check when Mason runs it below the target Python version")
+end
 
 print("formatter plugin spec passed")
