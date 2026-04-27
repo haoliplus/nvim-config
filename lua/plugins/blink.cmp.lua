@@ -44,6 +44,7 @@ return {
     "haoliplus/friendly-snippets",
     "fang2hou/blink-copilot",
     "L3MON4D3/LuaSnip",
+    "milanglacier/minuet-ai.nvim",
   },
   submodules = false,
   enabled = function()
@@ -91,8 +92,11 @@ return {
           })
         end,
       },
-      -- ["<A-y>"] = require("minuet").make_blink_map(),
-      -- df
+      ["<A-y>"] = {
+        function(cmp)
+          cmp.show({ providers = { "minuet" } })
+        end,
+      },
     },
     signature = {
       -- Enable signature help
@@ -154,7 +158,7 @@ return {
         "snippets",
         "buffer",
         "lazydev",
-        -- "minuet",
+        "minuet",
       },
       providers = {
         copilot = {
@@ -169,15 +173,14 @@ return {
           -- make lazydev completions top priority (see `:h blink.cmp`)
           score_offset = 100,
         },
-        -- minuet = {
-        --   name = "minuet",
-        --   module = "minuet.blink",
-        --   async = true,
-        --   -- Should match minuet.config.request_timeout * 1000,
-        --   -- since minuet.config.request_timeout is in seconds
-        --   timeout_ms = 3000,
-        --   score_offset = 50, -- Gives minuet higher priority among suggestions
-        -- },
+        minuet = {
+          name = "minuet",
+          module = "minuet.blink",
+          async = true,
+          -- Should match minuet.config.request_timeout * 1000.
+          timeout_ms = 3000,
+          score_offset = 50,
+        },
       },
     },
   },

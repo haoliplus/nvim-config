@@ -2,7 +2,7 @@ return {
   { -- github copilot
     "github/copilot.vim",
     -- enabled = false,
-    enabled = true,
+    enabled = false,
     init = function()
       -- vim.keymap.set("i", "<C-Y>", 'copilot#Accept("\\<CR>")', {
       --   expr = true,
