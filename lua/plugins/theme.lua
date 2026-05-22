@@ -125,6 +125,18 @@ return {
             color = "#f1502f",
             name = "toml",
           },
+          ["yaml"] = {
+            icon = "",
+            color = "#6d8086",
+            cterm_color = "66",
+            name = "yaml",
+          },
+          ["yml"] = {
+            icon = "",
+            color = "#6d8086",
+            cterm_color = "66",
+            name = "yml",
+          },
         },
       })
 
