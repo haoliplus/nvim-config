@@ -91,9 +91,22 @@ return {
   -- },
   { ------ Better syntax highlightingG
     "nvim-treesitter/nvim-treesitter",
-    -- dependencies = { "IndianBoy42/tree-sitter-just" },
+    branch = "main",
     build = ":TSUpdate",
     lazy = false,
+    opts = {
+      install_dir = vim.fn.stdpath("data") .. "/site",
+    },
+    config = function(_, opts)
+      require("nvim-treesitter").setup(opts)
+
+      vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("UserTreesitterStart", { clear = true }),
+        callback = function()
+          pcall(vim.treesitter.start)
+        end,
+      })
+    end,
   },
   {
     "nvim-tree/nvim-web-devicons",
