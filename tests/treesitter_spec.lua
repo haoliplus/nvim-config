@@ -1,12 +1,17 @@
 local root = vim.fn.getcwd()
 local theme_path = root .. "/lua/plugins/theme.lua"
 local theme_source = table.concat(vim.fn.readfile(theme_path), "\n")
+local ui_path = root .. "/lua/plugins/ui.lua"
+local ui_source = table.concat(vim.fn.readfile(ui_path), "\n")
+local lock_path = root .. "/lazy-lock.json"
+local lock_source = table.concat(vim.fn.readfile(lock_path), "\n")
 
-if
-  not theme_source:find('plugin.dir .. "/runtime"', 1, true)
-  or not theme_source:find("vim.opt.rtp:prepend(query_runtime)", 1, true)
-then
-  error("nvim-treesitter runtime directory should be prepended so bundled queries are visible")
+if not theme_source:find("vim.treesitter.start", 1, true) then
+  error("built-in treesitter should start from the FileType autocmd")
+end
+
+if theme_source:find("nvim%-treesitter") or ui_source:find("nvim%-treesitter") or lock_source:find("nvim%-treesitter") then
+  error("nvim-treesitter plugin should not be configured")
 end
 
 print("treesitter spec passed")

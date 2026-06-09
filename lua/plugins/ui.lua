@@ -118,8 +118,7 @@ return {
     },
     dependencies = {
       { "nvim-tree/nvim-web-devicons" },
-      --Please make sure you install markdown and markdown_inline parser
-      { "nvim-treesitter/nvim-treesitter" },
+      -- Please make sure the markdown and markdown_inline parsers are installed.
     },
   },
   {

@@ -20,8 +20,7 @@ return {
     "hrsh7th/nvim-cmp",
     enabled = flag,
     dependencies = {
-      -- If you want to enable filetype detection based on treesitter:
-      -- requires = { "nvim-treesitter/nvim-treesitter" },
+      -- Filetype detection can use Neovim's built-in treesitter runtime.
       { "L3MON4D3/LuaSnip" },
       { "saadparwaiz1/cmp_luasnip" },
     },

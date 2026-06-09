@@ -1,7 +1,32 @@
+local function setup_builtin_treesitter()
+  vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("UserTreesitterStart", { clear = true }),
+    callback = function(args)
+      pcall(vim.treesitter.start, args.buf)
+    end,
+  })
+end
+
+setup_builtin_treesitter()
+
 return {
   -- Themes
   -- syntax highlight
   { "jackguo380/vim-lsp-cxx-highlight" },
+  {
+    "romus204/tree-sitter-manager.nvim",
+    dependencies = {}, -- tree-sitter CLI must be installed system-wide
+    config = function()
+      require("tree-sitter-manager").setup({
+        -- Default Options
+        -- ensure_installed = {}, -- list of parsers to install at the start of a neovim session. If set to "all", install all parsers.
+        -- border = nil, -- border style for the window (e.g. "rounded", "single"), if nil, use the default border style defined by 'vim.o.winborder'. See :h 'winborder' for more info.
+        -- auto_install = false, -- if enabled, install missing parsers when editing a new file
+        -- highlight = true, -- treesitter highlighting is enabled by default
+        -- languages = {}, -- override or add new parser sources
+      })
+    end
+  },
   { "MunifTanjim/nui.nvim" },
   { -- theme
     "drewtempelmeyer/palenight.vim",
@@ -89,30 +114,6 @@ return {
   --   "IndianBoy42/tree-sitter-just",
   --   opts = {},
   -- },
-  { ------ Better syntax highlightingG
-    "nvim-treesitter/nvim-treesitter",
-    branch = "main",
-    build = ":TSUpdate",
-    lazy = false,
-    opts = {
-      install_dir = vim.fn.stdpath("data") .. "/site",
-    },
-    config = function(plugin, opts)
-      local query_runtime = plugin.dir .. "/runtime"
-      if vim.uv.fs_stat(query_runtime) then
-        vim.opt.rtp:prepend(query_runtime)
-      end
-
-      require("nvim-treesitter").setup(opts)
-
-      vim.api.nvim_create_autocmd("FileType", {
-        group = vim.api.nvim_create_augroup("UserTreesitterStart", { clear = true }),
-        callback = function()
-          pcall(vim.treesitter.start)
-        end,
-      })
-    end,
-  },
   {
     "nvim-tree/nvim-web-devicons",
     lazy = false,
