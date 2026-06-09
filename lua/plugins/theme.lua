@@ -97,7 +97,12 @@ return {
     opts = {
       install_dir = vim.fn.stdpath("data") .. "/site",
     },
-    config = function(_, opts)
+    config = function(plugin, opts)
+      local query_runtime = plugin.dir .. "/runtime"
+      if vim.uv.fs_stat(query_runtime) then
+        vim.opt.rtp:prepend(query_runtime)
+      end
+
       require("nvim-treesitter").setup(opts)
 
       vim.api.nvim_create_autocmd("FileType", {
