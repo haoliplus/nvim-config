@@ -52,12 +52,19 @@ return {
         extra = true,
       },
       ---Function to call before (un)comment
-      pre_hook = nil,
+      pre_hook = function(ctx)
+        local ok, parser = pcall(vim.treesitter.get_parser, 0)
+        if ok and parser then
+          return nil
+        end
+
+        return require("Comment.ft").get(vim.bo.filetype, ctx.ctype) or vim.bo.commentstring
+      end,
       ---Function to call after (un)comment
       post_hook = nil,
     },
     lazy = false,
-    config = function(opts)
+    config = function(_, opts)
       -- vim.cmd([[autocmd FileType cpp setlocal commentstring=///\ %s]])
       -- vim.cmd([[autocmd FileType cuda setlocal commentstring=///\ %s]])
       local ft = require("Comment.ft")
