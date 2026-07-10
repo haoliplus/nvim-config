@@ -12,6 +12,7 @@ return {
   },
   { -- better comment cmd
     "numToStr/Comment.nvim",
+    enabled = false,
     opts = {
       -- add any options here
       ---Add a space b/w comment and the line
