@@ -107,6 +107,7 @@ return {
             }
           end,
           isort = {
+            command = vim.fn.stdpath("data") .. "/mason/bin/isort",
             append_args = { "--quiet" },
           },
         },
