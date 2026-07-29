@@ -14,7 +14,43 @@ return {
   -- syntax highlight
   { "jackguo380/vim-lsp-cxx-highlight" },
   {
+    "phelipetls/jsonpath.nvim",
+    ft = { "json" },
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    opts = {
+      show_on_winbar = true,
+    },
+    config = function(_, opts)
+      require("jsonpath").setup(opts)
+
+      local function enable_jsonpath()
+        local bufnr = vim.api.nvim_get_current_buf()
+        vim.schedule(function()
+          pcall(vim.treesitter.start, bufnr)
+          pcall(function()
+            vim.treesitter.get_parser(bufnr):parse()
+          end)
+        end)
+        vim.opt_local.winbar = "%{%v:lua.require'jsonpath'.get()%}"
+      end
+
+      vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("JsonpathWinbar", { clear = true }),
+        pattern = "json",
+        callback = enable_jsonpath,
+      })
+
+      -- lazy.nvim loads this plugin after the FileType event that triggered it.
+      if vim.bo.filetype == "json" then
+        enable_jsonpath()
+      end
+    end,
+  },
+  {
     "romus204/tree-sitter-manager.nvim",
+    -- `main` currently passes Git's unsupported `--no-advice` option.
+    commit = "f1a322c76ce799d14659d70389c41ebd3136c3ff",
+    enabled = false,
     dependencies = {}, -- tree-sitter CLI must be installed system-wide
     config = function()
       require("tree-sitter-manager").setup({
