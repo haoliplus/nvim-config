@@ -8,3 +8,4 @@ cd-project.nvim.json
 playground
 nvim.log
 .codex
+lazy-lock.json
