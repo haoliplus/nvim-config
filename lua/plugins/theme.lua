@@ -14,9 +14,14 @@ return {
   -- syntax highlight
   { "jackguo380/vim-lsp-cxx-highlight" },
   {
+    "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    lazy = false,
+    build = ":TSUpdate",
+  },
+  {
     "phelipetls/jsonpath.nvim",
     ft = { "json" },
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
     opts = {
       show_on_winbar = true,
     },
